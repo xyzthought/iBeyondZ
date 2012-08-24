@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>c60267b5-4e53-4e22-8ffc-5ec0a7eab640</ProjectGuid>
+    <ProjectGuid>{94EB6C49-8A53-432D-B3DB-473A77D101B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BLL.BusinessObject</RootNamespace>
