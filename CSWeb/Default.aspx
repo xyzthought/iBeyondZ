@@ -42,7 +42,8 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
                                 Display="Dynamic" ControlToValidate="txtPassword" CssClass="errorMsg"></asp:RequiredFieldValidator></span>
                         <p>
-                            <asp:Button ID="btnLogin" class="btnLogin" runat="server" />
+                            <asp:Button ID="btnLogin" class="btnLogin" runat="server" 
+                                onclick="btnLogin_Click" />
                         </p>
                     </div>
                 </div>
