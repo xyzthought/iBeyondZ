@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using Utility;
-
+using System.Web.Mail;
+using System.Configuration;
 
 namespace CSWeb.Utility
 {
@@ -49,5 +50,42 @@ namespace CSWeb.Utility
             }
         }
         #endregion Mail Message
+
+
+        #region SendExceptionMail
+        public static void SendExceptionMail(string strMessage, string strSource, string strStackTrace)
+        {
+            try
+            {
+                string strFromMailId = ConfigurationManager.AppSettings.Get("EmailFrom");
+                string strMailServer = ConfigurationManager.AppSettings.Get("SmtpClient");
+                string strMailUser = ConfigurationManager.AppSettings.Get("UID");
+                string strMailPwd = ConfigurationManager.AppSettings.Get("Pwd");
+                string vstrSubject = "CSWeb Integration - Exception";
+                string vstrBody = "<b>Message: </b>" + strMessage + "<br/><br/><b>Sourse: </b>" + strSource + "<br/><br/><b>StackTrace: </b>" + strStackTrace;
+                string strMails = ConfigurationManager.AppSettings.Get("ErrorEmailTo");
+                MailMessage objMessage = new MailMessage();
+
+                if (strMailServer != "")
+                {
+                    SmtpMail.SmtpServer = strMailServer;
+                    objMessage.Fields["http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"] = 1;
+                    objMessage.Fields["http://schemas.microsoft.com/cdo/configuration/sendusername"] = strMailUser;
+                    objMessage.Fields["http://schemas.microsoft.com/cdo/configuration/sendpassword"] = strMailPwd;
+                }
+
+                objMessage.From = strFromMailId;
+                objMessage.To = strMails;
+                objMessage.Subject = vstrSubject;
+                objMessage.Body = vstrBody;
+                objMessage.BodyFormat = MailFormat.Html;
+                SmtpMail.Send(objMessage);
+            }
+            catch (Exception exc)
+            {
+
+            }
+        }
+        #endregion
     }
 }
