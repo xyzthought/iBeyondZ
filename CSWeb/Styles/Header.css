@@ -1,0 +1,99 @@
+﻿
+@import "reset.css";
+html, form, body {
+    height: 100%;
+}
+input {
+    margin: 0;
+    padding: 0;
+}
+textarea {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #262626;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 12px;
+    height: 100%;
+}
+.clear {
+    clear: both;
+}
+.header-bar {
+    background: url("../Images/menuBgNew.png") repeat-x scroll center top transparent;
+    border-bottom: 0 none;
+    color: #FFFFFF;
+    height: 63px;
+    padding: 0 10px;
+}
+.header-innerWrap {
+    height: 35px;
+    margin: 0 auto;
+    width: 96%;
+}
+.Headermenu {
+    float: right;
+}
+.wlcm {
+    height: 27px;
+    padding-top: 10px;
+    text-align: right;
+}
+.wlcmNote {
+    color: #CCCCCC;
+    margin-right: 13px;
+}
+.menu {
+    height: 35px;
+}
+.menu ul li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+.menu ul li a {
+    color: #CCCCCC;
+    font-size: 12px;
+    height: 18px;
+    padding: 0 10px;
+    text-decoration: none;
+}
+.menu ul li a:hover {
+    background: none repeat scroll 0 0 #3B3939;
+    color: #FFFFFF;
+    display: block;
+    height: 35px;
+}
+.menu ul li a.lastA {
+    background: none repeat scroll 0 0 transparent;
+}
+.menu ul li.selectedMenu {
+    background: url("../Images/MenuBar/selector.png") no-repeat scroll 9px bottom transparent;
+    font-weight: bold;
+}
+.menu ul li a.Default {
+    background: none repeat scroll 0 0 #3B3939;
+    color: #FFFFFF;
+    display: block;
+    height: 35px;
+}
+.welcomeTxt {
+    float: right !important;
+    position: absolute;
+    right: 314px;
+}
+.welcomeTxt a:hover {
+    background: none repeat scroll 0 0 transparent !important;
+    color: #CCCCCC !important;
+}
+.welcomeOrg {
+    float: right !important;
+    position: absolute;
+    right: 177px;
+}
+.removeClass {
+    float: right !important;
+    position: absolute;
+    right: 176px !important;
+}

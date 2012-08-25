@@ -1,0 +1,1791 @@
+﻿
+@import "reset.css";
+html, form, body {
+    height: 100%;
+}
+input {
+    margin: 0;
+    padding: 0;
+}
+textarea {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #262626;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 12px;
+    height: 100%;
+}
+.wrapper {
+    height: auto !important;
+    margin: 0 0 -35px;
+    min-height: 100%;
+    position: relative;
+}
+.push, .footerWrapper {
+    height: 35px;
+}
+.footerWrapper {
+    background: none repeat scroll 0 0 #E2E2E2;
+    color: #9C9C9C;
+    font-size: 11px;
+    line-height: 35px;
+    position: relative;
+    text-align: center;
+}
+.header 
+{
+    background: url("../images/Navi.png") repeat-x scroll center top #FFFFFF;
+    /*background: none repeat scroll 0 0 #000000;*/
+    height: 35px;
+    text-align: right;
+    width: 100%;
+}
+.header_V2 {
+    background: none repeat scroll 0 0 #000000;
+    height: 35px;
+    text-align: right;
+}
+.logo {
+    float: left;
+    height: 59px;
+    padding: 6px 0 0;
+}
+.logo img {
+    height: 55px;
+}
+.lblWl {
+    font-weight: bold;
+}
+.header-bar {
+    background: none repeat scroll 0 0 #BF2E1A;
+    border-bottom: 3px solid #191919;
+    color: #FFFFFF;
+    height: 22px;
+    padding: 0 10px;
+}
+.header-bar-logout {
+    float: right;
+    height: 25px;
+    line-height: 25px;
+}
+.header-bar-logout a {
+    line-height: 25px;
+    text-decoration: none;
+}
+.header-bar-logout a:hover {
+    text-decoration: underline;
+}
+.header-bar a {
+    color: #FFFFFF;
+}
+.clear {
+    clear: both;
+}
+.login-input-area {
+    height: 247px;
+    margin: 0 auto;
+    padding: 57px 0 0;
+    width: 445px;
+}
+.login-input-area h1 {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    height: 47px;
+    line-height: 57px;
+    padding: 5px 5px 5px 25px;
+}
+.login-input {
+    padding: 5px 25px;
+}
+.cred {
+    margin: 5px 0;
+}
+.cred2 {
+    margin-top: 15px;
+}
+.forgotPass {
+    color: #44A1EF;
+    float: right;
+}
+.txtCred {
+    border: 1px solid #DADADA;
+    height: 20px;
+    line-height: 25px;
+    padding: 3px;
+    width: 345px;
+}
+.chkExisting input {
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.btn-wrapper {
+    margin-top: 55px;
+    text-align: center;
+}
+.btn-wrapper2 {
+    padding-top: 28px;
+    text-align: center;
+}
+.btn {
+    background: url("../Images/btn.png") no-repeat scroll left bottom transparent;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 10px;
+}
+.btn a {
+    background: url("../Images/btn.png") no-repeat scroll right top transparent;
+    color: #191919;
+    display: inline-block;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+.errorMsg {
+    color: #A70000;
+    margin: 10px;
+    text-align: center;
+}
+.errorMsgP {
+    height: 30px;
+    margin: 5px 0;
+}
+.main-wrapper {
+    margin: 10px auto;
+    width: 95%;
+}
+.sort {
+    background: url("../Images/sort_down.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 8px;
+    margin-left: 5px;
+    width: 8px;
+}
+.tblManageOrganization {
+    border: 1px solid #AAAAAA;
+}
+.tblManageOrganization tr td {
+    padding: 5px;
+}
+.tblManageOrganization tr.trHeader {
+    background: url("../Images/tblHead.png") repeat-x scroll center top transparent;
+    height: 33px;
+}
+.tblManageOrganization tr.trHeader td {
+    border-bottom: 1px solid #AAAAAA;
+    font-size: 14px;
+    font-weight: bold;
+}
+.tblManageOrganization tr.tdData td {
+    background: url("../Images/dot.png") repeat-x scroll center bottom transparent;
+}
+.tblManageOrganization tr.tdDataLast td {
+    background: none repeat scroll 0 0 transparent;
+}
+.gvStyle {
+    border: 1px solid #AAAAAA;
+}
+.gvStyle tr td, .gvStyle tr th {
+    padding: 5px;
+}
+.gvStyle tr.trHeader {
+    background: url("../Images/tblHead.png") repeat-x scroll center top #EEECEC;
+    height: 33px;
+}
+.gvStyle tr.trHeader th {
+    border-bottom: 1px solid #AAAAAA;
+    font-size: 14px;
+    font-weight: bold;
+}
+.gvStyle tr.trHeader th a {
+    color: #626262;
+    text-decoration: none;
+}
+.gvStyle tr.tdData {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
+}
+.gvStyle tr.tdData td {
+}
+.gvStyle tr.tdData:hover {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #EAEAEA;
+}
+.gvStyle tr.tdData td a {
+    color: #626262;
+    text-decoration: none;
+}
+.gvStyle tr.tdDataLast td {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.gvNoData {
+    border: 1px solid #AAAAAA;
+    color: #BF2E1A;
+}
+.gvNoData tr td {
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+.main-table-wrapper {
+    margin: 10px auto 0;
+    padding: 5px;
+    width: 98%;
+}
+.organizationName {
+    background: url("../Images/top-border.png") repeat-x scroll center bottom transparent;
+    color: #BF2E1A;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    margin: 10px 0;
+}
+.org {
+    display: inline-block;
+    height: 33px;
+    padding: 0 5px;
+}
+.organizationName span {
+    color: #BF2E1A;
+    font-weight: bold;
+}
+.organizationName span.orgName {
+    color: #777777;
+}
+.upload {
+    height: 36px;
+    margin-bottom: 10px;
+}
+.upload input.textSearch {
+    border: 1px solid #CACACA;
+    height: 28px;
+    line-height: 28px;
+    padding: 3px;
+    vertical-align: top;
+    width: 150px;
+}
+.searchWrapper {
+    float: left;
+    height: 36px;
+}
+.action {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+.view {
+    background: url("../Images/view.png") no-repeat scroll center top transparent;
+}
+.delete {
+    background: url("../Images/delete.png") no-repeat scroll center top transparent;
+}
+.report {
+    background: url("../Images/report.png") no-repeat scroll center top transparent;
+}
+.divider {
+    background: url("../Images/right-border.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 25px;
+    margin: 0 15px;
+    vertical-align: top;
+    width: 2px;
+}
+.divider-wc {
+    background: url("../Images/right-border.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 25px;
+    margin: 0 15px;
+    vertical-align: middle;
+    width: 2px;
+}
+.stickytooltip {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid black;
+    display: none;
+    padding: 2px;
+    position: absolute;
+    z-index: 3000;
+}
+.new-report {
+    height: 35px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+.new-report a {
+    background: url("../Images/new_report.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 34px;
+    text-decoration: none;
+    width: 104px;
+}
+.imgPublished {
+    background: url("../Images/published.png") no-repeat scroll center top transparent;
+    border: 0 none;
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+    width: 16px;
+}
+.chart {
+    background: url("../Images/chart.png") no-repeat scroll center top transparent;
+}
+.edit {
+    background: url("../Images/edit.png") no-repeat scroll center top transparent;
+}
+#overlay {
+    background: url("../Images/modal_back.png") repeat scroll center top transparent;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100010;
+}
+#overlayClass {
+    background: url("../Images/modal_back.png") repeat scroll center top transparent;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100010;
+}
+.mainModal {
+    left: 50%;
+    margin: -250px 0 0 -261px;
+    position: absolute;
+    top: 48%;
+    width: 522px;
+}
+.topM {
+    background: url("../Images/modal_top.png") no-repeat scroll center top transparent;
+    height: 95px;
+    width: 522px;
+}
+.topModal {
+    background: url("../Images/modal_top.png") no-repeat scroll center top transparent;
+    height: 95px;
+}
+.topM span {
+    float: left;
+}
+.mainModal2 {
+    height: 400px;
+    margin: -200px 0 0 -261px;
+}
+.topM2 {
+    background: url("../Images/topM2.png") no-repeat scroll center top transparent;
+    height: 14px;
+    width: 522px;
+}
+.MidM2 h1 {
+    border-bottom: 1px solid #999999;
+    color: #BF2E1A;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 10px 10px;
+}
+.MidM2 a {
+    background: url("../Images/close2.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    float: right;
+    height: 18px;
+    width: 18px;
+}
+.topM h1 {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 60px 50px 0;
+}
+.topM a {
+    background: url("../Images/modalCloseBtn.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    float: right;
+    height: 16px;
+    width: 16px;
+}
+.bottomM {
+    background: url("../Images/modal-bottom.png") no-repeat scroll center bottom transparent;
+    height: 52px;
+    width: 522px;
+}
+.bottomM2 {
+    background: url("../Images/bottomM2.png") no-repeat scroll center top transparent;
+    height: 14px;
+    width: 522px;
+}
+.MidM {
+    background: url("../Images/modal-mid.png") repeat-y scroll 0 0 transparent;
+    width: 522px;
+}
+.MidM2 {
+    background: url("../Images/MidM2.png") repeat-y scroll 0 0 transparent;
+    width: 522px;
+}
+.modalContent {
+    margin: 0 auto;
+    width: 423px;
+}
+.ifrmCont {
+    border: 0 none;
+    margin: 5px 0 0;
+    width: 100%;
+}
+.rdoOrganization {
+    padding: 10px;
+}
+.rdoOrganization table tr td {
+    padding: 5px 0;
+}
+.rdoOrganization table tr td label {
+    margin-left: 5px;
+    vertical-align: top;
+}
+.searchBox {
+    background: url("../Images/search.png") no-repeat scroll center top transparent;
+    float: right;
+    height: 24px;
+    line-height: 28px;
+    margin: 0 5px 0 0;
+    padding: 2px;
+    width: 224px;
+}
+.searchBoxTxt {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px;
+    vertical-align: top;
+    width: 193px;
+}
+.searchBoxBtn {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    width: 21px;
+}
+.changePass {
+    padding: 5px;
+}
+.btnChangePass {
+    margin: 10px 0;
+    text-align: center;
+}
+.changePassError {
+    color: #BF2E1A;
+    margin: 5px 0;
+}
+.changePasswordUnmatch {
+    color: #BF2E1A;
+}
+.invi2 {
+    background: url("../Images/inviteHead.png") no-repeat scroll center top transparent;
+    color: #191919;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    width: 80px;
+}
+.invi2 span {
+    padding: 0 0 0 5px;
+}
+.accepted {
+    float: left;
+    margin-right: 10px;
+    width: 550px;
+}
+.pending {
+    float: left;
+    width: 540px;
+}
+.invDiv {
+    height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}
+.invLblName {
+    padding: 5px 5px 5px 0;
+    width: 135px;
+}
+.invLblEmail {
+    padding: 5px 5px 5px 0;
+    width: 165px;
+}
+.invLblName2 {
+    padding: 5px 28px 5px 0;
+    text-align: right;
+    width: 60px;
+}
+.wrapDv2 {
+    width: 200px;
+    word-wrap: break-word;
+}
+.wrapDv2 span {
+    padding-left: 5px;
+    word-wrap: break-word;
+}
+.wrapDv3 {
+    width: 180px;
+    word-wrap: break-word;
+}
+.wrapDv3 span {
+    padding-left: 5px;
+}
+.invPendingLblName {
+    padding: 5px 5px 5px 0;
+    vertical-align: top;
+    width: 253px;
+}
+.wrapDv {
+    width: 250px;
+    word-wrap: break-word;
+}
+.wrapDv span {
+    padding-left: 5px;
+    word-wrap: break-word;
+}
+.invPendingLblName2 {
+    padding: 5px 5px 5px 0;
+    text-align: center;
+    vertical-align: top;
+    width: 151px;
+}
+.invPendingLblName2 a {
+    color: #1B8CF5;
+    text-decoration: none;
+}
+.invPendingLblName2 a:hover {
+    text-decoration: underline;
+}
+.acceptedCont, .pendingCont {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #CACACA;
+    border-left: 1px solid #CACACA;
+    border-right: 1px solid #CACACA;
+}
+.accpendNew {
+    background: url("../Images/tblHead.png") repeat-x scroll center top transparent;
+    border-bottom: 1px solid #AAAAAA;
+    border-top: 1px solid #AAAAAA;
+    font-weight: bold;
+    height: 33px;
+    line-height: 33px;
+}
+.accepted div.invtdHeadA {
+    float: left;
+    padding: 0 0 0 5px;
+    width: 186px;
+}
+.accepted div.invtdHeadAName {
+    width: 180px;
+}
+.accepted div.invtdHeadAEmail {
+    text-align: left;
+    width: 212px;
+}
+.accepted div.invtdHeadANew2 {
+    padding-right: 5px;
+    text-align: right;
+    width: 115px;
+}
+.pending div.invtdHeadP {
+    float: left;
+    font-weight: bold;
+    padding: 0 0 0 5px;
+    width: 270px;
+}
+.pending div.invtdHeadP2 {
+    padding-right: 5px;
+    text-align: right;
+    width: 151px;
+}
+.modalContentInvNew {
+    width: 522px;
+}
+.invite {
+    margin: 10px auto 0;
+    width: 40%;
+}
+.invite table {
+    border-bottom: 1px solid #CACACA;
+    border-left: 1px solid #CACACA;
+    border-right: 1px solid #CACACA;
+    padding: 5px;
+}
+.invite table tr td {
+    padding: 5px 0;
+}
+.inv {
+    text-align: right;
+}
+.txtInv {
+    border: 1px solid #DADADA;
+    height: 100px;
+    max-height: 100px;
+    max-width: 345px;
+    padding: 3px;
+    width: 345px;
+}
+.pend tr {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
+}
+.pend tr {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
+}
+.pend tr:hover {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #EAEAEA;
+}
+.gridWrapper {
+    clear: both;
+}
+.exportExcelButton {
+    background: url("../Images/excel.png") no-repeat scroll left top transparent;
+    float: right;
+    height: 16px;
+    width: 16px;
+}
+.exportCSVButton {
+    background: url("../Images/csv.png") no-repeat scroll left top transparent;
+    float: right;
+    height: 16px;
+    margin-left: 10px;
+    width: 16px;
+}
+.itemNo {
+    color: #3C3A3B;
+    float: left;
+    font-size: 12px;
+    margin: 9px 0 0 10px;
+}
+.gridPagination {
+    float: right;
+    list-style-type: none;
+    margin: 9px 0 0;
+    padding: 0 5px 0 0;
+}
+.pagination {
+    float: left;
+    list-style-type: none;
+    margin: 0 20px 0 0;
+    padding: 0;
+}
+.pagination ul li, .gridPagination ul li {
+    float: left;
+    height: 33px;
+}
+.pagination ul li a, .gridPagination ul li a {
+    border-bottom: medium none;
+    color: #000000;
+    display: block;
+    outline: medium none;
+    text-decoration: none;
+}
+.gridPagination ul li.pages {
+    background: none repeat scroll 0 0 transparent;
+    font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+    padding: 0 5px;
+}
+.gridPagination ul li.activePage {
+    background: none repeat scroll 0 0 transparent;
+    color: #000000;
+    font-size: 14px;
+    height: 20px;
+    padding: 0 5px;
+}
+.gridPagination ul li.activePage a, .gridPagination ul li.activePage a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+.gridPagination ul li.pages a, .gridPagination ul li.pages a:visited {
+    color: #333333;
+    display: block;
+    padding: 0;
+    text-decoration: none;
+}
+a.prevNextPage {
+    display: inline-block;
+    height: 33px;
+    width: 35px;
+}
+.gridPagination ul li.nextPageEnabled, .gridPagination li.nextPageDisabled {
+    background: url("../Images/gridNextPage.png") no-repeat scroll right bottom transparent;
+    height: 9px;
+    margin-top: 4px;
+    padding: 0;
+    width: 15px;
+}
+.gridPagination ul li.nextPageDisabled {
+    background: url("../Images/gridNextPage.png") no-repeat scroll left top transparent;
+    margin-top: 5px;
+}
+.gridPagination ul li.previousPageEnabled, .gridPagination li.previousPageDisabled {
+    background: url("../Images/gridPreviousPage.png") no-repeat scroll left bottom transparent;
+    height: 9px;
+    margin-top: 4px;
+    padding: 0;
+    width: 15px;
+}
+.gridPagination ul li.previousPageDisabled {
+    background: url("../Images/gridPreviousPage.png") no-repeat scroll left top transparent;
+}
+.categoryLeftcol {
+    background: url("Images/leftcolBg.jpg") no-repeat scroll left top #272626;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    vertical-align: top;
+    width: 220px;
+}
+div.Leftcol {
+    min-height: 400px;
+}
+.LeftcolBottom {
+    background: url("Images/leftcolBgBottom.jpg") no-repeat scroll left top transparent;
+    height: 109px;
+    padding: 0;
+}
+.categoryTextHeading {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 30px 0 7px 15px;
+}
+.leftColMenu {
+    margin: 2px 0 0 2px;
+}
+.leftColMenu li, .leftColMenu li.active {
+    background: url("Images/leftColMenuBg.png") no-repeat scroll left top transparent;
+    border-bottom: 1px solid #000000;
+    color: #F0F0F0;
+    cursor: pointer;
+    font-size: 13px;
+    height: 22px;
+    overflow: hidden;
+    padding: 6px 0 0 37px;
+    width: 179px;
+}
+.leftColMenu li:hover {
+    background: url("Images/leftColMenuBgActive.png") no-repeat scroll left top transparent;
+    color: #000000;
+}
+.leftColMenu li.active {
+    background: url("Images/leftColMenuBgActive.png") no-repeat scroll left top transparent;
+    color: #000000;
+}
+.leftColMenu li a {
+    color: #F0F0F0;
+    text-decoration: none;
+}
+.leftColMenu li:hover a {
+    color: #000000;
+}
+.leftColMenu li.active a {
+    color: #000000;
+}
+.leftcolSearchWrapper {
+    background: url("Images/searchBoxBg.png") no-repeat scroll right top transparent;
+    height: 23px;
+    margin: 18px 0 0;
+    width: 204px;
+}
+.leftcolSearchTxt {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #7D7D7D;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 3px;
+    width: 155px;
+}
+.leftcolSearchButton {
+    background: url("Images/smallSearch.gif") no-repeat scroll left top transparent;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 0;
+    height: 15px;
+    margin: 1px 0 0 5px;
+    vertical-align: middle;
+    width: 15px;
+}
+.categoryLeftcolVerticalSpacer {
+    height: 300px;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.gridForm {
+    background: url("Images/gridTop.gif") no-repeat scroll left top transparent;
+}
+span.frmSteps {
+    font-size: 18px;
+    margin-left: 10px;
+}
+table.formHintWrapper {
+    margin-top: 3px;
+    padding: 0;
+    width: 100%;
+}
+table.formHintWrapper td {
+    vertical-align: top;
+}
+.gridForm td.formCol {
+    background: url("Images/formBg.gif") repeat-y scroll 0 0 transparent;
+}
+.formWrapper {
+    background: none repeat scroll 0 0 #F0ECED;
+    padding-bottom: 10px;
+    width: 440px;
+}
+.gridForm th {
+    border-bottom: 1px solid #B2B2B2;
+    color: #7E7E7E;
+    font-size: 14px;
+    padding: 10px 3px;
+}
+.gridForm td {
+    border: medium none;
+    font-size: 12px;
+    padding: 5px 5px 0;
+}
+.gridForm td.helpCol {
+    padding-top: 0;
+}
+.formWrapper a {
+    color: #7F7F7F;
+}
+a.removeDate {
+    margin-left: 5px;
+}
+.gridFooterWrapper td {
+    border: medium none;
+    padding: 0 !important;
+}
+.gridFooterNewCell {
+    background: url("../Images/formFooterBgMiddle.gif") repeat-x scroll 0 0 transparent;
+}
+.gridFooterNew {
+    height: 32px;
+    padding: 13px 0 15px;
+}
+td.leftRightImage {
+    padding: 0;
+    vertical-align: middle;
+}
+.labeltxt {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 5px 5px 0;
+    vertical-align: top;
+}
+.table-border td {
+    border-bottom: 1px solid #CCCCCC !important;
+}
+.action-div img {
+    vertical-align: top;
+}
+.grid-bord {
+    border-bottom: 1px solid #E5E5E5;
+}
+div.report-div {
+    overflow: visible;
+    width: 760px;
+}
+.gridTable td.pb {
+    height: 55px;
+    padding: 5px 0 0;
+}
+.pb-grid {
+    height: 55px;
+}
+.left-panel-img {
+    vertical-align: bottom;
+}
+.word-wrap-m {
+    word-wrap: break-word;
+}
+.word-wrap-m2 {
+    overflow: hidden;
+    width: 100px;
+}
+.white-sp {
+    display: inline-block;
+}
+.word-wrap-p {
+    width: 340px;
+}
+.word-wrap-p a {
+    word-wrap: break-word;
+}
+.box-down {
+    float: right;
+    padding: 13px 0 0 35px;
+    width: 440px;
+}
+.desc {
+    float: left;
+    padding: 10px 5px;
+    width: 280px;
+}
+.associate {
+    float: left;
+    margin-left: 10px;
+    padding: 5px 5px 10px;
+    width: 450px;
+}
+.associate a:hover {
+    color: #F79321;
+    font-weight: bold;
+}
+.clear {
+    clear: both;
+}
+.assoc-media {
+    float: left;
+    padding: 5px;
+    width: 210px;
+}
+.assoc-playlist {
+    float: left;
+    margin: 0 0 0 10px;
+    padding: 5px;
+    width: 210px;
+}
+.margin-l {
+    margin: 0 0 0 20px;
+}
+.margin-l2 {
+    margin: 0 0 0 10px;
+}
+.btnCSV {
+    background: url("Images/btnExportToCsv.png") no-repeat scroll 0 0 transparent;
+    height: 27px;
+    margin: 0 5px;
+    width: 130px;
+}
+.btnExcel {
+    background: url("Images/btnExportToExcel.png") no-repeat scroll 0 0 transparent;
+    height: 27px;
+    margin: 0 5px;
+    width: 138px;
+}
+.below-box {
+    border-bottom: medium none;
+    padding-left: 20px;
+    padding-top: 0 !important;
+}
+.forgotModal {
+    left: 50%;
+    margin: -250px 0 0 -261px;
+    position: absolute;
+    top: 50%;
+    width: 522px;
+}
+table.upl2 {
+    margin: 0 auto;
+    padding: 10px 0 0;
+}
+table.upl2 tr td {
+    vertical-align: middle;
+}
+table.upl tr td {
+    padding: 2px;
+}
+table.upl tr td.msgUpload {
+    font-weight: bold;
+    height: 20px;
+    padding: 2px;
+    text-align: center;
+}
+.txtUpl {
+    border: 1px solid #DADADA;
+    height: 20px;
+    line-height: 24px;
+    padding: 2px;
+    width: 240px;
+}
+.txtUplTextArea {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 100px;
+    max-height: 100px;
+    max-width: 240px;
+    padding: 2px;
+    width: 240px;
+}
+.txtUplTextArea2 {
+    max-width: 360px;
+    width: 360px;
+}
+.btnAlign {
+    text-align: center;
+}
+.invTbl2 {
+    margin: 0 auto;
+}
+.invTbl2 tr td {
+    padding: 5px;
+}
+.invTbl2 tr td.invArea {
+    padding: 5px 5px 10px;
+}
+.invMarg {
+    color: #BF2E1A;
+    margin: 10px 0;
+}
+a.inviteMore {
+    background: url("../Images/invite.png") no-repeat scroll center top transparent;
+    color: #BF2E1A;
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 3px;
+    text-decoration: none;
+    text-indent: 35px;
+    width: 130px;
+}
+.errorMsg4 {
+    color: #A70000;
+    padding: 10px;
+    text-align: center;
+}
+.fl {
+    float: right;
+    padding-right: 6px;
+}
+.dvAddInvite {
+    margin-bottom: 5px;
+}
+.addNew {
+    margin: 0 auto;
+    width: 500px;
+}
+.fieldAddEdit {
+    padding: 8px;
+}
+.fieldAddEdit div {
+    margin: 5px 0;
+}
+.fieldAddEdit div.alt {
+    margin: 5px 0 10px;
+}
+.fieldAddEdit div.inner {
+    margin: 0 auto;
+    width: 390px;
+}
+.gvStyle tr.tdData td.al {
+    padding-right: 10px;
+    text-align: right;
+}
+.gvStyle tr.trHeader th.alH {
+    text-align: center;
+}
+.gvStyle tr.tdData td.alNew {
+    text-align: center;
+    vertical-align: middle;
+}
+.mandet {
+    color: red;
+    text-align: right;
+}
+.mandet2 {
+    color: red;
+    float: left;
+}
+.cred3 {
+    margin: 7px 0;
+}
+.mandet2 {
+    color: #DC2233;
+    font-weight: bold;
+}
+div.fileupload-rebrush {
+    background-color: #DBDBDB;
+    border: 1px solid #C0C0C0;
+    height: 25px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+}
+div.fileupload-rebrush input.fileupload-rebrush-button {
+    background-color: #C0C0C0;
+    border: 1px solid #A3A3A3;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 11px;
+    margin-left: 5px;
+    padding: 3px 5px;
+    text-transform: uppercase;
+}
+div.fileupload-rebrush input.fileupload-rebrush-field {
+    background-color: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    color: #A3A3A3;
+    font-family: arial;
+    font-size: 12px;
+    margin-left: 1px;
+    padding: 4px 5px;
+    position: relative;
+    width: 400px;
+    z-index: 3;
+}
+.rd table tr td {
+    padding: 0;
+}
+.rd table tr td input {
+    margin-left: 5px;
+    vertical-align: top;
+}
+.rd table tr td label {
+    margin-left: 5px;
+    vertical-align: top;
+}
+.btn-wrapper4 {
+    text-align: center;
+}
+.accPend {
+    margin: 0 auto;
+    width: 1100px;
+}
+.btn5 {
+    background: url("../Images/topBtn.png") no-repeat scroll left bottom transparent;
+    display: inline-block;
+    height: 29px;
+    line-height: 29px;
+    padding-left: 10px;
+    vertical-align: top;
+}
+.btn5 a {
+    background: url("../Images/topBtn.png") no-repeat scroll right top transparent;
+    color: #444444;
+    display: inline-block;
+    font-size: 14px;
+    height: 29px;
+    line-height: 29px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+.inviteNew {
+    background: url("../Images/inviteNew.png") no-repeat scroll right top transparent;
+    display: inline-block;
+    height: 24px;
+    margin-right: 5px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    width: 24px;
+}
+.addNew5 {
+    background: url("../Images/add.png") no-repeat scroll right top transparent;
+    display: inline-block;
+    height: 22px;
+    margin-right: 5px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    width: 22px;
+}
+.uplWrap {
+    float: right;
+}
+.uplNew {
+    background: url("../Images/upload.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 14px;
+    margin-right: 5px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    width: 10px;
+}
+#chkOrganization td {
+    padding: 10px 20px 0 0;
+}
+#chkOrganization td input {
+    margin: 0 5px 0 0;
+    vertical-align: top;
+}
+.msgDisplay {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.breadcrmbLeft {
+    border-bottom: 1px solid #CACACA;
+    font-size: 12px;
+    height: 48px;
+    line-height: 45px;
+    margin: 0;
+}
+.breadcrmb span.brd {
+    float: left;
+}
+.spBold {
+    font-weight: bold;
+}
+.inner2 {
+    padding-top: 5px;
+}
+.CategoryModal {
+    left: 50%;
+    margin: -250px 0 0 -261px;
+    position: absolute;
+    top: 50%;
+    width: 522px;
+}
+.fieldAddEdit div.regular {
+    height: 12px;
+    margin: 0;
+}
+.modalInner {
+    height: 500px;
+    overflow: auto;
+}
+.assocChartMain {
+}
+.assoc1 {
+    background: url("../Images/AssocHeader.png") no-repeat scroll left bottom transparent;
+    height: 25px;
+    padding-left: 6px;
+}
+.assoc1 h2 {
+    background: url("../Images/AssocHeader.png") no-repeat scroll right top transparent;
+    color: #FFFFFF;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+}
+.assocReportName {
+    padding: 0 0 10px;
+    text-align: center;
+}
+.assocReportName1 {
+    color: #777777;
+    font-size: 14px;
+}
+.assocReportName2 {
+    color: #BF2E1A;
+    font-size: 14px;
+}
+.assocMain {
+}
+.assocMainInner {
+}
+.assocMainInner div {
+    margin: 5px 0;
+}
+.assocMainInner div.clear {
+    margin: 0;
+}
+.assocMainInner div.alt {
+    margin: 5px 0 10px;
+}
+.assocRadio table tr td {
+    padding: 0 20px 0 0;
+}
+.assocRadio table tr td input {
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+}
+.assocRadio table tr td label {
+    vertical-align: middle;
+}
+.assocdrp select, .assoctxt input {
+    border: 1px solid #DADADA;
+    height: 22px;
+    line-height: 22px;
+    width: 249px;
+}
+.yAxis table tr td {
+    padding: 0 10px 1px 0;
+}
+.yAxis table tr td input {
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+}
+.yAxis table tr td label {
+    vertical-align: text-top;
+}
+.rptFilter label {
+    margin: 0 0 0 5px;
+    vertical-align: middle;
+}
+.rptFilter input {
+    vertical-align: middle;
+}
+.btnCover {
+    margin-right: 5px;
+}
+.associateChartScroll {
+    border: 1px solid #EAEAEA;
+    height: 390px;
+    overflow: auto;
+    padding: 5px;
+}
+.assocMainInner div.btnCover2 {
+    background: none repeat scroll 0 0 #EAEAEA;
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+}
+.modalContentChk {
+    border-bottom: 1px solid #AAAAAA;
+    border-left: 1px solid #AAAAAA;
+    border-right: 1px solid #AAAAAA;
+    max-height: 200px;
+    overflow: auto;
+}
+.CategoryChk {
+    float: left;
+    padding: 5px;
+    width: 7px;
+}
+.CategoryChkHead {
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+}
+.chkBtnWrap {
+    padding: 10px 0 0;
+    text-align: center;
+}
+.dvChkWrap {
+    background: url("../Images/tblHead.png") repeat-x scroll center top transparent;
+    border: 1px solid #AAAAAA;
+    height: 30px;
+}
+.dvChk {
+    padding-top: 5px;
+    width: 350px;
+}
+.manageRptChk tr td {
+    border-bottom: 1px dotted #BF2E1A;
+}
+.manageRptChk tr td table.noBottomBord tr td {
+    border-bottom: 0 dotted #BF2E1A;
+}
+.schema {
+    background: url("../Images/schema_dot.png") repeat-x scroll center top transparent;
+    float: left;
+    height: 1px;
+    margin: 6px 3px 0;
+    width: 250px;
+}
+#dvSchema {
+    margin-top: 5px;
+    padding: 0 0 0 22px;
+}
+.trActionList table tr td label {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.trActionList table tr td input {
+    vertical-align: middle;
+}
+.modalOverlay {
+    background: url("../Images/modal_back.png") repeat scroll center top transparent;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100010;
+}
+.txtMyAccountTextArea {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 100px;
+    max-height: 100px;
+    max-width: 360px;
+    padding: 2px;
+    width: 360px;
+}
+.txtSubscriptionTextArea {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 80px;
+    max-height: 80px;
+    max-width: 360px;
+    padding: 2px;
+    width: 360px;
+}
+.txtFeedBackTextArea {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 150px;
+    max-height: 150px;
+    max-width: 415px;
+    padding: 2px;
+    width: 415px;
+}
+.mainModalSubscription {
+    left: 50%;
+    margin-bottom: 0;
+    margin-left: -261px;
+    margin-right: 0;
+    position: absolute;
+    width: 522px;
+}
+.alignCP {
+    text-align: center;
+}
+.gvStyle tr.tdData td.alignRP, .gvStyle tr.trHeader th.alignRP {
+    text-align: right;
+}
+.alignInvRP {
+    text-align: right;
+}
+.SubscriptionHeader {
+    background: url("../Images/tblHead.png") repeat-x scroll center top transparent;
+    height: 33px;
+}
+.ViewRptCategory {
+    background: url("../Images/menu_bg2.png") repeat-x scroll center top transparent;
+    display: inline-block;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 150px;
+}
+.ViewRptCategory a {
+    color: White;
+    font-weight: bold;
+    text-decoration: none;
+}
+.mainModalAcc {
+    left: 50%;
+    margin: -228px 0 0 -261px;
+    position: absolute;
+    top: 50%;
+    width: 522px;
+}
+.inpAlign {
+    vertical-align: top;
+}
+.AddNewReportIco {
+    background: url("../Images/addNew.png") no-repeat scroll right top transparent;
+    display: inline-block;
+    height: 14px;
+    margin-right: 8px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    width: 14px;
+}
+.orgErrorMsg {
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+.rq {
+    color: Red;
+    margin-right: 3px;
+    vertical-align: top;
+}
+.mainModalComment {
+    left: 50%;
+    margin: -175px 0 0 -261px;
+    position: absolute;
+    top: 50%;
+    width: 522px;
+}
+.commentInner {
+    height: 350px;
+    margin: 0 auto;
+    width: 500px;
+}
+.commentBody {
+    height: 300px;
+    overflow: auto;
+    padding: 10px 0;
+}
+.topMComment {
+    background: url("../Images/topM2.png") no-repeat scroll center top transparent;
+    height: 14px;
+    width: 522px;
+}
+.MidMComment h1 {
+    border-bottom: 1px solid #999999;
+    color: #BF2E1A;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 10px 25px 0;
+}
+.MidMComment a {
+    background: url("../Images/close2.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    float: right;
+    height: 18px;
+    width: 18px;
+}
+.bottomMComment {
+    background: url("../Images/bottomM2.png") no-repeat scroll center top transparent;
+    height: 14px;
+    width: 522px;
+}
+.MidMComment {
+    background: url("../Images/MidM2.png") repeat-y scroll 0 0 transparent;
+    height: 600px;
+    width: 522px;
+}
+.invTblComment {
+    margin: 0 auto;
+}
+.invTblComment tr td {
+    padding: 5px;
+}
+.invTbl2Comment tr td.invArea {
+    padding: 5px 5px 10px;
+}
+.modalContentdashboard {
+    padding: 10px 0 0;
+}
+.reports {
+    float: left;
+    font-size: 24px;
+    text-shadow: 1px 3px 0 #FFFFFF;
+}
+.dvCat {
+    font-size: 14px;
+    padding-bottom: 30px;
+    width: 342px;
+}
+.uncategorized {
+    vertical-align: top;
+    width: 30%;
+}
+.categorized {
+    vertical-align: top;
+    width: 70%;
+}
+.dvCat h2 {
+    background: url("../Images/h2Dot.png") repeat-x scroll center bottom transparent;
+    color: #444444;
+    cursor: pointer;
+    font-size: 20px;
+    height: 25px;
+}
+.published {
+    background: url("../Images/published.png") no-repeat scroll center top transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin-right: 7px;
+    width: 12px;
+}
+.notPublished {
+    background: url("../Images/notPublished.png") no-repeat scroll center top transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin-right: 7px;
+    width: 12px;
+}
+.dvCat ul li {
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.dvCat ul li a {
+    color: #444444;
+    text-decoration: none;
+}
+.catDown {
+    background: url("../Images/sort_down.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 8px;
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 8px;
+}
+.catUp {
+    background: url("../Images/sort_up.png") no-repeat scroll center top transparent;
+    display: inline-block;
+    height: 8px;
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 8px;
+}
+.actionContainer {
+    background: url("../Images/arrow_right.png") no-repeat scroll left center transparent;
+    color: #444444;
+    display: inline-block;
+    padding-left: 20px;
+}
+.dvCat ul li span.actionContainer a {
+    color: #BF2E1A;
+    font-size: 12px;
+    font-weight: bold;
+}
+.txtInvDashboard {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 100px;
+    max-height: 100px;
+    max-width: 345px;
+    padding: 2px;
+    width: 345px;
+}
+.includeCoverP input {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.includeCoverP label {
+    margin-right: 7px;
+    vertical-align: middle;
+}
+.chkUserP table tr td label {
+    vertical-align: middle;
+}
+.chkUserP table tr td input {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.chkUserP div {
+    height: 130px;
+    overflow: auto;
+}
+.tblSnaps {
+    border-color: #B3B3B3 #B3B3B3 -moz-use-text-color;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    color: #000000;
+    padding: 0;
+}
+.tblSnaps tr td {
+    border-bottom: 1px dotted #B3B3B3;
+    border-left: 1px solid #B3B3B3;
+    padding: 7px 6px;
+}
+.tblSnaps tr td a {
+    font-weight: bold;
+}
+.tblSnaps tr.altRow td {
+    background: none repeat scroll 0 0 #F2F2F2;
+}
+.tblSnaps tr th {
+    background: none repeat scroll 0 0 #F1F1F1;
+    border-bottom: 1px solid #B3B3B3;
+    border-left: 1px solid #B3B3B3;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    padding: 3px 6px;
+    text-transform: uppercase;
+}
+.spDate {
+    color: #C0C0C0;
+    font-size: 14px;
+    font-weight: bold;
+    height: 22px;
+    line-height: 22px;
+}
+table.upl2 tr td.modalTd {
+    color: #999999;
+    font-weight: bold;
+}
+.Word_Wrap {
+    word-wrap: break-word;
+}
+.Font_Size {
+    font-size: 25px;
+}
+.tip {
+    background: url("../Images/TooltipIcon/tipTop.png") no-repeat scroll center top transparent;
+    display: none;
+    overflow: hidden;
+    padding-top: 15px;
+    position: absolute;
+    width: 212px;
+    z-index: 500;
+}
+.tipMid {
+    background: url("../Images/TooltipIcon/tipMid.png") repeat-y scroll 0 0 transparent;
+    padding: 0 50px;
+}
+.tipBtm {
+    background: url("../Images/TooltipIcon/tipBtm.png") no-repeat scroll center bottom transparent;
+    height: 32px;
+}
+.setchBoxCreate {
+    max-height: 100px;
+    min-height: 10px;
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+.setchBoxCreate table td {
+    padding-bottom: 4px;
+}
+.setchBoxCreate table td input {
+    float: left;
+}
+.setchBoxCreate table td label {
+}
+.associateBrdCum {
+    font-size: 13px;
+    font-weight: bold;
+    height: 15px;
+    line-height: 15px;
+    margin-left: 1px;
+    padding: 10px 0;
+}
+.chrtNewUpdate {
+    width: auto !important;
+}
+.chrtNewUpdate a {
+    width: auto !important;
+}
+.dvChkNew {
+    padding-top: 5px;
+    width: 423px;
+}
+.tipMidGray {
+    background: url("../Images/modal-midSmall.png") repeat-y scroll 0 0 transparent !important;
+    width: 800px !important;
+}
+.tipBtmGray {
+    background: url("../Images/modal-bottomSmall.png") no-repeat scroll 0 0 transparent !important;
+    height: 53px !important;
+    width: 800px !important;
+}
+.tiptopGray {
+    background: url("../Images/modal_topSmall.png") no-repeat scroll 0 0 transparent !important;
+    width: 800px !important;
+}
+.modalContentAssoRpt {
+    width: 423px !important;
+}
+.Boreder_Button tr td {
+    border-bottom: medium none;
+}
+.Boreder_Button tr td label {
+    line-height: 12px;
+    padding-left: 2px;
+    vertical-align: top;
+}
+.setHeight {
+    max-height: 350px;
+    min-height: 100px;
+    overflow-y: auto;
+}

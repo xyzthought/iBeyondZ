@@ -25,8 +25,8 @@ namespace DAL.Component
         {
             
             object[] mParams = {
-                                        new SqlParameter("@LoginID", SqlDbType.Int),    
-                                        new SqlParameter("@Password", SqlDbType.Int),    
+                                        new SqlParameter("@LoginID", SqlDbType.NVarChar),    
+                                        new SqlParameter("@LoginPassword", SqlDbType.NVarChar),    
                                 };
 
             mParams[0] = vObjUserInfo.LoginID;
