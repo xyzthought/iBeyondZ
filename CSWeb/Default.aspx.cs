@@ -14,11 +14,6 @@ public partial class _Default : System.Web.UI.Page
     {
         ClearPage();
 
-        //ddvfdvfv
-        //ki je hoche
-        //ttttt
-        //Eta Biswajiter jonnyo
-        //from anshuman
     }
 
     private void ClearPage()
