@@ -19,7 +19,7 @@
     <div class="wrapper">
         <div class="main-table-wrapper">
             <div class="breadcrmbLeft">
-                <input type="hidden" name="ctl00$ContentPlaceHolder1$currentReportName" id="currentReportName" />
+                <input type="hidden" name="hdnData" id="hdnData" />
                 <div class="searchBox">
                     <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
                         onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
@@ -27,10 +27,10 @@
                     <div class="clear">
                     </div>
                 </div>
-                <div id="ContentPlaceHolder1_dvAddReport" class="fl">
+                <div id="dvAdd" class="fl">
                     <span class="btn5"><asp:LinkButton id="lnkAddNew" href="#" runat="server"><span class="AddNewData"></span>Add Data 1</asp:LinkButton></span>
                 </div>
-                <div id="ContentPlaceHolder1_dvCloneOrgReport" class="fl">
+                <div id="divAdd1" class="fl">
                     <span class="btn5"><asp:LinkButton id="lnkAddNew2" href="#" runat="server"><span class="AddNewData"></span>Add Data 2</asp:LinkButton> </span>
                 </div>
                 <div class="reports">
