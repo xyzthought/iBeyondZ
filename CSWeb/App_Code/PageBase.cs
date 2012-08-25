@@ -10,6 +10,11 @@ public class PageBase : System.Web.UI.Page
 {
 	public PageBase()
 	{
+        CheckSession();
+	}
+
+    public void CheckSession()
+    {
         try
         {
             if (null != System.Web.HttpContext.Current.Session["UserData"])
@@ -17,13 +22,13 @@ public class PageBase : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("~/Default.aspx", false);
+                System.Web.HttpContext.Current.Response.Redirect("~/Default.aspx", false);
             }
         }
         catch (Exception ex)
         {
 
         }
-        
-	}
+
+    }
 }

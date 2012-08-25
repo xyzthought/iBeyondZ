@@ -1,11 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LandingPage.aspx.cs" Inherits="Modules_LandingPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PlatformUser.aspx.cs" Inherits="Modules_PlatformUser" %>
 
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Clothing Shop |</title>
+    <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -26,9 +27,14 @@
                     <div class="clear">
                     </div>
                 </div>
-                
+                <div id="ContentPlaceHolder1_dvAddReport" class="fl">
+                    <span class="btn5"><asp:LinkButton id="lnkAddNew" href="#" runat="server"><span class="AddNewData"></span>Add Data 1</asp:LinkButton></span>
+                </div>
+                <div id="ContentPlaceHolder1_dvCloneOrgReport" class="fl">
+                    <span class="btn5"><asp:LinkButton id="lnkAddNew2" href="#" runat="server"><span class="AddNewData"></span>Add Data 2</asp:LinkButton> </span>
+                </div>
                 <div class="reports">
-                    Home | Top Information
+                    Manage Platform User
                 </div>
                 <div class="clear">
                 </div>

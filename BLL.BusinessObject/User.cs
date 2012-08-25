@@ -10,6 +10,7 @@ namespace BLL.BusinessObject
     {
         private int mintUserID;
         private int mintUserTypeID;
+        private string mstrUserType;
         private string mstrFirstName;
         private string mstrLastName;
         private string mstrLoginID;
@@ -30,6 +31,11 @@ namespace BLL.BusinessObject
         {
             get { return mintUserTypeID; }
             set { mintUserTypeID = value; }
+        }
+        public string UserType
+        {
+            get { return mstrUserType; }
+            set { mstrUserType = value; }
         }
         public string FirstName
         {
@@ -80,7 +86,8 @@ namespace BLL.BusinessObject
         {
             get { return mblnIsDeleted; }
             set { mblnIsDeleted = value; }
-        }
+        }
+
 
        
        

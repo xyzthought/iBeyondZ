@@ -43,6 +43,12 @@ namespace DAL.Component
                     if (reader["LoginID"] != DBNull.Value)
                         vObjUserInfo.LoginID = Convert.ToString(reader["LoginID"]);
 
+                    if (reader["UserTypeID"] != DBNull.Value)
+                        vObjUserInfo.UserTypeID = Convert.ToInt32(reader["UserTypeID"]);
+
+                    if (reader["UserType"] != DBNull.Value)
+                        vObjUserInfo.UserType = Convert.ToString(reader["UserType"]);
+
                     if (reader["LoginPassword"] != DBNull.Value)
                         vObjUserInfo.LoginPassword = Convert.ToString(reader["LoginPassword"]);
 

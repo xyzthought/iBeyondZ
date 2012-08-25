@@ -20,7 +20,7 @@ body {
 .wrapper {
     height: auto !important;
     margin: 0 0 -35px;
-    min-height: 100%;
+    min-height: 94%;
     position: relative;
 }
 .push, .footerWrapper {
@@ -1483,7 +1483,7 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
 .inpAlign {
     vertical-align: top;
 }
-.AddNewReportIco {
+.AddNewData {
     background: url("../Images/addNew.png") no-repeat scroll right top transparent;
     display: inline-block;
     height: 14px;
@@ -1788,4 +1788,44 @@ table.upl2 tr td.modalTd {
     max-height: 350px;
     min-height: 100px;
     overflow-y: auto;
+}
+
+.footer_V2 {
+    background: none repeat scroll 0 0 #000000;
+    height: 35px;
+    line-height: 34px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.footer_V2 .inner_footer {
+    margin: 0 auto;
+    text-align: center;
+    width: 980px;
+}
+
+.copyright {
+    color: #7A7A7A;
+    font-size: 10px;
+}
+p, form, input, label {
+    margin: 0;
+    padding: 0;
+}
+.copy {
+    color: #7A7A7A;
+    font-size: 10px;
+}
+
+.copy a {
+    color: #7A7A7A;
+    font-family: Arial,Helvetica,sans-serif;
+    text-decoration: none;
+}
+.copy span {
+    color: #FF0000;
+    font-size:24px;
+    font-style:italic;
+    font-family:'vardhana';
 }

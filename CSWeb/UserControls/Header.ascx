@@ -19,18 +19,17 @@
                 <div class="clear">
                 </div>
                 <ul>
-                    <li id="mnuli1"><a href='~/Modules/Landingpage.aspx'>Home</a></li>
-                    <li id="mnuli6"><a href="#" id="HeaderControl_A2">Platform User</a>
+                    <li id="mnuli1"><a href='../Modules/Landingpage.aspx'>Home</a></li>
+                    <li id="mnuli6"><a href="../Modules/PlatformUser.aspx">Platform User</a>
                         <%--<ul id="HeaderControl_ulDashboard" class="ulDashboard" style="width: 245px">
                             <li><a title="ddd" href="#" style="display: inline-block; width: 225px;">ddd</a></li><li>
                         </ul>--%>
                     </li>
-                    <li id="mnuli7"><a href='#'>Manufacturer</a></li>
-                    <li id="mnuli8"><a href='#'>Product</a></li>
-                    <li id="mnuli9"><a href='#'>Sale</a></li>
-                    <li id="mnuli10"><a href='#'>Report</a></li>
-                    <li id="mnuli5"><a href="#nogo" onclick="changeCss();OpenMyAccount()" class="lastA">
-                        My Account</a></li>
+                    <li id="mnuli7"><a href='../Modules/Manufacturer.aspx'>Manufacturer</a></li>
+                    <li id="mnuli8"><a href='../Modules/Product.aspx'>Product</a></li>
+                    <li id="mnuli9"><a href='../Modules/Sale.aspx'>Sale</a></li>
+                    <li id="mnuli10"><a href='../Modules/Report.aspx'>Report</a></li>
+                    <li id="mnuli5"><a href="#nogo" onclick="changeCss();OpenMyAccount()">My Account</a></li>
                 </ul>
                 <div class="clear">
                 </div>
@@ -39,12 +38,11 @@
         <div class="Headermenu">
             <div class="wlcm">
                 <span class="wlcmNote">Welcome <span id="lblUserName" runat="server"></span><span
-                    id="spnUserType" runat="server"></span>
-                    <span>| <b><a onclick="return OpenChangePassword();" id="HeaderControl_LinkButton1"
-                        href="#"
-                        style="color: #CCCCCC; text-decoration: none">Change Password</a></b></span>
-                    <span>| <b><a id="HeaderControl_lBtnLogout" href="#"
-                        style="color: #CCCCCC; text-decoration: none">Logout</a></b></span> </span>
+                    id="spnUserType" runat="server"></span><span>| <b><a onclick="return OpenChangePassword();"
+                        id="HeaderControl_LinkButton1" href="#" style="color: #CCCCCC; text-decoration: none">
+                        Change Password</a></b></span> <span>| <b>
+                            <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" Style="color: #CCCCCC;
+                                text-decoration: none">Logout</asp:LinkButton></b></span> </span>
             </div>
         </div>
         <div class="logo" style="display: none;">

@@ -55,7 +55,7 @@
         <div class="footerContainer">
             <div class="footerInner">
                 <span class="copyright">System maintained by <a href="www.ibeyondz.com" target="_blank"
-                    style="color: #8F8F8F;">iBeyondz, Imagine behind Imagination</a></span>
+                    style="color: #8F8F8F;">iBeyondz, Imagine beyond Imagination</a></span>
             </div>
         </div>
     </div>
