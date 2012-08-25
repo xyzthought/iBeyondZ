@@ -5,13 +5,19 @@ using System.Text;
 
 namespace BLL.BusinessObject
 {
-    public class Message
+   public class Message
     {
-        private int mintReturnValue;
+        private int mintReturnStatus = 1;
+        private long mintReturnValue = -1;
         private string mstrReturnMessage;
-       
 
-        public int ReturnValue
+        public int ReturnStatus
+        {
+            get { return mintReturnStatus; }
+            set { mintReturnStatus = value; }
+        }
+
+        public long ReturnValue
         {
             get { return mintReturnValue; }
             set { mintReturnValue = value; }
@@ -22,7 +28,6 @@ namespace BLL.BusinessObject
             get { return mstrReturnMessage; }
             set { mstrReturnMessage = value; }
         }
-
-       
     }
 }
+

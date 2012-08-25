@@ -32,6 +32,11 @@ namespace BLL.Component
         }
 
 
-        
+
+
+        public List<User> GetAllUser(List<User> objData, PageInfo objPI)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

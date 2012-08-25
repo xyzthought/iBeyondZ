@@ -54,3 +54,4 @@
     </div>
     <iframe id="ifSession" height="1px" width="1px" src="" style="display: none"></iframe>
 </div>
+<asp:ScriptManager ID="ScriptManager1"   runat="server"></asp:ScriptManager>
