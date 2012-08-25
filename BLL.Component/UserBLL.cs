@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DAL.Component;
 using System.Data;
+using BLL.BusinessObject;
 
 namespace BLL.Component
 {
@@ -15,14 +16,22 @@ namespace BLL.Component
             objDB = new UserDB();
         }
 
+        public void AuthenticationValidation(ref User objUser)
+        {
+            objDB.AuthenticationValidation(ref objUser);
+        }
+
         public DataTable GetSourceData()
         {
-            return objDB.GetSourceData(); 
+            return objDB.GetSourceData();
         }
 
         public void SaveSourceDataTable(DataTable dtSource)
         {
             objDB.SaveSourceDataTable(dtSource);
         }
+
+
+        
     }
 }

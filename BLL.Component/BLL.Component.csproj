@@ -45,6 +45,10 @@
     <Compile Include="UserBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL.BusinessObject\BLL.BusinessObject.csproj">
+      <Project>{94EB6C49-8A53-432D-B3DB-473A77D101B9}</Project>
+      <Name>BLL.BusinessObject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL.Component\DAL.Component.csproj">
       <Project>{F6FDD0F0-044F-4657-A7C4-AE8387AC0E47}</Project>
       <Name>DAL.Component</Name>

@@ -21,6 +21,47 @@ namespace DAL.Component
     {
         Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");
 
+        public void AuthenticationValidation(ref User vObjUserInfo)
+        {
+            
+            object[] mParams = {
+                                        new SqlParameter("@LoginID", SqlDbType.Int),    
+                                        new SqlParameter("@Password", SqlDbType.Int),    
+                                };
+
+            mParams[0] = vObjUserInfo.LoginID;
+            mParams[1] = vObjUserInfo.LoginPassword;
+
+            using (IDataReader reader = dBase.ExecuteReader("sprocCSWeb_AuthenticationValidation", mParams))
+            {
+
+                while (reader.Read())
+                {
+                    if (reader["UserID"] != DBNull.Value)
+                    vObjUserInfo.UserID = Convert.ToInt32(reader["UserID"]);
+
+                    if (reader["LoginID"] != DBNull.Value)
+                        vObjUserInfo.LoginID = Convert.ToString(reader["LoginID"]);
+
+                    if (reader["LoginPassword"] != DBNull.Value)
+                        vObjUserInfo.LoginPassword = Convert.ToString(reader["LoginPassword"]);
+
+                    if (reader["FirstName"] != DBNull.Value)
+                        vObjUserInfo.FirstName = Convert.ToString(reader["FirstName"]);
+
+                    if (reader["LastName"] != DBNull.Value)
+                        vObjUserInfo.LastName = Convert.ToString(reader["LastName"]);
+
+                    if (reader["CommunicationEmailID"] != DBNull.Value)
+                        vObjUserInfo.CommunicationEmailID = Convert.ToString(reader["CommunicationEmailID"]);
+
+                    if (reader["LastLoggedIn"] != DBNull.Value)
+                        vObjUserInfo.LastLoggedIn = Convert.ToDateTime(reader["LastLoggedIn"]);
+                }
+            }
+            
+        }
+
         #region Save Data
 
         public int SaveData(int kk)
@@ -149,5 +190,7 @@ namespace DAL.Component
 
         }
         #endregion
+
+       
     }
 }

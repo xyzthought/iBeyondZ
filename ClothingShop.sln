@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CSWeb", "CSWeb\", "{10C385E2-E858-4D84-956C-0E5810619BAD}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{04F24B07-4829-4AC5-94BC-37F681CD1ECF}|CSWeb.Utility.dll;{94EB6C49-8A53-432D-B3DB-473A77D101B9}|BLL.BusinessObject.dll;{8C966FE8-9462-4AF5-B745-151C273B70A4}|BLL.Component.dll;{F6FDD0F0-044F-4657-A7C4-AE8387AC0E47}|DAL.Component.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/CSWeb"
 		Debug.AspNetCompiler.PhysicalPath = "CSWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\CSWeb\"

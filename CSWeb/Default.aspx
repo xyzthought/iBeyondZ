@@ -14,7 +14,7 @@
         <div class="wrapper" style="background: #fff !important;">
             <div class="loginHeader">
                 <div class="wrapperInnner">
-                   <%-- <img src="#">--%></div>
+                    <%-- <img src="#">--%></div>
             </div>
             <div class="shiftingContainer">
                 <h1>
@@ -41,9 +41,10 @@
                         <span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
                                 Display="Dynamic" ControlToValidate="txtPassword" CssClass="errorMsg"></asp:RequiredFieldValidator></span>
+                        <label id="errMsg" runat="server">
+                            </label>
                         <p>
-                            <asp:Button ID="btnLogin" class="btnLogin" runat="server" 
-                                onclick="btnLogin_Click" />
+                            <asp:Button ID="btnLogin" class="btnLogin" runat="server" OnClick="btnLogin_Click" />
                         </p>
                     </div>
                 </div>
