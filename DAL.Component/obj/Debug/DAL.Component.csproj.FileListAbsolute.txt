@@ -1,0 +1,16 @@
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\DAL.Component.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\DAL.Component.pdb
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\obj\Debug\DAL.Component.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\obj\Debug\DAL.Component.pdb
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\BLL.BusinessObject.pdb
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\CSWeb.Utility.dll
+C:\Users\suvendu\Projects\ClothingShop\DAL.Component\bin\Debug\CSWeb.Utility.pdb

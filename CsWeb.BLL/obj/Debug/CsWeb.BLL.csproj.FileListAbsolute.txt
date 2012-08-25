@@ -1,0 +1,5 @@
+C:\Users\suvendu\Projects\ClothingShop\CsWeb.BLL\bin\Debug\CsWeb.BLL.dll
+C:\Users\suvendu\Projects\ClothingShop\CsWeb.BLL\bin\Debug\CsWeb.BLL.pdb
+C:\Users\suvendu\Projects\ClothingShop\CsWeb.BLL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\ClothingShop\CsWeb.BLL\obj\Debug\CsWeb.BLL.dll
+C:\Users\suvendu\Projects\ClothingShop\CsWeb.BLL\obj\Debug\CsWeb.BLL.pdb

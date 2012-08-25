@@ -1,0 +1,5 @@
+C:\Users\suvendu\Projects\ClothingShop\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\ClothingShop\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.pdb
+C:\Users\suvendu\Projects\ClothingShop\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\ClothingShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\ClothingShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb

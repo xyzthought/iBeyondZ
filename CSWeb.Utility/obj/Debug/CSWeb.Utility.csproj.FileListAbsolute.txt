@@ -1,0 +1,7 @@
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\bin\Debug\CSWeb.Utility.dll
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\bin\Debug\CSWeb.Utility.pdb
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\obj\Debug\CSWeb.Utility.dll
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\obj\Debug\CSWeb.Utility.pdb
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\bin\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\ClothingShop\CSWeb.Utility\bin\Debug\BLL.BusinessObject.pdb
