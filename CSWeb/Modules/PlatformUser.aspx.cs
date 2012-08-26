@@ -53,7 +53,7 @@ public partial class Modules_PlatformUser : PageBase
                 objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
             }
             UserBLL objUserBLL = new UserBLL();
-            //  IEnumerable<object> objData;
+          
             List<User> objData = new List<User>();
             objData = objUserBLL.GetAllUser(objData, objPI);
 
@@ -244,9 +244,14 @@ public partial class Modules_PlatformUser : PageBase
     }
 
 
-    public void ChangeCurBid(int campaignID, string value)
+   
+
+    protected void lnkBtnSearch_Click(object sender, EventArgs e)
+    {
+        PopulateGrid();
+    }
+    protected void lnkAddNew_Click(object sender, EventArgs e)
     {
 
     }
-
 }

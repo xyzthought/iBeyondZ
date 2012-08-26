@@ -1231,7 +1231,7 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
     font-size: 12px;
     height: 48px;
     line-height: 45px;
-    margin: 0;
+    margin: 0 0 0px 0;
 }
 .breadcrmb span.brd {
     float: left;

@@ -42,7 +42,98 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
                 <div id="dvgridcontainer" class="grid_container">
-                    &nbsp;
+                    <!--Start GRID-->
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
+                        <ContentTemplate>
+                            <div style="margin: 0px auto; padding: 0px; text-align: center;">
+                                <div id="divMess" runat="server" visible="false">
+                                    <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <br style="clear: both" />
+                            <div class="grid_container">
+                                <ctrl:CustomGridView id="gvGrid" emptydatatext="<span class='noDataSelected'>No Data Available</span>"
+                                    runat="server" autogeneratecolumns="false" allowpaging="True" allowsorting="True"
+                                    width="100%" pagesize="20" gridlines="None" cssclass="gvStyle" sortcolumn="UserType" DataKeyNames="UserID"
+                                    sortorder="Ascending" sortascimageurl="~/Images/GridViewCtrl/asc.png" sortdescimageurl="~/Images/GridViewCtrl/dsc.png"
+                                    exporttemplatepath="~/Reports/Templates/" excelheaderrow="8" startrow="10" startcolumn="2"
+                                    dbcolumn="" maxlevel="1" sheetnumber="1" currentdaterow="6" currentdatecol="3"
+                                    startdaterow="4" startdatecol="3" enddaterow="5" enddatecol="3">
+                    <Columns>
+                        <asp:TemplateField HeaderText="User Type" SortExpression="UserType">
+                            <ItemTemplate>
+                                <asp:Label ID="lblUserType" runat="server" Text='<%# Eval("UserType") %>' ToolTip='<%# Eval("UserType") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="First Name" SortExpression="FirstName">
+                            <ItemTemplate>
+                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Eval("FirstName") %>' ToolTip='<%# Eval("FirstName") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Last Name" SortExpression="LastName">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLastName" runat="server" Text='<%# Eval("LastName") %>' ToolTip='<%# Eval("LastName") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                         <asp:TemplateField HeaderText="Email-ID" SortExpression="CommunicationEmailID">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("CommunicationEmailID") %>' ToolTip='<%# Eval("CommunicationEmailID") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Last Logged-In" SortExpression="LastLoggedIn">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>' ToolTip='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Created On" SortExpression="CreatedOn">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Updated On" SortExpression="UpdatedOn">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="Action">
+                            <ItemTemplate>
+                                <a id="aEdit" runat="server" href="#" onclick="CallManageLoader();" title="Click to edit">
+                                    <img src="../../Images/iconEditAction.png" alt="Edit" /></a>
+                                <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
+                                    CommandArgument='<%# Eval("dd") +"|"+ Eval("dd") %>'> <img src="../../Images/iconDeleteAction.png" alt="Delete" /> </asp:LinkButton>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Left" CssClass="al" />
+                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
+                        </asp:TemplateField>
+                    </Columns>
+                    <RowStyle CssClass="tdData" />
+                    <HeaderStyle CssClass="trHeader" />
+                </ctrl:CustomGridView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <!--End Grid-->
                 </div>
             </div>
         </div>

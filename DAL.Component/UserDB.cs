@@ -33,7 +33,7 @@ namespace DAL.Component
             mParams[0] = vObjUserInfo.LoginID;
             mParams[1] = vObjUserInfo.LoginPassword;
 
-            using (IDataReader reader = dBase.ExecuteReader("sprocCSWeb_AuthenticationValidation", mParams))
+            using (IDataReader reader = dBase.ExecuteReader("sprocCS_AuthenticationValidation", mParams))
             {
 
                 while (reader.Read())
@@ -216,7 +216,7 @@ namespace DAL.Component
                 mParams[1] = vobjPageInfo.SortDirection;
                 mParams[2] = vobjPageInfo.SearchText;
 
-                using (IDataReader reader = dBase.ExecuteReader("sprocCSWeb_GetAllAppUser", mParams))
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllAppUser", mParams))
                 {
                     while (reader.Read())
                     {
