@@ -13,6 +13,7 @@ using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using BLL.BusinessObject;
 using CSWeb.Utility;
+using System.Diagnostics;
 
 
 namespace DAL.Component
@@ -197,6 +198,118 @@ namespace DAL.Component
         }
         #endregion
 
-       
+
+
+        public List<User> GetAllUser(List<User> objData, PageInfo vobjPageInfo)
+        {
+            List<User> lstobjUser = new List<User>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@SortDirection", SqlDbType.NVarChar),
+                                        new SqlParameter("@SearchText", SqlDbType.NVarChar)
+                                };
+
+                mParams[0] = vobjPageInfo.SortColumnName;
+                mParams[1] = vobjPageInfo.SortDirection;
+                mParams[2] = vobjPageInfo.SearchText;
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCSWeb_GetAllAppUser", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjUser.Add(PopulateUser(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjUser;
+        }
+
+        private User PopulateUser(IDataReader drData)
+        {
+            User objUser = new User();
+            try
+            {
+
+                if (FieldExists(drData, "UserID") && drData["UserID"] != DBNull.Value)
+                {
+                    objUser.UserID = Convert.ToInt32(drData["UserID"]);
+                }
+                if (FieldExists(drData, "UserTypeID") && drData["UserTypeID"] != DBNull.Value)
+                {
+                    objUser.UserTypeID = Convert.ToInt32(drData["UserTypeID"]);
+                }
+
+                if (FieldExists(drData, "UserType") && drData["UserType"] != DBNull.Value)
+                {
+                    objUser.UserType = Convert.ToString(drData["UserType"]);
+                }
+
+                if (FieldExists(drData, "FirstName") && drData["FirstName"] != DBNull.Value)
+                {
+                    objUser.FirstName = Convert.ToString(drData["FirstName"]);
+                }
+
+                if (FieldExists(drData, "LastName") && drData["LastName"] != DBNull.Value)
+                {
+                    objUser.LastName = Convert.ToString(drData["LastName"]);
+                }
+
+                if (FieldExists(drData, "LastLoggedIn") && drData["LastLoggedIn"] != DBNull.Value)
+                {
+                    objUser.LastLoggedIn = Convert.ToDateTime(drData["LastLoggedIn"]);
+                }
+
+                if (FieldExists(drData, "CommunicationEmailID") && drData["CommunicationEmailID"] != DBNull.Value)
+                {
+                    objUser.CommunicationEmailID = Convert.ToString(drData["CommunicationEmailID"]);
+                }
+
+                if (FieldExists(drData, "CreatedOn") && drData["CreatedOn"] != DBNull.Value)
+                {
+                    objUser.CreatedOn = Convert.ToDateTime(drData["CreatedOn"]);
+                }
+
+            
+                if (FieldExists(drData, "IsDeleted") && drData["IsDeleted"] != DBNull.Value)
+                {
+                    objUser.IsDeleted = Convert.ToBoolean(drData["IsDeleted"]);
+                }
+               
+                if (FieldExists(drData, "UpdatedOn") && drData["UpdatedOn"] != DBNull.Value)
+                {
+                    objUser.UpdatedOn = Convert.ToDateTime(drData["UpdatedOn"]);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objUser;
+        }
+
+
+        public bool FieldExists(IDataReader reader, string fieldName)
+        {
+            try
+            {
+                reader.GetSchemaTable().DefaultView.RowFilter = string.Format("ColumnName= '{0}'", fieldName);
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return (reader.GetSchemaTable().DefaultView.Count > 0);
+        }
     }
 }
