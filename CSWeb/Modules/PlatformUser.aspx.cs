@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Net.Mail;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
+using CSWeb.Utility;
 
 public partial class Modules_PlatformUser : PageBase
 {
@@ -30,10 +31,21 @@ public partial class Modules_PlatformUser : PageBase
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.DESC;
+            PopulateUserType();
             PopulateGrid();
         }
     }
 
+    #region Populate User Type
+    private void PopulateUserType()
+    {
+        UserTypeBLL objUTBLL = new UserTypeBLL();
+        List<UserTypeBO> objUTBO = objUTBLL.GetAllUserType();
+        Common.BindControl(ddlUserType, objUTBO, "UserType", "UserTypeID", Constants.ControlType.DropDownList, true);
+    } 
+    #endregion
+
+    #region Populate Grid
     private void PopulateGrid()
     {
         try
@@ -53,7 +65,7 @@ public partial class Modules_PlatformUser : PageBase
                 objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
             }
             UserBLL objUserBLL = new UserBLL();
-          
+
             List<User> objData = new List<User>();
             objData = objUserBLL.GetAllUser(objData, objPI);
 
@@ -104,8 +116,10 @@ public partial class Modules_PlatformUser : PageBase
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
-    }
+    } 
+    #endregion
 
+    #region GRID VIEW EVENTS
     protected void gvGrid_Sorting(object sender, GridViewSortEventArgs e)
     {
         try
@@ -242,7 +256,8 @@ public partial class Modules_PlatformUser : PageBase
     {
 
     }
-
+    
+    #endregion
 
    
 

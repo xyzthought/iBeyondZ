@@ -198,8 +198,7 @@ namespace DAL.Component
         }
         #endregion
 
-
-
+        #region Get All User
         public List<User> GetAllUser(List<User> objData, PageInfo vobjPageInfo)
         {
             List<User> lstobjUser = new List<User>();
@@ -277,17 +276,17 @@ namespace DAL.Component
                     objUser.CreatedOn = Convert.ToDateTime(drData["CreatedOn"]);
                 }
 
-            
+
                 if (FieldExists(drData, "IsDeleted") && drData["IsDeleted"] != DBNull.Value)
                 {
                     objUser.IsDeleted = Convert.ToBoolean(drData["IsDeleted"]);
                 }
-               
+
                 if (FieldExists(drData, "UpdatedOn") && drData["UpdatedOn"] != DBNull.Value)
                 {
                     objUser.UpdatedOn = Convert.ToDateTime(drData["UpdatedOn"]);
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -295,7 +294,8 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objUser;
-        }
+        } 
+        #endregion
 
 
         public bool FieldExists(IDataReader reader, string fieldName)
@@ -310,6 +310,35 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return (reader.GetSchemaTable().DefaultView.Count > 0);
+        }
+
+
+        public List<UserTypeBO> GetAllUserType()
+        {
+            List<UserTypeBO> objUserType = new List<UserTypeBO>();
+            UserTypeBO objUT = null;
+            try
+            {
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllUserType"))
+                {
+                    while (reader.Read())
+                    {
+                        objUT = new UserTypeBO();
+                        if (reader["UsertypeID"] != DBNull.Value)
+                            objUT.UsertypeID = Convert.ToInt32(reader["UsertypeID"]);
+
+                        if (reader["UserType"] != DBNull.Value)
+                            objUT.UserType = Convert.ToString(reader["UserType"]);
+                        objUserType.Add(objUT);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objUserType;
         }
     }
 }
