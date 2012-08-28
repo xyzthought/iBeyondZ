@@ -250,8 +250,5 @@ public partial class Modules_PlatformUser : PageBase
     {
         PopulateGrid();
     }
-    protected void lnkAddNew_Click(object sender, EventArgs e)
-    {
-
-    }
+    
 }

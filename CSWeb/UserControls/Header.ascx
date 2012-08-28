@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Header.ascx.cs" Inherits="UserControls_Header" %>
 <!--All Script tag should come here-->
 <script src="../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="../Scripts/common.js" type="text/javascript"></script>
+
 <!--All CSS should come here-->
 <link href="../Styles/InnerStyle.css" rel="stylesheet" type="text/css" />
 <link href="../Styles/Header.css" rel="stylesheet" type="text/css" />

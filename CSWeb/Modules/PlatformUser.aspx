@@ -27,8 +27,7 @@
                 </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" href="#" runat="server" 
-                        onclick="lnkAddNew_Click"><span class="AddNewData"></span>Add User</asp:LinkButton></span>
+                        <asp:LinkButton ID="lnkAddNew" href="#" runat="server" OnClientClick="ShowModalDiv('ModalWindow1','dvInnerWindow',0)"><span class="AddNewData"></span>Add User</asp:LinkButton></span>
                 </div>
                 <div class="reports">
                     Manage Platform User
@@ -114,7 +113,7 @@
                                                 <a id="aEdit" runat="server" href="#" onclick="CallManageLoader();" title="Click to edit">
                                                     <img src="../../Images/iconEditAction.png" alt="Edit" /></a>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
-                                                    CommandArgument='<%# Eval("dd") +"|"+ Eval("dd") %>'> <img src="../../Images/iconDeleteAction.png" alt="Delete" /> </asp:LinkButton>
+                                                    CommandArgument='<%# Eval("UserID") +"|"+ Eval("UserTypeID") %>'> <img src="../../Images/iconDeleteAction.png" alt="Delete" /> </asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" CssClass="al" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
@@ -126,6 +125,81 @@
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                </div>
+            </div>
+            <!--Add/Edit Platform User-->
+            <div id="ModalWindow1" style="display: none;" clientidmode="Static">
+                <div class="mainModalAddEdit" id="mainModalAddDataSource">
+                    <div class="topM">
+                        <h1>
+                            <span id="spTitle">Add/Edit User</span><a onclick="return CloseAddDiv();" id="lnkCloseAddDiv"
+                                title="Close" href="javascript:__doPostBack(&#39;ctl00$lnkCloseAddDiv&#39;,&#39;&#39;)">
+                            </a>
+                        </h1>
+                    </div>
+                    <div id="MidM2" class="MidM">
+                        <div class="addNew" id="addNew2">
+                            <div id="updDataSource">
+                                <div id="dvInnerWindow" class="modalContent">
+                                    <fieldset class="fieldAddEdit">
+                                        <div class="inner">
+                                            <div class="mandet">
+                                                <span id="ContentPlaceHolder1_lblMessage">* Fields are mandatory</span></div>
+                                            <div class="errorMsg">
+                                                <span id="ContentPlaceHolder1_lblError2"></span>
+                                            </div>
+                                            <div>
+                                                User Type :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt">
+                                                <asp:DropDownList ID="ddlUserType" runat="server" CssClass="txtCred">
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div>
+                                                First Name :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt" style="margin-bottom: 5px;">
+                                                <asp:TextBox ID="txtFirstName" runat="server" CssClass="txtCred"></asp:TextBox>
+                                            </div>
+                                            <div>
+                                                Last Name :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt" style="margin-bottom: 5px;">
+                                                <asp:TextBox ID="txtLastName" runat="server" CssClass="txtCred"></asp:TextBox>
+                                            </div>
+                                            <div>
+                                                LoginID :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt" style="margin-bottom: 5px;">
+                                                <asp:TextBox ID="txtLoginID" runat="server" CssClass="txtCred"></asp:TextBox>
+                                            </div>
+                                            <div>
+                                                Password :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt" style="margin-bottom: 5px;">
+                                                <asp:TextBox ID="txtPassword" runat="server" CssClass="txtCred"></asp:TextBox>
+                                            </div>
+                                            <div>
+                                                Communication Email-ID :<span class="mandet2">* </span>
+                                            </div>
+                                            <div class="alt" style="margin-bottom: 5px;">
+                                                <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred"></asp:TextBox>
+                                            </div>
+                                            <div class="btn-wrapper4">
+                                                <span class="btn">
+                                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server">Save</asp:LinkButton></span>
+                                                <span class="btn">
+                                                    <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv();">Cancel</asp:LinkButton>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottomM">
+                    </div>
                 </div>
             </div>
         </div>
