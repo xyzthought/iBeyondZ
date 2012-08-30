@@ -22,7 +22,7 @@ public partial class UserControls_Header : System.Web.UI.UserControl
             User objUser = new BLL.BusinessObject.User();
             objUser = (User)Session["UserData"];
             lblUserName.InnerHtml = objUser.FirstName;
-            spnUserType.InnerHtml = " [ " + objUser.UserType + " ]";
+            spnUserType.InnerHtml = " , " + objUser.UserType + " - Last login : "+string.Format("{0:dd-MMM @ HH:mm}",objUser.LastLoggedIn)+" ";
         }
         catch (Exception ex)
         {

@@ -128,11 +128,11 @@
                 </div>
             </div>
             <!--Add/Edit Platform User-->
-            <div id="ModalWindow1" style="display: none;" clientidmode="Static">
+            <div id="ModalWindow1"  clientidmode="Static">
                 <div class="mainModalAddEdit" id="mainModalAddDataSource">
                     <div class="topM">
                         <h1>
-                            <span id="spTitle">Add/Edit User</span><a onclick="return CloseAddDiv();" id="lnkCloseAddDiv"
+                            <span id="spTitle">Add/Edit Platform User</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv"
                                 title="Close" href="javascript:__doPostBack(&#39;ctl00$lnkCloseAddDiv&#39;,&#39;&#39;)">
                             </a>
                         </h1>
@@ -152,7 +152,7 @@
                                                 User Type :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt">
-                                                <asp:DropDownList ID="ddlUserType" runat="server" CssClass="txtCred">
+                                                <asp:DropDownList ID="ddlUserType" runat="server" CssClass="txtUpl">
                                                 </asp:DropDownList>
                                             </div>
                                             <div>
@@ -160,36 +160,42 @@
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtFirstName" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqtxtFirstName" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtFirstName" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Last Name :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqtxtSecondName" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLastName" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 LoginID :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtLoginID" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="ReqtxtLoginID" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLoginID" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Password :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtPassword" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtPassword" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Communication Email-ID :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="ReqtxtEmailID" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtEmailID" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="btn-wrapper4">
                                                 <span class="btn">
-                                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server">Save</asp:LinkButton></span>
+                                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server" 
+                                                    onclick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
                                                 <span class="btn">
-                                                    <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv();">Cancel</asp:LinkButton>
+                                                    <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1');">Cancel</asp:LinkButton>
                                                 </span>
                                             </div>
                                         </div>

@@ -73,7 +73,7 @@ namespace DAL.Component
 
         public int SaveData(int kk)
         {
-            Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("BOLDSN");
+           
             try
             {
                 int i = 0;
@@ -339,6 +339,33 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objUserType;
+        }
+
+       
+        public Message InsertUpdatePlatformUser(User objUser)
+        {
+            Message objMessage = new Message();
+            try
+            {
+               
+              
+
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
+
+        private static void CheckConnectionState(SqlConnection conn)
+        {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
         }
     }
 }

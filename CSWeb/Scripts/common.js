@@ -298,7 +298,9 @@ function SetModalPosition(DivID, TopOffset, iFrameID, iFrameheight, LeftPosition
 
 }
 
-
+function CloseAddDiv(divtoClose) {
+    $('#' + divtoClose).hide();
+}
 
 
 var docHeight = 0;

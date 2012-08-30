@@ -265,5 +265,35 @@ public partial class Modules_PlatformUser : PageBase
     {
         PopulateGrid();
     }
-    
+
+    protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
+    {
+        if (ddlUserType.SelectedIndex > 0)
+        {
+            SaveData(Constants.MODE_ADD,0);
+        }
+        else
+        {
+            lblMsg.Text = Resources.Resource.MandatoryFieldMissing;
+        }
+    }
+
+
+    #region Save Data
+    private void SaveData(string vstrMode,int vintUserID )
+    {
+        User objUser = new User();
+        UserBLL objUBLL=new UserBLL();
+        objUser.UserID=vintUserID;
+        objUser.UserTypeID =Convert.ToInt32(ddlUserType.SelectedItem.Value.ToString());
+        objUser.FirstName = txtFirstName.Text.Trim();
+        objUser.LastName = txtLastName.Text.Trim();
+        objUser.LoginID = txtLoginID.Text.Trim();
+        objUser.LoginPassword = txtPassword.Text.Trim();
+
+        Message objMsg = objUBLL.InsertUpdatePlatformUser(objUser);
+
+        lblMsg.Text = objMsg.ReturnMessage;
+    } 
+    #endregion
 }

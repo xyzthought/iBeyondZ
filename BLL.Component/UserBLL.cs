@@ -36,5 +36,10 @@ namespace BLL.Component
         {
             return objDB.GetAllUser(objData, objPI);
         }
+
+        public Message InsertUpdatePlatformUser(User objUser)
+        {
+            return objDB.InsertUpdatePlatformUser(objUser);
+        }
     }
 }
