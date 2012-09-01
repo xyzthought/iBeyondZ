@@ -76,7 +76,7 @@ public partial class Modules_PlatformUser : PageBase
             gvGrid.ExportCaption = "";
             gvGrid.ExcelColumn = "";
             gvGrid.DataBind();
-
+            updPanel.Update();
             if (objData != null)
             {
                 if (!iFlag && lblMsg.Text == "")
@@ -113,6 +113,7 @@ public partial class Modules_PlatformUser : PageBase
                 }
 
             }
+            
         }
         catch (Exception ex)
         {
@@ -186,7 +187,7 @@ public partial class Modules_PlatformUser : PageBase
 
                 if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID")) == ((User)Session["UserData"]).UserID)
                     lnkDelete.Visible = false;
-                
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "HidePopup", "CallLoader();MyModalClose();", true);
 
             }
         }
@@ -203,14 +204,15 @@ public partial class Modules_PlatformUser : PageBase
             if (e.CommandName == "Edit")
             {
                 int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                LoadForm(intUserID);
+                ViewState["intUserID"] = intUserID;
+                LoadData(intUserID);
             }
 
             if (e.CommandName == "Delete")
             {
                 
                 Message vobjMsg = new Message();
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString().Split('|')[0]);
+                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
                 User objUser = new User();
                 UserBLL objUBLL = new UserBLL();
                 objUser.UserID = intUserID;
@@ -222,6 +224,7 @@ public partial class Modules_PlatformUser : PageBase
                     lblMsg.Text = e.CommandArgument.ToString() + "' " + Constants.Deleted;
                     divMess.Attributes.Add("class", "Deleted");
                     lblMsg.Style.Add("color", "Black");
+                    PopulateGrid();
                 }
                 else
                 {
@@ -241,7 +244,10 @@ public partial class Modules_PlatformUser : PageBase
         }
     }
 
-    private void LoadForm(int vintUserID)
+
+    
+
+    private void LoadData(int vintUserID)
     {
         try
         {
@@ -252,12 +258,14 @@ public partial class Modules_PlatformUser : PageBase
 
             if (null != objList)
             {
-                ddlUserType.SelectedItem.Value = objList[0].UserTypeID.ToString();
+                ddlUserType.SelectedValue = objList[0].UserTypeID.ToString();
                 txtFirstName.Text = objList[0].FirstName;
                 txtLastName.Text = objList[0].LastName;
                 txtLoginID.Text = objList[0].LoginID;
                 txtPassword.Text = objList[0].LoginPassword;
                 txtEmailID.Text = objList[0].CommunicationEmailID;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditUser", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
+               
             }
         }
         catch (Exception ex)
@@ -290,7 +298,14 @@ public partial class Modules_PlatformUser : PageBase
     {
         if (ddlUserType.SelectedIndex > 0)
         {
-            SaveData(Constants.MODE_ADD,0);
+            if (null != ViewState["intUserID"] && Convert.ToInt32(ViewState["intUserID"].ToString())>0)
+            {
+                SaveData(Constants.MODE_EDIT, Convert.ToInt32(ViewState["intUserID"].ToString()));
+            }
+            else
+            {
+                SaveData(Constants.MODE_ADD, 0);
+            }
         }
         else
         {
@@ -317,6 +332,8 @@ public partial class Modules_PlatformUser : PageBase
         lblError.InnerHtml = objMsg.ReturnMessage;
         if (objMsg.ReturnValue > 0)
         {
+            lblMsg.Text = objMsg.ReturnMessage;
+            ViewState["intUserID"] = null;
             PopulateGrid();
         }
         else

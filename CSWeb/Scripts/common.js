@@ -226,8 +226,8 @@ function rtrim(s) {
     return s.substring(0, r + 1);
 }
 
-function ShowModalDiv(MainModalID, InnerDivID,TopOffset, iFrameID, iFrameheight, LeftPosition) {
-
+function ShowModalDiv(MainModalID, InnerDivID, TopOffset, iFrameID, iFrameheight, LeftPosition) {
+   
     SetModalPosition(MainModalID, TopOffset, iFrameID, iFrameID, iFrameheight, LeftPosition);
     $('#' + MainModalID).show();
     if (null != InnerDivID) {
@@ -300,6 +300,22 @@ function SetModalPosition(DivID, TopOffset, iFrameID, iFrameheight, LeftPosition
 
 function CloseAddDiv(divtoClose) {
     $('#' + divtoClose).hide();
+}
+
+
+function CallLoader(LoaderDivID,ModalDivID) {
+    setTimeout(function () {
+        OpenModal($('#' + ModalDivID));
+        $('#modalOverlay').css('z-index', '3000');
+        return true;
+    }, 200);
+    CloseModal('#' + LoaderDivID);
+}
+
+
+function OpenaModal(obj) {
+    $('#ModalDivID').css('display', '');
+    $(obj).css('display', '');
 }
 
 

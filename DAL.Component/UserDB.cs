@@ -403,7 +403,7 @@ namespace DAL.Component
                     while (reader.Read())
                     {
                         lstobjUser.Add(PopulateUser(reader));
-                        break;
+                        
                     }
                 }
             }
