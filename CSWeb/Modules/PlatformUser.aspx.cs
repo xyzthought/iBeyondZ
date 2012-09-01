@@ -76,7 +76,7 @@ public partial class Modules_PlatformUser : PageBase
             gvGrid.ExportCaption = "";
             gvGrid.ExcelColumn = "";
             gvGrid.DataBind();
-            updPanel.Update();
+            
             if (objData != null)
             {
                 if (!iFlag && lblMsg.Text == "")
@@ -183,11 +183,11 @@ public partial class Modules_PlatformUser : PageBase
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
-                lnkDelete.OnClientClick = "return confirm(':" + BLL.BusinessObject.Constants.DeleteConf + "');";
+                lnkDelete.OnClientClick = "return confirm('User :" + BLL.BusinessObject.Constants.DeleteConf + "');";
 
                 if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID")) == ((User)Session["UserData"]).UserID)
                     lnkDelete.Visible = false;
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "HidePopup", "CallLoader();MyModalClose();", true);
+                
 
             }
         }
@@ -221,10 +221,9 @@ public partial class Modules_PlatformUser : PageBase
                 if (vobjMsg.ReturnValue > 0)
                 {
                     divMess.Visible = true;
-                    lblMsg.Text = e.CommandArgument.ToString() + "' " + Constants.Deleted;
+                    lblMsg.Text = Constants.Deleted;
                     divMess.Attributes.Add("class", "Deleted");
                     lblMsg.Style.Add("color", "Black");
-                    PopulateGrid();
                 }
                 else
                 {
@@ -277,6 +276,7 @@ public partial class Modules_PlatformUser : PageBase
 
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+        PopulateGrid();
 
     }
 
@@ -332,6 +332,7 @@ public partial class Modules_PlatformUser : PageBase
         lblError.InnerHtml = objMsg.ReturnMessage;
         if (objMsg.ReturnValue > 0)
         {
+            divMess.Visible = true;
             lblMsg.Text = objMsg.ReturnMessage;
             ViewState["intUserID"] = null;
             PopulateGrid();

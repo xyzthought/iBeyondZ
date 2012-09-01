@@ -65,7 +65,7 @@
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                     EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
-                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing"
+                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing" OnRowDeleting="gvGrid_RowDeleting"
                                     OnSorting="gvGrid_Sorting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="User Type" SortExpression="UserType">
