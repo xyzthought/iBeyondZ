@@ -36,6 +36,8 @@ public partial class Modules_PlatformUser : PageBase
         }
     }
 
+   
+
     #region Populate User Type
     private void PopulateUserType()
     {
@@ -171,38 +173,20 @@ public partial class Modules_PlatformUser : PageBase
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID"));
+                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID"));
                 param = Common.GenerateBASE64WithObfuscateApp(param);
                 vstrLink = "AddEditUser?q=" + param;
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
-                aEdit.Attributes.Add("href", vstrLink);
-
-
-                Label lblinfo = (Label)e.Row.FindControl("lblinfo");
-                lblinfo.Text = Common.cutTextToSpecifiedSize(lblinfo.Text.Trim(), 50);
-
-                ImageButton imbtnStatus = new ImageButton();
-
-                imbtnStatus = (ImageButton)e.Row.FindControl("imbtnStatus");
-                if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "IsActive")))
-                {
-                    imbtnStatus.ImageUrl = "../../Images/icon_tick.png";
-                    imbtnStatus.ToolTip = Resources.Resource.InactiveMsg;
-                    imbtnStatus.OnClientClick = "return confirm(':" + BLL.BusinessObject.Constants.InActiveConf + " ');";
-                    // imbtnStatus.Attributes.Add("OnClientClick", 
-                }
-                else
-                {
-                    imbtnStatus.ImageUrl = "../../Images/icon_cross.png";
-                    imbtnStatus.ToolTip = Resources.Resource.ActiveMsg;
-                    imbtnStatus.OnClientClick = "return confirm(':" + BLL.BusinessObject.Constants.ActiveConf + "');";
-                    //imbtnStatus.OnClientClick = "return confirm('<b>Ad Exchange:</b>'" + CloudMob.BO.Constants.DeleteConf + ");";
-                }
+                aEdit.Attributes.Add("on", vstrLink);*/
 
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
                 lnkDelete.OnClientClick = "return confirm(':" + BLL.BusinessObject.Constants.DeleteConf + "');";
+
+                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID")) == ((User)Session["UserData"]).UserID)
+                    lnkDelete.Visible = false;
+                
 
             }
         }
@@ -216,17 +200,26 @@ public partial class Modules_PlatformUser : PageBase
     {
         try
         {
+            if (e.CommandName == "Edit")
+            {
+                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
+                LoadForm(intUserID);
+            }
+
             if (e.CommandName == "Delete")
             {
-                //  divMess.Visible = false;
+                
                 Message vobjMsg = new Message();
-                int dd = Convert.ToInt32(e.CommandArgument.ToString().Split('|')[0]);
-                //    iFlag = true;
-                vobjMsg = null;//.Delete();
+                int intUserID = Convert.ToInt32(e.CommandArgument.ToString().Split('|')[0]);
+                User objUser = new User();
+                UserBLL objUBLL = new UserBLL();
+                objUser.UserID = intUserID;
+                vobjMsg = objUBLL.DeletePlatformUser(objUser);
+
                 if (vobjMsg.ReturnValue > 0)
                 {
                     divMess.Visible = true;
-                    lblMsg.Text = e.CommandArgument.ToString().Split('|')[1].ToString() + "' " + Constants.Deleted;
+                    lblMsg.Text = e.CommandArgument.ToString() + "' " + Constants.Deleted;
                     divMess.Attributes.Add("class", "Deleted");
                     lblMsg.Style.Add("color", "Black");
                 }
@@ -238,13 +231,9 @@ public partial class Modules_PlatformUser : PageBase
                     lblMsg.Text = vobjMsg.ReturnMessage;
                 }
             }
-            else if (e.CommandName == "Status")
-            {
-                Message vobjMsg = new Message();
+            
 
-            }
-
-            PopulateGrid();
+           
         }
         catch (Exception ex)
         {
@@ -252,9 +241,40 @@ public partial class Modules_PlatformUser : PageBase
         }
     }
 
+    private void LoadForm(int vintUserID)
+    {
+        try
+        {
+            User objUser = new User();
+            UserBLL objUBLL = new UserBLL();
+            objUser.UserID = vintUserID;
+            List<User> objList = objUBLL.GetPlatformUserByUserID(ref objUser);
+
+            if (null != objList)
+            {
+                ddlUserType.SelectedItem.Value = objList[0].UserTypeID.ToString();
+                txtFirstName.Text = objList[0].FirstName;
+                txtLastName.Text = objList[0].LastName;
+                txtLoginID.Text = objList[0].LoginID;
+                txtPassword.Text = objList[0].LoginPassword;
+                txtEmailID.Text = objList[0].CommunicationEmailID;
+            }
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+       
+    }
+
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
 
+    }
+
+    protected void gvGrid_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        //gvGrid.EditIndex = e.NewEditIndex;
     }
     
     #endregion
@@ -290,10 +310,20 @@ public partial class Modules_PlatformUser : PageBase
         objUser.LastName = txtLastName.Text.Trim();
         objUser.LoginID = txtLoginID.Text.Trim();
         objUser.LoginPassword = txtPassword.Text.Trim();
+        objUser.CommunicationEmailID = txtEmailID.Text.Trim();
 
         Message objMsg = objUBLL.InsertUpdatePlatformUser(objUser);
 
-        lblMsg.Text = objMsg.ReturnMessage;
+        lblError.InnerHtml = objMsg.ReturnMessage;
+        if (objMsg.ReturnValue > 0)
+        {
+            PopulateGrid();
+        }
+        else
+        {
+            Page.ClientScript.RegisterStartupScript(GetType(), "AddEditUser", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
+        }
     } 
     #endregion
+    
 }

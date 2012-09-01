@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PlatformUser.aspx.cs" Inherits="Modules_PlatformUser" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PlatformUser.aspx.cs" Inherits="Modules_PlatformUser"  EnableEventValidation = "false" %>
 
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
@@ -6,6 +6,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script type="text/javascript">
+        function ClearFormFields() {
+            $("select#ddlUserType").val('0');
+            $('#txtFirstName').val('');
+            $('#txtLastName').val('');
+            $('#txtLoginID').val('');
+            $('#txtPassword').val('');
+            $('#txtEmailID').val('');
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -27,7 +37,7 @@
                 </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" href="#" runat="server" OnClientClick="ShowModalDiv('ModalWindow1','dvInnerWindow',0)"><span class="AddNewData"></span>Add User</asp:LinkButton></span>
+                        <asp:LinkButton ID="lnkAddNew" href="#" runat="server" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"><span class="AddNewData"></span>Add User</asp:LinkButton></span>
                 </div>
                 <div class="reports">
                     Manage Platform User
@@ -53,7 +63,7 @@
                                     SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
-                                    EndDateCol="3">
+                                    EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand" OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing">
                                     <Columns>
                                         <asp:TemplateField HeaderText="User Type" SortExpression="UserType">
                                             <ItemTemplate>
@@ -86,7 +96,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Last Logged-In" SortExpression="LastLoggedIn">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>'
+                                                <asp:Label ID="lblLastLoggedIn" runat="server" Text='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>'
                                                     ToolTip='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
@@ -94,7 +104,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Created On" SortExpression="CreatedOn">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>'
+                                                <asp:Label ID="lblCreatedOn" runat="server" Text='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>'
                                                     ToolTip='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
@@ -102,7 +112,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Updated On" SortExpression="UpdatedOn">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>'
+                                                <asp:Label ID="lblUpdatedOn" runat="server" Text='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>'
                                                     ToolTip='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
@@ -110,10 +120,10 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
-                                                <a id="aEdit" runat="server" href="#" onclick="CallManageLoader();" title="Click to edit">
-                                                    <img src="../../Images/iconEditAction.png" alt="Edit" /></a>
+                                                <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit" CausesValidation="False"
+                                                     CommandArgument='<%# Eval("UserID") %>' OnClientClick="ShowModalDiv('ModalWindow1','dvInnerWindow',0)"> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
-                                                    CommandArgument='<%# Eval("UserID") +"|"+ Eval("UserTypeID") %>'> <img src="../../Images/iconDeleteAction.png" alt="Delete" /> </asp:LinkButton>
+                                                    CommandArgument='<%# Eval("UserID") %>'> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" CssClass="al" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
@@ -128,12 +138,12 @@
                 </div>
             </div>
             <!--Add/Edit Platform User-->
-            <div id="ModalWindow1"  clientidmode="Static">
+            <div id="ModalWindow1" style="display: none" clientidmode="Static">
                 <div class="mainModalAddEdit" id="mainModalAddDataSource">
                     <div class="topM">
                         <h1>
-                            <span id="spTitle">Add/Edit Platform User</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv"
-                                title="Close" href="javascript:__doPostBack(&#39;ctl00$lnkCloseAddDiv&#39;,&#39;&#39;)">
+                            <span id="spTitle">Add/Edit Platform User</span><a onclick="return CloseAddDiv('ModalWindow1');"
+                                id="lnkCloseAddDiv" title="Close">
                             </a>
                         </h1>
                     </div>
@@ -144,9 +154,9 @@
                                     <fieldset class="fieldAddEdit">
                                         <div class="inner">
                                             <div class="mandet">
-                                                <span id="ContentPlaceHolder1_lblMessage">* Fields are mandatory</span></div>
+                                                <span id="lblMessage">* Fields are mandatory</span></div>
                                             <div class="errorMsg">
-                                                <span id="ContentPlaceHolder1_lblError2"></span>
+                                                <span id="lblError" runat="server"></span>
                                             </div>
                                             <div>
                                                 User Type :<span class="mandet2">* </span>
@@ -160,40 +170,48 @@
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtFirstName" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="reqtxtFirstName" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtFirstName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="reqtxtFirstName" runat="server" ErrorMessage="*"
+                                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtFirstName" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Last Name :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="reqtxtSecondName" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLastName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="reqtxtSecondName" runat="server" ErrorMessage="*"
+                                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLastName" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 LoginID :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtLoginID" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="ReqtxtLoginID" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLoginID" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="ReqtxtLoginID" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                                    ForeColor="Red" ControlToValidate="txtLoginID" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Password :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtPassword" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtPassword" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                                    ForeColor="Red" ControlToValidate="txtPassword" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 Communication Email-ID :<span class="mandet2">* </span>
                                             </div>
                                             <div class="alt" style="margin-bottom: 5px;">
                                                 <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="ReqtxtEmailID" runat="server" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtEmailID" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="ReqtxtEmailID" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                                    ForeColor="Red" ControlToValidate="txtEmailID" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <br />
+                                                <asp:RegularExpressionValidator ID="RegEmail" runat="server" ErrorMessage="Invalid Email"
+                                                    Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ControlToValidate="txtEmailID"
+                                                    ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></asp:RegularExpressionValidator>
                                             </div>
                                             <div class="btn-wrapper4">
                                                 <span class="btn">
-                                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server" 
-                                                    onclick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
+                                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
                                                 <span class="btn">
                                                     <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1');">Cancel</asp:LinkButton>
                                                 </span>

@@ -41,6 +41,11 @@
             </div>
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
+            <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
+
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                    ErrorMessage="RegularExpressionValidator" ControlToValidate="txtTest" ValidationExpression="\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"></asp:RegularExpressionValidator>
+
                 <div id="dvgridcontainer" class="grid_container">
                     <!--Start GRID-->
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
@@ -63,54 +68,6 @@
                         <asp:TemplateField HeaderText="User Type" SortExpression="UserType">
                             <ItemTemplate>
                                 <asp:Label ID="lblUserType" runat="server" Text='<%# Eval("UserType") %>' ToolTip='<%# Eval("UserType") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="First Name" SortExpression="FirstName">
-                            <ItemTemplate>
-                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Eval("FirstName") %>' ToolTip='<%# Eval("FirstName") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Last Name" SortExpression="LastName">
-                            <ItemTemplate>
-                                <asp:Label ID="lblLastName" runat="server" Text='<%# Eval("LastName") %>' ToolTip='<%# Eval("LastName") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                         <asp:TemplateField HeaderText="Email-ID" SortExpression="CommunicationEmailID">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("CommunicationEmailID") %>' ToolTip='<%# Eval("CommunicationEmailID") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Last Logged-In" SortExpression="LastLoggedIn">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>' ToolTip='<%# Eval("LastLoggedIn", "{0:dd-MMM-yy HH:mm:ss}") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Created On" SortExpression="CreatedOn">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("CreatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Left" />
-                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Updated On" SortExpression="UpdatedOn">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCommunicationEmailID" runat="server" Text='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("UpdatedOn", "{0:dd-MMM-yy}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Left" />
                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />

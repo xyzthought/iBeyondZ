@@ -138,24 +138,7 @@ namespace Custom.WebGridViewControls.Pager
                 writer.RenderEndTag(); // Ul
                 writer.RenderEndTag(); // Div
 
-                /* SAMPLE OUTPUT
-                    <div class="itemNo">
-                        Displaying 1 to 2 of 100
-                    </div>
-                    <div class="gridPagination">
-                        <ul>
-                            <li class="previousPageDisabled" />
-                            <li class="activePage">1</li>
-                            <li class="pages">
-                                <a href="javascript:__doPostBack('pgnCampaign','2')">2</a>
-                            </li>
-                            <li class="pages">
-                                <a href="javascript:__doPostBack('pgnCampaign','3')">3</a>
-                            </li>
-                            <li class="nextPageEnabled" />
-                        </ul>
-                    </div>
-                END SAMPLE OUTPUT */
+               
             }
             else
             {

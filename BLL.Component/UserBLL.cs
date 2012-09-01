@@ -41,5 +41,15 @@ namespace BLL.Component
         {
             return objDB.InsertUpdatePlatformUser(objUser);
         }
+
+        public List<User> GetPlatformUserByUserID(ref User objUser)
+        {
+            return objDB.GetPlatformUserByUserID(ref objUser);
+        }
+
+        public Message DeletePlatformUser(User objUser)
+        {
+            return objDB.DeletePlatformUser(objUser);
+        }
     }
 }

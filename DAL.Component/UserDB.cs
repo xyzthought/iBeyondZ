@@ -251,6 +251,16 @@ namespace DAL.Component
                     objUser.UserType = Convert.ToString(drData["UserType"]);
                 }
 
+                if (FieldExists(drData, "LoginID") && drData["LoginID"] != DBNull.Value)
+                {
+                    objUser.LoginID = Convert.ToString(drData["LoginID"]);
+                }
+
+                if (FieldExists(drData, "LoginPassword") && drData["LoginPassword"] != DBNull.Value)
+                {
+                    objUser.LoginPassword = Convert.ToString(drData["LoginPassword"]);
+                } 
+
                 if (FieldExists(drData, "FirstName") && drData["FirstName"] != DBNull.Value)
                 {
                     objUser.FirstName = Convert.ToString(drData["FirstName"]);
@@ -347,9 +357,20 @@ namespace DAL.Component
             Message objMessage = new Message();
             try
             {
-               
-              
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdatePlatformUser");
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, objUser.UserID);
+                dBase.AddInParameter(objCmd, "@UserTypeID", DbType.Int32, objUser.UserTypeID);
+                dBase.AddInParameter(objCmd, "@FirstName", DbType.String, objUser.FirstName);
+                dBase.AddInParameter(objCmd, "@LastName", DbType.String, objUser.LastName);
+                dBase.AddInParameter(objCmd, "@CommunicationEmailID", DbType.String, objUser.CommunicationEmailID);
+                dBase.AddInParameter(objCmd, "@LoginID", DbType.String, objUser.LoginID);
+                dBase.AddInParameter(objCmd, "@LoginPassword", DbType.String, objUser.LoginPassword);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
 
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
             }
             catch (Exception ex)
             {
@@ -366,6 +387,54 @@ namespace DAL.Component
                 conn.Close();
             }
             conn.Open();
+        }
+
+        public List<User> GetPlatformUserByUserID(ref User objUser)
+        {
+            List<User> lstobjUser = new List<User>();
+            try
+            {
+
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetPlatformUserByUserID");
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, objUser.UserID);
+
+                using (IDataReader reader = dBase.ExecuteReader(objCmd))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjUser.Add(PopulateUser(reader));
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjUser;
+        }
+
+        public Message DeletePlatformUser(User objUser)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_DeletePlatformUser");
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, objUser.UserID);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
         }
     }
 }

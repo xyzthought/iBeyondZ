@@ -19,7 +19,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CSWeb", "CSWeb\", "{10C385E
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "56776"
+		VWDPort = "57629"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
