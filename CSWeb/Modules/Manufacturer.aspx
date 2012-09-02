@@ -144,8 +144,7 @@
                         <div class="mainModalAddEdit" id="mainModalAddDataSource">
                             <div class="topM">
                                 <h1>
-                                    <span id="spTitle">Add/Edit Manufacturer</span><a onclick="return CloseAddDiv('ModalWindow1');"
-                                        id="lnkCloseAddDiv" title="Close"> </a>
+                                    <span id="spTitle">Add/Edit Manufacturer</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv" title="Close"> </a>
                                 </h1>
                             </div>
                             <div id="MidM2" class="MidM">

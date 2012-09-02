@@ -123,7 +123,6 @@ namespace DAL.Component
             List<Manufacturer> lstManufacturer = new List<Manufacturer>();
             using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllManufacturer", mParams))
             {
-
                 while (reader.Read())
                 {
                     Manufacturer objManufacturer = new Manufacturer();

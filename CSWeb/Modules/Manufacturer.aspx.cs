@@ -53,7 +53,6 @@ public partial class Modules_Manufacturer : PageBase
                 objPI.SortDirection = Convert.ToString(ViewState[Constants.SORTDERECTION]);
                 objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
             }
-
             List<Manufacturer> objData = new ManufacturerBLL().GetAll(objPI);
 
             gvGrid.DataSource = objData;
