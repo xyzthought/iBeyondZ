@@ -8,6 +8,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using BLL.BusinessObject;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.Common;
 
 namespace DAL.Component
 {
@@ -21,36 +22,23 @@ namespace DAL.Component
         /// <param name="vobjManufacturer">Manufacturer Data Object</param>
         public void Add(ref Manufacturer vobjManufacturer)
         {
-            SqlParameter[] mParams = {
-                                    new SqlParameter("@CompanyName", SqlDbType.NVarChar), 
-                                    new SqlParameter("@ContactFirstName", SqlDbType.NVarChar),
-                                    new SqlParameter("@ContactLastName", SqlDbType.NVarChar),
-                                    new SqlParameter("@Address", SqlDbType.NVarChar),
-                                    new SqlParameter("@ZIP", SqlDbType.NVarChar),
-                                    new SqlParameter("@City", SqlDbType.NVarChar),
-                                    new SqlParameter("@Phone", SqlDbType.NVarChar),
-                                    new SqlParameter("@Email", SqlDbType.NVarChar),
-                                    new SqlParameter("@CreatedBy", SqlDbType.Int),
-                                    new SqlParameter("@MessageID", SqlDbType.Int),
-                                    new SqlParameter("@Message", SqlDbType.NVarChar)
-                                };
+            DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertManufacturer");
+            dBase.AddInParameter(objCmd, "@CompanyName", DbType.String, vobjManufacturer.CompanyName);
+            dBase.AddInParameter(objCmd, "@ContactFirstName", DbType.String, vobjManufacturer.ContactFirstName);
+            dBase.AddInParameter(objCmd, "@ContactLastName", DbType.String, vobjManufacturer.ContactLastName);
+            dBase.AddInParameter(objCmd, "@Address", DbType.String, vobjManufacturer.Address);
+            dBase.AddInParameter(objCmd, "@ZIP", DbType.String, vobjManufacturer.ZIP);
+            dBase.AddInParameter(objCmd, "@City", DbType.String, vobjManufacturer.City);
+            dBase.AddInParameter(objCmd, "@Country", DbType.String, vobjManufacturer.Country);
+            dBase.AddInParameter(objCmd, "@Phone", DbType.String, vobjManufacturer.Phone);
+            dBase.AddInParameter(objCmd, "@Email", DbType.String, vobjManufacturer.Email);
+            dBase.AddInParameter(objCmd, "@CreatedBy", DbType.Int32, vobjManufacturer.CreatedBy);
+            dBase.AddOutParameter(objCmd, "@MessageID", DbType.Int32, 4);
+            dBase.AddOutParameter(objCmd, "@Message", DbType.String, 255);
+            dBase.ExecuteNonQuery(objCmd);
 
-            mParams[0].Value = vobjManufacturer.CompanyName;
-            mParams[1].Value = vobjManufacturer.ContactFirstName;
-            mParams[2].Value = vobjManufacturer.ContactLastName;
-            mParams[3].Value = vobjManufacturer.Address;
-            mParams[4].Value = vobjManufacturer.ZIP;
-            mParams[5].Value = vobjManufacturer.City;
-            mParams[6].Value = vobjManufacturer.Phone;
-            mParams[7].Value = vobjManufacturer.Email;
-            mParams[8].Value = vobjManufacturer.CreatedBy;
-            mParams[9].Direction = ParameterDirection.Output;
-            mParams[10].Direction = ParameterDirection.Output;
-
-            dBase.ExecuteNonQuery("sprocCS_InsertManufacturer", mParams);
-
-            vobjManufacturer.ReturnValue = Convert.ToInt32(mParams[9].Value.ToString());
-            vobjManufacturer.ReturnMessage = mParams[9].Value.ToString();
+            vobjManufacturer.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@MessageID");
+            vobjManufacturer.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@Message");
 
         }
 
@@ -60,37 +48,25 @@ namespace DAL.Component
         /// <param name="vobjManufacturer">Manufacturer Data Object</param>
         public void Update(ref Manufacturer vobjManufacturer)
         {
-            SqlParameter[] mParams = {
-                                    new SqlParameter("@ManufacturerID", SqlDbType.Int), 
-                                    new SqlParameter("@CompanyName", SqlDbType.NVarChar), 
-                                    new SqlParameter("@ContactFirstName", SqlDbType.NVarChar),
-                                    new SqlParameter("@ContactLastName", SqlDbType.NVarChar),
-                                    new SqlParameter("@Address", SqlDbType.NVarChar),
-                                    new SqlParameter("@ZIP", SqlDbType.NVarChar),
-                                    new SqlParameter("@City", SqlDbType.NVarChar),
-                                    new SqlParameter("@Phone", SqlDbType.NVarChar),
-                                    new SqlParameter("@Email", SqlDbType.NVarChar),
-                                    new SqlParameter("@UpdatedBy", SqlDbType.Int),
-                                    new SqlParameter("@MessageID", SqlDbType.Int),
-                                    new SqlParameter("@Message", SqlDbType.NVarChar)
-                                };
-            mParams[0].Value = vobjManufacturer.ManufacturerID;
-            mParams[1].Value = vobjManufacturer.CompanyName;
-            mParams[2].Value = vobjManufacturer.ContactFirstName;
-            mParams[3].Value = vobjManufacturer.ContactLastName;
-            mParams[4].Value = vobjManufacturer.Address;
-            mParams[5].Value = vobjManufacturer.ZIP;
-            mParams[6].Value = vobjManufacturer.City;
-            mParams[7].Value = vobjManufacturer.Phone;
-            mParams[8].Value = vobjManufacturer.Email;
-            mParams[9].Value = vobjManufacturer.UpdatedBy;
-            mParams[10].Direction = ParameterDirection.Output;
-            mParams[11].Direction = ParameterDirection.Output;
+            DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_UpdateManufacturer");
+            dBase.AddInParameter(objCmd, "@ManufacturerID", DbType.Int32, vobjManufacturer.ManufacturerID);
+            dBase.AddInParameter(objCmd, "@CompanyName", DbType.String, vobjManufacturer.CompanyName);
+            dBase.AddInParameter(objCmd, "@ContactFirstName", DbType.String, vobjManufacturer.ContactFirstName);
+            dBase.AddInParameter(objCmd, "@ContactLastName", DbType.String, vobjManufacturer.ContactLastName);
+            dBase.AddInParameter(objCmd, "@Address", DbType.String, vobjManufacturer.Address);
+            dBase.AddInParameter(objCmd, "@ZIP", DbType.String, vobjManufacturer.ZIP);
+            dBase.AddInParameter(objCmd, "@City", DbType.String, vobjManufacturer.City);
+            dBase.AddInParameter(objCmd, "@Country", DbType.String, vobjManufacturer.Country);
+            dBase.AddInParameter(objCmd, "@Phone", DbType.String, vobjManufacturer.Phone);
+            dBase.AddInParameter(objCmd, "@Email", DbType.String, vobjManufacturer.Email);
+            dBase.AddInParameter(objCmd, "@UpdatedBy", DbType.Int32, vobjManufacturer.UpdatedBy);
+            dBase.AddOutParameter(objCmd, "@MessageID", DbType.Int32, 4);
+            dBase.AddOutParameter(objCmd, "@Message", DbType.String, 255);
+            dBase.ExecuteNonQuery(objCmd);
 
-            dBase.ExecuteNonQuery("sprocCS_UpdateManufacturer", mParams);
+            vobjManufacturer.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@MessageID");
+            vobjManufacturer.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@Message");
 
-            vobjManufacturer.ReturnValue = Convert.ToInt32(mParams[10].Value.ToString());
-            vobjManufacturer.ReturnMessage = mParams[11].Value.ToString();
 
         }
 
@@ -100,20 +76,16 @@ namespace DAL.Component
         /// <param name="vobjManufacturer">Manufacturer Data Object having Manufacturer ID</param>
         public void Delete(ref Manufacturer vobjManufacturer)
         {
-            SqlParameter[] mParams = {
-                                    new SqlParameter("@ManufacturerID", SqlDbType.Int),
-                                    new SqlParameter("@MessageID", SqlDbType.Int),
-                                    new SqlParameter("@Message", SqlDbType.NVarChar)
-                                };
-            mParams[0].Value = vobjManufacturer.ManufacturerID;
-            mParams[2].Direction = ParameterDirection.Output;
-            mParams[3].Direction = ParameterDirection.Output;
+            DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_DeleteManufacturer");
+            dBase.AddInParameter(objCmd, "@ManufacturerID", DbType.Int32, vobjManufacturer.ManufacturerID);
+            dBase.AddOutParameter(objCmd, "@MessageID", DbType.Int32, 4);
+            dBase.AddOutParameter(objCmd, "@Message", DbType.String, 255);
+            dBase.ExecuteNonQuery(objCmd);
 
-            dBase.ExecuteNonQuery("sprocCS_DeleteManufacturer", mParams);
-
-            vobjManufacturer.ReturnValue = Convert.ToInt32(mParams[2].Value.ToString());
-            vobjManufacturer.ReturnMessage = mParams[3].Value.ToString();
-        }
+            vobjManufacturer.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@MessageID");
+            vobjManufacturer.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@Message");
+            
+         }
 
         /// <summary>
         /// Change status of Manufacturer from Active to Inactive and vice versa
@@ -122,12 +94,12 @@ namespace DAL.Component
         /// <param name="vintManufacturerID"></param>
         public void ChangeManufacturerStatus(bool vblnIsActive, int vintManufacturerID)
         {
-            SqlParameter[] mParams = {
+            object[] mParams = {
                                     new SqlParameter("@ManufacturerID", SqlDbType.Int),
                                     new SqlParameter("@IsActive", SqlDbType.Bit)
                                 };
-            mParams[0].Value = vintManufacturerID;
-            mParams[1].Value = vblnIsActive;
+            mParams[0] = vintManufacturerID;
+            mParams[1]= vblnIsActive;
             dBase.ExecuteNonQuery("sprocCS_ChangeManufacturerStatus", mParams);
         
         }
@@ -136,9 +108,18 @@ namespace DAL.Component
         /// Returns all the Manufacturer from Database
         /// </summary>
         /// <returns>Manufacturer collection</returns>
-        public List<Manufacturer> GetAll()
+        public List<Manufacturer> GetAll(PageInfo vobjPageInfo)
         {
-            object[] mParams = { };
+            object[] mParams = {
+                                        new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@SortDirection", SqlDbType.NVarChar),
+                                        new SqlParameter("@SearchText", SqlDbType.NVarChar)
+                                };
+
+            mParams[0] = vobjPageInfo.SortColumnName;
+            mParams[1] = vobjPageInfo.SortDirection;
+            mParams[2] = vobjPageInfo.SearchText;
+
             List<Manufacturer> lstManufacturer = new List<Manufacturer>();
             using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllManufacturer", mParams))
             {
@@ -193,18 +174,16 @@ namespace DAL.Component
         /// <param name="vobjManufacturer">Manufacturer Data Object</param>
         public void GetByID(ref Manufacturer vobjManufacturer)
         {
-            SqlParameter[] mParams = {
+            object[] mParams = {
                                     new SqlParameter("@ManufacturerID", SqlDbType.Int)
                                 };
-            mParams[0].Value = vobjManufacturer.ManufacturerID;
+            mParams[0] = vobjManufacturer.ManufacturerID;
             using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetManufacturerByID", mParams))
             {
 
                 while (reader.Read())
                 {
-                    if (reader["ManufacturerID"] != DBNull.Value)
-                        vobjManufacturer.ManufacturerID = Convert.ToInt32(reader["ManufacturerID"]);
-
+                   
                     if (reader["CompanyName"] != DBNull.Value)
                         vobjManufacturer.CompanyName = Convert.ToString(reader["CompanyName"]);
 

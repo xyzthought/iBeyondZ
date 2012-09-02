@@ -7,7 +7,7 @@ using BLL.BusinessObject;
 
 namespace BLL.Component
 {
-    class ManufacturerBLL
+    public class ManufacturerBLL
     {
         public void Add(ref Manufacturer vobjManufacturer)
         {
@@ -63,11 +63,11 @@ namespace BLL.Component
 
         }
 
-        public List<Manufacturer> GetAll()
+        public List<Manufacturer> GetAll(PageInfo objPI)
         {
             try
             {
-                return new ManufacturerDB().GetAll();
+                return new ManufacturerDB().GetAll(objPI);
             }
             catch (Exception ex)
             {
