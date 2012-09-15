@@ -15,12 +15,20 @@ namespace BLL.BusinessObject
         public string Description { get { return mstrDescription; } set { mstrDescription = value; } }
         private int mintManufacturerID;
         public int ManufacturerID { get { return mintManufacturerID; } set { mintManufacturerID = value; } }
+        private string mstrManufacturer;
+        public string Manufacturer { get { return mstrManufacturer; } set { mstrManufacturer= value; } }
         private int mintCategoryID;
         public int CategoryID { get { return mintCategoryID; } set { mintCategoryID = value; } }
+        private string mstrCategoryName;
+        public string CategoryName { get { return mstrCategoryName; } set { mstrCategoryName = value; } }
+        private string mstrSizeName;
+        public string SizeName { get { return mstrSizeName; } set { mstrSizeName = value; } }
         private int mintSizeID;
         public int SizeID { get { return mintSizeID; } set { mintSizeID = value; } }
         private decimal mdcmBuyingPrice;
         public decimal BuyingPrice { get { return mdcmBuyingPrice; } set { mdcmBuyingPrice = value; } }
+        private decimal mdcmSellingPrice;
+        public decimal SellingPrice { get { return mdcmSellingPrice; } set { mdcmSellingPrice = value; } }
         private decimal mdcmTax;
         public decimal Tax { get { return mdcmTax; } set { mdcmTax = value; } }
         private decimal mdcmMargin;
