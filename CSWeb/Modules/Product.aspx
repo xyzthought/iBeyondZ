@@ -43,7 +43,7 @@
                 <div id="ContentPlaceHolder1_dvCloneOrgReport" class="fl">
                     <span class="btn5">
                         <asp:LinkButton ID="lnkAddNew2" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"
-                            runat="server"><span class="AddNewData"></span>Add</asp:LinkButton>
+                            runat="server"><span class="AddNewData"></span>Add Product</asp:LinkButton>
                     </span>
                 </div>
                 <div class="reports">
@@ -149,7 +149,7 @@
                                                         Product Name :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtProductName" runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="txtProductName" runat="server" CssClass="txtCred"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="reqtxtProductName" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductName" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
@@ -157,13 +157,13 @@
                                                         Description :
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtDescription" runat="server" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                                                        <asp:TextBox ID="txtDescription" runat="server" Rows="5" TextMode="MultiLine" class="txtInv"></asp:TextBox>
                                                     </div>
                                                     <div>
                                                         Manufacturer:<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:DropDownList ID="cmbManufacturer" runat="server">
+                                                        <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl">
                                                         </asp:DropDownList>
                                                         <%--  <asp:RequiredFieldValidator ID="ReqtxtLoginID" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                                             ForeColor="Red" ControlToValidate="txtContactLastName" Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -172,7 +172,7 @@
                                                         Category :
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:DropDownList ID="cmbCategory" runat="server">
+                                                        <asp:DropDownList ID="cmbCategory" runat="server" CssClass="txtUpl">
                                                         </asp:DropDownList>
                                                         <%-- <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                                             ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -186,39 +186,50 @@
                                                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                     </div>
-                                                    <div>
-                                                        Buying Price :
+                                                    <div style="float: left">
+                                                        <div style="margin: 0!important">
+                                                            Buying Price :
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtBuyingPrice" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox></td>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtBuyingPrice" runat="server"></asp:TextBox></td>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div>
-                                                        Tax :
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtTax" runat="server"></asp:TextBox></td>
-                                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                                    <div style="float: left; padding-left: 18px">
+                                                        <div style="margin: 0!important">
+                                                            Tax :
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox></td>
+                                                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        Tax Margin :<span class="mandet2"></span>
+                                                    <div style="clear: both">
                                                     </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtMargin" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                    <div style="float: left">
+                                                        <div style="margin: 0!important">
+                                                            Tax Margin :<span class="mandet2"></span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        Selling Price :<span class="mandet2"></span>
+                                                    <div style="float: left; padding-left: 18px">
+                                                        <div style="margin: 0!important">
+                                                            Selling Price :<span class="mandet2"></span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        </div>
                                                     </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtSellingPrice" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                    </div>
+                                                    <div style="clear: both">
                                                     <div>
                                                         Bar Code :<span class="mandet2"></span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox></td>
+                                                        <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox></td>
                                                     </div>
                                                     <div class="btn-wrapper4">
                                                         <span class="btn">
