@@ -29,6 +29,35 @@ public partial class Modules_LandingPage : PageBase
         {
 
             PopulateTopSellingProduct();
+            PopulateL7DaysTop10SellingProduct();
+        }
+    }
+
+    private void PopulateL7DaysTop10SellingProduct()
+    {
+        try
+        {
+
+            if (objPI.SortDirection == null && objPI.SortColumnName == null)
+            {
+                objPI.SortDirection = Convert.ToString(ViewState[Constants.SORTDERECTION]);
+                objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
+                objPI.SearchText = string.Empty;
+            }
+            ReportBLL objReportBLL = new ReportBLL();
+
+            List<Report> objData = new List<Report>();
+            objData = objReportBLL.GetTopSellingProduct(objData, objPI);
+
+            L7DaysTop10.DataSource = objData;
+            L7DaysTop10.ExportTemplate = "export_template_4Column.xlsx";
+            L7DaysTop10.ExportCaption = "";
+            L7DaysTop10.ExcelColumn = "";
+            L7DaysTop10.DataBind();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
