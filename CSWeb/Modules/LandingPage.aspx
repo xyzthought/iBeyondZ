@@ -36,7 +36,60 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
                 <div id="dvgridcontainer" class="grid_container">
-                    &nbsp;
+                    <div id="Div1">
+                        <div id="Div2" class="grid_container">
+                            <div style="margin: 0px auto; padding: 0px; text-align: center;">
+                                <div id="divMess" runat="server" visible="false">
+                                    <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <br style="clear: both" />
+                            <div class="grid_container">
+                                <ctrl:CustomGridView ID="gvGridTopSellingProduct" EmptyDataText="<span class='noDataSelected'>No Data Available</span>"
+                                    runat="server" AutoGenerateColumns="false" AllowPaging="True" AllowSorting="True"
+                                    Width="100%" PageSize="20" GridLines="None" CssClass="gvStyle" SortColumn="ProductName"
+                                    DataKeyNames="ProductID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
+                                    SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
+                                    ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
+                                    CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
+                                    EndDateCol="3" OnSorting="gvGrid_Sorting">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Product" SortExpression="ProductName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' ToolTip='<%# Eval("ProductName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Size" SortExpression="SizeName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblSizeName" runat="server" Text='<%# Eval("SizeName") %>' ToolTip='<%# Eval("SizeName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Total Quantity" SortExpression="Quantity">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Total Price" SortExpression="Price">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:C}", Eval("Price")) %>' ToolTip='<%# Eval("Price") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <RowStyle CssClass="tdData" />
+                                    <HeaderStyle CssClass="trHeader" />
+                                </ctrl:CustomGridView>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
