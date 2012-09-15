@@ -292,7 +292,8 @@ function SetModalPosition(DivID, TopOffset, iFrameID, iFrameheight, LeftPosition
 
     $('#' + DivID).css({
         "position": "absolute",
-        "top": dvNewPosition,
+        /*"top": dvNewPosition,*/
+        "top": "7px",
         "left": dvPositionWidth
     });
 

@@ -3,7 +3,6 @@
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Manage Manufacturer</title>
@@ -70,8 +69,8 @@
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                     EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
-                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing" OnRowDeleting="gvGrid_RowDeleting"
-                                    OnSorting="gvGrid_Sorting">
+                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing"
+                                    OnRowDeleting="gvGrid_RowDeleting" OnSorting="gvGrid_Sorting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Company Name" SortExpression="CompanyName">
                                             <ItemTemplate>
@@ -82,14 +81,16 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Contact First Name" SortExpression="ContactFirstName">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblContactFirstName" runat="server" Text='<%# Eval("ContactFirstName") %>' ToolTip='<%# Eval("ContactFirstName") %>'></asp:Label>
+                                                <asp:Label ID="lblContactFirstName" runat="server" Text='<%# Eval("ContactFirstName") %>'
+                                                    ToolTip='<%# Eval("ContactFirstName") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ContactLastName" SortExpression="ContactLastName">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblContactLastName" runat="server" Text='<%# Eval("ContactLastName") %>' ToolTip='<%# Eval("ContactLastName") %>'></asp:Label>
+                                                <asp:Label ID="lblContactLastName" runat="server" Text='<%# Eval("ContactLastName") %>'
+                                                    ToolTip='<%# Eval("ContactLastName") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -115,7 +116,7 @@
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
-                                         <asp:TemplateField HeaderText="Phone" SortExpression="Phone">
+                                        <asp:TemplateField HeaderText="Phone" SortExpression="Phone">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPhone" runat="server" Text='<%# Eval("Phone") %>' ToolTip='<%# Eval("Phone") %>'></asp:Label>
                                             </ItemTemplate>
@@ -144,7 +145,8 @@
                         <div class="mainModalAddEdit" id="mainModalAddDataSource">
                             <div class="topM">
                                 <h1>
-                                    <span id="spTitle">Add/Edit Manufacturer</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv" title="Close"> </a>
+                                    <span id="spTitle">Add/Edit Manufacturer</span><a onclick="return CloseAddDiv('ModalWindow1');"
+                                        id="lnkCloseAddDiv" title="Close"> </a>
                                 </h1>
                             </div>
                             <div id="MidM2" class="MidM">
@@ -190,36 +192,46 @@
                                                         <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                                             ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
-                                                    <div>
-                                                        ZIP :<span class="mandet2">* </span>
+                                                    <div style="float: left">
+                                                        <div style="margin: 0!important">
+                                                            ZIP :<span class="mandet2">* </span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtZIP" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
+                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtZIP" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    <div style="float: left;padding-left:18px">
+                                                        <div style="margin: 0!important">
+                                                            City :<span class="mandet2">* </span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtCity" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCity" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        City :<span class="mandet2">* </span>
+                                                    <div style="clear:both"></div>
+                                                    <div  style="float: left">
+                                                        <div style="margin: 0!important">
+                                                            Country :<span class="mandet2">* </span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtCountry" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtCity" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtCity" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    <div style="float: left;padding-left:18px">
+                                                        <div style="margin: 0!important">
+                                                            Phone :<span class="mandet2"></span>
+                                                        </div>
+                                                        <div class="alt" style="margin-bottom: 5px;">
+                                                            <asp:TextBox ID="txtPhone" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        Country :<span class="mandet2">* </span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtCountry" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div>
-                                                        Phone :<span class="mandet2"></span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                    </div>
+                                                    <div style="clear:both"></div>
                                                     <div>
                                                         Email :<span class="mandet2"></span>
                                                     </div>
@@ -267,4 +279,3 @@
     </form>
 </body>
 </html>
-
