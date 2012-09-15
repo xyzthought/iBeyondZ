@@ -47,7 +47,7 @@ public partial class Modules_LandingPage : PageBase
             ReportBLL objReportBLL = new ReportBLL();
 
             List<Report> objData = new List<Report>();
-            objData = objReportBLL.GetTopSellingProduct(objData, objPI);
+            objData = objReportBLL.GetL7DaysTop10SellingProduct(objData, objPI);
 
             L7DaysTop10.DataSource = objData;
             L7DaysTop10.ExportTemplate = "export_template_4Column.xlsx";

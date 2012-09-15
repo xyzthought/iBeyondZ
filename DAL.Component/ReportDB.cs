@@ -107,5 +107,37 @@ namespace DAL.Component
             }
             return (reader.GetSchemaTable().DefaultView.Count > 0);
         }
+
+        public List<Report> GetL7DaysTop10SellingProduct(List<Report> objData, PageInfo vobjPageInfo)
+        {
+            List<Report> lstobjReport = new List<Report>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@SortDirection", SqlDbType.NVarChar),
+                                        new SqlParameter("@SearchText", SqlDbType.NVarChar)
+                                };
+
+                mParams[0] = vobjPageInfo.SortColumnName;
+                mParams[1] = vobjPageInfo.SortDirection;
+                mParams[2] = vobjPageInfo.SearchText;
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_L7DaysTop10SellingProduct", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjReport.Add(PopulateReport(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjReport;
+        }
     }
 }

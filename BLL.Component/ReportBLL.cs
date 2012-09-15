@@ -22,5 +22,10 @@ namespace BLL.Component
         {
             return objDB.GetTopSellingProduct(objData, objPI);
         }
+
+        public List<Report> GetL7DaysTop10SellingProduct(List<Report> objData, PageInfo objPI)
+        {
+            return objDB.GetL7DaysTop10SellingProduct(objData, objPI);
+        }
     }
 }
