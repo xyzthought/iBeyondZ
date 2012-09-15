@@ -69,16 +69,16 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Price" SortExpression="Price">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:C}", Eval("Price")) %>'
                                                             ToolTip='<%# Eval("Price") %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                             </Columns>
                                             <RowStyle CssClass="tdData" />
@@ -109,7 +109,7 @@
                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                             CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
-                                            EndDateCol="3" OnSorting="gvGrid_Sorting">
+                                            EndDateCol="3" OnSorting="L7DaysTop10_Sorting">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Product" SortExpression="ProductName">
                                                     <ItemTemplate>
@@ -129,16 +129,16 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Price" SortExpression="Price">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:C}", Eval("Price")) %>'
                                                             ToolTip='<%# Eval("Price") %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                             </Columns>
                                             <RowStyle CssClass="tdData" />
