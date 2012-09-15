@@ -19,13 +19,7 @@
         <div class="main-table-wrapper">
             <div class="breadcrmbLeft">
                 <input type="hidden" name="ctl00$ContentPlaceHolder1$currentReportName" id="currentReportName" />
-                <div class="searchBox">
-                    <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
-                        onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
-                    <a id="lnkBtnSearch" class="searchBoxBtn" href="#"></a>
-                    <div class="clear">
-                    </div>
-                </div>
+                
                 <div class="reports">
                     Home | Top Information
                 </div>
