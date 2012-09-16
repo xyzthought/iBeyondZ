@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Header.ascx.cs" Inherits="UserControls_Header" %>
 <!--All Script tag should come here-->
-<script src="../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="../Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="../Scripts/common.js" type="text/javascript"></script>
 
 <!--All CSS should come here-->
