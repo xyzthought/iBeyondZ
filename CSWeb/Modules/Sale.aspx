@@ -20,15 +20,15 @@
             <div class="breadcrmbLeft">
                 <input type="hidden" name="ctl00$ContentPlaceHolder1$currentReportName" id="currentReportName" />
                 <div class="searchBox">
-                    <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
+                   <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
                         onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
-                    <a id="lnkBtnSearch" class="searchBoxBtn" href="#"></a>
+                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" OnClick="lnkBtnSearch_Click"></asp:LinkButton>
                     <div class="clear">
                     </div>
                 </div>
                 <div id="dv3" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkRefresh" href="#" runat="server" onclick="lnkRefresh_Click">Refresh</asp:LinkButton>
+                        <asp:LinkButton ID="lnkRefresh" runat="server" OnClick="lnkRefresh_Click">Refresh</asp:LinkButton>
                     </span>
                 </div>
                 <div id="dv2" class="fl">
@@ -39,7 +39,7 @@
                 </div>
                 <div id="dv1" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew2" href="#" runat="server"><span class="AddNewData"></span>Add New Sale</asp:LinkButton>
+                        <asp:LinkButton ID="lnkAddNew2" runat="server" OnClick="lnkAddNew2_Click"><span class="AddNewData"></span>Add New Sale</asp:LinkButton>
                     </span>
                 </div>
                 <div class="reports">
@@ -100,8 +100,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Amount">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Price") %>'
-                                            ToolTip='<%# Eval("Price") %>'></asp:Label>
+                                        <asp:Label ID="lblAmount" runat="server" Text='<%# String.Format("{0:C}", Eval("Price")) %>'
+                                            ToolTip='<%# String.Format("{0:C}", Eval("Price")) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />

@@ -37,6 +37,20 @@ public partial class Modules_Sale : PageBase
         }
     }
 
+
+    protected void lnkBtnSearch_Click(object sender, EventArgs e)
+    {
+        PopulateGrid();
+    }
+
+    protected void lnkAddNew2_Click(object sender, EventArgs e)
+    {
+       param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0" ;
+       param = Common.GenerateBASE64WithObfuscateApp(param);
+       vstrLink = "AddEditSaleOrder.aspx?q=" + param;
+       Response.Redirect(vstrLink, false);
+    }
+
     #region Populate Grid
     private void PopulateGrid()
     {

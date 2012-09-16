@@ -12,7 +12,6 @@ using System.Text.RegularExpressions;
 using System.Net.Mail;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
-using CSWeb.Utility;
 
 public partial class Modules_PlatformUser : PageBase
 {

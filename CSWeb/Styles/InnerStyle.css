@@ -497,14 +497,14 @@ body {
 .invi2 span {
     padding: 0 0 0 5px;
 }
-.accepted {
+.smallDivLeft {
     float: left;
     margin-right: 10px;
-    width: 550px;
+    width: 450px;
 }
-.pending {
+.smallDivRight {
     float: left;
-    width: 540px;
+    width: 450px;
 }
 .invDiv {
     height: 200px;
@@ -567,9 +567,9 @@ body {
 }
 .acceptedCont, .pendingCont {
     background: none repeat scroll 0 0 #FFFFFF;
-    border-bottom: 1px solid #CACACA;
-    border-left: 1px solid #CACACA;
-    border-right: 1px solid #CACACA;
+    border: 1px solid #CACACA;
+    /*border-left: 1px solid #CACACA;
+    border-right: 1px solid #CACACA;*/
 }
 .accpendNew {
     background: url("../Images/tblHead.png") repeat-x scroll center top transparent;
@@ -1164,7 +1164,7 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
 }
 .accPend {
     margin: 0 auto;
-    width: 1100px;
+    width: 910px;
 }
 .btn5 {
     background: url("../Images/topBtn.png") no-repeat scroll left bottom transparent;
