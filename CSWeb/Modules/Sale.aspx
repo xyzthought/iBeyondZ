@@ -26,16 +26,15 @@
                     <div class="clear">
                     </div>
                 </div>
-
                 <div id="dv3" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="LinkButton1" href="#" runat="server">Refresh</asp:LinkButton>
+                        <asp:LinkButton ID="lnkRefresh" href="#" runat="server" onclick="lnkRefresh_Click">Refresh</asp:LinkButton>
                     </span>
                 </div>
                 <div id="dv2" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
-                            <input type="text" id="datepicker" runat="server" class="txtCred" Style="width: 100px!important" /></p>
+                            <input type="text" id="datepicker" runat="server" class="txtCred" style="width: 100px!important" /></p>
                     </div>
                 </div>
                 <div id="dv1" class="fl">
@@ -52,7 +51,100 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
                 <div id="dvgridcontainer" class="grid_container">
-                    &nbsp;
+                    <div style="margin: 0px auto; padding: 0px; text-align: center;">
+                        <div id="divMess" runat="server" visible="false">
+                            <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                        </div>
+                    </div>
+                    <br style="clear: both" />
+                    <div class="grid_container">
+                        <ctrl:CustomGridView ID="gvGrid" EmptyDataText="<span class='noDataSelected'>No Data Available</span>"
+                            runat="server" AutoGenerateColumns="false" AllowPaging="True" AllowSorting="True"
+                            Width="100%" PageSize="20" GridLines="None" CssClass="gvStyle" SortColumn="FirstName"
+                            DataKeyNames="SaleID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
+                            SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
+                            ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
+                            CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
+                            EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
+                            OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing"
+                            OnRowDeleting="gvGrid_RowDeleting" OnSorting="gvGrid_Sorting">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Sale Order">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblSaleOrder" runat="server" Text='<%# Eval("SaleOrder") %>' ToolTip='<%# Eval("SaleOrder") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Customer" SortExpression="FirstName">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCustomer" runat="server" Text='<%# Eval("FirstName")+" "+Eval("LastName") %>' ToolTip='<%# Eval("FirstName")+" "+Eval("LastName") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="SaleDate">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblSaleDate" runat="server" Text='<%# Eval("SaleDate","{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("SaleDate","{0:dd-MMM-yy}") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Payment Mode" SortExpression="PaymentMode">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblPaymentMode" runat="server" Text='<%# Eval("PaymentMode") %>'
+                                            ToolTip='<%# Eval("PaymentMode") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Amount">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Price") %>'
+                                            ToolTip='<%# Eval("Price") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Standard Rebate">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblStandardRebate" runat="server" Text='<%# String.Format("{0:C}", Eval("StandardRebate")) %>'
+                                            ToolTip='<%# String.Format("{0:C}", Eval("StandardRebate")) %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Discount">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDiscount" runat="server" Text='<%# String.Format("{0:C}", Eval("Discount")) %>'
+                                            ToolTip='<%# String.Format("{0:C}", Eval("Discount")) %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="SaleMadeBy" SortExpression="SaleMadeBy">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblSaleMadeBy" runat="server" Text='<%# Eval("SaleMadeBy") %>'
+                                            ToolTip='<%# Eval("SaleMadeBy") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Action">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
+                                            CausesValidation="False" CommandArgument='<%# Eval("SaleID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
+                                        <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
+                                            CommandArgument='<%# Eval("SaleID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" CssClass="al" />
+                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
+                                </asp:TemplateField>
+                            </Columns>
+                            <RowStyle CssClass="tdData" />
+                            <HeaderStyle CssClass="trHeader" />
+                        </ctrl:CustomGridView>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,8 +160,6 @@
     </form>
 </body>
 </html>
-
-
 <!--Date Picker-->
 <script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
 <script src="../Scripts/jquery.ui.datepicker.js" type="text/javascript"></script>
@@ -89,5 +179,4 @@
         });
     });
 </script>
-
 <!--Date Picker-->

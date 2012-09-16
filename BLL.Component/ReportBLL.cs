@@ -27,5 +27,7 @@ namespace BLL.Component
         {
             return objDB.GetL7DaysTop10SellingProduct(objData, objPI);
         }
+
+        
     }
 }
