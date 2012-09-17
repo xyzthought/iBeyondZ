@@ -20,5 +20,10 @@ namespace BLL.Component
         {
             return objDB.GetAllSaleDataByDate(objData, objPI, strDate);
         }
+
+        public List<Sale> GetProductDetailByBarCode(string vstrProductBarcode)
+        {
+            return objDB.GetProductDetailByBarCode(vstrProductBarcode);
+        }
     }
 }

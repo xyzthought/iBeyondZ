@@ -67,7 +67,42 @@ namespace BLL.BusinessObject
         {
             get { return mstrSaleMadeBy; }
             set { mstrSaleMadeBy = value; }
-        }
+        }
 
+      
+
+        private int mintProductID;
+        private string mstrBarCode;
+        private string mstrProductName;
+        private string mstrSizeName;
+        private decimal mdblQuantity;
+
+        public int ProductID
+        {
+            get { return mintProductID; }
+            set { mintProductID = value; }
+        }
+
+        public string BarCode
+        {
+            get { return mstrBarCode; }
+            set { mstrBarCode = value; }
+        }
+        public string ProductName
+        {
+            get { return mstrProductName; }
+            set { mstrProductName = value; }
+        }
+        public string SizeName
+        {
+            get { return mstrSizeName; }
+            set { mstrSizeName = value; }
+        }
+
+        public decimal Quantity
+        {
+            get { return mdblQuantity; }
+            set { mdblQuantity = value; }
+        }
     }
 }

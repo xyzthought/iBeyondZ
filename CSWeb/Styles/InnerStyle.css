@@ -578,6 +578,7 @@ body {
     font-weight: bold;
     height: 33px;
     line-height: 33px;
+    padding-left:10px;
 }
 .accepted div.invtdHeadA {
     float: left;
@@ -634,9 +635,14 @@ body {
     padding: 3px;
     width: 345px;
 }
+
+.dvDevider {
+    background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
+}
 .pend tr {
     background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
 }
+
 .pend tr {
     background: url("../Images/dot.png") repeat-x scroll center bottom #FFFFFF;
 }
@@ -1079,7 +1085,7 @@ a.inviteMore {
     width: 500px;
 }
 .fieldAddEdit {
-    padding: 8px;
+    /*padding: 8px;*/
 }
 .fieldAddEdit div {
     margin: 5px 0;
@@ -1091,6 +1097,11 @@ a.inviteMore {
     margin: 0 auto;
     width: 390px;
 }
+
+.fieldAddEdit div.innerSummary {
+    margin: 5px;
+}
+
 .gvStyle tr.tdData td.al {
     padding-right: 10px;
     text-align: right;
@@ -1165,6 +1176,12 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
 .accPend {
     margin: 0 auto;
     width: 910px;
+}
+
+.saleDetail {
+    margin: 5px auto;
+    width: 910px;
+    border: 1px solid #CACACA;
 }
 .btn5 {
     background: url("../Images/topBtn.png") no-repeat scroll left bottom transparent;

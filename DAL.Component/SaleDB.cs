@@ -128,5 +128,73 @@ namespace DAL.Component
             }
             return (reader.GetSchemaTable().DefaultView.Count > 0);
         }
+
+        public List<Sale> GetProductDetailByBarCode(string vstrProductBarcode)
+        {
+            List<Sale> lstobjData = new List<Sale>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("@ProductBarcode", SqlDbType.NVarChar),                                              
+                                };
+
+                mParams[0] = vstrProductBarcode;
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjData.Add(PopulateProductData(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjData;
+        }
+
+        private Sale PopulateProductData(IDataReader drData)
+        {
+            Sale objData = new Sale();
+            try
+            {
+
+                if (FieldExists(drData, "ProductID") && drData["ProductID"] != DBNull.Value)
+                {
+                    objData.ProductID = Convert.ToInt32(drData["ProductID"]);
+                }
+                if (FieldExists(drData, "BarCode") && drData["BarCode"] != DBNull.Value)
+                {
+                    objData.BarCode = Convert.ToString(drData["BarCode"]);
+                }
+                if (FieldExists(drData, "ProductName") && drData["ProductName"] != DBNull.Value)
+                {
+                    objData.ProductName = Convert.ToString(drData["ProductName"]);
+                }
+                if (FieldExists(drData, "SizeName") && drData["SizeName"] != DBNull.Value)
+                {
+                    objData.SizeName = Convert.ToString(drData["SizeName"]);
+                }
+                if (FieldExists(drData, "Quantity") && drData["Quantity"] != DBNull.Value)
+                {
+                    objData.Quantity = Convert.ToDecimal(drData["Quantity"]);
+                }
+                if (FieldExists(drData, "Price") && drData["Price"] != DBNull.Value)
+                {
+                    objData.Price = Convert.ToDecimal(drData["Price"]);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objData;
+        }
     }
 }
