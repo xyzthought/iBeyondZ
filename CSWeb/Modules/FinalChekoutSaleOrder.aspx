@@ -27,7 +27,7 @@
                         symbol: '€ '
                     });
 
-                    
+
 
                     //$('#<%=lblTotalAmount.ClientID%>').formatCurrency({ colorize: true, region: 'fr-BE' });
                 }
@@ -150,7 +150,7 @@
                                 <div class="acceptedCont">
                                     <div id="MidM2">
                                         <fieldset class="fieldAddEdit">
-                                            <div class="inner">
+                                            <div class="inner" style="margin: 0 5px 24px!important;">
                                                 <div class="mandet">
                                                     <span id="lblMessage">* Fields are mandatory</span></div>
                                                 <div class="errorMsg">
@@ -161,29 +161,74 @@
                                                 </div>
                                                 <div class="alt">
                                                     <div class="demo">
-                                                        <asp:TextBox id="Customer" runat="server" ClientIDMode="Static" CssClass="txtCred"/>
-                                                        <asp:ImageButton src="../Images/refresh.png" ID="btnRegresh" runat="server" 
-                                                            onclick="btnRegresh_Click"/>
-                                                        <asp:HiddenField id="Customerid" runat="server" ClientIDMode="Static" />
+                                                        <asp:TextBox ID="Customer" runat="server" ClientIDMode="Static" CssClass="txtCred" />
+                                                        <asp:ImageButton src="../Images/refresh.png" ID="btnRegresh" runat="server" OnClick="btnRegresh_Click"
+                                                            CausesValidation="false" />
+                                                        <asp:HiddenField ID="Customerid" runat="server" ClientIDMode="Static" />
                                                         <p id="Customer-description">
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div style="float: left">
                                                     <div>
-                                                        Quantity :<span class="mandet2">* </span>
+                                                        Address :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtQuantity" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 100px!important"
-                                                            onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="ReqQuantity" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        <asp:TextBox ID="txtAddress" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="ReqtxtAddress" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                                            ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
-                                                <div style="float: right; margin-top: 25px;">
-                                                    <span class="btn5">
-                                                        <asp:LinkButton ID="lnkAddMore" runat="server" OnClick="lnkAddMore_Click"><span class="AddNewData"></span>Add</asp:LinkButton>
-                                                    </span>
+                                                <div style="float: left">
+                                                    <div style="margin: 0!important">
+                                                        ZIP :<span class="mandet2">* </span>
+                                                    </div>
+                                                    <div class="alt" style="margin-bottom: 5px;">
+                                                        <asp:TextBox ID="txtZIP" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
+                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                                <div style="float: left; padding-left: 18px">
+                                                    <div style="margin: 0!important">
+                                                        City :<span class="mandet2">* </span>
+                                                    </div>
+                                                    <div class="alt" style="margin-bottom: 5px;">
+                                                        <asp:TextBox ID="txtCity" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCity" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                                <div style="clear: both">
+                                                </div>
+                                                <div style="float: left">
+                                                    <div style="margin: 0!important">
+                                                        Country :<span class="mandet2">* </span>
+                                                    </div>
+                                                    <div class="alt" style="margin-bottom: 5px;">
+                                                        <asp:TextBox ID="txtCountry" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                                <div style="float: left; padding-left: 18px">
+                                                    <div style="margin: 0!important">
+                                                        Phone :<span class="mandet2"></span>
+                                                    </div>
+                                                    <div class="alt" style="margin-bottom: 5px;">
+                                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <div style="clear: both">
+                                                </div>
+                                                <div>
+                                                    Email :<span class="mandet2"></span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegEmail" runat="server" ErrorMessage="Invalid Email"
+                                                        Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ControlToValidate="txtEmailID"
+                                                        ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></asp:RegularExpressionValidator>
                                                 </div>
                                                 <div style="clear: both">
                                                 </div>
@@ -191,6 +236,24 @@
                                         </fieldset>
                                     </div>
                                 </div>
+
+                                <!--Payment Button-->
+                                <div class="acceptedCont" style="margin-top:9px!important">
+                                    <div id="Div3">
+                                        <fieldset class="fieldAddEdit" >
+                                            <div class="inner">
+                                                
+                                                <div>
+                                                    <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
+                                                            <asp:LinkButton ID="lnkFinalCheckout" runat="server" CausesValidation="False">Final Checkout</asp:LinkButton>
+                                                        </span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <!--Payment Button-->
+                            </div>
                             </div>
                             <!--End Add/Edit product-->
                             <!--Start Payment Deatils-->
@@ -221,8 +284,9 @@
                                                 </div>
                                                 <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                     Discount</div>
-                                                <div style="width: 100px; float: left;">€&nbsp; 
-                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Style="width: 100px!important" ></asp:Label>
+                                                <div style="width: 100px; float: left;">
+                                                    €&nbsp;
+                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Style="width: 100px!important"></asp:Label>
                                                 </div>
                                                 <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
                                                     Total Pay</div>
@@ -237,6 +301,85 @@
                             </div>
                         </div>
                         <!--End Payment Deatils-->
+                        <!--Card Panel-->
+                        <div class="smallDivRight" style="margin-top: 5px!important">
+                            <div class="pendingCont">
+                                <div id="Div2">
+                                    <fieldset class="fieldAddEdit">
+                                        <div class="innerSummary">
+                                            <div class="errorMsg">
+                                                <span id="Span1" runat="server"></span>
+                                            </div>
+                                            <div>
+                                                <div class="accpendNew">
+                                                    Payment Method</div>
+                                            </div>
+                                            <div style="clear: both">
+                                            </div>
+                                            <div style="float: left">
+                                                <div>
+                                                    Mode of Payment :<span class="mandet2">* </span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
+                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                            <div style="float: left">
+                                                <div style="margin: 0!important">
+                                                    Credit/Debit Card # :<span class="mandet2">* </span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtCreditCard" runat="server" MaxLength="16" CssClass="txtCred"
+                                                        Style="width: 160px!important"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*"
+                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                            <div style="float: left; padding-left: 18px">
+                                                <div style="margin: 0!important">
+                                                    CVV Number :<span class="mandet2"></span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtCVV" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div style="clear: both">
+                                            </div>
+                                            <div style="float: left">
+                                                <div style="margin: 0!important">
+                                                    Expiry on [DD - YYYY] :<span class="mandet2">* </span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtMonth" runat="server" MaxLength="2" CssClass="txtCred" Style="width: 60px!important"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*"
+                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtMonth" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    <asp:RangeValidator ID="RVmonth" runat="server" ControlToValidate="txtMonth" MinimumValue="1"
+                                                        MaximumValue="12" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
+                                                    <asp:TextBox ID="txtYear" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 60px!important"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
+                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtYear" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtYear"
+                                                        MinimumValue="2012" MaximumValue="2016" ErrorMessage="*" Font-Size="X-Small"
+                                                        ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
+                                                </div>
+                                            </div>
+                                            <div style="float: left; padding-left: 18px">
+                                                <div style="margin: 0!important">
+                                                    Amount Paid :<span class="mandet2"></span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtAmountPaid" runat="server" CssClass="txtCred" Style="width: 160px!important"
+                                                        ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Card Panel-->
                     </div>
                 </div>
             </div>
@@ -272,20 +415,20 @@
         padding: 0;
     }
     
-    .ui-autocomplete {
-		max-height: 200px;
-		overflow-y: auto;
-		/* prevent horizontal scrollbar */
-		overflow-x: hidden;
-		/* add padding to account for vertical scrollbar */
-		padding-right: 20px;
-	}
-	/* IE 6 doesn't support max-height
+    .ui-autocomplete
+    {
+        max-height: 200px;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden; /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+    /* IE 6 doesn't support max-height
 	 * we use height instead, but this forces the menu to always be this tall
 	 */
-	* html .ui-autocomplete {
-		height: 200px;
-	}
+    * html .ui-autocomplete
+    {
+        height: 200px;
+    }
 </style>
 <script type="text/javascript">
 
@@ -316,7 +459,7 @@
                 $("#Customer").val(ui.item.label);
                 $("#Customerid").val(ui.item.value);
                 $("#Customer-description").html(ui.item.desc);
-                
+
                 return false;
             }
         })
@@ -328,5 +471,3 @@
 		};
     });
 </script>
-
-

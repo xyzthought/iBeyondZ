@@ -83,7 +83,15 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                     SaleID = Convert.ToInt32(objQuery["ID"].ToString());
                     lblHeader.Text = "Final Checkout | Sale Order";
                     PopulateProductDetail();
-                    txtDiscount.Text = Session["Discount"].ToString();
+                    if (!string.IsNullOrEmpty(Session["Discount"].ToString()))
+                    {
+                        txtDiscount.Text = Session["Discount"].ToString();
+                    }
+                    else
+                    {
+                        txtDiscount.Text = "0.00";
+                    }
+                    
                     CalculateTotalPrice();
                 }
                 else
@@ -145,6 +153,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
 
             lblTotalAmount.Text = String.Format("{0:C}", dblTotalPrice);
             lblTotalPay.Text = String.Format("{0:C}", dblDiscounted);
+            txtAmountPaid.Text = String.Format("{0:C}", dblDiscounted);
         }
     }
 
@@ -251,7 +260,24 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         if (!string.IsNullOrEmpty(Customerid.Value))
         {
             int CustID = Convert.ToInt32(Customerid.Value);
-
+            Customer objCust = new Customer();
+            CustomerBLL objCBLL = new CustomerBLL();
+            objCust.CustomerID = CustID;
+            List<Customer> objLCust = objCBLL.GetCustomerDetailByCustID(ref objCust);
+            if (null != objLCust)
+            {
+                PopulateFormFields(objLCust);
+            }
         }
+    }
+
+    private void PopulateFormFields(List<BLL.BusinessObject.Customer> objLCust)
+    {
+        txtAddress.Text = objLCust[0].Address;
+        txtZIP.Text = objLCust[0].ZIP;
+        txtCity.Text = objLCust[0].City;
+        txtCountry.Text = objLCust[0].Country;
+        txtEmailID.Text = objLCust[0].Email;
+        txtPhone.Text = objLCust[0].TeleNumber;
     }
 }
