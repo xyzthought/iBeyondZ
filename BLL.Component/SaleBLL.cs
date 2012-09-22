@@ -25,5 +25,10 @@ namespace BLL.Component
         {
             return objDB.GetProductDetailByBarCode(vstrProductBarcode);
         }
+
+        public DataTable GetAllCustomerNameForAutoComplete()
+        {
+            return objDB.GetAllCustomerNameForAutoComplete();
+        }
     }
 }

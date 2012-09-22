@@ -196,5 +196,27 @@ namespace DAL.Component
             }
             return objData;
         }
+
+        public DataTable GetAllCustomerNameForAutoComplete()
+        {
+            DataTable dtData = new DataTable();
+            try
+            {
+                using (DbConnection connection = dBase.CreateConnection())
+                {
+                    connection.Open();
+                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetAllCustomerNameForAutoComplete");
+                    DataSet dsData = dBase.ExecuteDataSet(objCmd);
+                    dtData = dsData.Tables[0];
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+
+            return dtData;
+        }
     }
 }

@@ -7,15 +7,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
+        
     <script type="text/javascript">
 
         function CalculatePay() {
-            var tp = $("#lblTotalPay").val();
-            var dis = $("#txtDiscount").val();
-            
-            if (dis != "" && tp!="") {
-                tp = tp - dis;
-                $("#lblTotalPay").val(tp);
+
+            try {
+                var tp = $('#<%=lblTotalAmount.ClientID%>').html().replace(' ', '').replace('.', '').replace(',', '').replace(/\u20ac/g, '');
+                var dis = $("#txtDiscount").val();
+                if (dis != "" && tp != "") {
+                    DisVal = tp - dis;
+                    
+                    $('#<%=lblTotalPay.ClientID%>').html(DisVal).formatCurrency({
+                        decimalSymbol: ',',
+                        digitGroupSymbol: '.',
+                        dropDecimals: false,
+                        groupDigits: true,
+                        region: 'fr-BE',
+                        colorize: true,
+                        symbol: '€ '
+                    });
+
+                    //$('#<%=lblTotalAmount.ClientID%>').formatCurrency({ colorize: true, region: 'fr-BE' });
+                }
+            } catch (e) {
+                alert(e);
             }
         }
     </script>
@@ -105,7 +121,8 @@
                                                         Payment Details</div>
                                                     <div class="accpendNew" style="width:46%;float:right">
                                                        <span class="btn5" style="float:right;padding-top:2px;padding-right:5px;">
-                                                            <asp:LinkButton ID="lnkAddNew2" runat="server">Final Checkout</asp:LinkButton>
+                                                            <asp:LinkButton ID="lnkFinalChekout" runat="server" 
+                                                            CausesValidation="False" onclick="lnkFinalChekout_Click">Final Checkout</asp:LinkButton>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -148,7 +165,8 @@
                                     SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
-                                    EndDateCol="3">
+                                    EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
+                                    OnRowEditing="gvGrid_RowEditing" OnRowDeleting="gvGrid_RowDeleting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Bar Code">
                                             <ItemTemplate>

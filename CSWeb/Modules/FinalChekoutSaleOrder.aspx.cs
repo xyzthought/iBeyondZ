@@ -15,7 +15,7 @@ using System.Diagnostics;
 using System.Data;
 
 
-public partial class Modules_AddEditSaleOrder : PageBase
+public partial class Modules_FinalChekoutSaleOrder : PageBase
 {
     string vstrLink = string.Empty;
     string param = string.Empty;
@@ -71,53 +71,45 @@ public partial class Modules_AddEditSaleOrder : PageBase
     {
         if (!Page.IsPostBack)
         {
-            if (null == Session["dtProductDetail"])
+            if (null != Session["dtProductDetail"])
             {
-                dtProductDetail = CreateTableStructure();
-            }
-            else
-            {
+                PopulateCustomer();
                 dtProductDetail = (DataTable)Session["dtProductDetail"];
-                PopulateProductDetail();
-                txtDiscount.Text = Session["Discount"].ToString();
-                CalculateTotalPrice();
-            }
-            string strQuery = Request.QueryString["q"];
-            if(!string.IsNullOrEmpty(strQuery))
-            {
-                Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
-                SelectedMode = objQuery["MODE"].ToString();
-                SaleID = Convert.ToInt32(objQuery["ID"].ToString());
-                if (Constants.MODE == Constants.MODE_EDIT)
+                string strQuery = Request.QueryString["q"];
+                if (!string.IsNullOrEmpty(strQuery))
                 {
-                    PopulateSaleDetail();
-                    lblHeader.Text = "EDIT | Sale Order";
+                    Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
+                    SelectedMode = objQuery["MODE"].ToString();
+                    SaleID = Convert.ToInt32(objQuery["ID"].ToString());
+                    lblHeader.Text = "Final Checkout | Sale Order";
+                    PopulateProductDetail();
+                    txtDiscount.Text = Session["Discount"].ToString();
+                    CalculateTotalPrice();
                 }
                 else
                 {
-                    lblHeader.Text = "ADD | Sale Order";
+                    Response.Redirect("Sale.aspx", false);
                 }
-            }
-            else
-            {
-                Response.Redirect("Sale.aspx",false);
             }
         }
     }
 
-    private DataTable CreateTableStructure()
+    private void PopulateCustomer()
     {
-        DataTable dtData = new DataTable();
-       
-        dtData.Columns.Add("ProductID", typeof(int));
-        dtData.Columns.Add("BarCode", typeof(string));
-        dtData.Columns.Add("ProductName", typeof(string));
-        dtData.Columns.Add("SizeName", typeof(string));
-        dtData.Columns.Add("Quantity", typeof(decimal));
-        dtData.Columns.Add("Unit", typeof(decimal));
-        dtData.Columns.Add("Price", typeof(decimal));
-        dtData.PrimaryKey = new DataColumn[] { dtData.Columns["ProductID"] };
-        return dtData;
+        SaleBLL objSaleBLL = new SaleBLL();
+        DataTable dtData = objSaleBLL.GetAllCustomerNameForAutoComplete();
+        if (null != dtData && dtData.Rows.Count > 0)
+        {
+            hdnCustData.Value="";
+            for (int i = 0; i < dtData.Rows.Count; i++)
+            {
+                hdnCustData.Value+=dtData.Rows[i]["CustomerID"].ToString()+"##"+dtData.Rows[i]["CustomerName"].ToString()+"##"+dtData.Rows[i]["Address"].ToString()+"@@";
+            }
+            if (hdnCustData.Value.Length > 0)
+            {
+                hdnCustData.Value = hdnCustData.Value.Substring(0, hdnCustData.Value.Length - 2);
+            }
+        }
     }
 
    
@@ -130,7 +122,6 @@ public partial class Modules_AddEditSaleOrder : PageBase
     #endregion
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
-        AddDataToDataTable();
         PopulateProductDetail();
         CalculateTotalPrice();
     }
@@ -157,38 +148,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
     }
 
-    private void AddDataToDataTable()
-    {
-        try
-        {
-            SaleBLL objSBLL = new SaleBLL();
-            List<Sale> objSale = objSBLL.GetProductDetailByBarCode(txtProductBarCode.Text.Trim());
-            if (null != objSale && objSale.Count>0)
-            {
-                DataRow dtRow = dtProductDetail.NewRow();
-                dtRow["ProductID"] = objSale[0].ProductID;
-                dtRow["BarCode"] = objSale[0].BarCode;
-                dtRow["ProductName"] = objSale[0].ProductName;
-                dtRow["SizeName"] = objSale[0].SizeName;
-                dtRow["Quantity"] =Convert.ToDecimal(txtQuantity.Text.Trim());
-                dtRow["Unit"] = objSale[0].Price;
-                dtRow["Price"] = objSale[0].Price * Convert.ToDecimal(txtQuantity.Text.Trim());
-                dtProductDetail.Rows.Add(dtRow);
-            }
-            else
-            {
-                lblError.InnerHtml = "Product Bar Code not found";
-            }
-        }
-        catch (ConstraintException ex)
-        {
-            lblError.InnerHtml = "Product all ready added";
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-    }
+    
 
     private void PopulateProductDetail()
     {
@@ -278,20 +238,20 @@ public partial class Modules_AddEditSaleOrder : PageBase
     }
 
     #endregion
-
-    protected void lnkFinalChekout_Click(object sender, EventArgs e)
+    protected void lnkBack_Click(object sender, EventArgs e)
     {
-        if (null != dtProductDetail && dtProductDetail.Rows.Count > 0)
+        Session["dtProductDetail"] = dtProductDetail;
+        param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "=" + SaleID;
+        param = Common.GenerateBASE64WithObfuscateApp(param);
+        vstrLink = "AddEditSaleOrder.aspx?q=" + param;
+        Response.Redirect(vstrLink, false);
+    }
+    protected void btnRegresh_Click(object sender, ImageClickEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(Customerid.Value))
         {
-            Session["Discount"] = txtDiscount.Text.Trim();
-            Session["dtProductDetail"] = dtProductDetail;
-            param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "="+SaleID;
-            param = Common.GenerateBASE64WithObfuscateApp(param);
-            vstrLink = "FinalChekoutSaleOrder.aspx?q=" + param;
-            Response.Redirect(vstrLink, false);
+            int CustID = Convert.ToInt32(Customerid.Value);
+
         }
     }
-
-    
-
 }

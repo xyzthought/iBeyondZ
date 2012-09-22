@@ -2,7 +2,13 @@
 <!--All Script tag should come here-->
 <script src="../Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="../Scripts/common.js" type="text/javascript"></script>
-
+<script src="../Scripts/jquery-formatcurrency.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.position.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.autocomplete.js" type="text/javascript"></script>
+<link href="../Styles/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<link href="../Styles/jquery.ui.autocomplete.css" rel="stylesheet" type="text/css" />
 <!--All CSS should come here-->
 <link href="../Styles/InnerStyle.css" rel="stylesheet" type="text/css" />
 <link href="../Styles/Header.css" rel="stylesheet" type="text/css" />
@@ -56,4 +62,5 @@
     </div>
     <iframe id="ifSession" height="1px" width="1px" src="" style="display: none"></iframe>
 </div>
-<asp:ScriptManager ID="ScriptManager1"   runat="server"></asp:ScriptManager>
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+</asp:ScriptManager>
