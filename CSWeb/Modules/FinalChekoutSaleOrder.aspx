@@ -16,16 +16,16 @@
                 var dis = $("#txtDiscount").val();
                 if (dis != "" && tp != "") {
                     DisVal = tp - dis;
-
-                    $('#<%=lblTotalPay.ClientID%>').html(DisVal).formatCurrency({
-                        decimalSymbol: ',',
-                        digitGroupSymbol: '.',
-                        dropDecimals: false,
-                        groupDigits: true,
-                        region: 'fr-BE',
-                        colorize: true,
-                        symbol: '€ '
-                    });
+                    $('#<%=lblTotalPay.ClientID%>').html(DisVal);
+                    /* $('#<%=lblTotalPay.ClientID%>').html(DisVal).formatCurrency({
+                    decimalSymbol: ',',
+                    digitGroupSymbol: '.',
+                    dropDecimals: false,
+                    groupDigits: true,
+                    region: 'fr-BE',
+                    colorize: true,
+                    symbol: '€ '
+                    });*/
 
 
 
@@ -146,7 +146,7 @@
                         <!--Outer Div-->
                         <div class="accPend">
                             <!--Start Add/Edit product-->
-                            <div class="smallDivLeft">
+                            <div class="smallDivLeft" style="width: 415px!important">
                                 <div class="acceptedCont">
                                     <div id="MidM2">
                                         <fieldset class="fieldAddEdit">
@@ -236,95 +236,67 @@
                                         </fieldset>
                                     </div>
                                 </div>
-
-                                <!--Payment Button-->
-                                <div class="acceptedCont" style="margin-top:9px!important">
-                                    <div id="Div3">
-                                        <fieldset class="fieldAddEdit" >
-                                            <div class="inner">
-                                                
-                                                <div>
-                                                    <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
-                                                            <asp:LinkButton ID="lnkFinalCheckout" runat="server" CausesValidation="False">Final Checkout</asp:LinkButton>
-                                                        </span>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                                <!--Payment Button-->
-                            </div>
-                            </div>
-                            <!--End Add/Edit product-->
-                            <!--Start Payment Deatils-->
-                            <div class="smallDivRight">
-                                <div class="pendingCont">
-                                    <div id="Div1">
-                                        <fieldset class="fieldAddEdit">
-                                            <div class="innerSummary">
-                                                <div class="errorMsg">
-                                                    <span id="Span2" runat="server"></span>
-                                                </div>
-                                                <div>
-                                                    <div class="accpendNew" style="width: 49%; float: left">
-                                                        Payment Details</div>
-                                                    <div class="accpendNew" style="width: 46%; float: right">
-                                                        <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
-                                                            <asp:LinkButton ID="lnkBack" runat="server" CausesValidation="False" OnClick="lnkBack_Click">Back</asp:LinkButton>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div style="clear: both">
-                                                </div>
-                                                <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                    Total Amount</div>
-                                                <div style="width: 100px; float: left;">
-                                                    <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred"></asp:Label></div>
-                                                <div style="clear: both">
-                                                </div>
-                                                <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                    Discount</div>
-                                                <div style="width: 100px; float: left;">
-                                                    €&nbsp;
-                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Style="width: 100px!important"></asp:Label>
-                                                </div>
-                                                <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
-                                                    Total Pay</div>
-                                                <div style="width: 100px; float: right; margin-bottom: 22px">
-                                                    <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred"></asp:Label></div>
-                                                <div style="clear: both">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <!--End Payment Deatils-->
-                        <!--Card Panel-->
-                        <div class="smallDivRight" style="margin-top: 5px!important">
+                        <!--End Add/Edit product-->
+                        <!--Start Payment Deatils-->
+                        <div class="smallDivRight" style="width: 486px!important">
                             <div class="pendingCont">
-                                <div id="Div2">
+                                <div id="Div1">
                                     <fieldset class="fieldAddEdit">
                                         <div class="innerSummary">
                                             <div class="errorMsg">
-                                                <span id="Span1" runat="server"></span>
+                                                <span id="spErrorPay" runat="server"></span>
                                             </div>
                                             <div>
-                                                <div class="accpendNew">
-                                                    Payment Method</div>
+                                                <div class="accpendNew" style="width: 49%; float: left">
+                                                    Payment Details</div>
+                                                <div class="accpendNew" style="width: 46%; float: right">
+                                                    <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
+                                                        <asp:LinkButton ID="lnkBack" runat="server" CausesValidation="False" OnClick="lnkBack_Click">Back</asp:LinkButton>
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div style="clear: both">
                                             </div>
-                                            <div style="float: left">
-                                                <div>
-                                                    Mode of Payment :<span class="mandet2">* </span>
-                                                </div>
-                                                <div class="alt" style="margin-bottom: 5px;">
-                                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
-                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                </div>
+                                            <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
+                                                Total Amount</div>
+                                            <div style="width: 100px; float: left;">
+                                                <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred"></asp:Label></div>
+                                            <div style="clear: both">
+                                            </div>
+                                            <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
+                                                Discount</div>
+                                            <div style="width: 100px; float: left;">
+                                                €&nbsp;
+                                                <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Style="width: 100px!important"></asp:Label>
+                                            </div>
+                                            <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
+                                                Total Pay</div>
+                                            <div style="width: 100px; float: right; margin-bottom: 22px">
+                                                <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred"></asp:Label></div>
+                                            <div style="clear: both">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Payment Deatils-->
+                    <!--Card Panel-->
+                    <div class="smallDivRight" style="margin-top: 18px!important; width: 486px!important">
+                        <div class="pendingCont">
+                            <div id="Div2">
+                                <fieldset class="fieldAddEdit">
+                                    <div class="innerSummary">
+                                        <!--Credit Card-->
+                                        <div style="float: left; margin-right: 10px">
+                                            <div>
+                                                <div class="accpendNew">
+                                                    Credit Card</div>
+                                            </div>
+                                            <div style="clear: both">
                                             </div>
                                             <div style="float: left">
                                                 <div style="margin: 0!important">
@@ -332,58 +304,83 @@
                                                 </div>
                                                 <div class="alt" style="margin-bottom: 5px;">
                                                     <asp:TextBox ID="txtCreditCard" runat="server" MaxLength="16" CssClass="txtCred"
-                                                        Style="width: 160px!important"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*"
-                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        Style="width: 140px!important"></asp:TextBox>
                                                 </div>
                                             </div>
-                                            <div style="float: left; padding-left: 18px">
+                                            <div style="clear: both">
+                                            </div>
+                                            <div>
                                                 <div style="margin: 0!important">
-                                                    CVV Number :<span class="mandet2"></span>
+                                                    Amount Paid :<span class="mandet2"></span>
                                                 </div>
                                                 <div class="alt" style="margin-bottom: 5px;">
-                                                    <asp:TextBox ID="txtCVV" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                                    <asp:TextBox ID="txtAmountPaid" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <!--Credit Card-->
+                                        <!--Bank Contact-->
+                                        <div style="float: left; margin-right: 10px">
+                                            <div>
+                                                <div class="accpendNew">
+                                                    Bank Contact</div>
                                             </div>
                                             <div style="clear: both">
                                             </div>
                                             <div style="float: left">
                                                 <div style="margin: 0!important">
-                                                    Expiry on [DD - YYYY] :<span class="mandet2">* </span>
+                                                    Credit/Debit Card # :<span class="mandet2">* </span>
                                                 </div>
                                                 <div class="alt" style="margin-bottom: 5px;">
-                                                    <asp:TextBox ID="txtMonth" runat="server" MaxLength="2" CssClass="txtCred" Style="width: 60px!important"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*"
-                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtMonth" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    <asp:RangeValidator ID="RVmonth" runat="server" ControlToValidate="txtMonth" MinimumValue="1"
-                                                        MaximumValue="12" ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
-                                                    <asp:TextBox ID="txtYear" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 60px!important"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
-                                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtYear" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtYear"
-                                                        MinimumValue="2012" MaximumValue="2016" ErrorMessage="*" Font-Size="X-Small"
-                                                        ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
+                                                    <asp:TextBox ID="txtBank" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
                                                 </div>
                                             </div>
-                                            <div style="float: left; padding-left: 18px">
+                                            <div style="clear: both">
+                                            </div>
+                                            <div>
                                                 <div style="margin: 0!important">
                                                     Amount Paid :<span class="mandet2"></span>
                                                 </div>
                                                 <div class="alt" style="margin-bottom: 5px;">
-                                                    <asp:TextBox ID="txtAmountPaid" runat="server" CssClass="txtCred" Style="width: 160px!important"
-                                                        ReadOnly="true"></asp:TextBox>
+                                                    <asp:TextBox ID="txtBCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                </div>
+                                        <!--Bank Contact-->
+                                        <!--Cash-->
+                                        <div style="float: left;">
+                                            <div>
+                                                <div class="accpendNew">
+                                                    Cash</div>
+                                            </div>
+                                            <div style="clear: both">
+                                            </div>
+                                            <div style="clear: both">
+                                            </div>
+                                            <div>
+                                                <div style="margin-bottom: 10px!important;">
+                                                    Amount Paid :<span class="mandet2"></span>
+                                                </div>
+                                                <div class="alt" style="margin-bottom: 5px;">
+                                                    <asp:TextBox ID="txtCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important"></asp:TextBox>
+                                                </div>
+                                                <div id="dvAddUser" class="fl">
+                                                    <span class="btn5" style="margin-right: -5px!important; margin-top: 16px!important;">
+                                                        <asp:LinkButton ID="lnkFinalCheckout" runat="server" OnClick="lnkFinalCheckout_Click">Final Checkout</asp:LinkButton></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Cash-->
+                                    </div>
+                                </fieldset>
                             </div>
                         </div>
-                        <!--End Card Panel-->
                     </div>
+                    <!--End Card Panel-->
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="push">
     </div>

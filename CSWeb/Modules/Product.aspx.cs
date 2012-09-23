@@ -25,70 +25,12 @@ public partial class Modules_Product : System.Web.UI.Page
                 ViewState[Constants.SORTDERECTION] = Constants.DESC;
 
                 BindGrid();
-                PopulateManufacturer();
-                PopulateCategory();
-                PopulateSize();
             }
             catch (Exception ex)
             {
-                 SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+                SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
-           
-        }
-    }
 
-    private void PopulateSize()
-    {
-        try
-        {
-            List<Size> lstSize = new SizeBLL().GetSize(0);
-            chkSize.DataSource = lstSize;
-            chkSize.DataMember = "SizeID";
-            chkSize.DataTextField = "SizeName";
-            chkSize.DataBind();
-        }
-        catch (Exception ex)
-        {
-
-            throw ex;
-        }
-    }
-
-    private void PopulateCategory()
-    {
-        try
-        {
-            List<Category> lstCategory = new CategoryBLL().GetCategory(0);
-            cmbCategory.DataSource = lstCategory;
-            cmbCategory.DataMember = "CategoryID";
-            cmbCategory.DataTextField = "CategoryName";
-            cmbCategory.DataBind();
-            cmbCategory.Items.Insert(0, new ListItem("--Select--"));
-            cmbCategory.SelectedIndex = 0;
-        }
-        catch (Exception ex)
-        {
-
-            throw ex;
-        }
-    }
-
-    private void PopulateManufacturer()
-    {
-        try
-        {
-            List<Manufacturer> lstManufacturer = new ManufacturerBLL().GetAll(new PageInfo());
-            cmbManufacturer.DataSource = lstManufacturer;
-            cmbManufacturer.DataMember = "ManufacturerID";
-            cmbManufacturer.DataTextField = "CompanyName";
-            cmbManufacturer.DataBind();
-            cmbManufacturer.Items.Insert(0, new ListItem("--Select--"));
-            cmbManufacturer.SelectedIndex = 0;
-        }
-        catch (Exception ex)
-        {
-            
-            throw ex;
         }
     }
 
@@ -122,77 +64,7 @@ public partial class Modules_Product : System.Web.UI.Page
         }
     }
 
-    protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            BLL.BusinessObject.Product mobjProduct = PopulateFromForm();
-            SaveProduct(mobjProduct);
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-    }
 
-    private void SaveProduct(Product mobjProduct)
-    {
-        try
-        {
-            BLL.Component.ProductBLL objProd = new ProductBLL();
-            if (mobjProduct.ProductID == 0)
-            {
-                bool mblnReturn = objProd.AddProduct(mobjProduct);
-            }
-            else
-            {
-                objProd.EditProduct(mobjProduct);
-            }
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-    }
-
-    private Product PopulateFromForm()
-    {
-        BLL.BusinessObject.Product objProduct = new Product();
-        try
-        {
-            objProduct.ProductID = 0;
-            objProduct.ProductName = txtProductName.Text.Trim();
-            objProduct.Description = txtDescription.Text.Trim();
-            objProduct.ManufacturerID = int.Parse(cmbManufacturer.SelectedValue);
-            objProduct.CategoryID = int.Parse(cmbCategory.SelectedValue);
-            objProduct.SizeID = int.Parse(chkSize.SelectedValue);
-            objProduct.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
-            objProduct.Tax = Convert.ToDecimal(txtTax.Text);
-            objProduct.Margin = Convert.ToDecimal(txtMargin.Text);
-            objProduct.SellingPrice = Convert.ToDecimal(txtSellingPrice.Text);
-            objProduct.BarCode = txtBarcode.Text.Trim();
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-        return objProduct;
-    }
-
-    private void PopulateProductByID(int ProductID)
-    {
-        try
-        {
-            BLL.Component.ProductBLL objProd = new ProductBLL();
-            BLL.BusinessObject.Product objProduct = objProd.GetProductByID(ProductID);
-
-            txtProductName.Text = objProduct.ProductName;
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-    }
     protected void gvGrid_Sorting(object sender, GridViewSortEventArgs e)
     {
         try
@@ -241,9 +113,11 @@ public partial class Modules_Product : System.Web.UI.Page
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
-                lnkDelete.OnClientClick = "return confirm('Manufacturer :" + BLL.BusinessObject.Constants.DeleteConf + "');";
+                lnkDelete.OnClientClick = "return confirm('Product :" + BLL.BusinessObject.Constants.DeleteConf + "');";
+                //OnClientClick="return ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"
 
             }
         }
@@ -260,12 +134,12 @@ public partial class Modules_Product : System.Web.UI.Page
             {
                 int intProductID = Convert.ToInt32(e.CommandArgument.ToString());
                 ViewState["intProductID"] = intProductID;
-                LoadData(intProductID);
+                //LoadData(intProductID);
+                Response.Redirect("AddEditProduct.aspx?ProductID=" + intProductID);
             }
 
             if (e.CommandName == "Delete")
             {
-
                 int intProductID = Convert.ToInt32(e.CommandArgument.ToString());
                 bool blnReturn = new ProductBLL().DeleteProduct(intProductID);
 
@@ -284,9 +158,6 @@ public partial class Modules_Product : System.Web.UI.Page
                     lblMsg.Text = "Delete failed";
                 }
             }
-
-
-
         }
         catch (Exception ex)
         {
@@ -294,33 +165,13 @@ public partial class Modules_Product : System.Web.UI.Page
         }
     }
 
-    private void LoadData(int intProductID)
+    protected void gvGrid_RowEditing(object sender, GridViewEditEventArgs e)
     {
-        try
-        {
-            List<Product> lstProduct = new ProductBLL().GetAllProducts(intProductID);
 
+    }
 
-            if (null != lstProduct && lstProduct.Count>0)
-            {
-                txtProductName.Text = lstProduct[0].ProductName;
-                txtDescription.Text = lstProduct[0].Description;
-              //  cmbManufacturer.SelectedValue = lstProduct[0].ManufacturerID.ToString();
-                //cmbCategory.SelectedValue = lstProduct[0].CategoryID.ToString();
-
-                txtBuyingPrice.Text = lstProduct[0].BuyingPrice.ToString();
-                txtTax.Text = lstProduct[0].Tax.ToString();
-                txtMargin.Text = lstProduct[0].Margin.ToString();
-                txtSellingPrice.Text = lstProduct[0].SellingPrice.ToString();
-                txtBarcode.Text = lstProduct[0].BarCode;
-                
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditProduct", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
-
-            }
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
+    protected void lnkAddNew2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AddEditProduct.aspx");
     }
 }

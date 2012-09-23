@@ -8,6 +8,7 @@
     <title>Manage Products</title>
     <script type="text/javascript">
         function ClearFormFields() {
+
             $('#txtProductName').val('');
             $('#txtDescription').val('');
             $('#txtBuyingPrice').val('');
@@ -42,9 +43,9 @@
                 </div>
                 <div id="ContentPlaceHolder1_dvCloneOrgReport" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew2" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"
-                            runat="server"><span class="AddNewData"></span>Add Product</asp:LinkButton>
-                    </span>
+                        <%--<asp:LinkButton ID="lnkAddNew2" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"
+                            runat="server"><span class="AddNewData"></span>Add Product</asp:LinkButton>--%>
+                        <a href='AddEditProduct.aspx'>Add Product</a> </span>
                 </div>
                 <div class="reports">
                     Manage Products
@@ -71,7 +72,7 @@
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                     EndDateCol="3" OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowCommand="gvGrid_RowCommand"
-                                    OnRowDataBound="gvGrid_RowDataBound" OnSorting="gvGrid_Sorting">
+                                    OnRowDataBound="gvGrid_RowDataBound" OnSorting="gvGrid_Sorting" OnRowEditing="gvGrid_RowEditing">
                                     <Columns>
                                         <asp:TemplateField HeaderText="ProductID" Visible="false">
                                             <ItemTemplate>
@@ -102,7 +103,7 @@
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Bar Code" SortExpression="Barcode">
+                                        <asp:TemplateField HeaderText="Bar Code" SortExpression="BarCode">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("BarCode") %>' ToolTip='<%# Eval("BarCode") %>'></asp:Label>
                                             </ItemTemplate>
@@ -112,7 +113,7 @@
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
-                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductID") %>' OnClientClick="return ClearFormFields();"> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
+                                                    OnClientClick="return ClearFormFields();" CausesValidation="False" CommandArgument='<%# Eval("ProductID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
                                                     CommandArgument='<%# Eval("ProductID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
                                             </ItemTemplate>
@@ -123,128 +124,6 @@
                                     <RowStyle CssClass="tdData" />
                                     <HeaderStyle CssClass="trHeader" />
                                 </ctrl:CustomGridView>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="ModalWindow1" style="display: none" clientidmode="Static">
-                        <div class="mainModalAddEdit" id="mainModalAddDataSource">
-                            <div class="topM">
-                                <h1>
-                                    <span id="spTitle">Add/Edit Product</span><a onclick="return CloseAddDiv('ModalWindow1');"
-                                        id="lnkCloseAddDiv" title="Close"> </a>
-                                </h1>
-                            </div>
-                            <div id="MidM2" class="MidM">
-                                <div class="addNew" id="addNew2">
-                                    <div id="updDataSource">
-                                        <div id="dvInnerWindow" class="modalContent">
-                                            <fieldset class="fieldAddEdit">
-                                                <div class="inner">
-                                                    <div class="mandet">
-                                                        <span id="lblMessage">* Fields are mandatory</span></div>
-                                                    <div class="errorMsg">
-                                                        <span id="lblError" runat="server"></span>
-                                                    </div>
-                                                    <div>
-                                                        Product Name :<span class="mandet2">* </span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtProductName" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqtxtProductName" runat="server" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductName" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div>
-                                                        Description :
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtDescription" runat="server" Rows="5" TextMode="MultiLine" class="txtInv"></asp:TextBox>
-                                                    </div>
-                                                    <div>
-                                                        Manufacturer:<span class="mandet2">* </span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl">
-                                                        </asp:DropDownList>
-                                                        <%--  <asp:RequiredFieldValidator ID="ReqtxtLoginID" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtContactLastName" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                                    </div>
-                                                    <div>
-                                                        Category :
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:DropDownList ID="cmbCategory" runat="server" CssClass="txtUpl">
-                                                        </asp:DropDownList>
-                                                        <%-- <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                                    </div>
-                                                    <div>
-                                                        Size :
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:CheckBoxList ID="chkSize" runat="server">
-                                                        </asp:CheckBoxList>
-                                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                                    </div>
-                                                    <div style="float: left">
-                                                        <div style="margin: 0!important">
-                                                            Buying Price :
-                                                        </div>
-                                                        <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtBuyingPrice" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox></td>
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                        </div>
-                                                    </div>
-                                                    <div style="float: left; padding-left: 18px">
-                                                        <div style="margin: 0!important">
-                                                            Tax :
-                                                        </div>
-                                                        <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox></td>
-                                                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                                        </div>
-                                                    </div>
-                                                    <div style="clear: both">
-                                                    </div>
-                                                    <div style="float: left">
-                                                        <div style="margin: 0!important">
-                                                            Tax Margin :<span class="mandet2"></span>
-                                                        </div>
-                                                        <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                    <div style="float: left; padding-left: 18px">
-                                                        <div style="margin: 0!important">
-                                                            Selling Price :<span class="mandet2"></span>
-                                                        </div>
-                                                        <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                    <div style="clear: both">
-                                                    <div>
-                                                        Bar Code :<span class="mandet2"></span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox></td>
-                                                    </div>
-                                                    <div class="btn-wrapper4">
-                                                        <span class="btn">
-                                                            <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
-                                                        <span class="btn">
-                                                            <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1');">Cancel</asp:LinkButton>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bottomM">
                             </div>
                         </div>
                     </div>

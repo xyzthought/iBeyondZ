@@ -151,9 +151,8 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                 dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
             }
 
-            lblTotalAmount.Text = String.Format("{0:C}", dblTotalPrice);
-            lblTotalPay.Text = String.Format("{0:C}", dblDiscounted);
-            txtAmountPaid.Text = String.Format("{0:C}", dblDiscounted);
+            lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice);// String.Format("{0:C}", dblTotalPrice);
+            lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
         }
     }
 
@@ -279,5 +278,24 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         txtCountry.Text = objLCust[0].Country;
         txtEmailID.Text = objLCust[0].Email;
         txtPhone.Text = objLCust[0].TeleNumber;
+    }
+    protected void lnkFinalCheckout_Click(object sender, EventArgs e)
+    {
+        double dbAmounttoBePaid = Math.Round(Convert.ToDouble(lblTotalPay.Text.Trim()), 2);
+        double dblCalculatedAmount = 0;
+        double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim().Replace(".",",")), 2));
+        double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim().Replace(".", ",")), 2));
+        double dblCash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtCash.Text.Trim().Replace(".", ",")), 2));
+
+         dblCalculatedAmount = dblCredit + dblBank + dblCash;
+        if (dblCalculatedAmount < dbAmounttoBePaid)
+        {
+            spErrorPay.InnerHtml = "Deficit Amount ( "+ Math.Round((dbAmounttoBePaid-dblCalculatedAmount),2).ToString()+" )";
+        }
+        else if (dblCalculatedAmount > dbAmounttoBePaid)
+        {
+            spErrorPay.InnerHtml = "Surplus Amount ( " + Math.Round((dblCalculatedAmount - dbAmounttoBePaid),2).ToString() + " )";
+        }
+
     }
 }

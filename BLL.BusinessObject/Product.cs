@@ -23,8 +23,8 @@ namespace BLL.BusinessObject
         public string CategoryName { get { return mstrCategoryName; } set { mstrCategoryName = value; } }
         private string mstrSizeName;
         public string SizeName { get { return mstrSizeName; } set { mstrSizeName = value; } }
-        private int mintSizeID;
-        public int SizeID { get { return mintSizeID; } set { mintSizeID = value; } }
+        private string mstrSizeID;
+        public string SizeID { get { return mstrSizeID; } set { mstrSizeID = value; } }
         private decimal mdcmBuyingPrice;
         public decimal BuyingPrice { get { return mdcmBuyingPrice; } set { mdcmBuyingPrice = value; } }
         private decimal mdcmSellingPrice;

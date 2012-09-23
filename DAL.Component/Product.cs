@@ -43,10 +43,10 @@ namespace DAL.Component
 
                     if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
-                    if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
+                    //     if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
 
                     if (dataReader["CategoryID"] != DBNull.Value) { obj.CategoryID = (int)dataReader["CategoryID"]; }
-                    if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (int)dataReader["SizeID"]; }
+                    //if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
                     if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
                     if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
                     if (dataReader["Margin"] != DBNull.Value) { obj.Margin = (decimal)dataReader["Margin"]; }
@@ -68,7 +68,7 @@ namespace DAL.Component
 
         }
 
-        public bool InsertProduct(BLL.BusinessObject.Product vobjProduct)
+        public int InsertProduct(BLL.BusinessObject.Product vobjProduct)
         {
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_InsertProduct");
@@ -78,22 +78,26 @@ namespace DAL.Component
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
             db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
             db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
-            db.AddInParameter(dbCommand, "SizeID", DbType.Int32, vobjProduct.SizeID);
+            db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
             db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
             db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
             db.AddInParameter(dbCommand, "Margin", DbType.Decimal, vobjProduct.Margin);
             db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
+            db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
             //db.AddInParameter(dbCommand, "CreatedOn", DbType.DateTime, vobjProduct.CreatedOn);
             //db.AddInParameter(dbCommand, "UpdatedOn", DbType.DateTime, vobjProduct.UpdatedOn);
             db.AddInParameter(dbCommand, "CreatedBy", DbType.Int32, vobjProduct.CreatedBy);
             db.AddInParameter(dbCommand, "UpdatedBy", DbType.Int32, vobjProduct.UpdatedBy);
             //db.AddInParameter(dbCommand, "IsActive", DbType.Boolean, vobjProduct.IsActive);
             //db.AddInParameter(dbCommand, "IsDeleted", DbType.Boolean, vobjProduct.IsDeleted);
-
-            return (db.ExecuteNonQuery(dbCommand) == 1);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            int mintReturn = int.Parse(db.GetParameterValue(dbCommand, "@Return").ToString());
+            return mintReturn;
+            //(db.ExecuteNonQuery(dbCommand) == 1);
         }
 
-        public bool UpdateProduct(BLL.BusinessObject.Product vobjProduct)
+        public int UpdateProduct(BLL.BusinessObject.Product vobjProduct)
         {
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_UpdateProduct");
@@ -103,19 +107,17 @@ namespace DAL.Component
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
             db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
             db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
-            db.AddInParameter(dbCommand, "SizeID", DbType.Int32, vobjProduct.SizeID);
+            db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
             db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
             db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
             db.AddInParameter(dbCommand, "Margin", DbType.Decimal, vobjProduct.Margin);
             db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
-            db.AddInParameter(dbCommand, "CreatedOn", DbType.DateTime, vobjProduct.CreatedOn);
-            db.AddInParameter(dbCommand, "UpdatedOn", DbType.DateTime, vobjProduct.UpdatedOn);
-            db.AddInParameter(dbCommand, "CreatedBy", DbType.Int32, vobjProduct.CreatedBy);
+            db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
             db.AddInParameter(dbCommand, "UpdatedBy", DbType.Int32, vobjProduct.UpdatedBy);
-            db.AddInParameter(dbCommand, "IsActive", DbType.Boolean, vobjProduct.IsActive);
-            db.AddInParameter(dbCommand, "IsDeleted", DbType.Boolean, vobjProduct.IsDeleted);
-
-            return (db.ExecuteNonQuery(dbCommand) == 1);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            int mintReturn = int.Parse(db.GetParameterValue(dbCommand, "@Return").ToString());
+            return mintReturn;
         }
 
         public BLL.BusinessObject.Product GetProductByID(int ProductID)
@@ -132,7 +134,7 @@ namespace DAL.Component
                 while (dataReader.Read())
                 {
 
-                  
+
 
                     if (dataReader["ProductID"] != DBNull.Value) { obj.ProductID = (int)dataReader["ProductID"]; }
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
@@ -141,11 +143,12 @@ namespace DAL.Component
 
                     if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
-                    if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
+                    // if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
 
                     if (dataReader["CategoryID"] != DBNull.Value) { obj.CategoryID = (int)dataReader["CategoryID"]; }
-                    if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (int)dataReader["SizeID"]; }
+                    if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
                     if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
+                    if (dataReader["SellingPrice"] != DBNull.Value) { obj.SellingPrice = (decimal)dataReader["SellingPrice"]; }
                     if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
                     if (dataReader["Margin"] != DBNull.Value) { obj.Margin = (decimal)dataReader["Margin"]; }
                     if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
@@ -156,7 +159,7 @@ namespace DAL.Component
                     //if (dataReader["IsActive"] != DBNull.Value) { obj.IsActive = (bool)dataReader["IsActive"]; }
                     //if (dataReader["IsDeleted"] != DBNull.Value) { obj.IsDeleted = (bool)dataReader["IsDeleted"]; }
 
-                   
+
 
                 }
 

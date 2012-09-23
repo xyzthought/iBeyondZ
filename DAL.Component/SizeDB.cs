@@ -38,5 +38,41 @@ namespace DAL.Component
                 return list;
             }
         }
+
+        public int InsertSize(string SizeName)
+        {
+
+            Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
+            DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_InsertMasterSize");
+
+            db.AddInParameter(dbCommand, "SizeName", DbType.String, SizeName);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            return (int)db.GetParameterValue(dbCommand, "@Return");
+        }
+
+        public int UpdateSize(int SizeID, string SizeName)
+        {
+
+            Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
+            DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_UpdateMasterSize");
+
+            db.AddInParameter(dbCommand, "SizeID", DbType.Int32, SizeID);
+            db.AddInParameter(dbCommand, "SizeName", DbType.String, SizeName);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            return (int)db.GetParameterValue(dbCommand, "@Return");
+        }
+
+        public bool DeleteSize(int SizeID)
+        {
+
+            Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
+            DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_DeleteSize");
+
+            db.AddInParameter(dbCommand, "SizeID", DbType.Int32, SizeID);
+
+            return (db.ExecuteNonQuery(dbCommand) == 1);
+        }
     }
 }

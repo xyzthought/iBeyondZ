@@ -152,8 +152,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
             }
 
-            lblTotalAmount.Text = String.Format("{0:C}", dblTotalPrice);
-            lblTotalPay.Text = String.Format("{0:C}", dblDiscounted);
+            lblTotalAmount.Text =Math.Round(dblTotalPrice,2).ToString();// String.Format("{0:C}", dblTotalPrice);
+            lblTotalPay.Text = Math.Round(dblDiscounted,2).ToString();// String.Format("{0:C}", dblDiscounted);
         }
     }
 
@@ -235,8 +235,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (e.CommandName == "Edit")
             {
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                ViewState["intUserID"] = intUserID;
+                int intProductID = Convert.ToInt32(e.CommandArgument.ToString());
+                PopulateForm(intProductID);
             }
 
             if (e.CommandName == "Delete")
@@ -261,6 +261,24 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
+    }
+
+    private void PopulateForm(int vintProductID)
+    {
+        for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+        {
+            if (dtProductDetail.Rows[i]["ProductID"].ToString() == vintProductID.ToString())
+            {
+                txtProductBarCode.Text = dtProductDetail.Rows[i]["BarCode"].ToString();
+                txtQuantity.Text=dtProductDetail.Rows[i]["Quantity"].ToString();
+                dtProductDetail.Rows[i].Delete();
+                break;
+            }
+        }
+        dtProductDetail.AcceptChanges();
+        PopulateProductDetail();
+        CalculateTotalPrice();
+
     }
 
    

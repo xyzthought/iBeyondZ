@@ -18,14 +18,14 @@
                 if (dis != "" && tp != "") {
                     DisVal = tp - dis;
                     
-                    $('#<%=lblTotalPay.ClientID%>').html(DisVal).formatCurrency({
+                    $('#<%=lblTotalPay.ClientID%>').html(DisVal);/*.formatCurrency({
                         decimalSymbol: ',',
                         digitGroupSymbol: '.',
                         dropDecimals: false,
                         groupDigits: true,
                         region: 'fr-BE',
                         colorize: true,
-                        symbol: '€ '
+                        symbol: '€ '*/
                     });
 
                     //$('#<%=lblTotalAmount.ClientID%>').formatCurrency({ colorize: true, region: 'fr-BE' });

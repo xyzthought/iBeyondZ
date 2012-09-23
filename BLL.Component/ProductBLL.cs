@@ -8,13 +8,13 @@ namespace BLL.Component
 {
     public class ProductBLL
     {
-        public bool AddProduct(BLL.BusinessObject.Product vobjProduct)
+        public int AddProduct(BLL.BusinessObject.Product vobjProduct)
         {
             DAL.Component.Product objProdDAL = new DAL.Component.Product();
             return objProdDAL.InsertProduct(vobjProduct);
         }
 
-        public bool EditProduct(BLL.BusinessObject.Product vobjProduct)
+        public int EditProduct(BLL.BusinessObject.Product vobjProduct)
         {
             DAL.Component.Product objProdDAL = new DAL.Component.Product();
             return objProdDAL.UpdateProduct(vobjProduct);
@@ -32,7 +32,7 @@ namespace BLL.Component
             return objProdDAL.GetProductByID(ProductID);
         }
 
-       
+
 
         public bool DeleteProduct(int ProductID)
         {
@@ -41,7 +41,7 @@ namespace BLL.Component
 
         public List<Product> GetAllProducts(int intProductID)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
