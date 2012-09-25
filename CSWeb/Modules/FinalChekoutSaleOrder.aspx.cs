@@ -294,7 +294,11 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         }
         else if (dblCalculatedAmount > dbAmounttoBePaid)
         {
-            spErrorPay.InnerHtml = "Surplus Amount ( " + Math.Round((dblCalculatedAmount - dbAmounttoBePaid),2).ToString() + " )";
+            spErrorPay.InnerHtml = "Surplus Amount ( " + Math.Round((dblCalculatedAmount - dbAmounttoBePaid), 2).ToString() + " )";
+        }
+        else
+        {
+            spErrorPay.InnerHtml = "Ready for save data";
         }
 
     }

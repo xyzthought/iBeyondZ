@@ -115,6 +115,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtData.Columns.Add("SizeName", typeof(string));
         dtData.Columns.Add("Quantity", typeof(decimal));
         dtData.Columns.Add("Unit", typeof(decimal));
+        dtData.Columns.Add("PDiscount", typeof(decimal));
         dtData.Columns.Add("Price", typeof(decimal));
         dtData.PrimaryKey = new DataColumn[] { dtData.Columns["ProductID"] };
         return dtData;
@@ -163,6 +164,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             SaleBLL objSBLL = new SaleBLL();
             List<Sale> objSale = objSBLL.GetProductDetailByBarCode(txtProductBarCode.Text.Trim());
+            RepopulateDataTableWithDiscountPrice();
             if (null != objSale && objSale.Count>0)
             {
                 DataRow dtRow = dtProductDetail.NewRow();
@@ -172,6 +174,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 dtRow["SizeName"] = objSale[0].SizeName;
                 dtRow["Quantity"] =Convert.ToDecimal(txtQuantity.Text.Trim());
                 dtRow["Unit"] = objSale[0].Price;
+                dtRow["PDiscount"] = 0;
                 dtRow["Price"] = objSale[0].Price * Convert.ToDecimal(txtQuantity.Text.Trim());
                 dtProductDetail.Rows.Add(dtRow);
             }
@@ -187,6 +190,28 @@ public partial class Modules_AddEditSaleOrder : PageBase
         catch (Exception ex)
         {
             SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+
+    private void RepopulateDataTableWithDiscountPrice()
+    {
+        if (gvGrid.Rows.Count > 0)
+        {
+            for (int i = 0; i < gvGrid.Rows.Count; i++)
+            {
+                TextBox txtPDiscount=(TextBox) gvGrid.Rows[i].Cells[6].FindControl("txtPDiscount");
+                dtProductDetail.Rows[i]["PDiscount"] = (string.IsNullOrEmpty(txtPDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtPDiscount.Text.Trim()));
+
+                if (!string.IsNullOrEmpty(txtPDiscount.Text))
+                {
+                    dtProductDetail.Rows[i]["Price"] = (Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) - Convert.ToDecimal(txtPDiscount.Text);
+                }
+                else
+                {
+                    dtProductDetail.Rows[i]["Price"] = (Convert.ToDecimal(gvGrid.Rows[i].Cells[5].Text) * Convert.ToDecimal(gvGrid.Rows[i].Cells[4].Text));
+                }
+                dtProductDetail.AcceptChanges();
+            }
         }
     }
 
@@ -301,6 +326,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
     {
         if (null != dtProductDetail && dtProductDetail.Rows.Count > 0)
         {
+            RepopulateDataTableWithDiscountPrice();
             Session["Discount"] = txtDiscount.Text.Trim();
             Session["dtProductDetail"] = dtProductDetail;
             param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "="+SaleID;
