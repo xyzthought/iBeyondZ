@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Globalization;
+using System.Threading;
 
 /// <summary>
 /// Summary description for PageBase
@@ -31,4 +33,18 @@ public class PageBase : System.Web.UI.Page
         }
 
     }
+
+    protected override void InitializeCulture()
+    {
+        var culture = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+        culture.NumberFormat.CurrencySymbol = string.Empty;
+        culture.NumberFormat.NumberDecimalDigits = 2;
+        culture.NumberFormat.NumberDecimalSeparator = ".";
+        culture.NumberFormat.NumberGroupSeparator = ",";
+        Thread.CurrentThread.CurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+
+        base.InitializeCulture();
+    }
+
 }

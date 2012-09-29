@@ -283,9 +283,9 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
     {
         double dbAmounttoBePaid = Math.Round(Convert.ToDouble(lblTotalPay.Text.Trim()), 2);
         double dblCalculatedAmount = 0;
-        double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim().Replace(".",",")), 2));
-        double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim().Replace(".", ",")), 2));
-        double dblCash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtCash.Text.Trim().Replace(".", ",")), 2));
+        double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim()), 2));
+        double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim()), 2));
+        double dblCash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtCash.Text.Trim()), 2));
 
          dblCalculatedAmount = dblCredit + dblBank + dblCash;
         if (dblCalculatedAmount < dbAmounttoBePaid)
@@ -299,7 +299,28 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         else
         {
             spErrorPay.InnerHtml = "Ready for save data";
+            SaveData();
         }
 
+    }
+
+    private void SaveData()
+    {
+        /*
+         * SaleID
+CustomerID
+PaymentModeID
+CCAmount
+BankAmount
+Cash
+SaleDate
+StandardRebate
+Discount
+SaleMadeBy
+         */
+        Sale objSale = new Sale();
+        objSale.SaleID = SaleID;
+        objSale.CustomerID =Convert.ToInt32(Customerid.Value.ToString());
+           
     }
 }

@@ -16,13 +16,59 @@ namespace BLL.BusinessObject
         private decimal mdblPrice;
         private decimal mdblStandardRebate;
         private decimal mdblDiscount;
-        private string mstrSaleMadeBy;
+       
+        private int mintCustomerID;
+        private int mintPaymentModeID;
+        private decimal mdblCCAmount;
+        private decimal mdblBankAmount;
+        private decimal mdblCash;
+        private int mintSaleMadeBy;
+
+        private int mintProductID;
+        private string mstrBarCode;
+        private string mstrProductName;
+        private string mstrSizeName;
+        private decimal mdblQuantity;
 
         public long SaleID
         {
             get { return mlngSaleID; }
             set { mlngSaleID = value; }
         }
+        public int CustomerID
+        {
+            get { return mintCustomerID; }
+            set { mintCustomerID = value; }
+        }
+        public int PaymentModeID
+        {
+            get { return mintPaymentModeID; }
+            set { mintPaymentModeID = value; }
+        }
+        public decimal CCAmount
+        {
+            get { return mdblCCAmount; }
+            set { mdblCCAmount = value; }
+        }
+        public decimal BankAmount
+        {
+            get { return mdblBankAmount; }
+            set { mdblBankAmount = value; }
+        }
+        public decimal Cash
+        {
+            get { return mdblCash; }
+            set { mdblCash = value; }
+        }
+       
+        public int SaleMadeBy
+        {
+            get { return mintSaleMadeBy; }
+            set { mintSaleMadeBy = value; }
+        }
+
+
+       
         public string SaleOrder
         {
             get { return mstrSaleOrder; }
@@ -63,19 +109,11 @@ namespace BLL.BusinessObject
             get { return mdblDiscount; }
             set { mdblDiscount = value; }
         }
-        public string SaleMadeBy
-        {
-            get { return mstrSaleMadeBy; }
-            set { mstrSaleMadeBy = value; }
-        }
+        
 
       
 
-        private int mintProductID;
-        private string mstrBarCode;
-        private string mstrProductName;
-        private string mstrSizeName;
-        private decimal mdblQuantity;
+        
 
         public int ProductID
         {

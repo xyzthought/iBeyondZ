@@ -100,24 +100,24 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Amount">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblAmount" runat="server" Text='<%# String.Format("{0:C}", Eval("Price")) %>'
-                                            ToolTip='<%# String.Format("{0:C}", Eval("Price")) %>'></asp:Label>
+                                        <asp:Label ID="lblAmount" runat="server" Text='<%# String.Format("{0:0.00}", Eval("Price")) %>'
+                                            ToolTip='<%# String.Format("{0:0.00}", Eval("Price")) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Standard Rebate">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblStandardRebate" runat="server" Text='<%# String.Format("{0:C}", Eval("StandardRebate")) %>'
-                                            ToolTip='<%# String.Format("{0:C}", Eval("StandardRebate")) %>'></asp:Label>
+                                        <asp:Label ID="lblStandardRebate" runat="server" Text='<%# String.Format("{0:0.00}", Eval("StandardRebate")) %>'
+                                            ToolTip='<%# String.Format("{0:0.00}", Eval("StandardRebate")) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Discount">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblDiscount" runat="server" Text='<%# String.Format("{0:C}", Eval("Discount")) %>'
-                                            ToolTip='<%# String.Format("{0:C}", Eval("Discount")) %>'></asp:Label>
+                                        <asp:Label ID="lblDiscount" runat="server" Text='<%# String.Format("{0:0.00}", Eval("Discount")) %>'
+                                            ToolTip='<%# String.Format("{0:0.00}", Eval("Discount")) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />

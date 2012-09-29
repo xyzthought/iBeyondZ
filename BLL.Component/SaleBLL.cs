@@ -30,5 +30,10 @@ namespace BLL.Component
         {
             return objDB.GetAllCustomerNameForAutoComplete();
         }
+
+        public DataTable PopulateAutoCompleteProductInformation()
+        {
+            return objDB.PopulateAutoCompleteProductInformation();
+        }
     }
 }

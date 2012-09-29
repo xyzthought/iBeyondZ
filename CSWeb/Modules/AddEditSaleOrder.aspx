@@ -72,18 +72,26 @@
                                             <div id="MidM2">
                                                 <fieldset class="fieldAddEdit">
                                                     <div class="inner">
+                                                        <asp:HiddenField ID="hdnByBarCode" runat="server" ClientIDMode="Static" />
+                                                        <asp:HiddenField ID="hdnByProductName" runat="server" ClientIDMode="Static" />
                                                         <div class="mandet">
                                                             <span id="lblMessage">* Fields are mandatory</span></div>
                                                         <div class="errorMsg">
                                                             <span id="lblError" runat="server"></span>
                                                         </div>
+                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;padding-bottom: 6px;">
+                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection" value="Bar Code" checked="checked" onchange="ChangeMe(1)" />&nbsp;Bar Code<input type="radio" id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product Name
+                                                        </div>
                                                         <div>
-                                                            Product Bar Code :<span class="mandet2">* </span>
+                                                            Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
                                                         </div>
                                                         <div class="alt">
-                                                            <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred"></asp:TextBox>
+                                                            <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                                 Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
+                                                            <p id="Product-description">
+                                                            </p>
                                                         </div>
                                                         <div style="float: left">
                                                             <div>
@@ -171,7 +179,7 @@
                                             EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
                                             OnRowEditing="gvGrid_RowEditing" OnRowDeleting="gvGrid_RowDeleting">
                                             <Columns>
-                                            <asp:TemplateField HeaderText="ProductID" Visible="false">
+                                                <asp:TemplateField HeaderText="ProductID" Visible="false">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblProductID" runat="server" Text='<%# Eval("ProductID") %>'></asp:Label>
                                                     </ItemTemplate>
@@ -208,24 +216,25 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Unit">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblUnit" runat="server" Text='<%# String.Format("{0:C}",Eval("Unit")) %>'
-                                                            ToolTip='<%# String.Format("{0:C}",Eval("Unit")) %>'></asp:Label>
+                                                        <asp:Label ID="lblUnit" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Unit")) %>'
+                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("Unit")) %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Discount">
+                                                <asp:TemplateField HeaderText="Discount(%)">
                                                     <ItemTemplate>
-                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred" Style="width: 100px!important;
-                                                            text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
+                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred" MaxLength="2"
+                                                            Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
+                                                            onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Price">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}",Eval("Price")) %>'
-                                                            ToolTip='<%# String.Format("{0:C}",Eval("Price")) %>'></asp:Label>
+                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Price")) %>'
+                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("Price")) %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -266,3 +275,93 @@
     </form>
 </body>
 </html>
+
+<style>
+    #project-label
+    {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+    #project-icon
+    {
+        float: left;
+        height: 32px;
+        width: 32px;
+    }
+    #Product-description
+    {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .ui-autocomplete
+    {
+        max-height: 200px;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden; /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+    /* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+    * html .ui-autocomplete
+    {
+        height: 200px;
+    }
+</style>
+<script type="text/javascript">
+
+    function ChangeMe(callfrom) {
+        Populate(callfrom);
+    }
+
+
+    $(function () {
+        Populate(1);
+    });
+
+    function Populate(callfrom) {
+        var projects = [];
+        var MyKeys = ["value", "label", "desc"];
+
+        if (callfrom=="1")
+            dimArrayValue = $("#hdnByBarCode").val();
+        else if (callfrom == "2")
+            dimArrayValue = $("#hdnByProductName").val();
+
+        var DataArr = dimArrayValue.split("@@");
+
+        for (i = 0; i < DataArr.length; i++) {
+            var DataArr2 = DataArr[i].split("##");
+            var obj = {};
+            for (j = 0; j < DataArr2.length; j++) {
+                obj[MyKeys[j]] = DataArr2[j];
+            }
+            projects.push(obj);
+        }
+
+
+        $("#txtProductBarCode").autocomplete({
+            minLength: 0,
+            source: projects,
+            focus: function (event, ui) {
+                $("#txtProductBarCode").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui) {
+                $("#txtProductBarCode").val(ui.item.label);
+                $("#Productid").val(ui.item.value);
+                $("#Product-description").html(ui.item.desc);
+
+                return false;
+            }
+        })
+		.data("autocomplete")._renderItem = function (ul, item) {
+		    return $("<li></li>")
+				.data("item.autocomplete", item)
+				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
+				.appendTo(ul);
+		};
+    }
+</script>

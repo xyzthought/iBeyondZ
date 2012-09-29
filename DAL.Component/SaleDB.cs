@@ -103,7 +103,7 @@ namespace DAL.Component
                 }
                 if (FieldExists(drData, "SaleMadeBy") && drData["SaleMadeBy"] != DBNull.Value)
                 {
-                    objData.SaleMadeBy = Convert.ToString(drData["SaleMadeBy"]);
+                    objData.SaleMadeBy = Convert.ToInt32(drData["SaleMadeBy"]);
 
                 }
             }
@@ -206,6 +206,28 @@ namespace DAL.Component
                 {
                     connection.Open();
                     DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetAllCustomerNameForAutoComplete");
+                    DataSet dsData = dBase.ExecuteDataSet(objCmd);
+                    dtData = dsData.Tables[0];
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+
+            return dtData;
+        }
+
+        public DataTable PopulateAutoCompleteProductInformation()
+        {
+            DataTable dtData = new DataTable();
+            try
+            {
+                using (DbConnection connection = dBase.CreateConnection())
+                {
+                    connection.Open();
+                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoComplete");
                     DataSet dsData = dBase.ExecuteDataSet(objCmd);
                     dtData = dsData.Tables[0];
                     connection.Close();

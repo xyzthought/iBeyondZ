@@ -69,38 +69,71 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+        try
         {
-            if (null == Session["dtProductDetail"])
+            if (!Page.IsPostBack)
             {
-                dtProductDetail = CreateTableStructure();
-            }
-            else
-            {
-                dtProductDetail = (DataTable)Session["dtProductDetail"];
-                PopulateProductDetail();
-                txtDiscount.Text = Session["Discount"].ToString();
-                CalculateTotalPrice();
-            }
-            string strQuery = Request.QueryString["q"];
-            if(!string.IsNullOrEmpty(strQuery))
-            {
-                Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
-                SelectedMode = objQuery["MODE"].ToString();
-                SaleID = Convert.ToInt32(objQuery["ID"].ToString());
-                if (Constants.MODE == Constants.MODE_EDIT)
+                PopulateAutoCompleteProductInformation();
+                if (null == Session["dtProductDetail"])
                 {
-                    PopulateSaleDetail();
-                    lblHeader.Text = "EDIT | Sale Order";
+                    dtProductDetail = CreateTableStructure();
                 }
                 else
                 {
-                    lblHeader.Text = "ADD | Sale Order";
+                    dtProductDetail = (DataTable)Session["dtProductDetail"];
+                    PopulateProductDetail();
+                    txtDiscount.Text = Session["Discount"].ToString();
+                    CalculateTotalPrice();
+                }
+                string strQuery = Request.QueryString["q"];
+                if (!string.IsNullOrEmpty(strQuery))
+                {
+                    Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
+                    SelectedMode = objQuery["MODE"].ToString();
+                    SaleID = Convert.ToInt32(objQuery["ID"].ToString());
+                    if (Constants.MODE == Constants.MODE_EDIT)
+                    {
+                        PopulateSaleDetail();
+                        lblHeader.Text = "EDIT | Sale Order";
+                    }
+                    else
+                    {
+                        lblHeader.Text = "ADD | Sale Order";
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Sale.aspx", false);
                 }
             }
-            else
+        }
+        catch (Exception ex)
+        {
+          SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+
+    private void PopulateAutoCompleteProductInformation()
+    {
+        SaleBLL objSaleBLL = new SaleBLL();
+        DataTable dtData = objSaleBLL.PopulateAutoCompleteProductInformation();
+        if (null != dtData && dtData.Rows.Count > 0)
+        {
+            hdnByBarCode.Value = "";
+            hdnByProductName.Value = "";
+            for (int i = 0; i < dtData.Rows.Count; i++)
             {
-                Response.Redirect("Sale.aspx",false);
+                hdnByBarCode.Value += dtData.Rows[i]["ProductID"].ToString() + "##" + dtData.Rows[i]["BarCode"].ToString() + "##" + dtData.Rows[i]["ProductName"].ToString() + "@@";
+                hdnByProductName.Value += dtData.Rows[i]["ProductID"].ToString() + "##" + dtData.Rows[i]["ProductName"].ToString() + "##" + dtData.Rows[i]["BarCode"].ToString() + "@@";
+            }
+            if (hdnByBarCode.Value.Length > 0)
+            {
+                hdnByBarCode.Value = hdnByBarCode.Value.Substring(0, hdnByBarCode.Value.Length - 2);
+            }
+
+            if (hdnByProductName.Value.Length > 0)
+            {
+                hdnByProductName.Value = hdnByProductName.Value.Substring(0, hdnByProductName.Value.Length - 2);
             }
         }
     }
@@ -201,10 +234,10 @@ public partial class Modules_AddEditSaleOrder : PageBase
             {
                 TextBox txtPDiscount=(TextBox) gvGrid.Rows[i].Cells[6].FindControl("txtPDiscount");
                 dtProductDetail.Rows[i]["PDiscount"] = (string.IsNullOrEmpty(txtPDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtPDiscount.Text.Trim()));
-
+                decimal dblPrice = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
                 if (!string.IsNullOrEmpty(txtPDiscount.Text))
                 {
-                    dtProductDetail.Rows[i]["Price"] = (Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) - Convert.ToDecimal(txtPDiscount.Text);
+                    dtProductDetail.Rows[i]["Price"] = dblPrice -(dblPrice* Convert.ToDecimal(txtPDiscount.Text.Trim())/100);
                 }
                 else
                 {

@@ -74,7 +74,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Price" SortExpression="Price">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:C}", Eval("Price")) %>'
+                                                        <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:0.00}", Eval("Price")) %>'
                                                             ToolTip='<%# Eval("Price") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
@@ -134,7 +134,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Price" SortExpression="Price">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:C}", Eval("Price")) %>'
+                                                        <asp:Label ID="lblPrice" runat="server" Text='<%#String.Format("{0:0.00}", Eval("Price")) %>'
                                                             ToolTip='<%# Eval("Price") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />

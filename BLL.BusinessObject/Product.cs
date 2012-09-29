@@ -47,7 +47,8 @@ namespace BLL.BusinessObject
         public bool IsActive { get { return mblnIsActive; } set { mblnIsActive = value; } }
         private bool mblnIsDeleted;
         public bool IsDeleted { get { return mblnIsDeleted; } set { mblnIsDeleted = value; } }
-
+        private int mintBrandID;
+        public int BrandID { get { return mintBrandID; } set { mintBrandID = value; } }
 
     }
 }

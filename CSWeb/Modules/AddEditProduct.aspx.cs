@@ -18,6 +18,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             PopulateManufacturer();
             PopulateSize();
             PopulateCategory();
+            PopulateBrand();
             if (Request.QueryString["ProductID"] != null)
             {
                 LoadData(int.Parse(Request.QueryString["ProductID"]));
@@ -25,6 +26,28 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
 
             BindSizeMasterGrid();
             BindCategory();
+            BindBrand();
+        }
+    }
+
+
+
+    private void PopulateBrand()
+    {
+        try
+        {
+            List<Brand> lstBrand = new BrandBLL().GetBrand();
+            cmbBrand.DataSource = lstBrand;
+            cmbBrand.DataValueField = "BrandID";
+            cmbBrand.DataTextField = "BrandName";
+            cmbBrand.DataBind();
+            cmbBrand.Items.Insert(0, new ListItem("--Select--"));
+            cmbBrand.SelectedIndex = 0;
+        }
+        catch (Exception ex)
+        {
+
+            throw ex;
         }
     }
 
@@ -142,10 +165,11 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             objProduct.ProductName = txtProductName.Text.Trim();
             objProduct.Description = txtDescription.Text.Trim();
             objProduct.ManufacturerID = int.Parse(cmbManufacturer.SelectedValue);
+            objProduct.BrandID = int.Parse(cmbBrand.SelectedValue);
             objProduct.CategoryID = int.Parse(cmbCategory.SelectedValue);
             objProduct.SizeID = GetSizeIDs();// chkSize.SelectedValue == "" ? 0 : int.Parse(chkSize.SelectedValue);
             objProduct.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
-            objProduct.Tax = Convert.ToDecimal(txtTax.Text);
+            objProduct.Tax = txtTax.Text == "" ? 0 : Convert.ToDecimal(txtTax.Text);
             objProduct.Margin = Convert.ToDecimal(txtMargin.Text);
             objProduct.SellingPrice = Convert.ToDecimal(txtSellingPrice.Text);
             objProduct.BarCode = txtBarcode.Text.Trim();
@@ -205,7 +229,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 txtDescription.Text = objProduct.Description;
                 cmbManufacturer.SelectedValue = objProduct.ManufacturerID.ToString();
                 cmbCategory.SelectedValue = objProduct.CategoryID.ToString();
-
+                cmbBrand.SelectedValue = objProduct.BrandID.ToString();
                 string[] strVals = objProduct.SizeID.Split(',');
                 for (int i = 0; i < strVals.Length; i++)
                 {
@@ -350,6 +374,14 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         grvCategory.DataSource = lstCategory;
         grvCategory.DataBind();
     }
+
+    private void BindBrand()
+    {
+        List<Brand> lstBrand = new BrandBLL().GetBrand();
+        grvBrand.DataSource = lstBrand;
+        grvBrand.DataBind();
+    }
+
     protected void grvCategory_RowEditing(object sender, GridViewEditEventArgs e)
     {
         grvCategory.EditIndex = e.NewEditIndex;
@@ -449,5 +481,99 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     protected void lnkCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("Product.aspx");
+    }
+    protected void grvBrand_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        grvBrand.EditIndex = e.NewEditIndex;
+        BindBrand();
+    }
+    protected void grvBrand_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        grvBrand.EditIndex = -1;
+        BindBrand();
+    }
+    protected void grvBrand_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+    }
+    protected void grvBrand_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        try
+        {
+            int BrandID = 0;
+            string BrandName = string.Empty;
+            if (e.CommandName.Equals("Add"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
+
+                txtControl = ((TextBox)grvBrand.FooterRow.FindControl("txtBrand"));
+                if (txtControl.Text != null)
+                {
+                    BrandName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.BrandBLL().AddEditBrand(-1, BrandName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Brand with same name already exists');", true);
+                }
+                BindBrand();
+                PopulateBrand();
+            }
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+    protected void grvBrand_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int BrandID = Convert.ToInt32(grvBrand.DataKeys[e.RowIndex].Values[0].ToString());
+
+        new BLL.Component.BrandBLL().DeleteBrand(BrandID);
+
+
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Record deleted successfully');", true);
+
+        BindBrand();
+        PopulateBrand();
+    }
+    protected void grvBrand_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            int BrandID = 0;
+            string BrandName = string.Empty;
+            TextBox txtControl;
+
+            txtControl = ((TextBox)grvBrand.Rows[e.RowIndex].FindControl("txtBrandIDE"));
+            if (txtControl.Text != null)
+            {
+                BrandID = Convert.ToInt32(txtControl.Text.Trim());
+            }
+
+            txtControl = ((TextBox)grvBrand.Rows[e.RowIndex].FindControl("txtBrandE"));
+            if (txtControl != null)
+            {
+                BrandName = txtControl.Text.Trim();
+
+            }
+
+            int mintReturn = new BLL.Component.BrandBLL().AddEditBrand(BrandID, BrandName);
+            if (mintReturn == -1)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Brand with same name already exists.');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Updated successfully');", true);
+        grvBrand.EditIndex = -1;
+        BindBrand();
+        PopulateBrand();
     }
 }

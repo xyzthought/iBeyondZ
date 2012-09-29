@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrandDB.cs" />
     <Compile Include="CategoryDB.cs" />
     <Compile Include="CustomerDB.cs" />
     <Compile Include="ManufacturerDB.cs" />
