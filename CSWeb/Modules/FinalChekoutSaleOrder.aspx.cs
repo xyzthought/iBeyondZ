@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 using System.Data;
+using System.Activities.Statements;
 
 
 public partial class Modules_FinalChekoutSaleOrder : PageBase
@@ -69,64 +70,78 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+        try
         {
-            if (null != Session["dtProductDetail"])
+            if (!Page.IsPostBack)
             {
-                PopulateCustomer();
-                dtProductDetail = (DataTable)Session["dtProductDetail"];
-                string strQuery = Request.QueryString["q"];
-                if (!string.IsNullOrEmpty(strQuery))
+                if (null != Session["dtProductDetail"])
                 {
-                    Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
-                    SelectedMode = objQuery["MODE"].ToString();
-                    SaleID = Convert.ToInt32(objQuery["ID"].ToString());
-                    lblHeader.Text = "Final Checkout | Sale Order";
-                    PopulateProductDetail();
-                    if (!string.IsNullOrEmpty(Session["Discount"].ToString()))
+                    PopulateCustomer();
+                    dtProductDetail = (DataTable)Session["dtProductDetail"];
+                    string strQuery = Request.QueryString["q"];
+                    if (!string.IsNullOrEmpty(strQuery))
                     {
-                        txtDiscount.Text = Session["Discount"].ToString();
+                        Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
+                        SelectedMode = objQuery["MODE"].ToString();
+                        SaleID = Convert.ToInt32(objQuery["ID"].ToString());
+                        lblHeader.Text = "Final Checkout | Sale Order";
+                        PopulateProductDetail();
+                        if (!string.IsNullOrEmpty(Session["Discount"].ToString()))
+                        {
+                            txtDiscount.Text = Session["Discount"].ToString();
+                        }
+                        else
+                        {
+                            txtDiscount.Text = "0.00";
+                        }
+
+                        CalculateTotalPrice();
                     }
                     else
                     {
-                        txtDiscount.Text = "0.00";
+                        Response.Redirect("Sale.aspx", false);
                     }
-                    
-                    CalculateTotalPrice();
-                }
-                else
-                {
-                    Response.Redirect("Sale.aspx", false);
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
     private void PopulateCustomer()
     {
-        SaleBLL objSaleBLL = new SaleBLL();
-        DataTable dtData = objSaleBLL.GetAllCustomerNameForAutoComplete();
-        if (null != dtData && dtData.Rows.Count > 0)
+        try
         {
-            hdnCustData.Value="";
-            for (int i = 0; i < dtData.Rows.Count; i++)
+            SaleBLL objSaleBLL = new SaleBLL();
+            DataTable dtData = objSaleBLL.GetAllCustomerNameForAutoComplete();
+            if (null != dtData && dtData.Rows.Count > 0)
             {
-                hdnCustData.Value+=dtData.Rows[i]["CustomerID"].ToString()+"##"+dtData.Rows[i]["CustomerName"].ToString()+"##"+dtData.Rows[i]["Address"].ToString()+"@@";
+                hdnCustData.Value = "";
+                for (int i = 0; i < dtData.Rows.Count; i++)
+                {
+                    hdnCustData.Value += dtData.Rows[i]["CustomerID"].ToString() + "##" + dtData.Rows[i]["CustomerName"].ToString() + "##" + dtData.Rows[i]["Address"].ToString() + "@@";
+                }
+                if (hdnCustData.Value.Length > 0)
+                {
+                    hdnCustData.Value = hdnCustData.Value.Substring(0, hdnCustData.Value.Length - 2);
+                }
             }
-            if (hdnCustData.Value.Length > 0)
-            {
-                hdnCustData.Value = hdnCustData.Value.Substring(0, hdnCustData.Value.Length - 2);
-            }
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
-   
+
 
     #region Populate Sale Detail
     private void PopulateSaleDetail()
     {
         throw new NotImplementedException();
-    } 
+    }
     #endregion
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
@@ -136,27 +151,34 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
 
     private void CalculateTotalPrice()
     {
-        decimal dblTotalPrice = 0;
-        decimal dblDiscounted = 0;
-        if (null != dtProductDetail)
+        try
         {
-            for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+            decimal dblTotalPrice = 0;
+            decimal dblDiscounted = 0;
+            if (null != dtProductDetail)
             {
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
-            }
+                for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+                {
+                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                }
 
-            dblDiscounted = dblTotalPrice;
-            if(!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
-            {
-                dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
-            }
+                dblDiscounted = dblTotalPrice;
+                if (!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
+                {
+                    dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
+                }
 
-            lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice);// String.Format("{0:C}", dblTotalPrice);
-            lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
+                lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice);// String.Format("{0:C}", dblTotalPrice);
+                lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
+            }
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
-    
+
 
     private void PopulateProductDetail()
     {
@@ -168,9 +190,9 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
     }
 
     #region GRID VIEW EVENTS
-   
 
-    
+
+
     protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -231,11 +253,11 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         }
     }
 
-   
+
 
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        
+
         PopulateProductDetail();
         CalculateTotalPrice();
     }
@@ -281,46 +303,92 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
     }
     protected void lnkFinalCheckout_Click(object sender, EventArgs e)
     {
-        double dbAmounttoBePaid = Math.Round(Convert.ToDouble(lblTotalPay.Text.Trim()), 2);
-        double dblCalculatedAmount = 0;
-        double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim()), 2));
-        double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim()), 2));
-        double dblCash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtCash.Text.Trim()), 2));
+        try
+        {
+            double dbAmounttoBePaid = Math.Round(Convert.ToDouble(lblTotalPay.Text.Trim()), 2);
+            double dblCalculatedAmount = 0;
+            double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim()), 2));
+            double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim()), 2));
+            double dblCash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtCash.Text.Trim()), 2));
 
-         dblCalculatedAmount = dblCredit + dblBank + dblCash;
-        if (dblCalculatedAmount < dbAmounttoBePaid)
-        {
-            spErrorPay.InnerHtml = "Deficit Amount ( "+ Math.Round((dbAmounttoBePaid-dblCalculatedAmount),2).ToString()+" )";
+            dblCalculatedAmount = dblCredit + dblBank + dblCash;
+            if (dblCalculatedAmount < dbAmounttoBePaid)
+            {
+                spErrorPay.InnerHtml = "Deficit Amount ( " + Math.Round((dbAmounttoBePaid - dblCalculatedAmount), 2).ToString() + " )";
+            }
+            else if (dblCalculatedAmount > dbAmounttoBePaid)
+            {
+                spErrorPay.InnerHtml = "Surplus Amount ( " + Math.Round((dblCalculatedAmount - dbAmounttoBePaid), 2).ToString() + " )";
+            }
+            else
+            {
+                spErrorPay.InnerHtml = "Ready for save data";
+                SaveData();
+                Session["dtProductDetail"] = null;
+                Session["Discount"] = null;
+                Response.Redirect("AddEditSaleOrder.aspx",false);
+
+            }
         }
-        else if (dblCalculatedAmount > dbAmounttoBePaid)
+        catch (Exception ex)
         {
-            spErrorPay.InnerHtml = "Surplus Amount ( " + Math.Round((dblCalculatedAmount - dbAmounttoBePaid), 2).ToString() + " )";
-        }
-        else
-        {
-            spErrorPay.InnerHtml = "Ready for save data";
-            SaveData();
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
 
     }
 
+    protected string ShowValue(string strUnit, string Qnty, string Tax)
+    {
+        string strCalTax = string.Empty;
+        strCalTax = string.Format("{0:0.00}", (Convert.ToDecimal(strUnit) * Convert.ToDecimal(Qnty)) * Convert.ToDecimal(Tax) / 100);
+
+        return strCalTax;
+    }
+
     private void SaveData()
     {
-        /*
-         * SaleID
-CustomerID
-PaymentModeID
-CCAmount
-BankAmount
-Cash
-SaleDate
-StandardRebate
-Discount
-SaleMadeBy
-         */
-        Sale objSale = new Sale();
-        objSale.SaleID = SaleID;
-        objSale.CustomerID =Convert.ToInt32(Customerid.Value.ToString());
-           
+
+        try
+        {
+
+            Sale objSale = new Sale();
+            SaleBLL objSBLL = new SaleBLL();
+            objSale.SaleID = SaleID;
+            objSale.CustomerID = (string.IsNullOrEmpty(Customerid.Value.Trim()) ? 0 : Convert.ToInt32(Customerid.Value.Trim())); 
+            objSale.CFirstName = Customer.Text.Trim();
+            objSale.Address = txtAddress.Text.Trim();
+            objSale.City = txtCity.Text.Trim();
+            objSale.ZIP = txtZIP.Text.Trim();
+            objSale.Country = txtCountry.Text.Trim();
+            objSale.Email = txtEmailID.Text.Trim();
+            objSale.TeleNumber = txtPhone.Text.Trim();
+            objSale.CCAmount = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Convert.ToDecimal(txtAmountPaid.Text.Trim()));
+            objSale.BankAmount = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtBCash.Text.Trim()));
+            objSale.Cash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtCash.Text.Trim()));
+            objSale.Discount = (string.IsNullOrEmpty(txtDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtDiscount.Text.Trim()));
+            objSale.SaleMadeBy = ((User)Session["UserData"]).UserID;
+
+
+            Message objMessage = objSBLL.InsertUpdateSaleMaster(objSale);
+            if (objMessage.ReturnValue > 0)
+            {
+                for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+                {
+                    objSale.SaleID = objMessage.ReturnValue;
+                    objSale.ProductID = Convert.ToInt32(dtProductDetail.Rows[i]["ProductID"].ToString());
+                    objSale.SizeID = Convert.ToInt32(dtProductDetail.Rows[i]["SizeID"].ToString());
+                    objSale.Quantity = Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
+                    objSale.Discount = Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString());
+                    objSale.Price = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+
+                    objMessage = objSBLL.InsertUpdateSaleDetail(objSale);
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace BLL.BusinessObject
         private DateTime mdtSaleDate;
         private string mstrPaymentMode;
         private decimal mdblPrice;
+        private decimal mdblUnitPrice;
+        private decimal mdblTax;
         private decimal mdblStandardRebate;
         private decimal mdblDiscount;
        
@@ -23,12 +25,78 @@ namespace BLL.BusinessObject
         private decimal mdblBankAmount;
         private decimal mdblCash;
         private int mintSaleMadeBy;
+        private string mstrSaleMadeByName;
 
         private int mintProductID;
+        private int mintSizeID;
         private string mstrBarCode;
         private string mstrProductName;
         private string mstrSizeName;
         private decimal mdblQuantity;
+
+        private string mstrCFirstName;
+        private string mstrCLastName;
+        private string mstrAddress;
+        private string mstrCity;
+        private string mstrZIP;
+        private string mstrCountry;
+        private string mstrTeleNumber;
+        private string mstrEmail;
+        private DateTime mdtCreatedOn;
+        private int mintCreatedBy;
+
+       
+        public string CFirstName
+        {
+            get { return mstrCFirstName; }
+            set { mstrCFirstName = value; }
+        }
+        public string CLastName
+        {
+            get { return mstrCLastName; }
+            set { mstrCLastName = value; }
+        }
+        public string Address
+        {
+            get { return mstrAddress; }
+            set { mstrAddress = value; }
+        }
+        public string City
+        {
+            get { return mstrCity; }
+            set { mstrCity = value; }
+        }
+        public string ZIP
+        {
+            get { return mstrZIP; }
+            set { mstrZIP = value; }
+        }
+        public string Country
+        {
+            get { return mstrCountry; }
+            set { mstrCountry = value; }
+        }
+        public string TeleNumber
+        {
+            get { return mstrTeleNumber; }
+            set { mstrTeleNumber = value; }
+        }
+        public string Email
+        {
+            get { return mstrEmail; }
+            set { mstrEmail = value; }
+        }
+        public DateTime CreatedOn
+        {
+            get { return mdtCreatedOn; }
+            set { mdtCreatedOn = value; }
+        }
+        public int CreatedBy
+        {
+            get { return mintCreatedBy; }
+            set { mintCreatedBy = value; }
+        }
+
 
         public long SaleID
         {
@@ -60,14 +128,30 @@ namespace BLL.BusinessObject
             get { return mdblCash; }
             set { mdblCash = value; }
         }
+
+        public decimal Tax
+        {
+            get { return mdblTax; }
+            set { mdblTax = value; }
+        }
        
         public int SaleMadeBy
         {
             get { return mintSaleMadeBy; }
             set { mintSaleMadeBy = value; }
+        }
+        public string SaleMadeByName
+        {
+            get { return mstrSaleMadeByName; }
+            set { mstrSaleMadeByName = value; }
+        }
+
+
+        public int SizeID
+        {
+            get { return mintSizeID; }
+            set { mintSizeID = value; }
         }
-
-
        
         public string SaleOrder
         {
@@ -98,6 +182,12 @@ namespace BLL.BusinessObject
         {
             get { return mdblPrice; }
             set { mdblPrice = value; }
+        }
+
+        public decimal UnitPrice
+        {
+            get { return mdblUnitPrice; }
+            set { mdblUnitPrice = value; }
         }
         public decimal StandardRebate
         {

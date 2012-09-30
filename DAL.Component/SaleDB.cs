@@ -83,10 +83,8 @@ namespace DAL.Component
                 {
                     objData.SaleDate = Convert.ToDateTime(drData["SaleDate"]);
                 }
-                if (FieldExists(drData, "PaymentMode") && drData["PaymentMode"] != DBNull.Value)
-                {
-                    objData.PaymentMode = Convert.ToString(drData["PaymentMode"]);
-                }
+              
+               
                 if (FieldExists(drData, "Price") && drData["Price"] != DBNull.Value)
                 {
                     objData.Price = Convert.ToDecimal(drData["Price"]);
@@ -101,9 +99,9 @@ namespace DAL.Component
                     objData.Discount = Convert.ToDecimal(drData["Discount"]);
 
                 }
-                if (FieldExists(drData, "SaleMadeBy") && drData["SaleMadeBy"] != DBNull.Value)
+                if (FieldExists(drData, "SaleMadeByName") && drData["SaleMadeByName"] != DBNull.Value)
                 {
-                    objData.SaleMadeBy = Convert.ToInt32(drData["SaleMadeBy"]);
+                    objData.SaleMadeByName = Convert.ToString(drData["SaleMadeByName"]);
 
                 }
             }
@@ -129,17 +127,17 @@ namespace DAL.Component
             return (reader.GetSchemaTable().DefaultView.Count > 0);
         }
 
-        public List<Sale> GetProductDetailByBarCode(string vstrProductBarcode)
+        public List<Sale> GetProductDetailByBarCode(string vstrProductID)
         {
             List<Sale> lstobjData = new List<Sale>();
             try
             {
 
                 object[] mParams = {
-                                        new SqlParameter("@ProductBarcode", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@ProductID", SqlDbType.Int),                                              
                                 };
 
-                mParams[0] = vstrProductBarcode;
+                mParams[0] = Convert.ToInt32(vstrProductID);
 
                 using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode", mParams))
                 {
@@ -175,6 +173,10 @@ namespace DAL.Component
                 {
                     objData.ProductName = Convert.ToString(drData["ProductName"]);
                 }
+                if (FieldExists(drData, "SizeID") && drData["SizeID"] != DBNull.Value)
+                {
+                    objData.SizeID = Convert.ToInt32(drData["SizeID"]);
+                }
                 if (FieldExists(drData, "SizeName") && drData["SizeName"] != DBNull.Value)
                 {
                     objData.SizeName = Convert.ToString(drData["SizeName"]);
@@ -182,6 +184,14 @@ namespace DAL.Component
                 if (FieldExists(drData, "Quantity") && drData["Quantity"] != DBNull.Value)
                 {
                     objData.Quantity = Convert.ToDecimal(drData["Quantity"]);
+                }
+                if (FieldExists(drData, "UnitPrice") && drData["UnitPrice"] != DBNull.Value)
+                {
+                    objData.UnitPrice = Convert.ToDecimal(drData["UnitPrice"]);
+                }
+                if (FieldExists(drData, "Tax") && drData["Tax"] != DBNull.Value)
+                {
+                    objData.Tax = Convert.ToDecimal(drData["Tax"]);
                 }
                 if (FieldExists(drData, "Price") && drData["Price"] != DBNull.Value)
                 {
@@ -239,6 +249,70 @@ namespace DAL.Component
             }
 
             return dtData;
+        }
+
+        public Message InsertUpdateSaleMaster(Sale objSale)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleMaster");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
+                dBase.AddInParameter(objCmd, "@CustomerID", DbType.Int32, objSale.CustomerID);
+                dBase.AddInParameter(objCmd, "@CFirstName", DbType.String, objSale.CFirstName);
+                dBase.AddInParameter(objCmd, "@Address", DbType.String, objSale.Address);
+                dBase.AddInParameter(objCmd, "@City", DbType.String, objSale.City);
+                dBase.AddInParameter(objCmd, "@ZIP", DbType.String, objSale.ZIP);
+                dBase.AddInParameter(objCmd, "@Country", DbType.String, objSale.Country);
+                dBase.AddInParameter(objCmd, "@Email", DbType.String, objSale.Email);
+                dBase.AddInParameter(objCmd, "@TeleNumber", DbType.String, objSale.TeleNumber);
+
+                dBase.AddInParameter(objCmd, "@CCAmount", DbType.Decimal, objSale.CCAmount);
+                dBase.AddInParameter(objCmd, "@BankAmount", DbType.Decimal, objSale.BankAmount);
+                dBase.AddInParameter(objCmd, "@Cash", DbType.Decimal, objSale.Cash);
+                dBase.AddInParameter(objCmd, "@Discount", DbType.Decimal, objSale.Discount);
+                dBase.AddInParameter(objCmd, "@SaleMadeBy", DbType.Int32, objSale.SaleMadeBy);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
+
+        public Message InsertUpdateSaleDetail(Sale objSale)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleDetail");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
+                dBase.AddInParameter(objCmd, "@ProductID", DbType.Int32, objSale.ProductID);
+                dBase.AddInParameter(objCmd, "@SizeID", DbType.Int32, objSale.SizeID);
+                dBase.AddInParameter(objCmd, "@Quantity", DbType.Decimal, objSale.Quantity);
+                dBase.AddInParameter(objCmd, "@Discount", DbType.Decimal, objSale.Discount);
+                dBase.AddInParameter(objCmd, "@Price", DbType.Decimal, objSale.Price);
+                
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
         }
     }
 }

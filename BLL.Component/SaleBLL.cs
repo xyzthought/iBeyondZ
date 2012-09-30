@@ -35,5 +35,15 @@ namespace BLL.Component
         {
             return objDB.PopulateAutoCompleteProductInformation();
         }
+
+        public Message InsertUpdateSaleMaster(Sale objSale)
+        {
+            return objDB.InsertUpdateSaleMaster(objSale);
+        }
+
+        public Message InsertUpdateSaleDetail(Sale objSale)
+        {
+            return objDB.InsertUpdateSaleDetail(objSale);
+        }
     }
 }

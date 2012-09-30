@@ -11,27 +11,7 @@
 
         function CalculatePay() {
 
-            try {
-                var tp = $('#<%=lblTotalAmount.ClientID%>').html().replace(' ', '').replace('.', '').replace(',', '').replace(/\u20ac/g, '');
-                var dis = $("#txtDiscount").val();
-                if (dis != "" && tp != "") {
-                    DisVal = tp - dis;
-                    
-                    $('#<%=lblTotalPay.ClientID%>').html(DisVal);/*.formatCurrency({
-                        decimalSymbol: ',',
-                        digitGroupSymbol: '.',
-                        dropDecimals: false,
-                        groupDigits: true,
-                        region: 'fr-BE',
-                        colorize: true,
-                        symbol: '€ '*/
-                    });
 
-                    //$('#<%=lblTotalAmount.ClientID%>').formatCurrency({ colorize: true, region: 'fr-BE' });
-                }
-            } catch (e) {
-                alert(e);
-            }
         }
     </script>
 </head>
@@ -79,8 +59,12 @@
                                                         <div class="errorMsg">
                                                             <span id="lblError" runat="server"></span>
                                                         </div>
-                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;padding-bottom: 6px;">
-                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection" value="Bar Code" checked="checked" onchange="ChangeMe(1)" />&nbsp;Bar Code<input type="radio" id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product Name
+                                                        <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;
+                                                            padding-bottom: 6px;">
+                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection"
+                                                                value="Bar Code" checked="checked" onchange="ChangeMe(1)" />&nbsp;Bar Code<input
+                                                                    type="radio" id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
+                                                            Name
                                                         </div>
                                                         <div>
                                                             Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
@@ -89,7 +73,7 @@
                                                             <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                                 Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
+                                                            <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
                                                             <p id="Product-description">
                                                             </p>
                                                         </div>
@@ -98,8 +82,9 @@
                                                                 Quantity :<span class="mandet2">* </span>
                                                             </div>
                                                             <div class="alt" style="margin-bottom: 5px;">
-                                                                <asp:TextBox ID="txtQuantity" runat="server" MaxLength="4" CssClass="txtCred" Style="width: 100px!important;
-                                                                    text-align: right" onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);"></asp:TextBox>
+                                                                <asp:TextBox ID="txtQuantity" ClientIDMode="Static" runat="server" MaxLength="4"
+                                                                    CssClass="txtCred" Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,0,false);"
+                                                                    onblur="extractNumber(this,0,false);"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="ReqQuantity" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                                                     ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </div>
@@ -127,33 +112,39 @@
                                                             <span id="Span2" runat="server"></span>
                                                         </div>
                                                         <div>
-                                                            <div class="accpendNew" style="width: 49%; float: left">
+                                                            <div class="accpendNew">
                                                                 Payment Details</div>
-                                                            <div class="accpendNew" style="width: 46%; float: right">
-                                                                <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
-                                                                    <asp:LinkButton ID="lnkFinalChekout" runat="server" CausesValidation="False" OnClick="lnkFinalChekout_Click">Checkout</asp:LinkButton>
-                                                                </span>
+                                                        </div>
+                                                        <div style="clear: both">
+                                                        </div>
+                                                        <div>
+                                                            <div>
+                                                                <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
+                                                                    Total Amount</div>
+                                                                <div style="width: 100px; float: left;">
+                                                                    <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€</div>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width: 70px; float: left; padding-left: 5px; font-weight: bold">
+                                                                    Discount</div>
+                                                                <div style="width: 100px; float: left; display: ">
+                                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>
                                                         <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                            Total Amount</div>
-                                                        <div style="width: 100px; float: left;">
-                                                            <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred"></asp:Label></div>
-                                                        <div style="clear: both">
-                                                        </div>
-                                                        <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                            Discount</div>
-                                                        <div style="width: 100px; float: left;">
-                                                            <asp:TextBox ID="txtDiscount" runat="server" MaxLength="7" CssClass="txtCred" Style="width: 100px!important;
-                                                                text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
-                                                        </div>
-                                                        <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
                                                             Total Pay</div>
-                                                        <div style="width: 100px; float: right; margin-bottom: 22px">
-                                                            <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred"></asp:Label></div>
+                                                        <div style="width: 100px; float: left;">
+                                                            <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€
+                                                        </div>
                                                         <div style="clear: both">
+                                                        </div>
+                                                        <div style="float: right; margin-bottom: 19px;">
+                                                            <span class="btn5">
+                                                                <asp:LinkButton ID="lnkFinalChekout" runat="server" CausesValidation="False" OnClick="lnkFinalChekout_Click"><span class="AddCheckoutData"></span>Checkout</asp:LinkButton>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -211,33 +202,40 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Unit">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblUnit" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Unit")) %>'
                                                             ToolTip='<%# String.Format("{0:0.00}",Eval("Unit")) %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Discount(%)">
                                                     <ItemTemplate>
-                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred" MaxLength="2"
-                                                            Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
+                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred"
+                                                            MaxLength="2" Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
                                                             onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="VAT(21%)">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblVAT" runat="server" Text='<%# ShowValue(Eval("Unit").ToString(),Eval("Quantity").ToString(),Eval("Tax").ToString())%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Price">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Price")) %>'
                                                             ToolTip='<%# String.Format("{0:0.00}",Eval("Price")) %>'></asp:Label>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                    <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Action">
                                                     <ItemTemplate>
@@ -265,7 +263,6 @@
     </div>
     <div class="push">
     </div>
-    </div>
     <!--Body End-->
     <!--Footer Start-->
     <div>
@@ -275,7 +272,6 @@
     </form>
 </body>
 </html>
-
 <style>
     #project-label
     {
@@ -325,7 +321,7 @@
         var projects = [];
         var MyKeys = ["value", "label", "desc"];
 
-        if (callfrom=="1")
+        if (callfrom == "1")
             dimArrayValue = $("#hdnByBarCode").val();
         else if (callfrom == "2")
             dimArrayValue = $("#hdnByProductName").val();
@@ -353,7 +349,7 @@
                 $("#txtProductBarCode").val(ui.item.label);
                 $("#Productid").val(ui.item.value);
                 $("#Product-description").html(ui.item.desc);
-
+                $("#txtQuantity").val("1");
                 return false;
             }
         })

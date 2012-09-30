@@ -145,10 +145,12 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtData.Columns.Add("ProductID", typeof(int));
         dtData.Columns.Add("BarCode", typeof(string));
         dtData.Columns.Add("ProductName", typeof(string));
+        dtData.Columns.Add("SizeID", typeof(int));
         dtData.Columns.Add("SizeName", typeof(string));
         dtData.Columns.Add("Quantity", typeof(decimal));
         dtData.Columns.Add("Unit", typeof(decimal));
         dtData.Columns.Add("PDiscount", typeof(decimal));
+        dtData.Columns.Add("Tax", typeof(decimal));
         dtData.Columns.Add("Price", typeof(decimal));
         dtData.PrimaryKey = new DataColumn[] { dtData.Columns["ProductID"] };
         return dtData;
@@ -164,20 +166,28 @@ public partial class Modules_AddEditSaleOrder : PageBase
     #endregion
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
+        
         AddDataToDataTable();
         PopulateProductDetail();
         CalculateTotalPrice();
+        txtProductBarCode.Text = "";
+        txtQuantity.Text = "";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
     }
 
     private void CalculateTotalPrice()
     {
         decimal dblTotalPrice = 0;
         decimal dblDiscounted = 0;
+        decimal dblTotalDiscount = 0;
         if (null != dtProductDetail)
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
             {
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                decimal decDiscount= (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString())*Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
+                decDiscount = decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) /100);
+                dblTotalDiscount += decDiscount;
+                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString())+ decDiscount;
             }
 
             dblDiscounted = dblTotalPrice;
@@ -187,7 +197,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
             }
 
             lblTotalAmount.Text =Math.Round(dblTotalPrice,2).ToString();// String.Format("{0:C}", dblTotalPrice);
-            lblTotalPay.Text = Math.Round(dblDiscounted,2).ToString();// String.Format("{0:C}", dblDiscounted);
+            txtDiscount.Text = Math.Round(dblTotalDiscount, 2).ToString();
+            lblTotalPay.Text = Math.Round((dblTotalPrice-dblTotalDiscount), 2).ToString();// String.Format("{0:C}", dblDiscounted);
         }
     }
 
@@ -196,34 +207,47 @@ public partial class Modules_AddEditSaleOrder : PageBase
         try
         {
             SaleBLL objSBLL = new SaleBLL();
-            List<Sale> objSale = objSBLL.GetProductDetailByBarCode(txtProductBarCode.Text.Trim());
+            List<Sale> objSale = objSBLL.GetProductDetailByBarCode(Productid.Value.Trim());
             RepopulateDataTableWithDiscountPrice();
-            if (null != objSale && objSale.Count>0)
+            if (null != objSale && objSale.Count > 0)
             {
                 DataRow dtRow = dtProductDetail.NewRow();
                 dtRow["ProductID"] = objSale[0].ProductID;
                 dtRow["BarCode"] = objSale[0].BarCode;
                 dtRow["ProductName"] = objSale[0].ProductName;
+                dtRow["SizeID"] = objSale[0].SizeID;
                 dtRow["SizeName"] = objSale[0].SizeName;
-                dtRow["Quantity"] =Convert.ToDecimal(txtQuantity.Text.Trim());
-                dtRow["Unit"] = objSale[0].Price;
+                dtRow["Quantity"] = Convert.ToDecimal(txtQuantity.Text.Trim());
+                dtRow["Unit"] = objSale[0].UnitPrice;
                 dtRow["PDiscount"] = 0;
+                dtRow["Tax"] = objSale[0].Tax; ;
                 dtRow["Price"] = objSale[0].Price * Convert.ToDecimal(txtQuantity.Text.Trim());
                 dtProductDetail.Rows.Add(dtRow);
             }
             else
             {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
+              
                 lblError.InnerHtml = "Product Bar Code not found";
             }
         }
         catch (ConstraintException ex)
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
             lblError.InnerHtml = "Product all ready added";
         }
         catch (Exception ex)
         {
             SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
+    }
+
+    protected string ShowValue(string strUnit, string Qnty, string Tax)
+    {
+        string strCalTax = string.Empty;
+        strCalTax = string.Format("{0:0.00}", (Convert.ToDecimal(strUnit) * Convert.ToDecimal(Qnty)) * Convert.ToDecimal(Tax) / 100);
+
+        return strCalTax;
     }
 
     private void RepopulateDataTableWithDiscountPrice()
@@ -234,7 +258,10 @@ public partial class Modules_AddEditSaleOrder : PageBase
             {
                 TextBox txtPDiscount=(TextBox) gvGrid.Rows[i].Cells[6].FindControl("txtPDiscount");
                 dtProductDetail.Rows[i]["PDiscount"] = (string.IsNullOrEmpty(txtPDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtPDiscount.Text.Trim()));
+
                 decimal dblPrice = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
+                dblPrice = dblPrice + dblPrice * (Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()) / 100);
+           
                 if (!string.IsNullOrEmpty(txtPDiscount.Text))
                 {
                     dtProductDetail.Rows[i]["Price"] = dblPrice -(dblPrice* Convert.ToDecimal(txtPDiscount.Text.Trim())/100);

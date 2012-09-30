@@ -90,14 +90,14 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Payment Mode" SortExpression="PaymentMode">
+                               <%-- <asp:TemplateField HeaderText="Payment Mode" SortExpression="PaymentMode">
                                     <ItemTemplate>
                                         <asp:Label ID="lblPaymentMode" runat="server" Text='<%# Eval("PaymentMode") %>'
                                             ToolTip='<%# Eval("PaymentMode") %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                                 <asp:TemplateField HeaderText="Amount">
                                     <ItemTemplate>
                                         <asp:Label ID="lblAmount" runat="server" Text='<%# String.Format("{0:0.00}", Eval("Price")) %>'
@@ -106,14 +106,14 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Standard Rebate">
+                                <%--<asp:TemplateField HeaderText="Standard Rebate">
                                     <ItemTemplate>
                                         <asp:Label ID="lblStandardRebate" runat="server" Text='<%# String.Format("{0:0.00}", Eval("StandardRebate")) %>'
                                             ToolTip='<%# String.Format("{0:0.00}", Eval("StandardRebate")) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                                 <asp:TemplateField HeaderText="Discount">
                                     <ItemTemplate>
                                         <asp:Label ID="lblDiscount" runat="server" Text='<%# String.Format("{0:0.00}", Eval("Discount")) %>'
@@ -124,8 +124,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="SaleMadeBy" SortExpression="SaleMadeBy">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblSaleMadeBy" runat="server" Text='<%# Eval("SaleMadeBy") %>'
-                                            ToolTip='<%# Eval("SaleMadeBy") %>'></asp:Label>
+                                        <asp:Label ID="lblSaleMadeBy" runat="server" Text='<%# Eval("SaleMadeByName") %>'
+                                            ToolTip='<%# Eval("SaleMadeByName") %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
