@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace DAL.Component
 {
-    
+
     public class SaleDB
     {
         Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");
@@ -83,8 +83,8 @@ namespace DAL.Component
                 {
                     objData.SaleDate = Convert.ToDateTime(drData["SaleDate"]);
                 }
-              
-               
+
+
                 if (FieldExists(drData, "Price") && drData["Price"] != DBNull.Value)
                 {
                     objData.Price = Convert.ToDecimal(drData["Price"]);
@@ -189,6 +189,10 @@ namespace DAL.Component
                 {
                     objData.UnitPrice = Convert.ToDecimal(drData["UnitPrice"]);
                 }
+                if (FieldExists(drData, "Discount") && drData["Discount"] != DBNull.Value)
+                {
+                    objData.Discount = Convert.ToDecimal(drData["Discount"]);
+                }
                 if (FieldExists(drData, "Tax") && drData["Tax"] != DBNull.Value)
                 {
                     objData.Tax = Convert.ToDecimal(drData["Tax"]);
@@ -197,7 +201,7 @@ namespace DAL.Component
                 {
                     objData.Price = Convert.ToDecimal(drData["Price"]);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -299,7 +303,7 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@Quantity", DbType.Decimal, objSale.Quantity);
                 dBase.AddInParameter(objCmd, "@Discount", DbType.Decimal, objSale.Discount);
                 dBase.AddInParameter(objCmd, "@Price", DbType.Decimal, objSale.Price);
-                
+
                 dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
                 dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
                 dBase.ExecuteNonQuery(objCmd);
@@ -313,6 +317,54 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objMessage;
+        }
+
+        public Message DeleteSale(int intSaleID, int intUserID)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_DeleteSale");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, intSaleID);
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, intUserID);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
+
+        public List<Sale> GetSaleDetailBySaleID(Sale objSale)
+        {
+            List<Sale> lstobjData = new List<Sale>();
+            try
+            {
+
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSaleDetailBySaleID");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
+
+                using (IDataReader reader = dBase.ExecuteReader(objCmd))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjData.Add(PopulateProductData(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjData;
         }
     }
 }

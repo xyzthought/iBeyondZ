@@ -145,21 +145,18 @@ public partial class Modules_Sale : PageBase
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID"));
+                param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "SaleID"));
                 param = Common.GenerateBASE64WithObfuscateApp(param);
-                vstrLink = "AddEditUser?q=" + param;
+                vstrLink = "AddEditSaleOrder.aspx?q=" + param;
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
-                aEdit.Attributes.Add("on", vstrLink);*/
+                aEdit.Attributes.Add("href", vstrLink);
 
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
                 lnkDelete.OnClientClick = "return confirm('User :" + BLL.BusinessObject.Constants.DeleteConf + "');";
 
-                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID")) == ((User)Session["UserData"]).UserID)
-                    lnkDelete.Visible = false;
-
-
+                
             }
         }
         catch (Exception ex)
@@ -172,11 +169,7 @@ public partial class Modules_Sale : PageBase
     {
         try
         {
-            if (e.CommandName == "Edit")
-            {
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                ViewState["intUserID"] = intUserID;                
-            }
+            
 
             if (e.CommandName == "Delete")
             {

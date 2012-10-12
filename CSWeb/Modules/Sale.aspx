@@ -132,8 +132,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Action">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
-                                            CausesValidation="False" CommandArgument='<%# Eval("SaleID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
+                                        <a id="aEdit" runat="server" title="Click to edit"> <img src="../Images/ico_edit.png" alt="Edit" /> </a>
                                         <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
                                             CommandArgument='<%# Eval("SaleID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
                                     </ItemTemplate>

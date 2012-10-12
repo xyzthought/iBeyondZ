@@ -91,9 +91,12 @@ public partial class Modules_AddEditSaleOrder : PageBase
                     Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
                     SelectedMode = objQuery["MODE"].ToString();
                     SaleID = Convert.ToInt32(objQuery["ID"].ToString());
-                    if (Constants.MODE == Constants.MODE_EDIT)
+
+                    if (SelectedMode == Constants.MODE_EDIT)
                     {
-                        PopulateSaleDetail();
+                        Session["dtProductDetail"] = null;
+                        dtProductDetail.Clear();
+                        PopulateSaleDetail(SaleID);
                         lblHeader.Text = "EDIT | Sale Order";
                     }
                     else
@@ -109,7 +112,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
         catch (Exception ex)
         {
-          SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
@@ -141,7 +144,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
     private DataTable CreateTableStructure()
     {
         DataTable dtData = new DataTable();
-       
+
         dtData.Columns.Add("ProductID", typeof(int));
         dtData.Columns.Add("BarCode", typeof(string));
         dtData.Columns.Add("ProductName", typeof(string));
@@ -156,17 +159,39 @@ public partial class Modules_AddEditSaleOrder : PageBase
         return dtData;
     }
 
-   
+
 
     #region Populate Sale Detail
-    private void PopulateSaleDetail()
+    private void PopulateSaleDetail(int intSaleID)
     {
-        throw new NotImplementedException();
-    } 
+        Sale objSale = new Sale();
+        objSale.SaleID = intSaleID;
+        SaleBLL objSBLL = new SaleBLL();
+        List<Sale> objLSale = new List<Sale>();
+        objLSale = objSBLL.GetSaleDetailBySaleID(objSale);
+        if (null != objLSale)
+        {
+            for (int i = 0; i < objLSale.Count; i++)
+            {
+                InsertDataintoTempDataTable(objLSale[i], false);
+            }
+        }
+        PopulateProductDetail();
+        CalculateTotalPrice();
+        txtProductBarCode.Text = "";
+        txtQuantity.Text = "";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
+
+    }
     #endregion
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
-        
+
+        PopulateInformation();
+    }
+
+    private void PopulateInformation()
+    {
         AddDataToDataTable();
         PopulateProductDetail();
         CalculateTotalPrice();
@@ -184,21 +209,23 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
             {
-                decimal decDiscount= (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString())*Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
-                decDiscount = decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) /100);
+                decimal decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                decDiscount = (decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) / 100));
                 dblTotalDiscount += decDiscount;
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString())+ decDiscount;
+
+                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
             }
 
             dblDiscounted = dblTotalPrice;
-            if(!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
+            if (!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
             {
                 dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
             }
 
-            lblTotalAmount.Text =Math.Round(dblTotalPrice,2).ToString();// String.Format("{0:C}", dblTotalPrice);
+            lblTotalAmount.Text = Math.Round(dblTotalPrice, 2).ToString();// String.Format("{0:C}", dblTotalPrice);
             txtDiscount.Text = Math.Round(dblTotalDiscount, 2).ToString();
-            lblTotalPay.Text = Math.Round((dblTotalPrice-dblTotalDiscount), 2).ToString();// String.Format("{0:C}", dblDiscounted);
+            lblTotalPay.Text = Math.Round((dblTotalPrice - dblTotalDiscount), 2).ToString();// String.Format("{0:C}", dblDiscounted);
+            Session["Discount"] = Math.Round(dblTotalDiscount, 2).ToString();
         }
     }
 
@@ -211,23 +238,12 @@ public partial class Modules_AddEditSaleOrder : PageBase
             RepopulateDataTableWithDiscountPrice();
             if (null != objSale && objSale.Count > 0)
             {
-                DataRow dtRow = dtProductDetail.NewRow();
-                dtRow["ProductID"] = objSale[0].ProductID;
-                dtRow["BarCode"] = objSale[0].BarCode;
-                dtRow["ProductName"] = objSale[0].ProductName;
-                dtRow["SizeID"] = objSale[0].SizeID;
-                dtRow["SizeName"] = objSale[0].SizeName;
-                dtRow["Quantity"] = Convert.ToDecimal(txtQuantity.Text.Trim());
-                dtRow["Unit"] = objSale[0].UnitPrice;
-                dtRow["PDiscount"] = 0;
-                dtRow["Tax"] = objSale[0].Tax; ;
-                dtRow["Price"] = objSale[0].Price * Convert.ToDecimal(txtQuantity.Text.Trim());
-                dtProductDetail.Rows.Add(dtRow);
+                InsertDataintoTempDataTable(objSale[0], true);
             }
             else
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
-              
+
                 lblError.InnerHtml = "Product Bar Code not found";
             }
         }
@@ -241,6 +257,24 @@ public partial class Modules_AddEditSaleOrder : PageBase
             SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
+
+    private void InsertDataintoTempDataTable(Sale objSale, bool blnIsSingleEntry)
+    {
+        DataRow dtRow = dtProductDetail.NewRow();
+        dtRow["ProductID"] = objSale.ProductID;
+        dtRow["BarCode"] = objSale.BarCode;
+        dtRow["ProductName"] = objSale.ProductName;
+        dtRow["SizeID"] = objSale.SizeID;
+        dtRow["SizeName"] = objSale.SizeName;
+        dtRow["Quantity"] = (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
+        dtRow["Unit"] = objSale.UnitPrice;
+        dtRow["PDiscount"] = (blnIsSingleEntry == true ? 0 : objSale.Discount);
+        dtRow["Tax"] = objSale.Tax; ;
+        dtRow["Price"] = objSale.Price * (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
+        dtProductDetail.Rows.Add(dtRow);
+    }
+
+
 
     protected string ShowValue(string strUnit, string Qnty, string Tax)
     {
@@ -256,15 +290,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             for (int i = 0; i < gvGrid.Rows.Count; i++)
             {
-                TextBox txtPDiscount=(TextBox) gvGrid.Rows[i].Cells[6].FindControl("txtPDiscount");
+                TextBox txtPDiscount = (TextBox)gvGrid.Rows[i].Cells[6].FindControl("txtPDiscount");
                 dtProductDetail.Rows[i]["PDiscount"] = (string.IsNullOrEmpty(txtPDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtPDiscount.Text.Trim()));
 
                 decimal dblPrice = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
-                dblPrice = dblPrice + dblPrice * (Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()) / 100);
-           
+                dblPrice = dblPrice + dblPrice * (Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+
                 if (!string.IsNullOrEmpty(txtPDiscount.Text))
                 {
-                    dtProductDetail.Rows[i]["Price"] = dblPrice -(dblPrice* Convert.ToDecimal(txtPDiscount.Text.Trim())/100);
+                    dtProductDetail.Rows[i]["Price"] = dblPrice - (dblPrice * Convert.ToDecimal(txtPDiscount.Text.Trim()) / 100);
                 }
                 else
                 {
@@ -285,9 +319,9 @@ public partial class Modules_AddEditSaleOrder : PageBase
     }
 
     #region GRID VIEW EVENTS
-   
 
-    
+
+
     protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -355,7 +389,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
             if (dtProductDetail.Rows[i]["ProductID"].ToString() == vintProductID.ToString())
             {
                 txtProductBarCode.Text = dtProductDetail.Rows[i]["BarCode"].ToString();
-                txtQuantity.Text=dtProductDetail.Rows[i]["Quantity"].ToString();
+                txtQuantity.Text = dtProductDetail.Rows[i]["Quantity"].ToString();
                 dtProductDetail.Rows[i].Delete();
                 break;
             }
@@ -366,11 +400,11 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     }
 
-   
+
 
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        
+
         PopulateProductDetail();
         CalculateTotalPrice();
     }
@@ -387,15 +421,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
         if (null != dtProductDetail && dtProductDetail.Rows.Count > 0)
         {
             RepopulateDataTableWithDiscountPrice();
-            Session["Discount"] = txtDiscount.Text.Trim();
+            CalculateTotalPrice();
             Session["dtProductDetail"] = dtProductDetail;
-            param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "="+SaleID;
+            param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "=" + SaleID;
             param = Common.GenerateBASE64WithObfuscateApp(param);
             vstrLink = "FinalChekoutSaleOrder.aspx?q=" + param;
             Response.Redirect(vstrLink, false);
         }
     }
 
-    
+
 
 }

@@ -45,5 +45,15 @@ namespace BLL.Component
         {
             return objDB.InsertUpdateSaleDetail(objSale);
         }
+
+        public Message DeleteSale(int intSaleID, int intUserID)
+        {
+            return objDB.DeleteSale(intSaleID, intUserID);
+        }
+
+        public List<Sale> GetSaleDetailBySaleID(Sale objSale)
+        {
+            return objDB.GetSaleDetailBySaleID(objSale);
+        }
     }
 }
