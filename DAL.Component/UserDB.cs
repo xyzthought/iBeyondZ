@@ -24,7 +24,7 @@ namespace DAL.Component
 
         public void AuthenticationValidation(ref User vObjUserInfo)
         {
-            
+
             object[] mParams = {
                                         new SqlParameter("@LoginID", SqlDbType.NVarChar),    
                                         new SqlParameter("@LoginPassword", SqlDbType.NVarChar),    
@@ -39,7 +39,7 @@ namespace DAL.Component
                 while (reader.Read())
                 {
                     if (reader["UserID"] != DBNull.Value)
-                    vObjUserInfo.UserID = Convert.ToInt32(reader["UserID"]);
+                        vObjUserInfo.UserID = Convert.ToInt32(reader["UserID"]);
 
                     if (reader["LoginID"] != DBNull.Value)
                         vObjUserInfo.LoginID = Convert.ToString(reader["LoginID"]);
@@ -66,14 +66,14 @@ namespace DAL.Component
                         vObjUserInfo.LastLoggedIn = Convert.ToDateTime(reader["LastLoggedIn"]);
                 }
             }
-            
+
         }
 
         #region Save Data
 
         public int SaveData(int kk)
         {
-           
+
             try
             {
                 int i = 0;
@@ -107,7 +107,7 @@ namespace DAL.Component
         }
 
         # endregion
-        
+
         #region Return Data Table
         public DataTable GetSourceData()
         {
@@ -129,7 +129,7 @@ namespace DAL.Component
             }
 
             return dtData;
-        } 
+        }
         #endregion
 
         #region Bulk Insert
@@ -259,7 +259,7 @@ namespace DAL.Component
                 if (FieldExists(drData, "LoginPassword") && drData["LoginPassword"] != DBNull.Value)
                 {
                     objUser.LoginPassword = Convert.ToString(drData["LoginPassword"]);
-                } 
+                }
 
                 if (FieldExists(drData, "FirstName") && drData["FirstName"] != DBNull.Value)
                 {
@@ -304,7 +304,7 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objUser;
-        } 
+        }
         #endregion
 
 
@@ -351,7 +351,7 @@ namespace DAL.Component
             return objUserType;
         }
 
-       
+
         public Message InsertUpdatePlatformUser(User objUser)
         {
             Message objMessage = new Message();
@@ -403,7 +403,7 @@ namespace DAL.Component
                     while (reader.Read())
                     {
                         lstobjUser.Add(PopulateUser(reader));
-                        
+
                     }
                 }
             }
@@ -435,6 +435,62 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objMessage;
+        }
+
+
+
+        public Message ChangePassword(User objUser, string vstrNewPassword)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_ChangePassword");
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, objUser.UserID);
+                dBase.AddInParameter(objCmd, "@LoginPassword", DbType.String, objUser.LoginPassword);
+                dBase.AddInParameter(objCmd, "@NewPassword", DbType.String, vstrNewPassword);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
+
+        public User ChangeAccountInformation(ref User objUser)
+        {
+
+            User lstobjUser = new User();
+            try
+            {
+
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_ChangeAccountInformation");
+                dBase.AddInParameter(objCmd, "@UserID", DbType.Int32, objUser.UserID);
+                dBase.AddInParameter(objCmd, "@FirstName", DbType.String, objUser.FirstName);
+                dBase.AddInParameter(objCmd, "@LastName", DbType.String, objUser.LastName);
+                dBase.AddInParameter(objCmd, "@CommunicationEmailID", DbType.String, objUser.CommunicationEmailID);
+
+                using (IDataReader reader = dBase.ExecuteReader(objCmd))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjUser=PopulateUser(reader);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjUser;
         }
 
         

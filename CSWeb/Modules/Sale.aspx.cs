@@ -48,6 +48,7 @@ public partial class Modules_Sale : PageBase
        param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0" ;
        param = Common.GenerateBASE64WithObfuscateApp(param);
        vstrLink = "AddEditSaleOrder.aspx?q=" + param;
+       Session["dtProductDetail"] = null;
        Response.Redirect(vstrLink, false);
     }
 
@@ -154,9 +155,8 @@ public partial class Modules_Sale : PageBase
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
-                lnkDelete.OnClientClick = "return confirm('User :" + BLL.BusinessObject.Constants.DeleteConf + "');";
+                lnkDelete.OnClientClick = "return confirm('Sale :" + BLL.BusinessObject.Constants.DeleteConf + "');";
 
-                
             }
         }
         catch (Exception ex)
@@ -169,17 +169,16 @@ public partial class Modules_Sale : PageBase
     {
         try
         {
-            
-
             if (e.CommandName == "Delete")
             {
 
                 Message vobjMsg = new Message();
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                User objUser = new User();
-                UserBLL objUBLL = new UserBLL();
-                objUser.UserID = intUserID;
-                vobjMsg = objUBLL.DeletePlatformUser(objUser);
+                int intUserID = ((User)Session["UserData"]).UserID;
+                int intSaleID = Convert.ToInt32(e.CommandArgument.ToString());
+                Sale objSale = new Sale();
+                SaleBLL objUBLL = new SaleBLL();
+
+                vobjMsg = objUBLL.DeleteSale(intSaleID, intUserID);
 
                 if (vobjMsg.ReturnValue > 0)
                 {

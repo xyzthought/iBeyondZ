@@ -209,7 +209,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
             {
-                decimal decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                decimal decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
                 decDiscount = (decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) / 100));
                 dblTotalDiscount += decDiscount;
 

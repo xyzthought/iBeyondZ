@@ -51,5 +51,16 @@ namespace BLL.Component
         {
             return objDB.DeletePlatformUser(objUser);
         }
+
+        public Message ChangePassword(User objUser, string vstrNewPassword)
+        {
+            return objDB.ChangePassword(objUser, vstrNewPassword);
+        }
+
+       
+        public User ChangeAccountInformation(ref User objUser)
+        {
+            return objDB.ChangeAccountInformation(ref objUser);
+        }
     }
 }

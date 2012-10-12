@@ -366,5 +366,115 @@ namespace DAL.Component
             }
             return lstobjData;
         }
+
+        public Sale GetFinalCheckOutDeatils(ref Sale objSale)
+        {
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetFinalCheckOutDeatils");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
+
+                using (IDataReader reader = dBase.ExecuteReader(objCmd))
+                {
+                    while (reader.Read())
+                    {
+                        objSale=PopulateFinalCheckOutData(reader);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objSale;
+        }
+
+        private Sale PopulateFinalCheckOutData(IDataReader drData)
+        {
+            Sale objData = new Sale();
+            try
+            {
+
+                if (FieldExists(drData, "CustomerID") && drData["CustomerID"] != DBNull.Value)
+                {
+                    objData.CustomerID = Convert.ToInt32(drData["CustomerID"]);
+                }
+                if (FieldExists(drData, "CFirstName") && drData["CFirstName"] != DBNull.Value)
+                {
+                    objData.CFirstName = Convert.ToString(drData["CFirstName"]);
+                }
+                if (FieldExists(drData, "Address") && drData["Address"] != DBNull.Value)
+                {
+                    objData.Address = Convert.ToString(drData["Address"]);
+                }
+                if (FieldExists(drData, "ZIP") && drData["ZIP"] != DBNull.Value)
+                {
+                    objData.ZIP = Convert.ToString(drData["ZIP"]);
+                }
+                if (FieldExists(drData, "City") && drData["City"] != DBNull.Value)
+                {
+                    objData.City = Convert.ToString(drData["City"]);
+                }
+                if (FieldExists(drData, "TeleNumber") && drData["TeleNumber"] != DBNull.Value)
+                {
+                    objData.TeleNumber = Convert.ToString(drData["TeleNumber"]);
+                }
+                if (FieldExists(drData, "Country") && drData["Country"] != DBNull.Value)
+                {
+                    objData.Country = Convert.ToString(drData["Country"]);
+                }
+                if (FieldExists(drData, "Email") && drData["Email"] != DBNull.Value)
+                {
+                    objData.Email = Convert.ToString(drData["Email"]);
+                }
+                if (FieldExists(drData, "Discount") && drData["Discount"] != DBNull.Value)
+                {
+                    objData.Discount = Convert.ToDecimal(drData["Discount"]);
+                }
+                if (FieldExists(drData, "CCAmount") && drData["CCAmount"] != DBNull.Value)
+                {
+                    objData.CCAmount = Convert.ToDecimal(drData["CCAmount"]);
+                }
+                if (FieldExists(drData, "BankAmount") && drData["BankAmount"] != DBNull.Value)
+                {
+                    objData.BankAmount = Convert.ToDecimal(drData["BankAmount"]);
+                }
+                if (FieldExists(drData, "Cash") && drData["Cash"] != DBNull.Value)
+                {
+                    objData.Cash = Convert.ToDecimal(drData["Cash"]);
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objData;
+        }
+
+        public Message DeleteExistingSalesDetails(Sale objSale)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_DeleteExistingSalesDetails");
+                dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
     }
 }

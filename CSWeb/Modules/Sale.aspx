@@ -85,7 +85,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="SaleDate">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblSaleDate" runat="server" Text='<%# Eval("SaleDate","{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("SaleDate","{0:dd-MMM-yy}") %>'></asp:Label>
+                                        <asp:Label ID="lblSaleDate" runat="server" Text='<%# Eval("SaleDate","{0:dd-MMM-yy HH:mm}") %>' ToolTip='<%# Eval("SaleDate","{0:dd-MMM-yy}") %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />

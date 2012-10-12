@@ -84,6 +84,11 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                         Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
                         SelectedMode = objQuery["MODE"].ToString();
                         SaleID = Convert.ToInt32(objQuery["ID"].ToString());
+
+                        if (SelectedMode == Constants.MODE_EDIT)
+                        {
+                            PopulateFinalSaleDetail(SaleID);
+                        }
                         lblHeader.Text = "Final Checkout | Sale Order";
                         PopulateProductDetail();
                         if (!string.IsNullOrEmpty(Session["Discount"].ToString()))
@@ -108,6 +113,27 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         {
             SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
+    }
+
+    private void PopulateFinalSaleDetail(int SaleID)
+    {
+        Sale objSale = new Sale();
+        objSale.SaleID = SaleID;
+        SaleBLL objSBLL = new SaleBLL();
+        objSale = objSBLL.GetFinalCheckOutDeatils(ref objSale);
+
+        Customer.Text = objSale.CFirstName;
+        txtAddress.Text = objSale.Address;
+        txtZIP.Text = objSale.ZIP;
+        txtCity.Text = objSale.City;
+        txtCountry.Text = objSale.Country;
+        txtPhone.Text = objSale.TeleNumber;
+        txtEmailID.Text = objSale.Email;
+        txtAmountPaid.Text = objSale.CCAmount.ToString();
+        txtBCash.Text = objSale.BankAmount.ToString();
+        txtCash.Text = objSale.Cash.ToString();
+        txtDiscount.Text = objSale.Discount.ToString();
+
     }
 
     private void PopulateCustomer()
@@ -372,14 +398,16 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             Message objMessage = objSBLL.InsertUpdateSaleMaster(objSale);
             if (objMessage.ReturnValue > 0)
             {
+                objSale.SaleID = objMessage.ReturnValue;
+                objMessage = objSBLL.DeleteExistingSalesDetails(objSale);
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    objSale.SaleID = objMessage.ReturnValue;
+                    
                     objSale.ProductID = Convert.ToInt32(dtProductDetail.Rows[i]["ProductID"].ToString());
                     objSale.SizeID = Convert.ToInt32(dtProductDetail.Rows[i]["SizeID"].ToString());
                     objSale.Quantity = Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
                     objSale.Discount = Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString());
-                    objSale.Price = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                    objSale.Price = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString());
 
                     objMessage = objSBLL.InsertUpdateSaleDetail(objSale);
                 }

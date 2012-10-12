@@ -55,5 +55,15 @@ namespace BLL.Component
         {
             return objDB.GetSaleDetailBySaleID(objSale);
         }
+
+        public Sale GetFinalCheckOutDeatils(ref Sale objSale)
+        {
+            return objDB.GetFinalCheckOutDeatils(ref objSale);
+        }
+
+        public Message DeleteExistingSalesDetails(Sale objSale)
+        {
+            return objDB.DeleteExistingSalesDetails(objSale);
+        }
     }
 }
