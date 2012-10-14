@@ -9,15 +9,19 @@ namespace BLL.Component
 {
     public class ProductPurchaseBLL
     {
-        public List<ProductPurchase> GetAll(DateTime purchaseStartDate, DateTime purchaseEndDate, PageInfo vobjPageInfo)
+        public List<ProductPurchase> GetAll(DateTime purchaseStartDate, DateTime purchaseEndDate,String ManufacturerName,  PageInfo vobjPageInfo)
         {
-            return new ProductPurchaseDB().GetAll(purchaseStartDate, purchaseEndDate, vobjPageInfo);
+            return new ProductPurchaseDB().GetAll(purchaseStartDate, purchaseEndDate, ManufacturerName, vobjPageInfo);
         }
         public void GetByID(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().GetByID(ref vobjProductPurchase);
         }
-        public void Add(ref ProductPurchase vobjProductPurchase)
+        public void AddEditPurchase(ref ProductPurchase vobjProductPurchase)
+        {
+            new ProductPurchaseDB().AddEditPurchase(ref vobjProductPurchase);
+        }
+        /*public void Add(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().Add(ref vobjProductPurchase);
         }
@@ -25,7 +29,7 @@ namespace BLL.Component
         public void Update(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().Update(ref vobjProductPurchase);
-        }
+        }*/
         public void Delete(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().Delete(ref vobjProductPurchase);

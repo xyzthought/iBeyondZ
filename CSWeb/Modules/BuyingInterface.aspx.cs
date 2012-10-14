@@ -36,6 +36,7 @@ public partial class BuyingInterface : PageBase
             PopulateManufacturer();
             PopulateProduct();
             PopulateSize();
+            txtSearchManufacturerId.Value = "0";
         }
     }
 
@@ -58,8 +59,9 @@ public partial class BuyingInterface : PageBase
                 objPI.SortDirection = Convert.ToString(ViewState[Constants.SORTDERECTION]);
                 objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
             }
+            string strManufacturerName = (txtSearchManufacturer.Value.Trim()=="Manufacturer Name"? "": txtSearchManufacturer.Value.Trim());
 
-            List<ProductPurchase> objData = new ProductPurchaseBLL().GetAll(Convert.ToDateTime(fromDate.Value), Convert.ToDateTime(toDate.Value), objPI);
+            List<ProductPurchase> objData = new ProductPurchaseBLL().GetAll(Convert.ToDateTime(fromDate.Value), Convert.ToDateTime(toDate.Value), strManufacturerName, objPI);
 
             gvGrid.DataSource = objData;
             gvGrid.ExportTemplate = "export_template_4Column.xlsx";
@@ -194,8 +196,12 @@ public partial class BuyingInterface : PageBase
             if (e.CommandName == "Edit")
             {
                 int intPurchaseID = Convert.ToInt32(e.CommandArgument.ToString());
-                ViewState["intPurchaseID"] = intPurchaseID;
-                LoadData(intPurchaseID);
+                param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + intPurchaseID;
+                param = Common.GenerateBASE64WithObfuscateApp(param);
+                vstrLink = "AddEditPurchase.aspx?q=" + param;
+                Response.Redirect(vstrLink, false);
+                //ViewState["intPurchaseID"] = intPurchaseID;
+                //LoadData(intPurchaseID);
             }
 
             if (e.CommandName == "Delete")
@@ -203,7 +209,7 @@ public partial class BuyingInterface : PageBase
 
                 ProductPurchase objProductPurchase = new ProductPurchase();
                 int intPurchaseID = Convert.ToInt32(e.CommandArgument.ToString());
-                objProductPurchase.PurchaseID = intPurchaseID;
+                objProductPurchase.ProductPurchaseID = intPurchaseID;
                 new ProductPurchaseBLL().Delete(ref objProductPurchase);
 
                 if (objProductPurchase.ReturnStatus > 0)
@@ -231,6 +237,14 @@ public partial class BuyingInterface : PageBase
         }
     }
 
+    protected void lnkAddNew_Click(object sender, EventArgs e)
+    {
+        param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0";
+        param = Common.GenerateBASE64WithObfuscateApp(param);
+        vstrLink = "AddEditPurchase.aspx?q=" + param;
+        Response.Redirect(vstrLink, false);
+    }
+
     private void PopulateSize()
     {
         Common.BindControl(ddlSize, new SizeBLL().GetSize(0), "SizeName", "SizeID", Constants.ControlType.DropDownList, true);
@@ -238,7 +252,19 @@ public partial class BuyingInterface : PageBase
 
     private void PopulateManufacturer()
     {
-        Common.BindControl(ddlManufacturer, new ManufacturerBLL().GetAllActive(), "CompanyName", "ManufacturerID", Constants.ControlType.DropDownList, true);
+        List<Manufacturer> lstManufacturer = new ManufacturerBLL().GetAllActive();
+        hdnManufacturer.Value = "";
+        for (int i = 0; i < lstManufacturer.Count; i++)
+        {
+            hdnManufacturer.Value += lstManufacturer[i].ManufacturerID + "##" + lstManufacturer[i].CompanyName + "@@";
+        }
+
+        if (hdnManufacturer.Value.Length > 0)
+        {
+            hdnManufacturer.Value = hdnManufacturer.Value.Substring(0, hdnManufacturer.Value.Length - 2);
+        }
+
+        Common.BindControl(ddlManufacturer, lstManufacturer, "CompanyName", "ManufacturerID", Constants.ControlType.DropDownList, true);
     }
 
     public void PopulateProduct()
@@ -252,7 +278,7 @@ public partial class BuyingInterface : PageBase
         try
         {
             ProductPurchase objProductPurchase = new ProductPurchase();
-            objProductPurchase.PurchaseID = vintPurchaseID;
+            objProductPurchase.ProductPurchaseID = vintPurchaseID;
 
             new ProductPurchaseBLL().GetByID(ref objProductPurchase);
 
@@ -260,9 +286,9 @@ public partial class BuyingInterface : PageBase
             {
                 ddlProduct.SelectedValue = objProductPurchase.ProductID.ToString();
                 ddlManufacturer.SelectedValue = objProductPurchase.ManufacturerID.ToString();
-                ddlSize.SelectedValue = objProductPurchase.SizeID.ToString();
+                //ddlSize.SelectedValue = objProductPurchase.SizeID.ToString();
                 txtQuantity.Text = objProductPurchase.Quantity.ToString();
-                txtPrice.Text = objProductPurchase.Price.ToString("#.##");
+                //txtPrice.Text = objProductPurchase.Price.ToString("#.##");
                 txtDateOfPurchase.Value = objProductPurchase.PurchaseDate.ToShortDateString();
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditProductPurchase", "ChangeDatePicker();ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
@@ -311,8 +337,8 @@ public partial class BuyingInterface : PageBase
     #region Save Data
     private void SaveData(string vstrMode, int vintProductPurchaseID)
     {
-        ProductPurchase objProductPurchase = new ProductPurchase();
-        objProductPurchase.PurchaseID = vintProductPurchaseID;
+        /*ProductPurchase objProductPurchase = new ProductPurchase();
+        objProductPurchase.ProductPurchaseID = vintProductPurchaseID;
         objProductPurchase.ManufacturerID = Convert.ToInt32(ddlManufacturer.SelectedItem.Value);
         objProductPurchase.ProductID = Convert.ToInt32(ddlProduct.SelectedItem.Value);
         objProductPurchase.SizeID = Convert.ToInt32(ddlSize.SelectedItem.Value);
@@ -342,7 +368,7 @@ public partial class BuyingInterface : PageBase
         else
         {
             Page.ClientScript.RegisterStartupScript(GetType(), "AddEditProductPurchase", "objProductPurchaseShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
-        }
+        }*/
     }
     #endregion
 

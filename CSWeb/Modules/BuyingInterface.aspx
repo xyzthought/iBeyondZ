@@ -40,6 +40,8 @@
                     </div>
                 </div>
                 <div id="dv3" class="fl">
+                    <asp:HiddenField ID="hdnManufacturer" runat="server" ClientIDMode="Static" />
+                    <asp:HiddenField ID="txtSearchManufacturerId" runat="server" ClientIDMode="Static" />
                     <span class="btn5">
                         <asp:LinkButton ID="lnkRefresh" runat="server" OnClick="lnkRefresh_Click">Refresh</asp:LinkButton>
                     </span>
@@ -56,9 +58,15 @@
                             <input type="text" id="fromDate" runat="server" class="txtCred" style="width: 100px!important" /></p>
                     </div>
                 </div>
+                <div id="Div2" class="fl">
+                    <div class="demo" style="font-size: 9px!important;">
+                        <p>
+                            <input type="text" id="txtSearchManufacturer" runat="server" class="txtCred" value="Manufacturer Name" style="width: 200px!important" /></p>
+                    </div>
+                </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" href="#" runat="server" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow1','dvInnerWindow',0)"><span class="AddNewData"></span>Add Purchase Record</asp:LinkButton></span>
+                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add Purchase Record</span></asp:LinkButton>
                 </div>
                 <div class="reports">
                     Manage Product Purchase
@@ -111,7 +119,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Size" SortExpression="Size">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblSize" runat="server" Text='<%# Eval("SizeName") %>' ToolTip='<%# Eval("SizeName") %>'></asp:Label>
+                                                <asp:Label ID="lblSize" runat="server" Text='<%# Eval("Sizes") %>' ToolTip='<%# Eval("Sizes") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -125,7 +133,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Price" SortExpression="Price">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("Price")) %>' ToolTip='<%# String.Format("{0:C}", Eval("Price")) %>'></asp:Label>
+                                                <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>' ToolTip='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -133,9 +141,9 @@
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
-                                                    CausesValidation="False" CommandArgument='<%# Eval("PurchaseID") %>' OnClientClick="return ClearFormFields();"> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
+                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
-                                                    CommandArgument='<%# Eval("PurchaseID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
+                                                    CommandArgument='<%# Eval("ProductPurchaseID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" CssClass="al" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
@@ -295,5 +303,60 @@
             maxDate: "+0d"
         });
     }
+
+    // Auto complete Manufacturer
+    $(function () {
+        Populate();
+    });
+
+    function Populate() {
+        var projects = [];
+        var MyKeys = ["value", "label"];
+
+
+        dimArrayValue = $("#hdnManufacturer").val();
+
+        var DataArr = dimArrayValue.split("@@");
+
+        for (i = 0; i < DataArr.length; i++) {
+            var DataArr2 = DataArr[i].split("##");
+            var obj = {};
+            for (j = 0; j < DataArr2.length; j++) {
+                obj[MyKeys[j]] = DataArr2[j];
+            }
+            projects.push(obj);
+        }
+
+
+        $("#txtSearchManufacturer").autocomplete({
+            minLength: 0,
+            source: projects,
+            focus: function (event, ui) {
+                $("#txtSearchManufacturer").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui) {
+                $("#txtSearchManufacturer").val(ui.item.label);
+                $("#txtSearchManufacturerId").val(ui.item.value);
+                return false;
+            }
+        })
+		.data("autocomplete")._renderItem = function (ul, item) {
+		    return $("<li></li>")
+				.data("item.autocomplete", item)
+				.append("<a>" + item.label + "</a>")
+				.appendTo(ul);
+		};
+    }
+
+    $(function () {
+        /*if ($('#txtSearchManufacturer').val() == "") {
+            $('#txtSearchManufacturer').val('Manufacturer Name')
+        }*/
+        var tbval = $('#txtSearchManufacturer').val();
+        $('#txtSearchManufacturer').focus(function () { if ($(this).val() == tbval) $(this).val(''); });
+        $('#txtSearchManufacturer').blur(function () { if ($(this).val() == tbval) $(this).val(tbval); });
+    });
+
 </script>
 <!--Date Picker-->
