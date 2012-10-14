@@ -26,6 +26,10 @@ namespace BLL.Component
             return objProdDAL.GetAllProduct(info);
         }
 
+        public List<BLL.BusinessObject.Product> GetAllActiveProduct()
+        {
+            return new DAL.Component.Product().GetAllActiveProduct();
+        }
         public BLL.BusinessObject.Product GetProductByID(int ProductID)
         {
             DAL.Component.Product objProdDAL = new DAL.Component.Product();

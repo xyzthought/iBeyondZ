@@ -76,6 +76,21 @@ namespace BLL.Component
             }
         }
 
+        public List<Manufacturer> GetAllActive()
+        {
+            try
+            {
+                return new ManufacturerDB().GetAllActive();
+            }
+            catch (Exception ex)
+            {
+
+                //TODO: Handle exception;
+                return new List<Manufacturer>();
+            }
+
+        }
+
         public void GetByID(ref Manufacturer vobjManufacturer)
         {
             try
