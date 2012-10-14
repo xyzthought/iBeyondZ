@@ -309,6 +309,7 @@
 <script type="text/javascript">
 
     function ChangeMe(callfrom) {
+
         Populate(callfrom);
     }
 
@@ -321,10 +322,14 @@
         var projects = [];
         var MyKeys = ["value", "label", "desc"];
 
-        if (callfrom == "1")
+        if (callfrom == "1") {
+            $("#spType").html("Bar Code");
             dimArrayValue = $("#hdnByBarCode").val();
-        else if (callfrom == "2")
+        }
+        else if (callfrom == "2") {
+            $("#spType").html("Name");
             dimArrayValue = $("#hdnByProductName").val();
+        }
 
         var DataArr = dimArrayValue.split("@@");
 

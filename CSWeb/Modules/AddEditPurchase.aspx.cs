@@ -32,6 +32,7 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
             PopulateSize();
             PopulateCategory();
             PopulateBrand();
+            PopulateSeason();
 
             if (SelectedMode == Constants.MODE_EDIT)
             {
@@ -49,6 +50,10 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
     public void PopulateProduct()
     {
         Common.BindControl(cmbProduct, new ProductBLL().GetAllActiveProduct(), "ProductName", "ProductID", Constants.ControlType.DropDownList, true);
+    }
+    public void PopulateSeason()
+    {
+        Common.BindControl(cmbSeason, new SeasonBLL().GetSeason(), "SeasonName", "SeasonID", Constants.ControlType.DropDownList, true);
     }
 
     private void PopulateManufacturer()
@@ -126,6 +131,9 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
     }
     protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
     {
+        ProductPurchase objProductPurchase = new ProductPurchase();
+        objProductPurchase.ProductID = Convert.ToInt32(cmbProduct.SelectedValue);
+
     }
 
     protected void lnkCancel_Click(object sender, EventArgs e)

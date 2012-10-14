@@ -33,6 +33,20 @@
             var val = $('#txtBuyingPrice').val() * $('#txtMargin').val()
             $('#txtSellingPrice').val(val);
         }
+        /*
+        function ValidateZones(source, args) {
+		    var chlZones = document.getElementByc('');
+		    var chkLista = chlZones.getElementsByTagName("input");
+		    for (var i = 0; i < chkLista.length; i++) {
+			    if (chkLista[i].checked) {
+			        args.IsValid = true;
+			        alert("True");
+				    return;
+			    }
+            }
+            alert("False");
+		    args.IsValid = false;
+	}*/
     </script>
 </head>
 <body>
@@ -71,7 +85,7 @@
                                 <asp:DropDownList ID="cmbProduct" runat="server" CssClass="txtUpl">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="reqcmbProduct" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                    ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbProduct"
+                                    ForeColor="Red" InitialValue="-1" ControlToValidate="cmbProduct"
                                     Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div style="clear: both;">
@@ -89,35 +103,53 @@
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Brand
+                                Brand <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
                                 <asp:DropDownList ID="cmbBrand" runat="server" CssClass="txtUpl">
                                 </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="reqcmbBrand" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbBrand"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Category
+                                Category <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
                                 <asp:DropDownList ID="cmbCategory" runat="server" CssClass="txtUpl">
                                 </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="reqcmbCategory" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbCategory"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Size
+                                Season <span class="mandet2">* </span>
+                            </div>
+                            <div style="float: left;">
+                                <asp:DropDownList ID="cmbSeason" runat="server" CssClass="txtUpl">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="reqcmbSeason" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="-1" ControlToValidate="cmbSeason" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                            <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Size <span class="mandet2">* </span>
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="3"
-                                    CellPadding="5" CellSpacing="5">
+                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
                                 </asp:CheckBoxList>
+                                <%--<asp:CustomValidator ID="cvalZones" runat="server" ClientValidationFunction="ValidateZones" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" Display="Dynamic" />--%>
                             </div>
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Buying Price
+                                Buying Price <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtBuyingPrice"  runat="server" onkeyup="extractNumber(this,-1,false);"
@@ -158,10 +190,12 @@
                             <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Bar Code <span class="mandet2"></span>
+                                Bar Code <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="reqtxtBarcode" runat="server" ErrorMessage="*"
+                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBarcode" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div class="btn-wrapper4">
                                 <span class="btn">

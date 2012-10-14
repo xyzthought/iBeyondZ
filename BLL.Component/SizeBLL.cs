@@ -23,7 +23,7 @@ namespace BLL.Component
             return new DAL.Component.SizeDB().UpdateSize(SizeID, SizeName);
         }
 
-        public bool DeleteSize(int SizeID)
+        public int DeleteSize(int SizeID)
         {
             return new DAL.Component.SizeDB().DeleteSize(SizeID);
         }

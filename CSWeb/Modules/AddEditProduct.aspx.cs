@@ -264,6 +264,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         gvSize.EditIndex = -1;
 
         BindSizeMasterGrid();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow2','dvInnerWindow1',0);", true);
     }
     protected void gvSize_RowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -300,6 +301,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         {
 
         }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow2','dvInnerWindow1',0);", true);
     }
     protected void gvSize_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -310,19 +312,23 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
 
         int SizeID = Convert.ToInt32(gvSize.DataKeys[e.RowIndex].Values[0].ToString());
 
-        new BLL.Component.SizeBLL().DeleteSize(SizeID);
+        int mintReturn =new BLL.Component.SizeBLL().DeleteSize(SizeID);
 
-
-        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Record deleted successfully');", true);
+        if (mintReturn == -1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cannot delete as it is associated with a Product');", true);
+        }
 
         BindSizeMasterGrid();
         PopulateSize();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow2','dvInnerWindow1',0);", true);
 
     }
     protected void gvSize_RowEditing(object sender, GridViewEditEventArgs e)
     {
         gvSize.EditIndex = e.NewEditIndex;
         BindSizeMasterGrid();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow2','dvInnerWindow1',0);", true);
     }
     protected void gvSize_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
@@ -359,6 +365,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         gvSize.EditIndex = -1;
         BindSizeMasterGrid();
         PopulateSize();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow2','dvInnerWindow1',0);", true);
     }
 
     private void BindSizeMasterGrid()
@@ -386,12 +393,14 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         grvCategory.EditIndex = e.NewEditIndex;
         BindCategory();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
     protected void grvCategory_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         grvCategory.EditIndex = -1;
 
         BindCategory();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
     protected void grvCategory_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -422,7 +431,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 BindCategory();
                 PopulateCategory();
             }
-
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
         }
         catch (Exception ex)
         {
@@ -440,6 +449,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
 
         BindCategory();
         PopulateCategory();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
     protected void grvCategory_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
@@ -476,6 +486,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         grvCategory.EditIndex = -1;
         BindCategory();
         PopulateCategory();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
 
     protected void lnkCancel_Click(object sender, EventArgs e)
@@ -486,11 +497,13 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         grvBrand.EditIndex = e.NewEditIndex;
         BindBrand();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
     protected void grvBrand_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         grvBrand.EditIndex = -1;
         BindBrand();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
     protected void grvBrand_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -527,6 +540,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         {
 
         }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
     protected void grvBrand_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
@@ -539,6 +553,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
 
         BindBrand();
         PopulateBrand();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
     protected void grvBrand_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
@@ -575,5 +590,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         grvBrand.EditIndex = -1;
         BindBrand();
         PopulateBrand();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
 }
