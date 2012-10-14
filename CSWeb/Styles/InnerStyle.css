@@ -1035,6 +1035,25 @@ table.upl tr td.msgUpload {
     padding: 2px;
     width: 240px;
 }
+
+.txtProdDesc {
+    border: 1px solid #DADADA;
+    height: 26px;
+    line-height: 24px;
+    padding: 2px;
+    width: 240px;
+}
+.txProdDescTextArea {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 60px;
+    max-height: 60px;
+    max-width: 240px;
+    padding: 2px;
+    width: 240px;
+}
+
 .txtUplTextArea2 {
     max-width: 360px;
     width: 360px;
