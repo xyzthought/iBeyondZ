@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="Sale.cs" />
+    <Compile Include="Season.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserTypeBO.cs" />
