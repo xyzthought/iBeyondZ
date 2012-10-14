@@ -3,7 +3,6 @@
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Product</title>
@@ -53,126 +52,145 @@
                 <div class="clear">
                 </div>
             </div>
-            <div class="acceptedCont">
+            <div class="acceptedCont" style="border:0!important">
                 <span id="ContentPlaceHolder1_lblMsg"></span>
                 <div id="updMain">
                     <fieldset class="fieldAddEdit">
-                        <div class="inner">
+                        <div class="inner" style="width: 500px!important; margin: 10px auto; padding-left: 26px;
+                            padding-right: 26px; border: 1px solid #eee">
                             <div class="mandet">
                                 <span id="lblMessage">* Fields are mandatory</span></div>
                             <div class="errorMsg">
                                 <span id="lblError" runat="server"></span>
                             </div>
-                            <div>
-                                Product Name :<span class="mandet2">* </span>
+                            <div style="float: left; width: 135px;">
+                                Product Name <span class="mandet2">* </span>
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
+                            <div style="float: left;">
                                 <asp:TextBox ID="txtProductName" runat="server" CssClass="txtCred"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="reqtxtProductName" runat="server" ErrorMessage="*"
                                     Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductName" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
-                            <div>
-                                Description :
+                            <div style="clear: both;">
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
+                            <div style="float: left; width: 135px;">
+                                Description
+                            </div>
+                            <div style="float: left;">
                                 <asp:TextBox ID="txtDescription" runat="server" Rows="5" TextMode="MultiLine" class="txtInv"></asp:TextBox>
                             </div>
-                            <div>
-                                Manufacturer:<span class="mandet2">* </span>
+                            <div style="clear: both;">
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
+                            <div style="float: left; width: 135px;">
+                                Manufacturer<span class="mandet2">* </span>
+                            </div>
+                            <div style="float: left;">
                                 <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="ReqtxtMan" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                     ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbManufacturer"
                                     Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
-                            <div>
-                                Brand :&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="LinkButton1" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow4','dvInnerWindow3',0)"
-                                    runat="server"><img src="../Images/category.gif" alt="Add Brand" title="Add Brand" /></asp:LinkButton>
+                            <div style="clear: both;">
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
-                                <asp:DropDownList ID="cmbBrand" runat="server" CssClass="txtUpl">
+                            <div style="float: left; width: 135px;">
+                                Brand
+                            </div>
+                            <div style="float: left;">
+                                <asp:DropDownList ID="cmbBrand" runat="server" CssClass="txtUpl" Style="width: 280px!important">
                                 </asp:DropDownList>
                             </div>
-                            <div>
-                                Category :&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="lnkCategory" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow3','dvInnerWindow2',0)"
-                                    runat="server"><img alt="Add Category" title="Add Category" src="../Images/category.gif" /></asp:LinkButton>
+                            <div style="float: left; padding-left: 8px;">
+                                <span class="btn5">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow4','dvInnerWindow3',0)"><span class="AddNewData"></span>Add</asp:LinkButton>
+                                </span>
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
-                                <asp:DropDownList ID="cmbCategory" runat="server" CssClass="txtUpl">
+                            <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Category
+                            </div>
+                            <div style="float: left;">
+                                <asp:DropDownList ID="cmbCategory" runat="server" CssClass="txtUpl" Style="width: 280px!important">
                                 </asp:DropDownList>
-                                <%-- <asp:RequiredFieldValidator ID="reqtxtPassword" runat="server" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
-                            <div>
-                                Size :&nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:LinkButton ID="lnkAddSize" href="#" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow2','dvInnerWindow1',0)"
-                                    runat="server"><img src="../Images/size.png" alt="Add Size" title="Add Size" /></asp:LinkButton>
+                            <div style="float: left; padding-left: 8px;">
+                                <span class="btn5">
+                                    <asp:LinkButton ID="lnkCategory" runat="server" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow3','dvInnerWindow2',0)"><span class="AddNewData"></span>Add</asp:LinkButton>
+                                </span>
                             </div>
-                            <div class="alt" style="margin-bottom: 5px;">
-                                <asp:CheckBoxList ID="chkSize" runat="server">
+                            <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Size
+                            </div>
+                            <div style="float: left; width: 278px;">
+                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="3"
+                                    CellPadding="5" CellSpacing="5">
                                 </asp:CheckBoxList>
-                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtZIP" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
-                            <div style="float: left">
-                                <div style="margin: 0!important">
-                                    Buying Price :
-                                </div>
-                                <div class="alt" style="margin-bottom: 5px;">
-                                    <asp:TextBox ID="txtBuyingPrice" runat="server" onkeyup="extractNumber(this,-1,false);"
-                                        onblur="extractNumber(this,-1,false);calculateSellingPrice();" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox></td>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </div>
+                            <div style="float: left; padding-left: 8px;">
+                                <span class="btn5">
+                                    <asp:LinkButton ID="lnkAddSize" runat="server" OnClientClick="ClearFormFields();ShowModalDiv('ModalWindow2','dvInnerWindow1',0)"><span class="AddNewData"></span>Add</asp:LinkButton>
+                                </span>
                             </div>
-                            <div style="float: left; padding-left: 18px">
-                                <div style="margin: 0!important">
-                                    Tax :
-                                </div>
-                                <div class="alt" style="margin-bottom: 5px;">
-                                    <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                        onblur="extractNumber(this,-1,false);" Style="width: 160px!important"></asp:TextBox></td>
-                                    <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                            <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Buying Price
+                            </div>
+                            <div style="float: left;">
+                                <asp:TextBox ID="txtBuyingPrice" runat="server" onkeyup="extractNumber(this,-1,false);"
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" CssClass="txtCred"
+                                    Style="width: 160px!important"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                            <div style="clear: both">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Tax
+                            </div>
+                            <div style="float: left;">
+                                <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
+                                    onblur="extractNumber(this,-1,false);" Style="width: 160px!important"></asp:TextBox></td>
+                                <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                </div>
                             </div>
                             <div style="clear: both">
                             </div>
-                            <div style="float: left">
-                                <div style="margin: 0!important">
-                                    Margin :<span class="mandet2"></span>
-                                </div>
-                                <div class="alt" style="margin-bottom: 5px;">
-                                    <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
-                                        ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                </div>
+                            <div style="float: left; width: 135px;">
+                                Margin <span class="mandet2"></span>
                             </div>
-                            <div style="float: left; padding-left: 18px">
-                                <div style="margin: 0!important">
-                                    Selling Price :<span class="mandet2"></span>
-                                </div>
-                                <div class="alt" style="margin-bottom: 5px;">
-                                    <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);"
-                                        onblur="extractNumber(this,-1,false);" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                </div>
+                            <div style="float: left;">
+                                <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
+                                    ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
                             </div>
                             <div style="clear: both">
-                                <div>
-                                    Bar Code :<span class="mandet2"></span>
-                                </div>
-                                <div class="alt" style="margin-bottom: 5px;">
-                                    <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox>
-                                </div>
-                                <div class="btn-wrapper4">
-                                    <span class="btn">
-                                        <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
-                                    <span class="btn">
-                                        <asp:LinkButton ID="lnkCancel" runat="server" CausesValidation="false" OnClick="lnkCancel_Click">Cancel</asp:LinkButton>
-                                    </span>
-                                </div>
                             </div>
+                            <div style="float: left; width: 135px;">
+                                Selling Price <span class="mandet2"></span>
+                            </div>
+                            <div style="float: left;">
+                                <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
+                                    runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                            </div>
+                            <div style="clear: both">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Bar Code <span class="mandet2"></span>
+                            </div>
+                            <div style="float: left;">
+                                <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox>
+                            </div>
+                            <div class="btn-wrapper4">
+                                <span class="btn">
+                                    <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
+                                <span class="btn">
+                                    <asp:LinkButton ID="lnkCancel" runat="server" CausesValidation="false" OnClick="lnkCancel_Click">Cancel</asp:LinkButton>
+                                </span>
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
                 <div id="ModalWindow2" style="display: none" clientidmode="Static">
@@ -254,10 +272,10 @@
                                                                     CommandName="Delete" ToolTip="Delete" OnClientClick="return confirm('Are you sure you want to delete? ');" />
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server"
-                                                                    CommandName="Update" ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
-                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png" runat="server"
-                                                                    CommandName="Cancel" ToolTip="Cancel" />
+                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server" CommandName="Update"
+                                                                    ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
+                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png"
+                                                                    runat="server" CommandName="Cancel" ToolTip="Cancel" />
                                                             </EditItemTemplate>
                                                             <FooterStyle />
                                                             <FooterTemplate>
@@ -361,10 +379,10 @@
                                                                     CommandName="Delete" ToolTip="Delete" OnClientClick="return confirm('Are you sure you want to delete? ');" />
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server"
-                                                                    CommandName="Update" ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
-                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png" runat="server"
-                                                                    CommandName="Cancel" ToolTip="Cancel" />
+                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server" CommandName="Update"
+                                                                    ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
+                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png"
+                                                                    runat="server" CommandName="Cancel" ToolTip="Cancel" />
                                                             </EditItemTemplate>
                                                             <FooterStyle />
                                                             <FooterTemplate>
@@ -465,10 +483,10 @@
                                                                     CommandName="Delete" ToolTip="Delete" OnClientClick="return confirm('Are you sure you want to delete? ');" />
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server"
-                                                                    CommandName="Update" ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
-                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png" runat="server"
-                                                                    CommandName="Cancel" ToolTip="Cancel" />
+                                                                <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server" CommandName="Update"
+                                                                    ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
+                                                                <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png"
+                                                                    runat="server" CommandName="Cancel" ToolTip="Cancel" />
                                                             </EditItemTemplate>
                                                             <FooterStyle />
                                                             <FooterTemplate>
@@ -503,5 +521,4 @@
     <!--Footer Start-->
     </form>
 </body>
-
 </html>
