@@ -167,6 +167,30 @@ namespace DAL.Component
             return lstManufacturer;
         }
 
+        public List<Manufacturer> GetAllActive()
+        {
+            object[] mParams = { };
+
+
+            List<Manufacturer> lstManufacturer = new List<Manufacturer>();
+            using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllActiveManufacturer", mParams))
+            {
+                while (reader.Read())
+                {
+                    Manufacturer objManufacturer = new Manufacturer();
+
+                    if (reader["ManufacturerID"] != DBNull.Value)
+                        objManufacturer.ManufacturerID = Convert.ToInt32(reader["ManufacturerID"]);
+
+                    if (reader["CompanyName"] != DBNull.Value)
+                        objManufacturer.CompanyName = Convert.ToString(reader["CompanyName"]);
+
+                    lstManufacturer.Add(objManufacturer);
+                }
+            }
+            return lstManufacturer;
+        }
+
         /// <summary>
         /// Returns Manufacturer details of supplied Manufacturer id
         /// </summary>

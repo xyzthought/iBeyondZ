@@ -12,6 +12,7 @@ using System.Data;
 using System.Web.Mail;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace DAL.Component
 {
@@ -66,6 +67,39 @@ namespace DAL.Component
 
             return list;
 
+        }
+
+        public List<BLL.BusinessObject.Product> GetAllActiveProduct()
+        {
+            List<BLL.BusinessObject.Product> lstProduct = new List<BLL.BusinessObject.Product>();
+            try
+            {
+                object[] mParams = { };
+
+                Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllActiveProduct", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        BLL.BusinessObject.Product objProduct = new BLL.BusinessObject.Product();
+
+                        if (reader["ProductID"] != DBNull.Value)
+                            objProduct.ProductID = Convert.ToInt32(reader["ProductID"]);
+
+                        if (reader["ProductName"] != DBNull.Value)
+                            objProduct.ProductName = Convert.ToString(reader["ProductName"]);
+
+                        lstProduct.Add(objProduct);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstProduct;
         }
 
         public int InsertProduct(BLL.BusinessObject.Product vobjProduct)
