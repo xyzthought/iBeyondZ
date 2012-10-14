@@ -260,6 +260,11 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     private void InsertDataintoTempDataTable(Sale objSale, bool blnIsSingleEntry)
     {
+        if (lnkAddMore.Text.ToLower() == "update")
+        {
+            DeleteRowFromTempTable(objSale);
+        }
+
         DataRow dtRow = dtProductDetail.NewRow();
         dtRow["ProductID"] = objSale.ProductID;
         dtRow["BarCode"] = objSale.BarCode;
@@ -272,6 +277,17 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtRow["Tax"] = objSale.Tax; ;
         dtRow["Price"] = objSale.Price * (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
         dtProductDetail.Rows.Add(dtRow);
+    }
+
+    private void DeleteRowFromTempTable(Sale objSale)
+    {
+        var rows = dtProductDetail.Select("ProductID ="+objSale.ProductID);
+        foreach (var row in rows)
+            row.Delete();
+        dtProductDetail.AcceptChanges();
+        txtProductBarCode.Enabled = true;
+        lnkAddMore.Text = "Add";
+        //dtProductDetail.AsEnumerable().Where(a => Convert.ToInt32(a["ProductID"]) == objSale.ProductID).CopyToDataTable();
     }
 
 
@@ -390,11 +406,13 @@ public partial class Modules_AddEditSaleOrder : PageBase
             {
                 txtProductBarCode.Text = dtProductDetail.Rows[i]["BarCode"].ToString();
                 txtQuantity.Text = dtProductDetail.Rows[i]["Quantity"].ToString();
-                dtProductDetail.Rows[i].Delete();
+                //dtProductDetail.Rows[i].Delete();
+                lnkAddMore.Text = "Update";
+                txtProductBarCode.Enabled = false;
                 break;
             }
         }
-        dtProductDetail.AcceptChanges();
+        //dtProductDetail.AcceptChanges();
         PopulateProductDetail();
         CalculateTotalPrice();
 
