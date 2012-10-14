@@ -64,15 +64,16 @@ namespace DAL.Component
             return (int)db.GetParameterValue(dbCommand, "@Return");
         }
 
-        public bool DeleteSize(int SizeID)
+        public int DeleteSize(int SizeID)
         {
 
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_DeleteSize");
 
             db.AddInParameter(dbCommand, "SizeID", DbType.Int32, SizeID);
-
-            return (db.ExecuteNonQuery(dbCommand) == 1);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            return (int)db.GetParameterValue(dbCommand, "@Return");
         }
     }
 }
