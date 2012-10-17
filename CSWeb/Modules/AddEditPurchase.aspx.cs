@@ -16,12 +16,13 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             string SelectedMode = "";
+            int intProductPurchaseID = 0;
             string strQuery = Request.QueryString["q"];
             if (!string.IsNullOrEmpty(strQuery))
             {
                 Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
                 SelectedMode = objQuery["MODE"].ToString();
-                int intProductPurchaseID = Convert.ToInt32(objQuery["ID"].ToString());
+                intProductPurchaseID = Convert.ToInt32(objQuery["ID"].ToString());
             }
             else
             {
@@ -38,12 +39,15 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
             {
 
                 //PopulateSaleDetail(SaleID);
+                PopulateData(intProductPurchaseID);
                 lblHeader.Text = "EDIT | Product Purchase";
             }
             else
             {
+                txtProductPurchaseID.Value = "0";
                 lblHeader.Text = "ADD | Product Purchase";
             }
+
         }
     }
 
@@ -132,12 +136,84 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
     protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
     {
         ProductPurchase objProductPurchase = new ProductPurchase();
+        objProductPurchase.ProductPurchaseID = Convert.ToInt32(txtProductPurchaseID.Value);
         objProductPurchase.ProductID = Convert.ToInt32(cmbProduct.SelectedValue);
+        objProductPurchase.ManufacturerID = Convert.ToInt32(cmbManufacturer.SelectedValue);
+        objProductPurchase.BrandID = Convert.ToInt32(cmbBrand.SelectedValue);
+        objProductPurchase.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
+        objProductPurchase.SeasonID = Convert.ToInt32(cmbSeason.SelectedValue);
+        objProductPurchase.PurchaseDate = Convert.ToDateTime(txtDateOfPurchase.Value);
+        objProductPurchase.Quantity = Convert.ToInt32(txtQuantity.Text);
+        objProductPurchase.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
+        objProductPurchase.Tax = Convert.ToDecimal(txtTax.Text);
+        objProductPurchase.Margin = Convert.ToDecimal(txtMargin.Text);
+        objProductPurchase.SellingPrice = Convert.ToDecimal(txtSellingPrice.Text);
+        objProductPurchase.BarCode = txtBarcode.Text.Trim();
+        objProductPurchase.Quantity = Convert.ToInt32(txtQuantity.Text);
 
+        string strSizeIDs = "<data>";
+        foreach (ListItem lstSizeIDs in chkSize.Items)
+        {
+            if (lstSizeIDs.Selected == true)
+            {
+                strSizeIDs += "<sizes><SizeID>" + lstSizeIDs.Value + "</SizeID></sizes>";
+            }
+        }
+        strSizeIDs += "</data>";
+
+        objProductPurchase.SizeIDs = strSizeIDs;
+
+        new ProductPurchaseBLL().AddEditPurchase(ref objProductPurchase);
+
+        if (objProductPurchase.ReturnValue > 0)
+        {
+            Response.Redirect("BuyingInterface.aspx", false);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + objProductPurchase.ReturnMessage + "');", true);
+        }
     }
 
     protected void lnkCancel_Click(object sender, EventArgs e)
-    {
+    { 
         Response.Redirect("BuyingInterface.aspx", false);
     }
+
+    private void PopulateData(int vintProductPurchaseID)
+    {
+        ProductPurchase objProductPurshase = new ProductPurchase();
+        objProductPurshase.ProductPurchaseID = vintProductPurchaseID;
+        new ProductPurchaseBLL().GetByID(ref objProductPurshase);
+        txtProductPurchaseID.Value = objProductPurshase.ProductPurchaseID.ToString();
+        txtDateOfPurchase.Value = objProductPurshase.PurchaseDate.ToShortDateString();
+        cmbManufacturer.SelectedValue = objProductPurshase.ManufacturerID.ToString();
+        cmbProduct.SelectedValue = objProductPurshase.ProductID.ToString();
+        txtBarcode.Text = objProductPurshase.BarCode;
+        cmbBrand.SelectedValue = objProductPurshase.BrandID.ToString();
+        cmbCategory.SelectedValue = objProductPurshase.CategoryID.ToString();
+        cmbSeason.SelectedValue = objProductPurshase.SeasonID.ToString();
+        txtBuyingPrice.Text = objProductPurshase.BuyingPrice.ToString("F2");
+        txtTax.Text = objProductPurshase.Tax.ToString("F2");
+        txtMargin.Text = objProductPurshase.Margin.ToString("F2");
+        txtSellingPrice.Text = objProductPurshase.SellingPrice.ToString("F2");
+        txtQuantity.Text = objProductPurshase.Quantity.ToString();
+
+        if (! String.IsNullOrEmpty(objProductPurshase.SizeIDs))
+        {
+            string[] arrSizeIDs = objProductPurshase.SizeIDs.Split(',');
+            for (int i = 0; i < arrSizeIDs.Length; i++)
+            {
+                for (int j =0; j< chkSize.Items.Count; j++)
+                {
+                    if (chkSize.Items[j].Value.Equals(arrSizeIDs[i]))
+                    {
+                        chkSize.Items[j].Selected = true;
+                    }
+                }
+            }
+        }
+
+    }
+
 }

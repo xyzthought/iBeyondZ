@@ -227,9 +227,7 @@ public partial class BuyingInterface : PageBase
                     lblMsg.Text = objProductPurchase.ReturnMessage;
                 }
             }
-
-
-
+            
         }
         catch (Exception ex)
         {

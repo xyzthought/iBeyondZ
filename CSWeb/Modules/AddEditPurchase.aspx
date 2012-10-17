@@ -30,7 +30,12 @@
             if ($('#txtMargin').val() == '') {
                 $('#txtMargin').val('0');
             }
-            var val = $('#txtBuyingPrice').val() * $('#txtMargin').val()
+
+            if ($('#txtTax').val() == '') {
+                $('#txtTax').val('0');
+            }
+
+            var val = parseFloat( $('#txtBuyingPrice').val()) + parseFloat( $('#txtMargin').val()) + parseFloat( $('#txtTax').val());
             $('#txtSellingPrice').val(val);
         }
         /*
@@ -79,6 +84,17 @@
                                 <span id="lblError" runat="server"></span>
                             </div>
                             <div style="float: left; width: 135px;">
+                                Purchase Date <span class="mandet2">* </span>
+                            </div>
+                            <div style="float: left;">
+                                <input type="text" ID="txtDateOfPurchase" name="txtDateOfPurchase" runat="server" class="txtCred" style="width:160px!important"  readonly="readonly" />
+                                <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" ControlToValidate="txtDateOfPurchase" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:HiddenField ID="txtProductPurchaseID" runat="server" Visible="false" />
+                            </div>
+                            <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
                                 Product <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
@@ -89,6 +105,16 @@
                                     Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div style="clear: both;">
+                            </div>
+                            <div style="float: left; width: 135px;">
+                                Bar Code <span class="mandet2">* </span>
+                            </div>
+                            <div style="float: left;">
+                                <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="reqtxtBarcode" runat="server" ErrorMessage="*"
+                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBarcode" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                            <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
                                 Manufacturer<span class="mandet2">* </span>
@@ -165,7 +191,7 @@
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                    onblur="extractNumber(this,-1,false);" Style="width: 160px!important;"></asp:TextBox>
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 160px!important;"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
@@ -190,13 +216,16 @@
                             <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Bar Code <span class="mandet2">* </span>
+                                Quantity
                             </div>
                             <div style="float: left;">
-                                <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqtxtBarcode" runat="server" ErrorMessage="*"
-                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBarcode" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtQuantity" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);" Style="width: 160px!important;"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="reqtxtQuantity" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
+                                ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
+                            <div style="clear: both">
+                            </div>
+                            
                             <div class="btn-wrapper4">
                                 <span class="btn">
                                     <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click">Save</asp:LinkButton></span>
@@ -221,3 +250,36 @@
     </form>
 </body>
 </html>
+<!--Date Picker-->
+<script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.datepicker.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.widget.js" type="text/javascript"></script>
+<link href="../Styles/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" />
+<link href="../Styles/jquery.ui.theme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+  
+    $(function () {
+        $("#txtDateOfPurchase").datepicker({
+            showOn: "button",
+            buttonImage: "../images/calendar.gif",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: "+0d"
+        });
+    });
+    function ChangeDatePicker() {
+        $("#txtDateOfPurchase").datepicker({
+            showOn: "button",
+            buttonImage: "../images/calendar.gif",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: "+0d"
+        });
+    }
+
+    
+
+</script>
+<!--Date Picker-->

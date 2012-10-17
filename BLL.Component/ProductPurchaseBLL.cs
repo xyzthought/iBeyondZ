@@ -25,7 +25,6 @@ namespace BLL.Component
         {
             new ProductPurchaseDB().Add(ref vobjProductPurchase);
         }
-
         public void Update(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().Update(ref vobjProductPurchase);

@@ -25,8 +25,7 @@ namespace BLL.BusinessObject
         public string SizeIDs { get; set; }
         public string ProductName { get; set; }
         public string Sizes { get; set; }            
-
-
+        
         /*
         private int mintPurchaseID;
         private int mintManufacturerID;

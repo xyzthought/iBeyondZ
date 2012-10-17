@@ -117,7 +117,7 @@
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Size" SortExpression="Size">
+                                        <asp:TemplateField HeaderText="Size" SortExpression="Sizes">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblSize" runat="server" Text='<%# Eval("Sizes") %>' ToolTip='<%# Eval("Sizes") %>'></asp:Label>
                                             </ItemTemplate>
@@ -131,7 +131,7 @@
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                                        <asp:TemplateField HeaderText="Buying Price" SortExpression="BuyingPrice">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>' ToolTip='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'></asp:Label>
                                             </ItemTemplate>

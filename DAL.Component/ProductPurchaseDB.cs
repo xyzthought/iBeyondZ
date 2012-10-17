@@ -140,7 +140,7 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@PurchaseDate", DbType.DateTime, vobjProductPurchase.PurchaseDate);
                 dBase.AddInParameter(objCmd, "@Quantity", DbType.Int32, vobjProductPurchase.Quantity);
                 dBase.AddInParameter(objCmd, "@BuyingPrice", DbType.Decimal, vobjProductPurchase.BuyingPrice);
-                dBase.AddInParameter(objCmd, "@Tax", DbType.Decimal, vobjProductPurchase.ProductPurchaseID);
+                dBase.AddInParameter(objCmd, "@Tax", DbType.Decimal, vobjProductPurchase.Tax);
                 dBase.AddInParameter(objCmd, "@Margin", DbType.Decimal, vobjProductPurchase.Margin);
                 dBase.AddInParameter(objCmd, "@SellingPrice", DbType.Decimal, vobjProductPurchase.SellingPrice);
                 dBase.AddInParameter(objCmd, "@BarCode", DbType.String, vobjProductPurchase.BarCode);
@@ -152,8 +152,7 @@ namespace DAL.Component
 
                 vobjProductPurchase.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@MessageID");
                 vobjProductPurchase.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@Message");
-
-
+                
             }
             catch (Exception ex)
             {
