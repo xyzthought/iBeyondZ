@@ -237,7 +237,7 @@
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
                                                         <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred"></asp:TextBox>
-                                                        <asp:RegularExpressionValidator ID="RegEmail" runat="server" ErrorMessage="Invalid Email"
+                                                        <asp:RegularExpressionValidator ID="RegEmail" runat="server" ErrorMessage="<br>Invalid Email"
                                                             Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ControlToValidate="txtEmailID"
                                                             ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></asp:RegularExpressionValidator>
                                                     </div>

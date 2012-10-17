@@ -300,7 +300,7 @@ public partial class Modules_Manufacturer : PageBase
         objManufacturer.ContactFirstName = txtContactFirstName.Text.Trim();
         objManufacturer.ContactLastName = txtContactLastName.Text.Trim();
         objManufacturer.Address = txtAddress.Text.Trim();
-        objManufacturer.ZIP = txtAddress.Text.Trim();
+        objManufacturer.ZIP = txtZIP.Text.Trim();
         objManufacturer.City = txtCity.Text.Trim();
         objManufacturer.Country = txtCountry.Text.Trim();
         objManufacturer.Phone = txtPhone.Text.Trim();
