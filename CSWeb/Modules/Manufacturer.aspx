@@ -36,7 +36,7 @@
                 <div class="searchBox">
                     <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
                         onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
-                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" OnClick="lnkBtnSearch_Click"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" ValidationGroup="abc" OnClick="lnkBtnSearch_Click"></asp:LinkButton>
                     <div class="clear">
                     </div>
                 </div>
