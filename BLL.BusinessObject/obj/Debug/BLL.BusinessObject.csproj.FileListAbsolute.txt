@@ -13,3 +13,8 @@ C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\BLL.BusinessObject\
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb
+C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.pdb
+C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb

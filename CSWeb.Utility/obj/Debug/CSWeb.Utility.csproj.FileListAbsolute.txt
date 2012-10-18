@@ -19,3 +19,10 @@ C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\CSWeb.Utility\bin\D
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\CSWeb.Utility\obj\Debug\ResolveAssemblyReference.cache
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.dll
 C:\Anshuman\Projects\iBeyondz\CSLatest\20121014_L_2\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.pdb
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\bin\Debug\CSWeb.Utility.dll
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\bin\Debug\CSWeb.Utility.pdb
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\bin\Debug\BLL.BusinessObject.dll
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\bin\Debug\BLL.BusinessObject.pdb
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\obj\Debug\CSWeb.Utility.dll
+C:\Users\suvendu\Projects\CShop\CSWeb.Utility\obj\Debug\CSWeb.Utility.pdb
