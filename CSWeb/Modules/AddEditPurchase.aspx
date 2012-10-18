@@ -187,11 +187,11 @@
                             <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Tax
+                                Tax (%)
                             </div>
                             <div style="float: left;">
-                                <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                    onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 160px!important;"></asp:TextBox>
+                                <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);" Text="21"
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 160px!important;" MaxLength="2"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
