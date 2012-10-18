@@ -139,7 +139,7 @@ namespace DAL.Component
 
                 mParams[0] = Convert.ToInt32(vstrProductID);
 
-                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode", mParams))
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode_V2", mParams))
                 {
                     while (reader.Read())
                     {
@@ -241,7 +241,7 @@ namespace DAL.Component
                 using (DbConnection connection = dBase.CreateConnection())
                 {
                     connection.Open();
-                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoComplete");
+                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoComplete_V2");
                     DataSet dsData = dBase.ExecuteDataSet(objCmd);
                     dtData = dsData.Tables[0];
                     connection.Close();
@@ -296,7 +296,7 @@ namespace DAL.Component
             Message objMessage = new Message();
             try
             {
-                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleDetail");
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleDetail_V2");
                 dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
                 dBase.AddInParameter(objCmd, "@ProductID", DbType.Int32, objSale.ProductID);
                 dBase.AddInParameter(objCmd, "@SizeID", DbType.Int32, objSale.SizeID);
@@ -348,7 +348,7 @@ namespace DAL.Component
             try
             {
 
-                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSaleDetailBySaleID");
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSaleDetailBySaleID_V2");
                 dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
 
                 using (IDataReader reader = dBase.ExecuteReader(objCmd))

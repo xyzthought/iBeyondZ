@@ -167,8 +167,8 @@
                                 Size <span class="mandet2">* </span>
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
-                                </asp:CheckBoxList>
+                                <asp:RadioButtonList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
+                                </asp:RadioButtonList>
                                 <%--<asp:CustomValidator ID="cvalZones" runat="server" ClientValidationFunction="ValidateZones" ErrorMessage="*" Font-Size="X-Small"
                                     ForeColor="Red" Display="Dynamic" />--%>
                             </div>
