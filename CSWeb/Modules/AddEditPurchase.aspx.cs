@@ -44,6 +44,7 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
             }
             else
             {
+                txtDateOfPurchase.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
                 txtProductPurchaseID.Value = "0";
                 lblHeader.Text = "ADD | Product Purchase";
             }
@@ -142,7 +143,7 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
         objProductPurchase.BrandID = Convert.ToInt32(cmbBrand.SelectedValue);
         objProductPurchase.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
         objProductPurchase.SeasonID = Convert.ToInt32(cmbSeason.SelectedValue);
-        objProductPurchase.PurchaseDate = Convert.ToDateTime(txtDateOfPurchase.Value);
+        objProductPurchase.PurchaseDate =Convert.ToDateTime(txtDateOfPurchase.Value);
         objProductPurchase.Quantity = Convert.ToInt32(txtQuantity.Text);
         objProductPurchase.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
         objProductPurchase.Tax = Convert.ToDecimal(txtTax.Text);

@@ -35,7 +35,8 @@
                 $('#txtTax').val('0');
             }
 
-            var val = parseFloat( $('#txtBuyingPrice').val()) + parseFloat( $('#txtMargin').val()) + parseFloat( $('#txtTax').val());
+            var TaxonPurchase = parseFloat($('#txtBuyingPrice').val()) * parseFloat($('#txtTax').val()) / 100;
+            var val = parseFloat($('#txtBuyingPrice').val()) + TaxonPurchase + parseFloat($('#txtMargin').val());
             $('#txtSellingPrice').val(val);
         }
         /*
@@ -87,7 +88,7 @@
                                 Purchase Date <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
-                                <input type="text" ID="txtDateOfPurchase" name="txtDateOfPurchase" runat="server" class="txtCred" style="width:160px!important"  readonly="readonly" />
+                                <input type="text" ID="txtDateOfPurchase" name="txtDateOfPurchase" runat="server" class="txtCred" style="width:160px!important" />
                                 <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
                                     ForeColor="Red" ControlToValidate="txtDateOfPurchase" Display="Dynamic"></asp:RequiredFieldValidator>
                                     <asp:HiddenField ID="txtProductPurchaseID" runat="server" Visible="false" />
@@ -219,7 +220,7 @@
                                 Quantity
                             </div>
                             <div style="float: left;">
-                                <asp:TextBox ID="txtQuantity" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);" Style="width: 160px!important;"></asp:TextBox>
+                                <asp:TextBox ID="txtQuantity" runat="server" Text="1" CssClass="txtCred" onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);" Style="width: 160px!important;"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="reqtxtQuantity" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
                                 ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
