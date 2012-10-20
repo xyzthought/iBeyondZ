@@ -70,6 +70,7 @@ C:\Users\suvendu\Projects\CShop\BLL.Component\bin\Debug\CSWeb.Utility.pdb
 C:\Users\suvendu\Projects\CShop\BLL.Component\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\suvendu\Projects\CShop\BLL.Component\obj\Debug\BLL.Component.dll
 C:\Users\suvendu\Projects\CShop\BLL.Component\obj\Debug\BLL.Component.pdb
+<<<<<<< HEAD
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\bin\Debug\BLL.Component.dll
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\bin\Debug\BLL.Component.pdb
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\bin\Debug\BLL.BusinessObject.dll
@@ -88,3 +89,23 @@ D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\bin\Debug\Micros
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\obj\Debug\BLL.Component.dll
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.Component\obj\Debug\BLL.Component.pdb
+=======
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\BLL.Component.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\BLL.Component.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\BLL.BusinessObject.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\DAL.Component.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\CSWeb.Utility.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\BLL.BusinessObject.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\DAL.Component.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\CSWeb.Utility.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\obj\Debug\ResolveAssemblyReference.cache
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\obj\Debug\BLL.Component.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.Component\obj\Debug\BLL.Component.pdb
+>>>>>>> 4cd413d4d5d99a4eedc4f8af6ace4e9aa1332a18

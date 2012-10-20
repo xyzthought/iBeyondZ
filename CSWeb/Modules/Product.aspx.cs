@@ -120,7 +120,43 @@ public partial class Modules_Product : System.Web.UI.Page
 
 
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
 
+                TextBox txtControl;
+
+                GridViewRow emptyRow = gvGrid.Controls[0].Controls[0] as GridViewRow;
+
+                //txtControl = (TextBox)emptyRow.FindControl("txtSizeName1");
+
+                txtControl = (TextBox)emptyRow.FindControl("txtProductName1");
+                if (txtControl.Text != null)
+                {
+                    objProd.ProductName = txtControl.Text.Trim();
+                }
+                txtControl = (TextBox)emptyRow.FindControl("txtDescription1");
+                if (txtControl.Text != null)
+                {
+                    objProd.Description = txtControl.Text.Trim();
+                }
+                txtControl = (TextBox)emptyRow.FindControl("txtMargin1");
+                if (txtControl.Text != null)
+                {
+                    objProd.Margin = Convert.ToDecimal(txtControl.Text);
+                }
+
+                int mintReturn = new BLL.Component.ProductBLL().AddProduct(objProd);
+                if (mintReturn == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product already exists');", true);
+                }
+                else
+                {
+                    BindProduct();
+                }
+
+
+            }
         }
         catch (Exception ex)
         {
