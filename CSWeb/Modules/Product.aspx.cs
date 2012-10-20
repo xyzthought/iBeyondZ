@@ -234,4 +234,16 @@ public partial class Modules_Product : System.Web.UI.Page
 
 
 
+    protected void gvGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            gvGrid.PageIndex = e.NewPageIndex;
+            BindProduct();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
 }

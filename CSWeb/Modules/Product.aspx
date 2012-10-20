@@ -57,12 +57,13 @@
                             <div class="grid_container">
                                 <div class="inner" style="width: 700px!important; margin: 10px auto; border: 1px solid #eee">
                                     <ctrl:CustomGridView ID="gvGrid" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                        AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
+                                        AllowSorting="True" Width="100%" PageSize="50" GridLines="None" CssClass="gvStyle"
                                         SortColumn="ProductName" DataKeyNames="ProductID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                         SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ShowFooter="true" EmptyDataText="No Record Found"
                                         OnRowCancelingEdit="gvGrid_RowCancelingEdit" OnRowCommand="gvGrid_RowCommand"
                                         OnRowDataBound="gvGrid_RowDataBound" OnRowDeleting="gvGrid_RowDeleting" OnRowEditing="gvGrid_RowEditing"
-                                        OnRowUpdating="gvGrid_RowUpdating">
+                                        OnRowUpdating="gvGrid_RowUpdating" 
+                                        onpageindexchanging="gvGrid_PageIndexChanging">
                                         <EmptyDataTemplate>
                                             <table cellpadding="0" cellspacing="0" width="100%">
                                                 <tr>
