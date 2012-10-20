@@ -192,6 +192,7 @@ body {
 }
 .gvStyle tr td, .gvStyle tr th {
     padding: 5px;
+   
 }
 .gvStyle tr.trHeader {
     background: url("../Images/tblHead.png") repeat-x scroll center top #EEECEC;
