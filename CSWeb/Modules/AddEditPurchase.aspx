@@ -168,10 +168,13 @@
                                 Size <span class="mandet2">* </span>
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:RadioButtonList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
-                                </asp:RadioButtonList>
-                                <%--<asp:CustomValidator ID="cvalZones" runat="server" ClientValidationFunction="ValidateZones" ErrorMessage="*" Font-Size="X-Small"
-                                    ForeColor="Red" Display="Dynamic" />--%>
+                                <asp:DropDownList ID="cmbSizes" runat="server" CssClass="txtUpl">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="reqcmbSizes" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="-1" ControlToValidate="cmbSizes" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <%--<asp:RadioButtonList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
+                                </asp:RadioButtonList--%>
+
                             </div>
                             <div style="clear: both;">
                             </div>
@@ -207,10 +210,10 @@
                             </div>
                             <div style="clear: both">
                             </div>
-                            <div style="float: left; width: 135px;">
+                            <div style="display:none" > <!-- float: left; width: 135px;"> -->
                                 Selling Price <span class="mandet2"></span>
                             </div>
-                            <div style="float: left;">
+                            <div style="display:none" > <!--"float: left;">-->
                                 <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
                                     runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
                             </div>

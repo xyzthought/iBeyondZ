@@ -84,11 +84,12 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
     {
         try
         {
-            List<Size> lstSize = new SizeBLL().GetSize(0);
-            chkSize.DataSource = lstSize;
-            chkSize.DataValueField = "SizeID";
-            chkSize.DataTextField = "SizeName";
-            chkSize.DataBind();
+            //List<Size> lstSize = new SizeBLL().GetSize(0);
+            Common.BindControl(cmbSizes, new SizeBLL().GetSize(0), "SizeName", "SizeID", Constants.ControlType.DropDownList, true);
+            //chkSize.DataSource = lstSize;
+            //chkSize.DataValueField = "SizeID";
+            //chkSize.DataTextField = "SizeName";
+            //chkSize.DataBind();
         }
         catch (Exception ex)
         {
@@ -153,13 +154,14 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
         objProductPurchase.Quantity = Convert.ToInt32(txtQuantity.Text);
 
         string strSizeIDs = "<data>";
-        foreach (ListItem lstSizeIDs in chkSize.Items)
-        {
-            if (lstSizeIDs.Selected == true)
-            {
-                strSizeIDs += "<sizes><SizeID>" + lstSizeIDs.Value + "</SizeID></sizes>";
-            }
-        }
+        //foreach (ListItem lstSizeIDs in chkSize.Items)
+        //{
+        //    if (lstSizeIDs.Selected == true)
+        //    {
+        //        strSizeIDs += "<sizes><SizeID>" + lstSizeIDs.Value + "</SizeID></sizes>";
+        //    }
+        //}
+        strSizeIDs += "<sizes><SizeID>" + cmbSizes.SelectedValue + "</SizeID></sizes>";
         strSizeIDs += "</data>";
 
         objProductPurchase.SizeIDs = strSizeIDs;
@@ -205,13 +207,14 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
             string[] arrSizeIDs = objProductPurshase.SizeIDs.Split(',');
             for (int i = 0; i < arrSizeIDs.Length; i++)
             {
-                for (int j =0; j< chkSize.Items.Count; j++)
-                {
-                    if (chkSize.Items[j].Value.Equals(arrSizeIDs[i]))
-                    {
-                        chkSize.Items[j].Selected = true;
-                    }
-                }
+                cmbSizes.SelectedValue = arrSizeIDs[i];
+                //for (int j =0; j< chkSize.Items.Count; j++)
+                //{
+                //    if (chkSize.Items[j].Value.Equals(arrSizeIDs[i]))
+                //    {
+                //        chkSize.Items[j].Selected = true;
+                //    }
+                //}
             }
         }
 

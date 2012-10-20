@@ -18,14 +18,14 @@ namespace DAL.Component
     {
         Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");
 
-        public List<ProductPurchase> GetAll(DateTime purchaseStartDate, DateTime purchaseEndDate, String ManufacturerName, PageInfo vobjPageInfo)
+        public List<ProductPurchase> GetAll(String purchaseStartDate, String purchaseEndDate, String ManufacturerName, PageInfo vobjPageInfo)
         {
             List<ProductPurchase> lstProductPurshase = new List<ProductPurchase>();
             try
             {
                 object[] mParams = {
-                                    new SqlParameter("@PurchaseStartDate", SqlDbType.DateTime),
-                                    new SqlParameter("@PurchaseEndDate", SqlDbType.DateTime),
+                                    new SqlParameter("@PurchaseStartDate", SqlDbType.VarChar),
+                                    new SqlParameter("@PurchaseEndDate", SqlDbType.VarChar),
                                     new SqlParameter("@CompanyName", SqlDbType.NVarChar),
                                     new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
                                     new SqlParameter("@SortDirection", SqlDbType.NVarChar),
@@ -100,7 +100,7 @@ namespace DAL.Component
                         if (reader["SeasonID"] != DBNull.Value)
                             vobjProductPurchase.SeasonID = Convert.ToInt32(reader["SeasonID"]);
                         if (reader["PurchaseDate"] != DBNull.Value)
-                            vobjProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToShortDateString();
+                            vobjProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToString("MM/dd/yyyy");
                         if (reader["Quantity"] != DBNull.Value)
                             vobjProductPurchase.Quantity = Convert.ToInt32(reader["Quantity"]);
                         if (reader["BuyingPrice"] != DBNull.Value)
@@ -137,7 +137,7 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@BrandID", DbType.Int32, vobjProductPurchase.BrandID);
                 dBase.AddInParameter(objCmd, "@CategoryID", DbType.Int32, vobjProductPurchase.CategoryID);
                 dBase.AddInParameter(objCmd, "@SeasonID", DbType.Int32, vobjProductPurchase.SeasonID);
-                dBase.AddInParameter(objCmd, "@PurchaseDate", DbType.DateTime, vobjProductPurchase.PurchaseDate);
+                dBase.AddInParameter(objCmd, "@PurchaseDate", DbType.String, vobjProductPurchase.PurchaseDate);
                 dBase.AddInParameter(objCmd, "@Quantity", DbType.Int32, vobjProductPurchase.Quantity);
                 dBase.AddInParameter(objCmd, "@BuyingPrice", DbType.Decimal, vobjProductPurchase.BuyingPrice);
                 dBase.AddInParameter(objCmd, "@Tax", DbType.Decimal, vobjProductPurchase.Tax);
