@@ -35,6 +35,10 @@
                 $('#txtTax').val('0');
             }
 
+            if ($('#txtSellingPrice').val() == '') {
+                $('#txtSellingPrice').val('0');
+            }
+
             //var TaxonPurchase = parseFloat($('#txtBuyingPrice').val()) * parseFloat($('#txtTax').val()) / 100;
             //var val = parseFloat($('#txtBuyingPrice').val()) + TaxonPurchase + parseFloat($('#txtMargin').val());
             //$('#txtSellingPrice').val(val);
