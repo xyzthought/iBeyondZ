@@ -555,4 +555,52 @@ public partial class Modules_MasterData : System.Web.UI.Page
 
     }
 
+    protected void gvSize_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            gvSize.PageIndex = e.NewPageIndex;
+            BindSizeMasterGrid();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+    protected void grvCategory_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvCategory.PageIndex = e.NewPageIndex;
+            BindCategory();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+    protected void grvSeason_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvSeason.PageIndex = e.NewPageIndex;
+            BindSeason();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+    protected void grvBrand_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvBrand.PageIndex = e.NewPageIndex;
+            BindBrand();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
 }
