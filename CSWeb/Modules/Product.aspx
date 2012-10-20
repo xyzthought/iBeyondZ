@@ -21,7 +21,7 @@
             $('#lblError').empty();
         }
     </script>
-    <style>
+    <style type="text/css">
     .gvStyle tr td, .gvStyle tr th{padding:5px;vertical-align:top;}
     </style>
 </head>

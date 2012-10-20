@@ -28,7 +28,6 @@ public partial class Modules_MasterData : System.Web.UI.Page
                 BindSizeMasterGrid();
                 BindCategory();
                 BindBrand();
-                BindProduct();
                 BindSeason();
             }
             catch (Exception ex)
@@ -175,27 +174,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
         grvSeason.DataSource = lstSeason;
         grvSeason.DataBind();
     }
-    private void BindProduct()
-    {
-        try
-        {
-
-            if (objPI.SortDirection == null && objPI.SortColumnName == null)
-            {
-                objPI.SortDirection = Convert.ToString(ViewState[Constants.SORTDERECTION]);
-                objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
-            }
-            //List<Manufacturer> objData = new ManufacturerBLL().GetAll(objPI);
-
-            BLL.Component.ProductBLL objprod = new BLL.Component.ProductBLL();
-            gvGrid.DataSource = objprod.GetAllProducts(objPI);
-            gvGrid.DataBind();
-        }
-        catch (Exception ex)
-        {
-            SendMail.MailMessage("CSWeb > Error > " + (new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-        }
-    }
+   
    
     protected void grvCategory_RowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -388,124 +367,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
 
     }
 
-    protected void gvGrid_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-    {
-        gvGrid.EditIndex = -1;
-        BindProduct();
-    }
-    protected void gvGrid_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        try
-        {
-            Product objProd=new Product();
-
-
-            if (e.CommandName.Equals("Add"))
-            {
-              
-                TextBox txtControl;
-
-                txtControl = ((TextBox)gvGrid.FooterRow.FindControl("txtProductName"));
-                if (txtControl.Text != null)
-                {
-                    objProd.ProductName = txtControl.Text.Trim();
-                }
-                txtControl = ((TextBox)gvGrid.FooterRow.FindControl("txtDescription"));
-                if (txtControl.Text != null)
-                {
-                    objProd.Description = txtControl.Text.Trim();
-                }
-                txtControl = ((TextBox)gvGrid.FooterRow.FindControl("txtMargin"));
-                if (txtControl.Text != null)
-                {
-                    objProd.Margin =Convert.ToDecimal(txtControl.Text);
-                }
-
-                int mintReturn = new BLL.Component.ProductBLL().AddProduct(objProd);
-                if (mintReturn == -1)
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product already exists');", true);
-                }
-                else
-                {
-                    BindProduct();
-                }
-
-                
-            }
-
-        }
-        catch (Exception ex)
-        {
-
-        }
-       
-    }
-    protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        int intProductID = Convert.ToInt32(gvGrid.DataKeys[e.RowIndex].Values[0].ToString());
-        bool blnReturn = new ProductBLL().DeleteProduct(intProductID);
-
-        BindProduct();
-    }
-    protected void gvGrid_RowEditing(object sender, GridViewEditEventArgs e)
-    {
-        gvGrid.EditIndex = e.NewEditIndex;
-        BindProduct();
-    }
-    protected void gvGrid_RowUpdating(object sender, GridViewUpdateEventArgs e)
-    {
-        try
-        {
-            Product objProd = new Product();
-            TextBox txtControl;
-
-            txtControl = ((TextBox)gvGrid.Rows[e.RowIndex].FindControl("txtProductIDE"));
-            if (txtControl.Text != null)
-            {
-                objProd.ProductID = Convert.ToInt32(txtControl.Text.Trim());
-            }
-
-            txtControl = ((TextBox)gvGrid.Rows[e.RowIndex].FindControl("txtProductNameE"));
-            if (txtControl != null)
-            {
-                objProd.ProductName = txtControl.Text.Trim();
-
-            }
-
-            txtControl = ((TextBox)gvGrid.Rows[e.RowIndex].FindControl("txtDescriptionE"));
-            if (txtControl != null)
-            {
-                objProd.Description = txtControl.Text.Trim();
-
-            }
-
-            txtControl = ((TextBox)gvGrid.Rows[e.RowIndex].FindControl("txtMarginE"));
-            if (txtControl != null)
-            {
-                objProd.Margin =Convert.ToDecimal(txtControl.Text.Trim());
-
-            }
-            objProd.UpdatedBy = 1;
-            int mintReturn = new BLL.Component.ProductBLL().EditProduct(objProd);
-            if (mintReturn == -1)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Brand with same name already exists.');", true);
-            }
-        }
-        catch (Exception ex)
-        {
-        }
-
-        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Updated successfully');", true);
-        gvGrid.EditIndex = -1;
-        BindProduct();
-       
-    }
-    protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-       
-    }
+   
 
     protected void grvSeason_RowEditing(object sender, GridViewEditEventArgs e)
     {

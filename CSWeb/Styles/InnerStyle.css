@@ -1044,6 +1044,15 @@ table.upl tr td.msgUpload {
     padding: 2px;
     width: 240px;
 }
+
+.txtMasterData {
+    border: 1px solid #DADADA;
+    height: 26px;
+    line-height: 24px;
+    padding: 2px;
+    width: 160px;
+}
+
 .txProdDescTextArea {
     border: 1px solid #DADADA;
     font-family: Arial,helvetica,Sans-Serif;
@@ -1877,3 +1886,8 @@ p, form, input, label {
     font-style:italic;
     font-family:'vardhana';
 }
+
+.divCenter {  
+            margin: 0px auto;  
+            width: 980px;  
+        }  

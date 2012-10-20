@@ -35,7 +35,7 @@
             <div class="breadcrmbLeft">
                 <input type="hidden" name="ctl00$ContentPlaceHolder1$currentReportName" id="currentReportName" />
                 <div class="reports">
-                    Manage Products
+                    Manage Master Data
                 </div>
                 <div class="clear">
                 </div>
@@ -52,134 +52,8 @@
                             </div>
                             <br style="clear: both" />
                             <div class="grid_container">
-                                <div style="width: 40%; float: left">
-                                    <ctrl:CustomGridView ID="gvGrid" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                        AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
-                                        SortColumn="ProductName" DataKeyNames="ProductID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
-                                        SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ShowFooter="true" EmptyDataText="No Record Found"
-                                        OnRowCancelingEdit="gvGrid_RowCancelingEdit" OnRowCommand="gvGrid_RowCommand"
-                                        OnRowDataBound="gvGrid_RowDataBound" OnRowDeleting="gvGrid_RowDeleting" OnRowEditing="gvGrid_RowEditing"
-                                        OnRowUpdating="gvGrid_RowUpdating">
-                                        <EmptyDataTemplate>
-                                            <table cellpadding="0" cellspacing="0" width="100%">
-                                                <tr>
-                                                    <th>
-                                                        <b>
-                                                            <asp:Label ID="lblProductID" runat="server" Text="ProductID" Visible="false" /></b>
-                                                    </th>
-                                                    <th>
-                                                        <b>
-                                                            <asp:Label ID="lblProductName" runat="server" Text="ProductName" /></b>
-                                                    </th>
-                                                    <th>
-                                                        <b>
-                                                            <asp:Label ID="lblDescription" runat="server" Text="Description" /></b>
-                                                    </th>
-                                                    <th>
-                                                        <b>
-                                                            <asp:Label ID="lblMargin" runat="server" Text="Margin" /></b>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProductID1" CssClass="txtProdDesc" runat="server" Visible="false"
-                                                            Text="0" />
-                                                    </td>
-                                                    <td valign="top">
-                                                        <asp:TextBox ID="txtProductName" CssClass="txtProdDesc" runat="server" Visible="true" />
-                                                    </td>
-                                                    <td valign="top">
-                                                        <asp:TextBox ID="txtDescription" CssClass="txProdDescTextArea" runat="server" Visible="true"
-                                                            Rows="3" />
-                                                    </td>
-                                                    <td valign="top">
-                                                        <asp:TextBox ID="txtMargin" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
-                                                            CssClass="txtProdDesc" runat="server" Visible="true" Style="width: 100px; text-align: right;" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </EmptyDataTemplate>
-                                        <Columns>
-                                            <asp:TemplateField HeaderText="ProductID" Visible="false">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblProductID" runat="server" Text='<%# Eval("ProductID") %>' Visible="false" />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtProductIDE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("ProductID") %>'
-                                                        Visible="false" />
-                                                </EditItemTemplate>
-                                                <FooterTemplate>
-                                                    <asp:TextBox ID="txtProductID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
-                                                </FooterTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Product">
-                                                <ItemStyle VerticalAlign="Top" />
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtProductNameE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("ProductName") %>' />
-                                                </EditItemTemplate>
-                                                <FooterTemplate>
-                                                    <asp:TextBox ID="txtProductName" CssClass="txtProdDesc" runat="server" />
-                                                </FooterTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Description">
-                                                <ItemStyle VerticalAlign="Top" />
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtDescriptionE" CssClass="txProdDescTextArea" runat="server" Text='<%# Eval("Description") %>'
-                                                        TextMode="MultiLine" />
-                                                </EditItemTemplate>
-                                                <FooterTemplate>
-                                                    <asp:TextBox ID="txtDescription" CssClass="txProdDescTextArea" runat="server" TextMode="MultiLine" />
-                                                </FooterTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Margin">
-                                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblMargin" runat="server" Text='<%# Eval("Margin") %>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtMarginE" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
-                                                        CssClass="txtProdDesc" Style="width: 100px; text-align: right;" runat="server"
-                                                        Text='<%# Eval("Margin") %>' />
-                                                </EditItemTemplate>
-                                                <FooterTemplate>
-                                                    <asp:TextBox ID="txtMargin" CssClass="txtProdDesc" runat="server" Style="width: 100px;
-                                                        text-align: right;" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);" />
-                                                </FooterTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Action">
-                                                <HeaderStyle />
-                                                <ItemStyle VerticalAlign="Top" />
-                                                <ItemTemplate>
-                                                    <asp:ImageButton ID="imgbtnEdit" ImageUrl="../Images/ico_Edit.png" runat="server"
-                                                        CommandName="Edit" ToolTip="Edit" ValidationGroup="Edit" />
-                                                    <asp:ImageButton ID="imgbtnDelete" ImageUrl="../Images/ico_delete.png" runat="server"
-                                                        CommandName="Delete" ToolTip="Delete" OnClientClick="return confirm('Are you sure you want to delete? ');" />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server" CommandName="Update"
-                                                        ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
-                                                    <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png"
-                                                        runat="server" CommandName="Cancel" ToolTip="Cancel" />
-                                                </EditItemTemplate>
-                                                <FooterStyle />
-                                                <FooterTemplate>
-                                                    <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
-                                                        CommandName="Add" ToolTip="Add New" Visible="true" ValidationGroup="NewD" />
-                                                </FooterTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                        <RowStyle CssClass="tdData" />
-                                        <HeaderStyle CssClass="trHeader" />
-                                    </ctrl:CustomGridView>
-                                </div>
-                                <div style="width: 25%; float: right; padding-left: 40px;">
-                                    <div id="divSize" style="height: 300px">
+                                <div class="divCenter">
+                                    <div id="divSize" style="float: left; padding-right: 10px;">
                                         <div class="reports" style="margin-bottom: 10px">
                                             Manage Size
                                         </div>
@@ -188,7 +62,7 @@
                                             <fieldset>
                                                 <div class="grid_container">
                                                     <ctrl:CustomGridView ID="gvSize" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                        AllowSorting="True" Width="100%" PageSize="5" GridLines="None" CssClass="gvStyle"
+                                                        AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
                                                         SortColumn="SizeID" DataKeyNames="SizeID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                         SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ShowFooter="true" EmptyDataText="No Record Found"
                                                         OnRowCancelingEdit="gvSize_RowCancelingEdit" OnRowCommand="gvSize_RowCommand"
@@ -208,11 +82,11 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtSizeID1" CssClass="txtProdDesc" runat="server" Visible="false"
+                                                                        <asp:TextBox ID="txtSizeID1" CssClass="txtMasterData" runat="server" Visible="false"
                                                                             Text="0" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtSizeName" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                                        <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -223,11 +97,11 @@
                                                                     <asp:Label ID="lblSizeID" runat="server" Text='<%# Eval("SizeID") %>' Visible="false" />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtSizeIDE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("SizeID") %>'
+                                                                    <asp:TextBox ID="txtSizeIDE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeID") %>'
                                                                         Visible="false" />
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
+                                                                    <asp:TextBox ID="txtSizeID" CssClass="txtMasterData" Text="0" runat="server" Visible="false" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Size">
@@ -235,10 +109,10 @@
                                                                     <asp:Label ID="lblSize" runat="server" Text='<%# Eval("SizeName") %>' />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtSizeNameE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("SizeName") %>' />
+                                                                    <asp:TextBox ID="txtSizeNameE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeName") %>' />
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeName" CssClass="txtProdDesc" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
@@ -270,8 +144,7 @@
                                             </fieldset>
                                         </div>
                                     </div>
-                                   
-                                    <div id="divCategory">
+                                    <div id="divCategory" style="float: left; padding-right: 10px;">
                                         <div class="reports" style="margin-bottom: 10px">
                                             Manage Category
                                         </div>
@@ -280,7 +153,7 @@
                                             <fieldset>
                                                 <div class="grid_container">
                                                     <ctrl:CustomGridView ID="grvCategory" runat="server" AutoGenerateColumns="false"
-                                                        AllowPaging="True" AllowSorting="True" Width="100%" PageSize="5" GridLines="None"
+                                                        AllowPaging="True" AllowSorting="True" Width="100%" PageSize="15" GridLines="None"
                                                         CssClass="gvStyle" SortColumn="CategoryID" DataKeyNames="CategoryID" SortOrder="Ascending"
                                                         SortAscImageUrl="~/Images/GridViewCtrl/asc.png" SortDescImageUrl="~/Images/GridViewCtrl/dsc.png"
                                                         ExportTemplatePath="~/Reports/Templates/" ExcelHeaderRow="8" StartRow="10" StartColumn="2"
@@ -304,11 +177,11 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtCategoryID" CssClass="txtProdDesc" runat="server" Visible="false"
+                                                                        <asp:TextBox ID="txtCategoryID" CssClass="txtMasterData" runat="server" Visible="false"
                                                                             Text="0" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtCategoryName" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                                        <asp:TextBox ID="txtCategoryName" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -319,11 +192,12 @@
                                                                     <asp:Label ID="lblCategoryID" runat="server" Text='<%# Eval("CategoryID") %>' Visible="false" />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtCategoryIDE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("CategoryID") %>'
+                                                                    <asp:TextBox ID="txtCategoryIDE" CssClass="txtMasterData" runat="server" Text='<%# Eval("CategoryID") %>'
                                                                         Visible="false" />
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtCategoryID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
+                                                                    <asp:TextBox ID="txtCategoryID" CssClass="txtMasterData" Text="0" runat="server"
+                                                                        Visible="false" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Size">
@@ -331,10 +205,10 @@
                                                                     <asp:Label ID="lblCategory" runat="server" Text='<%# Eval("CategoryName") %>' />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtCategoryNameE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("CategoryName") %>' />
+                                                                    <asp:TextBox ID="txtCategoryNameE" CssClass="txtMasterData" runat="server" Text='<%# Eval("CategoryName") %>' />
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtCategoryName" CssClass="txtProdDesc" runat="server" />
+                                                                    <asp:TextBox ID="txtCategoryName" CssClass="txtMasterData" runat="server" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
@@ -366,9 +240,7 @@
                                             </fieldset>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="width: 25%; float: right;">
-                                    <div id="divSeason" style="height: 300px">
+                                    <div id="divSeason" style="float: left; padding-right: 10px;">
                                         <div class="reports" style="margin-bottom: 10px">
                                             Manage Season
                                         </div>
@@ -378,7 +250,7 @@
                                                 <fieldset>
                                                     <div class="grid_container">
                                                         <ctrl:CustomGridView ID="grvSeason" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                            AllowSorting="True" Width="100%" PageSeason="5" GridLines="None" CssClass="gvStyle"
+                                                            AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
                                                             SortColumn="SeasonID" DataKeyNames="SeasonID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
@@ -400,11 +272,11 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-                                                                            <asp:TextBox ID="txtSeasonID1" CssClass="txtProdDesc" runat="server" Visible="false"
+                                                                            <asp:TextBox ID="txtSeasonID1" CssClass="txtMasterData" runat="server" Visible="false"
                                                                                 Text="0" />
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="txtSeason" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                                            <asp:TextBox ID="txtSeason" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -415,11 +287,11 @@
                                                                         <asp:Label ID="lblSeasonID" runat="server" Text='<%# Eval("SeasonID") %>' Visible="false" />
                                                                     </ItemTemplate>
                                                                     <EditItemTemplate>
-                                                                        <asp:TextBox ID="txtSeasonIDE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("SeasonID") %>'
+                                                                        <asp:TextBox ID="txtSeasonIDE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SeasonID") %>'
                                                                             Visible="false" />
                                                                     </EditItemTemplate>
                                                                     <FooterTemplate>
-                                                                        <asp:TextBox ID="txtSeasonID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
+                                                                        <asp:TextBox ID="txtSeasonID" CssClass="txtMasterData" Text="0" runat="server" Visible="false" />
                                                                     </FooterTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Season">
@@ -427,10 +299,10 @@
                                                                         <asp:Label ID="lblSeason" runat="server" Text='<%# Eval("SeasonName") %>' />
                                                                     </ItemTemplate>
                                                                     <EditItemTemplate>
-                                                                        <asp:TextBox ID="txtSeasonE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("SeasonName") %>' />
+                                                                        <asp:TextBox ID="txtSeasonE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SeasonName") %>' />
                                                                     </EditItemTemplate>
                                                                     <FooterTemplate>
-                                                                        <asp:TextBox ID="txtSeason" CssClass="txtProdDesc" runat="server" />
+                                                                        <asp:TextBox ID="txtSeason" CssClass="txtMasterData" runat="server" />
                                                                         <asp:RequiredFieldValidator ID="rqdtxtSeason" ControlToValidate="txtSeason" runat="server"
                                                                             ErrorMessage="*"></asp:RequiredFieldValidator>
                                                                     </FooterTemplate>
@@ -465,7 +337,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="divBrand">
+                                    <div id="divBrand" style="float: left">
                                         <div class="reports" style="margin-bottom: 10px">
                                             Manage Brand
                                         </div>
@@ -475,7 +347,7 @@
                                                 <fieldset>
                                                     <div class="grid_container">
                                                         <ctrl:CustomGridView ID="grvBrand" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                            AllowSorting="True" Width="100%" PageBrand="5" GridLines="None" CssClass="gvStyle"
+                                                            AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
                                                             SortColumn="BrandID" DataKeyNames="BrandID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
@@ -497,11 +369,11 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-                                                                            <asp:TextBox ID="txtBrandID1" CssClass="txtProdDesc" runat="server" Visible="false"
+                                                                            <asp:TextBox ID="txtBrandID1" CssClass="txtMasterData" runat="server" Visible="false"
                                                                                 Text="0" />
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="txtBrand" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                                            <asp:TextBox ID="txtBrand" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -512,11 +384,11 @@
                                                                         <asp:Label ID="lblBrandID" runat="server" Text='<%# Eval("BrandID") %>' Visible="false" />
                                                                     </ItemTemplate>
                                                                     <EditItemTemplate>
-                                                                        <asp:TextBox ID="txtBrandIDE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("BrandID") %>'
+                                                                        <asp:TextBox ID="txtBrandIDE" CssClass="txtMasterData" runat="server" Text='<%# Eval("BrandID") %>'
                                                                             Visible="false" />
                                                                     </EditItemTemplate>
                                                                     <FooterTemplate>
-                                                                        <asp:TextBox ID="txtBrandID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
+                                                                        <asp:TextBox ID="txtBrandID" CssClass="txtMasterData" Text="0" runat="server" Visible="false" />
                                                                     </FooterTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Brand">
@@ -524,10 +396,10 @@
                                                                         <asp:Label ID="lblBrand" runat="server" Text='<%# Eval("BrandName") %>' />
                                                                     </ItemTemplate>
                                                                     <EditItemTemplate>
-                                                                        <asp:TextBox ID="txtBrandE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("BrandName") %>' />
+                                                                        <asp:TextBox ID="txtBrandE" CssClass="txtMasterData" runat="server" Text='<%# Eval("BrandName") %>' />
                                                                     </EditItemTemplate>
                                                                     <FooterTemplate>
-                                                                        <asp:TextBox ID="txtBrand" CssClass="txtProdDesc" runat="server" />
+                                                                        <asp:TextBox ID="txtBrand" CssClass="txtMasterData" runat="server" />
                                                                     </FooterTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Action">
