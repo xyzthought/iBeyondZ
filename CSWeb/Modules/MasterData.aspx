@@ -216,7 +216,7 @@
                                                                         Visible="false" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size">
+                                                            <asp:TemplateField HeaderText="Category">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblCategory" runat="server" Text='<%# Eval("CategoryName") %>' />
                                                                 </ItemTemplate>
