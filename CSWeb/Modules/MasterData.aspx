@@ -111,7 +111,7 @@
                                                                     <asp:TextBox ID="txtSizeID" CssClass="txtMasterData" Text="0" runat="server" Visible="false" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size">
+                                                            <asp:TemplateField HeaderText="Size" SortExpression="SizeName">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblSize" runat="server" Text='<%# Eval("SizeName") %>' />
                                                                 </ItemTemplate>

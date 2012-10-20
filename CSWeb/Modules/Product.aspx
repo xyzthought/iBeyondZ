@@ -63,7 +63,7 @@
                                         OnRowCancelingEdit="gvGrid_RowCancelingEdit" OnRowCommand="gvGrid_RowCommand"
                                         OnRowDataBound="gvGrid_RowDataBound" OnRowDeleting="gvGrid_RowDeleting" OnRowEditing="gvGrid_RowEditing"
                                         OnRowUpdating="gvGrid_RowUpdating" 
-                                        onpageindexchanging="gvGrid_PageIndexChanging">
+                                        onpageindexchanging="gvGrid_PageIndexChanging" onsorting="gvGrid_Sorting">
                                         <EmptyDataTemplate>
                                             <table cellpadding="0" cellspacing="0" width="100%">
                                                 <tr>
@@ -122,7 +122,7 @@
                                                     <asp:TextBox ID="txtProductID" CssClass="txtProdDesc" Text="0" runat="server" Visible="false" />
                                                 </FooterTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Product">
+                                            <asp:TemplateField HeaderText="Product" SortExpression="ProductName">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
