@@ -143,7 +143,7 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
         objProductPurchase.BrandID = Convert.ToInt32(cmbBrand.SelectedValue);
         objProductPurchase.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
         objProductPurchase.SeasonID = Convert.ToInt32(cmbSeason.SelectedValue);
-        objProductPurchase.PurchaseDate =Convert.ToDateTime(txtDateOfPurchase.Value);
+        objProductPurchase.PurchaseDate =txtDateOfPurchase.Value;
         objProductPurchase.Quantity = Convert.ToInt32(txtQuantity.Text);
         objProductPurchase.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
         objProductPurchase.Tax = Convert.ToDecimal(txtTax.Text);
@@ -187,7 +187,7 @@ public partial class Modules_AddEditPurchase : System.Web.UI.Page
         objProductPurshase.ProductPurchaseID = vintProductPurchaseID;
         new ProductPurchaseBLL().GetByID(ref objProductPurshase);
         txtProductPurchaseID.Value = objProductPurshase.ProductPurchaseID.ToString();
-        txtDateOfPurchase.Value = objProductPurshase.PurchaseDate.ToShortDateString();
+        txtDateOfPurchase.Value = objProductPurshase.PurchaseDate;
         cmbManufacturer.SelectedValue = objProductPurshase.ManufacturerID.ToString();
         cmbProduct.SelectedValue = objProductPurshase.ProductID.ToString();
         txtBarcode.Text = objProductPurshase.BarCode;

@@ -49,7 +49,7 @@ namespace DAL.Component
                         if (reader["ProductPurchaseID"] != DBNull.Value)
                             objProductPurchase.ProductPurchaseID = Convert.ToInt32(reader["ProductPurchaseID"]);
                         if (reader["PurchaseDate"] != DBNull.Value)
-                            objProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]);
+                            objProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToShortDateString();
                         if (reader["CompanyName"] != DBNull.Value)
                             objProductPurchase.ManufacturerName = Convert.ToString(reader["CompanyName"]);
                         if (reader["ProductName"] != DBNull.Value)
@@ -100,7 +100,7 @@ namespace DAL.Component
                         if (reader["SeasonID"] != DBNull.Value)
                             vobjProductPurchase.SeasonID = Convert.ToInt32(reader["SeasonID"]);
                         if (reader["PurchaseDate"] != DBNull.Value)
-                            vobjProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]);
+                            vobjProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToShortDateString();
                         if (reader["Quantity"] != DBNull.Value)
                             vobjProductPurchase.Quantity = Convert.ToInt32(reader["Quantity"]);
                         if (reader["BuyingPrice"] != DBNull.Value)

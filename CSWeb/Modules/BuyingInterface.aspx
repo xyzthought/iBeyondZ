@@ -98,7 +98,7 @@
                                     <Columns>
                                         <asp:TemplateField HeaderText="Purchase Date" SortExpression="PurchaseDate">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblPurchaseDate" runat="server" Text='<%# Eval("PurchaseDate","{0:dd-MMM-yy}") %>' ToolTip='<%# Eval("PurchaseDate","{0:dd-MMM-yy}") %>'></asp:Label>
+                                                <asp:Label ID="lblPurchaseDate" runat="server" Text='<%# Eval("PurchaseDate") %>' ToolTip='<%# Eval("PurchaseDate") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />

@@ -287,7 +287,7 @@ public partial class BuyingInterface : PageBase
                 //ddlSize.SelectedValue = objProductPurchase.SizeID.ToString();
                 txtQuantity.Text = objProductPurchase.Quantity.ToString();
                 //txtPrice.Text = objProductPurchase.Price.ToString("#.##");
-                txtDateOfPurchase.Value = objProductPurchase.PurchaseDate.ToShortDateString();
+                txtDateOfPurchase.Value = objProductPurchase.PurchaseDate;
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditProductPurchase", "ChangeDatePicker();ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
 
