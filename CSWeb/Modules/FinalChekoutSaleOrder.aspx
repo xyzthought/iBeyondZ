@@ -287,19 +287,19 @@
                                                     <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                         Total Amount</div>
                                                     <div style="width: 100px; float: left;">
-                                                        <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred"></asp:Label>&nbsp;€</div>
+                                                        <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
                                                     <div style="clear: both">
                                                     </div>
 
                                                     <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                         Discount</div>
                                                     <div style="width: 100px; float: left;">
-                                                        <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Style="width: 100px!important"></asp:Label>&nbsp;€
+                                                        <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Style="width: 100px!important"></asp:Label>&nbsp;€
                                                     </div>
                                                     <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
                                                         Total Pay</div>
-                                                    <div style="width: 100px; float: right; margin-bottom: 22px">
-                                                        <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred"></asp:Label>&nbsp;€</div>
+                                                    <div style="float: right; margin-bottom: 22px">
+                                                        <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
                                                     <div style="clear: both">
                                                     </div>
                                                 </div>

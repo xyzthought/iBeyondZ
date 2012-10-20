@@ -122,13 +122,13 @@
                                                                 <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                                     Total Amount</div>
                                                                 <div style="width: 100px; float: left;">
-                                                                    <asp:Label ID="lblTotalAmount" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€</div>
+                                                                    <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€</div>
                                                             </div>
                                                             <div>
-                                                                <div style="width: 70px; float: left; padding-left: 5px; font-weight: bold">
+                                                                <div style="width: 70px; float: left; padding-left: 20px; font-weight: bold">
                                                                     Discount</div>
-                                                                <div style="width: 100px; float: left; display: ">
-                                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€
+                                                                <div style="float: left; display: ">
+                                                                    <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -137,7 +137,7 @@
                                                         <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                             Total Pay</div>
                                                         <div style="width: 100px; float: left;">
-                                                            <asp:Label ID="lblTotalPay" runat="server" CssClass="txtCred" Text="0.00"></asp:Label>&nbsp;€
+                                                            <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>

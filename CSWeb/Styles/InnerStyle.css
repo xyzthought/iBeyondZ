@@ -117,6 +117,16 @@ body {
     padding: 3px;
     width: 345px;
 }
+
+.lblAmt {
+    font-size:3em;
+    height: 20px;
+    line-height: 25px;
+    padding: 3px;
+    width: 345px;
+    text-align:right;
+}
+
 .chkExisting input {
     margin-left: 4px;
     vertical-align: middle;
