@@ -13,7 +13,7 @@ namespace BLL.BusinessObject
         public int BrandID {get;set;}
         public int CategoryID {get; set;}
         public int SeasonID {get; set;}
-        public DateTime PurchaseDate {get; set;}
+        public string PurchaseDate {get; set;}
         public int Quantity {get; set;}
         public decimal BuyingPrice {get; set;}
         public decimal Tax {get; set;}
