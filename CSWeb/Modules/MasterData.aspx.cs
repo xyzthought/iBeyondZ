@@ -270,7 +270,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
         }
         catch (Exception ex)
         {        
-
+          
         }
     }
     protected void grvCategory_RowDeleting(object sender, GridViewDeleteEventArgs e)
