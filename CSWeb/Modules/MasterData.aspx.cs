@@ -269,8 +269,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
             }
         }
         catch (Exception ex)
-        {
-            
+        {        
 
         }
     }
