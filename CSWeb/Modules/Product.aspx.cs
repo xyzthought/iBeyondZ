@@ -246,4 +246,32 @@ public partial class Modules_Product : System.Web.UI.Page
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
+    protected void gvGrid_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        try
+        {
+            divMess.Visible = false;
+            lblMsg.Text = "search";
+            if (Convert.ToString(e.SortDirection) == Convert.ToString(SortDirection.Ascending))
+            {
+                e.SortDirection = SortDirection.Descending;
+                objPI.SortDirection = Constants.DESC;
+                ViewState[Constants.SORTDERECTION] = Constants.DESC;
+            }
+            else
+            {
+                e.SortDirection = SortDirection.Ascending;
+                objPI.SortDirection = Constants.ASC;
+                ViewState[Constants.SORTDERECTION] = Constants.ASC;
+            }
+            //objPI.SortDirection = e.SortDirection.ToString();
+            objPI.SortColumnName = e.SortExpression;
+            ViewState[Constants.SORTCOLUMNNAME] = e.SortExpression;
+            BindProduct();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
 }
