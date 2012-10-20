@@ -8,7 +8,7 @@
     <title>Manage Products</title>
     <script type="text/javascript">
         function ClearFormFields() {
-
+         
             $('#txtProductName').val('');
             $('#txtDescription').val('');
             $('#txtBuyingPrice').val('');
