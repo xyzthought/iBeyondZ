@@ -79,7 +79,32 @@ public partial class Modules_MasterData : System.Web.UI.Page
         
                 }
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
 
+                GridViewRow emptyRow = gvSize.Controls[0].Controls[0] as GridViewRow;
+
+                txtControl = (TextBox)emptyRow.FindControl("txtSizeName1");
+
+                if (txtControl.Text != null)
+                {
+                    SizeName = txtControl.Text.Trim();
+                }
+
+                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName);
+                if (mintReturn == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size with same name already exists');", true);
+                }
+                else
+                {
+                    //          ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size created successfully');", true);
+                    BindSizeMasterGrid();
+
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -218,7 +243,30 @@ public partial class Modules_MasterData : System.Web.UI.Page
                 BindCategory();
 
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
 
+                GridViewRow emptyRow = grvCategory.Controls[0].Controls[0] as GridViewRow;
+
+
+
+                txtControl = (TextBox)emptyRow.FindControl("txtCategoryName1");
+
+
+                if (txtControl.Text != null)
+                {
+                    CategoryName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.CategoryBLL().AddEditCategory(0, CategoryName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Category with same name already exists');", true);
+                }
+                BindCategory();
+            }
         }
         catch (Exception ex)
         {
@@ -314,7 +362,28 @@ public partial class Modules_MasterData : System.Web.UI.Page
                 BindBrand();
        
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
 
+                GridViewRow emptyRow = grvBrand.Controls[0].Controls[0] as GridViewRow;
+
+                txtControl = (TextBox)emptyRow.FindControl("txtBrand1");
+
+
+                if (txtControl.Text != null)
+                {
+                    BrandName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.BrandBLL().AddEditBrand(-1, BrandName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Brand with same name already exists');", true);
+                }
+                BindBrand();
+            }
         }
         catch (Exception ex)
         {
@@ -397,6 +466,29 @@ public partial class Modules_MasterData : System.Web.UI.Page
                 TextBox txtControl;
 
                 txtControl = ((TextBox)grvSeason.FooterRow.FindControl("txtSeason"));
+                if (txtControl.Text != null)
+                {
+                    SeasonName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.SeasonBLL().AddEditSeason(-1, SeasonName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Season with same name already exists');", true);
+                }
+                BindSeason();
+
+            }
+
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
+
+                GridViewRow emptyRow = grvSeason.Controls[0].Controls[0] as GridViewRow;
+
+
+                txtControl = (TextBox)emptyRow.FindControl("txtSeason1");
                 if (txtControl.Text != null)
                 {
                     SeasonName = txtControl.Text.Trim();

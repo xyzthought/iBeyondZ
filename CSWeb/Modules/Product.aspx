@@ -89,15 +89,21 @@
                                                             Text="0" />
                                                     </td>
                                                     <td valign="top">
-                                                        <asp:TextBox ID="txtProductName" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                        <asp:TextBox ID="txtProductName1" CssClass="txtProdDesc" runat="server" Visible="true" />
+                                                        <asp:RequiredFieldValidator ValidationGroup="NewDS" ID="ReqtxtProduct" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtProductName1"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </td>
                                                     <td valign="top">
-                                                        <asp:TextBox ID="txtDescription" CssClass="txProdDescTextArea" runat="server" Visible="true"
+                                                        <asp:TextBox ID="txtDescription1" CssClass="txProdDescTextArea" runat="server" Visible="true"
                                                             Rows="3" />
                                                     </td>
                                                     <td valign="top">
-                                                        <asp:TextBox ID="txtMargin" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
+                                                        <asp:TextBox ID="txtMargin1" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
                                                             CssClass="txtProdDesc" runat="server" Visible="true" Style="width: 100px; text-align: right;" />
+                                                    </td>
+                                                     <td>
+                                                        <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
+                                                            CommandName="AddEmpty" ToolTip="Add New" Visible="true" ValidationGroup="NewDS" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -122,9 +128,14 @@
                                                 </ItemTemplate>
                                                 <EditItemTemplate>
                                                     <asp:TextBox ID="txtProductNameE" CssClass="txtProdDesc" runat="server" Text='<%# Eval("ProductName") %>' />
+                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSE" ID="ReqtxtProductE" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtProductNameE"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
+
                                                 </EditItemTemplate>
                                                 <FooterTemplate>
                                                     <asp:TextBox ID="txtProductName" CssClass="txtProdDesc" runat="server" />
+                                                    <asp:RequiredFieldValidator ValidationGroup="NewDS" ID="ReqtxtProduct" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtProductName"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                 </FooterTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Description">
@@ -166,14 +177,14 @@
                                                 </ItemTemplate>
                                                 <EditItemTemplate>
                                                     <asp:ImageButton ID="imgbtSave" ImageUrl="../Images/save.png" runat="server" CommandName="Update"
-                                                        ToolTip="Save" ValidationGroup="ProductFamilyEditRow" />
+                                                        ToolTip="Save" ValidationGroup="NewDSE" />
                                                     <asp:ImageButton ID="imgbtnCancel" CausesValidation="false" ImageUrl="../Images/cancel.png"
                                                         runat="server" CommandName="Cancel" ToolTip="Cancel" />
                                                 </EditItemTemplate>
                                                 <FooterStyle />
                                                 <FooterTemplate>
                                                     <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
-                                                        CommandName="Add" ToolTip="Add New" Visible="true" ValidationGroup="NewD" />
+                                                        CommandName="Add" ToolTip="Add New" Visible="true" ValidationGroup="NewDS" />
                                                 </FooterTemplate>
                                             </asp:TemplateField>
                                         </Columns>
