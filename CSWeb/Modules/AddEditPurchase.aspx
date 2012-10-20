@@ -35,9 +35,9 @@
                 $('#txtTax').val('0');
             }
 
-            var TaxonPurchase = parseFloat($('#txtBuyingPrice').val()) * parseFloat($('#txtTax').val()) / 100;
-            var val = parseFloat($('#txtBuyingPrice').val()) + TaxonPurchase + parseFloat($('#txtMargin').val());
-            $('#txtSellingPrice').val(val);
+            //var TaxonPurchase = parseFloat($('#txtBuyingPrice').val()) * parseFloat($('#txtTax').val()) / 100;
+            //var val = parseFloat($('#txtBuyingPrice').val()) + TaxonPurchase + parseFloat($('#txtMargin').val());
+            //$('#txtSellingPrice').val(val);
         }
         /*
         function ValidateZones(source, args) {
@@ -168,10 +168,13 @@
                                 Size <span class="mandet2">* </span>
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:RadioButtonList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
-                                </asp:RadioButtonList>
-                                <%--<asp:CustomValidator ID="cvalZones" runat="server" ClientValidationFunction="ValidateZones" ErrorMessage="*" Font-Size="X-Small"
-                                    ForeColor="Red" Display="Dynamic" />--%>
+                                <asp:DropDownList ID="cmbSizes" runat="server" CssClass="txtUpl">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="reqcmbSizes" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="-1" ControlToValidate="cmbSizes" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <%--<asp:RadioButtonList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="4" >
+                                </asp:RadioButtonList--%>
+
                             </div>
                             <div style="clear: both;">
                             </div>
@@ -187,17 +190,17 @@
                             </div>
                             <div style="clear: both">
                             </div>
-                            <div style="float: left; width: 135px;">
+                            <div style="display:none" > <!-- "float: left; width: 135px;"> -->
                                 Tax (%)
                             </div>
-                            <div style="float: left;">
+                            <div style= "display:none" > <!-- "float: left;"> -->
                                 <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);" Text="21"
                                     onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 160px!important;" MaxLength="2"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
-                            <div style="clear: both">
-                            </div>
+                            <%--<div style="clear: both">
+                            </div>--%>
                             <div style="float: left; width: 135px;">
                                 Margin <span class="mandet2"></span>
                             </div>
@@ -207,10 +210,10 @@
                             </div>
                             <div style="clear: both">
                             </div>
-                            <div style="float: left; width: 135px;">
+                            <div style="display:none" > <!-- float: left; width: 135px;"> -->
                                 Selling Price <span class="mandet2"></span>
                             </div>
-                            <div style="float: left;">
+                            <div style="display:none" > <!--"float: left;">-->
                                 <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
                                     runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
                             </div>

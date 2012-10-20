@@ -33,3 +33,10 @@ D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\CSWeb.Utility\bin\Debug\BLL.Bu
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\CSWeb.Utility\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.dll
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\bin\Debug\CSWeb.Utility.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\bin\Debug\CSWeb.Utility.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\bin\Debug\BLL.BusinessObject.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\bin\Debug\BLL.BusinessObject.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\obj\Debug\ResolveAssemblyReference.cache
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\CSWeb.Utility\obj\Debug\CSWeb.Utility.pdb

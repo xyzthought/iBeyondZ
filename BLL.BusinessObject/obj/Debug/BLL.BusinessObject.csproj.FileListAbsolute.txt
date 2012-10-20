@@ -23,3 +23,8 @@ D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.BusinessObject\bin\Debug\B
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
 D:\Projects\Others\Test\iBeyondZ_20Oct12\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.pdb
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
+C:\Anshuman\Projects\iBeyondz\CSLatest\20121020_1\iBeyondZ\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb

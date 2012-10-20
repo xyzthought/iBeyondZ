@@ -31,16 +31,14 @@
                 <ul>
                     <li id="mnuli1"><a href='../Modules/Landingpage.aspx'>Home</a></li>
                     <li id="mnuli6"><a href="../Modules/PlatformUser.aspx">Platform User</a>
-                        <%--<ul id="HeaderControl_ulDashboard" class="ulDashboard" style="width: 245px">
-                            <li><a title="ddd" href="#" style="display: inline-block; width: 225px;">ddd</a></li><li>
-                        </ul>--%>
+                        
                     </li>
                     <li id="mnuli7"><a href='../Modules/Manufacturer.aspx'>Manufacturer</a></li>
                     <li id="mnuli8"><a href='../Modules/Product.aspx'>Product</a></li>
                     <li id="mnuli11"><a href='../Modules/BuyingInterface.aspx'>Purchase</a></li>
                     <li id="mnuli9"><a href='../Modules/Sale.aspx'>Sale</a></li>
                     <li id="mnuli2"><a href='../Modules/MasterData.aspx'>Master</a></li>
-                    <li id="mnuli10"><a href='../Modules/Report.aspx'>Report</a></li>
+                   <%-- <li id="mnuli10"><a href='../Modules/Report.aspx'>Report</a></li>--%>
                     <li id="mnuli5">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>

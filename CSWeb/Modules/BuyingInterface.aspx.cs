@@ -61,7 +61,7 @@ public partial class BuyingInterface : PageBase
             }
             string strManufacturerName = (txtSearchManufacturer.Value.Trim()=="Manufacturer Name"? "": txtSearchManufacturer.Value.Trim());
 
-            List<ProductPurchase> objData = new ProductPurchaseBLL().GetAll(Convert.ToDateTime(fromDate.Value), Convert.ToDateTime(toDate.Value), strManufacturerName, objPI);
+            List<ProductPurchase> objData = new ProductPurchaseBLL().GetAll(fromDate.Value, toDate.Value, strManufacturerName, objPI);
 
             gvGrid.DataSource = objData;
             gvGrid.ExportTemplate = "export_template_4Column.xlsx";

@@ -9,7 +9,7 @@ namespace BLL.Component
 {
     public class ProductPurchaseBLL
     {
-        public List<ProductPurchase> GetAll(DateTime purchaseStartDate, DateTime purchaseEndDate,String ManufacturerName,  PageInfo vobjPageInfo)
+        public List<ProductPurchase> GetAll(String purchaseStartDate, String purchaseEndDate, String ManufacturerName, PageInfo vobjPageInfo)
         {
             return new ProductPurchaseDB().GetAll(purchaseStartDate, purchaseEndDate, ManufacturerName, vobjPageInfo);
         }

@@ -8,7 +8,7 @@
     <title>Manage Products</title>
     <script type="text/javascript">
         function ClearFormFields() {
-
+         
             $('#txtProductName').val('');
             $('#txtDescription').val('');
             $('#txtBuyingPrice').val('');
@@ -24,7 +24,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <!--Header start-->
+    <!--Header ff start-->
     <div>
         <uc1:Header ID="Header1" runat="server" />
     </div>
@@ -62,12 +62,13 @@
                                             <fieldset>
                                                 <div class="grid_container">
                                                     <ctrl:CustomGridView ID="gvSize" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                        AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
+                                                        AllowSorting="True" Width="100%" PageSize="50" GridLines="None" CssClass="gvStyle"
                                                         SortColumn="SizeID" DataKeyNames="SizeID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                         SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ShowFooter="true" EmptyDataText="No Record Found"
                                                         OnRowCancelingEdit="gvSize_RowCancelingEdit" OnRowCommand="gvSize_RowCommand"
                                                         OnRowDataBound="gvSize_RowDataBound" OnRowDeleting="gvSize_RowDeleting" OnRowEditing="gvSize_RowEditing"
-                                                        OnRowUpdating="gvSize_RowUpdating">
+                                                        OnRowUpdating="gvSize_RowUpdating" 
+                                                        onpageindexchanging="gvSize_PageIndexChanging">
                                                         <EmptyDataTemplate>
                                                             <table cellpadding="0" cellspacing="0" width="100%">
                                                                 <tr>
@@ -163,7 +164,7 @@
                                             <fieldset>
                                                 <div class="grid_container">
                                                     <ctrl:CustomGridView ID="grvCategory" runat="server" AutoGenerateColumns="false"
-                                                        AllowPaging="True" AllowSorting="True" Width="100%" PageSize="15" GridLines="None"
+                                                        AllowPaging="True" AllowSorting="True" Width="100%" PageSize="50" GridLines="None"
                                                         CssClass="gvStyle" SortColumn="CategoryID" DataKeyNames="CategoryID" SortOrder="Ascending"
                                                         SortAscImageUrl="~/Images/GridViewCtrl/asc.png" SortDescImageUrl="~/Images/GridViewCtrl/dsc.png"
                                                         ExportTemplatePath="~/Reports/Templates/" ExcelHeaderRow="8" StartRow="10" StartColumn="2"
@@ -172,7 +173,8 @@
                                                         EmptyDataText="No Record Found" OnRowCancelingEdit="grvCategory_RowCancelingEdit"
                                                         OnRowCommand="grvCategory_RowCommand" OnRowDataBound="grvCategory_RowDataBound"
                                                         OnRowDeleting="grvCategory_RowDeleting" OnRowEditing="grvCategory_RowEditing"
-                                                        OnRowUpdating="grvCategory_RowUpdating">
+                                                        OnRowUpdating="grvCategory_RowUpdating" 
+                                                        onpageindexchanging="grvCategory_PageIndexChanging">
                                                         <EmptyDataTemplate>
                                                             <table cellpadding="0" cellspacing="0" width="100%">
                                                                 <tr>
@@ -216,7 +218,7 @@
                                                                         Visible="false" />
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size">
+                                                            <asp:TemplateField HeaderText="Category">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblCategory" runat="server" Text='<%# Eval("CategoryName") %>' />
                                                                 </ItemTemplate>
@@ -270,14 +272,16 @@
                                                 <fieldset>
                                                     <div class="grid_container">
                                                         <ctrl:CustomGridView ID="grvSeason" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                            AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
+                                                            AllowSorting="True" Width="100%" PageSize="50" GridLines="None" CssClass="gvStyle"
                                                             SortColumn="SeasonID" DataKeyNames="SeasonID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                                             CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                                             EndDateCol="3" ShowFooter="true" EmptyDataText="No Record Found" OnRowCancelingEdit="grvSeason_RowCancelingEdit"
-                                                            OnRowCommand="grvSeason_RowCommand" OnRowDataBound="grvSeason_RowDataBound" OnRowDeleting="grvSeason_RowDeleting"
-                                                            OnRowEditing="grvSeason_RowEditing" OnRowUpdating="grvSeason_RowUpdating">
+                                                            OnRowCommand="grvSeason_RowCommand" 
+                                                            OnRowDataBound="grvSeason_RowDataBound" OnRowDeleting="grvSeason_RowDeleting"
+                                                            OnRowEditing="grvSeason_RowEditing" OnRowUpdating="grvSeason_RowUpdating" 
+                                                            onpageindexchanging="grvSeason_PageIndexChanging">
                                                             <EmptyDataTemplate>
                                                                 <table cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
@@ -375,14 +379,15 @@
                                                 <fieldset>
                                                     <div class="grid_container">
                                                         <ctrl:CustomGridView ID="grvBrand" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                                            AllowSorting="True" Width="100%" PageSize="15" GridLines="None" CssClass="gvStyle"
+                                                            AllowSorting="True" Width="100%" PageSize="50" GridLines="None" CssClass="gvStyle"
                                                             SortColumn="BrandID" DataKeyNames="BrandID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                                             CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                                             EndDateCol="3" ShowFooter="true" EmptyDataText="No Record Found" OnRowCancelingEdit="grvBrand_RowCancelingEdit"
                                                             OnRowCommand="grvBrand_RowCommand" OnRowDataBound="grvBrand_RowDataBound" OnRowDeleting="grvBrand_RowDeleting"
-                                                            OnRowEditing="grvBrand_RowEditing" OnRowUpdating="grvBrand_RowUpdating">
+                                                            OnRowEditing="grvBrand_RowEditing" OnRowUpdating="grvBrand_RowUpdating" 
+                                                            onpageindexchanging="grvBrand_PageIndexChanging">
                                                             <EmptyDataTemplate>
                                                                 <table cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
