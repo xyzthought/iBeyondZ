@@ -125,7 +125,7 @@
                                                                     <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€</div>
                                                             </div>
                                                             <div>
-                                                                <div style="width: 70px; float: left; padding-left: 20px; font-weight: bold">
+                                                                <div style="width: 70px; float: left; padding-left: 50px; font-weight: bold">
                                                                     Discount</div>
                                                                 <div style="float: left; display: ">
                                                                     <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
