@@ -54,7 +54,7 @@
                             <div class="grid_container">
                                 <div class="divCenter">
                                     <div id="divSize" style="float: left; padding-right: 10px;">
-                                        <div class="reports" style="margin-bottom: 10px">
+                                        <div class="masterHeader" style="margin-bottom: 10px">
                                             Manage Size
                                         </div>
                                         <br style="clear: both" />
@@ -156,7 +156,7 @@
                                         </div>
                                     </div>
                                     <div id="divCategory" style="float: left; padding-right: 10px;">
-                                        <div class="reports" style="margin-bottom: 10px">
+                                        <div class="masterHeader" style="margin-bottom: 10px">
                                             Manage Category
                                         </div>
                                         <br style="clear: both" />
@@ -167,7 +167,7 @@
                                                         AllowPaging="True" AllowSorting="True" Width="100%" PageSize="50" GridLines="None"
                                                         CssClass="gvStyle" SortColumn="CategoryID" DataKeyNames="CategoryID" SortOrder="Ascending"
                                                         SortAscImageUrl="~/Images/GridViewCtrl/asc.png" SortDescImageUrl="~/Images/GridViewCtrl/dsc.png"
-                                                        ExportTemplatePath="~/Reports/Templates/" ExcelHeaderRow="8" StartRow="10" StartColumn="2"
+                                                        ExportTemplatePath="~/reports/Templates/" ExcelHeaderRow="8" StartRow="10" StartColumn="2"
                                                         DBColumn="" MaxLevel="1" SheetNumber="1" CurrentDateRow="6" CurrentDateCol="3"
                                                         StartDateRow="4" StartDateCol="3" EndDateRow="5" EndDateCol="3" ShowFooter="true"
                                                         EmptyDataText="No Record Found" OnRowCancelingEdit="grvCategory_RowCancelingEdit"
@@ -263,7 +263,7 @@
                                         </div>
                                     </div>
                                     <div id="divSeason" style="float: left; padding-right: 10px;">
-                                        <div class="reports" style="margin-bottom: 10px">
+                                        <div class="masterHeader" style="margin-bottom: 10px">
                                             Manage Season
                                         </div>
                                         <br style="clear: both" />
@@ -370,7 +370,7 @@
                                         </div>
                                     </div>
                                     <div id="divBrand" style="float: left">
-                                        <div class="reports" style="margin-bottom: 10px">
+                                        <div class="masterHeader" style="margin-bottom: 10px">
                                             Manage Brand
                                         </div>
                                         <br style="clear: both" />

@@ -1632,6 +1632,12 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
     font-size: 24px;
     text-shadow: 1px 3px 0 #FFFFFF;
 }
+
+.masterHeader {
+    float: left;
+    font-size: 18px;
+    text-shadow: 1px 3px 0 #FFFFFF;
+}
 .dvCat {
     font-size: 14px;
     padding-bottom: 30px;
