@@ -14,15 +14,10 @@ using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 using System.Data;
 
-public class GridViewDropDownSelections
-{
-    public int RowIndex { get; set; }
-    public int SelectedIndex { get; set; }
-}
+
 
 public partial class Modules_AddEditSaleOrder : PageBase
 {
-    private List<GridViewDropDownSelections> selectedDropDownListItems = new List<GridViewDropDownSelections>();
 
     string vstrLink = string.Empty;
     string param = string.Empty;
