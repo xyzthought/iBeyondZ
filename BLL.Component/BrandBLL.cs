@@ -17,7 +17,7 @@ namespace BLL.Component
             return new DAL.Component.BrandDB().AddEditBrand(BrandID, BrandName);
         }
 
-        public bool DeleteBrand(int BrandID)
+        public int DeleteBrand(int BrandID)
         {
             return new DAL.Component.BrandDB().DeleteBrand(BrandID);
         }

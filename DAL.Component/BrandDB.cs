@@ -52,14 +52,16 @@ namespace DAL.Component
             return mintReturn;
         }
 
-        public bool DeleteBrand(int BrandID)
+        public int DeleteBrand(int BrandID)
         {
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_DeleteBrand ");
 
             db.AddInParameter(dbCommand, "BrandID", DbType.Int32, BrandID);
-
-            return (db.ExecuteNonQuery(dbCommand) == 1);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
+            int mintReturn = int.Parse(db.GetParameterValue(dbCommand, "@Return").ToString());
+            return mintReturn;
         }
     }
 }

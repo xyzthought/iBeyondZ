@@ -17,7 +17,7 @@ namespace BLL.Component
             return new DAL.Component.SeasonDB().AddEditSeason(SeasonID, SeasonName);
         }
 
-        public bool DeleteSeason(int SeasonID)
+        public int DeleteSeason(int SeasonID)
         {
             return new DAL.Component.SeasonDB().DeleteSeason(SeasonID);
         }

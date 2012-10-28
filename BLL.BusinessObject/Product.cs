@@ -49,6 +49,13 @@ namespace BLL.BusinessObject
         public bool IsDeleted { get { return mblnIsDeleted; } set { mblnIsDeleted = value; } }
         private int mintBrandID;
         public int BrandID { get { return mintBrandID; } set { mintBrandID = value; } }
+        private string mstrBrand;
+        public string Brand { get { return mstrBrand; } set { mstrBrand = value; } }
+        private int mintSeasonID;
+        public int SeasonID { get { return mintSeasonID; } set { mintSeasonID = value; } }
+        private string mstrSeason;
+        public string Season { get { return mstrSeason; } set { mstrSeason = value; } }
 
+        public decimal Quantity { get; set; }
     }
 }
