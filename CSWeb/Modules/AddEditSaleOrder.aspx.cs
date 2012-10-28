@@ -72,6 +72,21 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
     }
 
+    protected DataTable dtAutoComplete
+    {
+        get
+        {
+            if (ViewState["dtAutoComplete"] != null)
+                return (DataTable)ViewState["dtAutoComplete"];
+            else
+                return null;
+        }
+        set
+        {
+            ViewState["dtAutoComplete"] = value;
+        }
+    }
+
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
@@ -80,7 +95,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (!Page.IsPostBack)
             {
-                PopulateAutoCompleteProductInformation();
+                PopulateAutoCompleteDataTable();
                 if (null == Session["dtProductDetail"])
                 {
                     dtProductDetail = CreateTableStructure();
@@ -123,18 +138,23 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
     }
 
+    private void PopulateAutoCompleteDataTable()
+    { 
+        SaleBLL objSaleBLL = new SaleBLL();
+        dtAutoComplete = objSaleBLL.PopulateAutoCompleteProductInformation();
+        PopulateAutoCompleteProductInformation();
+    }
     private void PopulateAutoCompleteProductInformation()
     {
-        SaleBLL objSaleBLL = new SaleBLL();
-        DataTable dtData = objSaleBLL.PopulateAutoCompleteProductInformation();
-        if (null != dtData && dtData.Rows.Count > 0)
+
+        if (null != dtAutoComplete && dtAutoComplete.Rows.Count > 0)
         {
             hdnByBarCode.Value = "";
             hdnByProductName.Value = "";
-            for (int i = 0; i < dtData.Rows.Count; i++)
+            for (int i = 0; i < dtAutoComplete.Rows.Count; i++)
             {
-                hdnByBarCode.Value += dtData.Rows[i]["ProductID"].ToString() + "##" + dtData.Rows[i]["BarCode"].ToString() + "##" + dtData.Rows[i]["ProductName"].ToString() + "@@";
-                hdnByProductName.Value += dtData.Rows[i]["ProductID"].ToString() + "##" + dtData.Rows[i]["ProductName"].ToString() + "##" + dtData.Rows[i]["BarCode"].ToString() + "@@";
+                hdnByBarCode.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "@@";
+                hdnByProductName.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "@@";
             }
             if (hdnByBarCode.Value.Length > 0)
             {
@@ -145,6 +165,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
             {
                 hdnByProductName.Value = hdnByProductName.Value.Substring(0, hdnByProductName.Value.Length - 2);
             }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
         }
     }
 
@@ -452,6 +474,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
         PopulateProductDetail();
         CalculateTotalPrice();
+        PopulateAutoCompleteProductInformation();
     }
 
     protected void gvGrid_RowEditing(object sender, GridViewEditEventArgs e)
@@ -498,6 +521,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtProductDetail.AcceptChanges();
         PopulateProductDetail();
         CalculateTotalPrice();
+        PopulateAutoCompleteProductInformation();
     }
 
     protected void txtPDiscount_TextChanged(object sender, EventArgs e)
@@ -543,6 +567,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtProductDetail.AcceptChanges();
         PopulateProductDetail();
         CalculateTotalPrice();
+        PopulateAutoCompleteProductInformation();
     }
 
     protected void ddlDType_SelectedIndexChanged(object sender, EventArgs e)
@@ -560,5 +585,6 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             txtPDiscount.MaxLength = 8;
         }
+        PopulateAutoCompleteProductInformation();
     }
 }
