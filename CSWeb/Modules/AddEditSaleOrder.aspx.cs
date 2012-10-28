@@ -96,6 +96,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
             if (!Page.IsPostBack)
             {
                 PopulateAutoCompleteDataTable();
+                // Auto
                 if (null == Session["dtProductDetail"])
                 {
                     dtProductDetail = CreateTableStructure();
