@@ -125,11 +125,10 @@
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Discount(%)">
+                                                <asp:TemplateField HeaderText="Discount">
                                                     <ItemTemplate>
-                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred"
-                                                            MaxLength="2" Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
-                                                            onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
+                                                        <asp:Label ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" ></asp:Label>
+                                                        <asp:Label ID="lblDiscType" runat="server" Text='<%# Eval("DiscountType") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -143,8 +142,8 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Price">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Price")) %>'
-                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("Price")) %>'></asp:Label>
+                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("TPrice")) %>'
+                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("TPrice")) %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -152,7 +151,7 @@
                                                 <asp:TemplateField HeaderText="Action">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
-                                                            CommandArgument='<%# Eval("ProductID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
+                                                            CommandArgument='<%# Eval("ProductID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" style="vertical-align:middle;" /> </asp:LinkButton>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" CssClass="al" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />

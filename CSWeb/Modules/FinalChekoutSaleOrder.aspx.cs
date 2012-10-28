@@ -185,7 +185,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             {
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString());
                 }
 
                 dblDiscounted = dblTotalPrice;

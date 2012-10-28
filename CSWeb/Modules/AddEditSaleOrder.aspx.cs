@@ -14,9 +14,16 @@ using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 using System.Data;
 
+public class GridViewDropDownSelections
+{
+    public int RowIndex { get; set; }
+    public int SelectedIndex { get; set; }
+}
 
 public partial class Modules_AddEditSaleOrder : PageBase
 {
+    private List<GridViewDropDownSelections> selectedDropDownListItems = new List<GridViewDropDownSelections>();
+
     string vstrLink = string.Empty;
     string param = string.Empty;
 
@@ -153,8 +160,10 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtData.Columns.Add("Quantity", typeof(decimal));
         dtData.Columns.Add("Unit", typeof(decimal));
         dtData.Columns.Add("PDiscount", typeof(decimal));
+        dtData.Columns.Add("DiscountType", typeof(string));
         dtData.Columns.Add("Tax", typeof(decimal));
         dtData.Columns.Add("Price", typeof(decimal));
+        dtData.Columns.Add("TPrice", typeof(decimal));
         dtData.PrimaryKey = new DataColumn[] { dtData.Columns["ProductID"] };
         return dtData;
     }
@@ -186,8 +195,9 @@ public partial class Modules_AddEditSaleOrder : PageBase
     #endregion
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
-
+        ViewState["DiscountType"] = "%";
         PopulateInformation();
+
     }
 
     private void PopulateInformation()
@@ -205,15 +215,26 @@ public partial class Modules_AddEditSaleOrder : PageBase
         decimal dblTotalPrice = 0;
         decimal dblDiscounted = 0;
         decimal dblTotalDiscount = 0;
+        string selectedVal=string.Empty;
         if (null != dtProductDetail)
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
             {
                 decimal decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
-                decDiscount = (decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) / 100));
+
+                selectedVal = dtProductDetail.Rows[i]["DiscountType"].ToString();
+                if (selectedVal == "%")
+                {
+                    decDiscount = (decDiscount * (Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString()) / 100));
+                }
+                else
+                {
+                    decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString());
+                }
+                
                 dblTotalDiscount += decDiscount;
 
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
+                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString());
             }
 
             dblDiscounted = dblTotalPrice;
@@ -274,8 +295,11 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtRow["Quantity"] = (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
         dtRow["Unit"] = objSale.UnitPrice;
         dtRow["PDiscount"] = (blnIsSingleEntry == true ? 0 : objSale.Discount);
+        dtRow["DiscountType"] = ViewState["DiscountType"].ToString();
+
         dtRow["Tax"] = objSale.Tax; ;
-        dtRow["Price"] = objSale.Price * (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
+        dtRow["Price"] = objSale.Price;
+        dtRow["TPrice"] = objSale.Price * (blnIsSingleEntry == true ? Convert.ToDecimal(txtQuantity.Text.Trim()) : objSale.Quantity);
         dtProductDetail.Rows.Add(dtRow);
     }
 
@@ -302,7 +326,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     private void RepopulateDataTableWithDiscountPrice()
     {
-        if (gvGrid.Rows.Count > 0)
+        /*if (gvGrid.Rows.Count > 0)
         {
             for (int i = 0; i < gvGrid.Rows.Count; i++)
             {
@@ -314,15 +338,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
                 if (!string.IsNullOrEmpty(txtPDiscount.Text))
                 {
-                    dtProductDetail.Rows[i]["Price"] = dblPrice - (dblPrice * Convert.ToDecimal(txtPDiscount.Text.Trim()) / 100);
+                    dtProductDetail.Rows[i]["TPrice"] = dblPrice - (dblPrice * Convert.ToDecimal(txtPDiscount.Text.Trim()) / 100);
                 }
                 else
                 {
-                    dtProductDetail.Rows[i]["Price"] = (Convert.ToDecimal(gvGrid.Rows[i].Cells[5].Text) * Convert.ToDecimal(gvGrid.Rows[i].Cells[4].Text));
+                    dtProductDetail.Rows[i]["TPrice"] = (Convert.ToDecimal(gvGrid.Rows[i].Cells[5].Text) * Convert.ToDecimal(gvGrid.Rows[i].Cells[4].Text));
                 }
                 dtProductDetail.AcceptChanges();
             }
-        }
+        }*/
     }
 
     private void PopulateProductDetail()
@@ -351,6 +375,9 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
                 aEdit.Attributes.Add("on", vstrLink);*/
 
+
+                DropDownList ddlDType = (DropDownList)e.Row.FindControl("ddlDType");
+                ddlDType.Items.FindByValue((e.Row.FindControl("lblDiscType") as Label).Text).Selected = true;
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
@@ -450,4 +477,86 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
 
 
+    protected void lblQuantity_TextChanged(object sender, EventArgs e)
+    {
+        TextBox txtQuantity = (TextBox)sender;
+        int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
+        Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
+
+        int PQuantity =Convert.ToInt32(txtQuantity.Text.Trim());
+        int PID = Convert.ToInt32(lblProductID.Text.Trim());
+
+        for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+        {
+            if (dtProductDetail.Rows[i]["ProductID"].ToString() == PID.ToString())
+            {
+                dtProductDetail.Rows[i]["Quantity"] = PQuantity;
+                dtProductDetail.Rows[i]["TPrice"] = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"]) * PQuantity;
+                break;
+            }
+        }
+        dtProductDetail.AcceptChanges();
+        PopulateProductDetail();
+        CalculateTotalPrice();
+    }
+
+    protected void txtPDiscount_TextChanged(object sender, EventArgs e)
+    {
+        TextBox txtPDiscount = (TextBox)sender;
+        int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
+        Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
+        TextBox txtQuantity = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblQuantity") as TextBox;
+        DropDownList ddlDType = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("ddlDType") as DropDownList;
+        string selectedVal = ddlDType.SelectedItem.Text;
+        int PQuantity = Convert.ToInt32(txtQuantity.Text.Trim());
+        int PID = Convert.ToInt32(lblProductID.Text.Trim());
+
+        for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+        {
+            if (dtProductDetail.Rows[i]["ProductID"].ToString() == PID.ToString())
+            {
+                decimal dblPrice = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(PQuantity);
+                dblPrice = dblPrice + dblPrice * (Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+
+                if (!string.IsNullOrEmpty(txtPDiscount.Text))
+                {
+                    if (selectedVal == "%")
+                    {
+                        dtProductDetail.Rows[i]["TPrice"] = dblPrice - (dblPrice * Convert.ToDecimal(txtPDiscount.Text.Trim()) / 100);
+                    }
+                    else
+                    {
+                        dtProductDetail.Rows[i]["TPrice"] = dblPrice - Convert.ToDecimal(txtPDiscount.Text.Trim());
+                    }
+                    dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(txtPDiscount.Text.Trim());
+                    dtProductDetail.Rows[i]["DiscountType"] = selectedVal;
+                }
+                else
+                {
+                    dtProductDetail.Rows[i]["TPrice"] = dblPrice;
+                }
+                break;
+            }
+        }
+        dtProductDetail.AcceptChanges();
+        PopulateProductDetail();
+        CalculateTotalPrice();
+    }
+
+    protected void ddlDType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DropDownList ddlDType = (DropDownList)sender;
+        int rowIndex = ((GridViewRow)((DropDownList)sender).NamingContainer).RowIndex;
+        TextBox txtPDiscount = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("txtPDiscount") as TextBox;
+        txtPDiscount.Text = "";
+        string selectedVal = ddlDType.SelectedItem.Text;
+        if (selectedVal == "%")
+        {
+            txtPDiscount.MaxLength = 2;
+        }
+        else
+        {
+            txtPDiscount.MaxLength = 8;
+        }
+    }
 }

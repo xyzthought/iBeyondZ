@@ -51,7 +51,7 @@
                                         <div class="acceptedCont">
                                             <div id="MidM2">
                                                 <fieldset class="fieldAddEdit">
-                                                    <div class="inner">
+                                                    <div class="inner" style="height: 130px;">
                                                         <asp:HiddenField ID="hdnByBarCode" runat="server" ClientIDMode="Static" />
                                                         <asp:HiddenField ID="hdnByProductName" runat="server" ClientIDMode="Static" />
                                                         <div class="mandet">
@@ -69,15 +69,21 @@
                                                         <div>
                                                             Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
                                                         </div>
-                                                        <div class="alt">
-                                                            <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"></asp:TextBox>
+                                                        <div class="alt" style="float: left!important; width: 280px;">
+                                                            <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"
+                                                                Style="width: 275px!important;"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                                 Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
-                                                            <p id="Product-description">
+                                                            <p id="Product-description" style="margin-top: 5px;">
                                                             </p>
                                                         </div>
-                                                        <div style="float: left">
+                                                        <div style="float: right; margin-top: 3px;">
+                                                            <span class="btn5">
+                                                                <asp:LinkButton ID="lnkAddMore" runat="server" OnClick="lnkAddMore_Click"><span class="AddNewData"></span>Add</asp:LinkButton>
+                                                            </span>
+                                                        </div>
+                                                        <div style="float: left; display: none">
                                                             <div>
                                                                 Quantity :<span class="mandet2">* </span>
                                                             </div>
@@ -88,11 +94,6 @@
                                                                 <asp:RequiredFieldValidator ID="ReqQuantity" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                                                     ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </div>
-                                                        </div>
-                                                        <div style="float: right; margin-top: 25px;">
-                                                            <span class="btn5">
-                                                                <asp:LinkButton ID="lnkAddMore" runat="server" OnClick="lnkAddMore_Click"><span class="AddNewData"></span>Add</asp:LinkButton>
-                                                            </span>
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>
@@ -138,8 +139,6 @@
                                                             Total Pay</div>
                                                         <div style="width: 100px; float: left;">
                                                             <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
-                                                        </div>
-                                                        <div style="clear: both">
                                                         </div>
                                                         <div style="float: right; margin-bottom: 19px;">
                                                             <span class="btn5">
@@ -200,7 +199,10 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Quantity">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
+                                                        <asp:TextBox ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'
+                                                            CssClass="txtCred" MaxLength="3" Style="width: 40px!important; text-align: right"
+                                                            onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"
+                                                            OnTextChanged="lblQuantity_TextChanged" AutoPostBack="true"></asp:TextBox>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -213,11 +215,21 @@
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Discount(%)">
+                                                <asp:TemplateField Visible="false">
                                                     <ItemTemplate>
+                                                        <asp:Label ID="lblDiscType" runat="server" Text='<%# Eval("DiscountType") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Discount">
+                                                    <ItemTemplate>
+                                                        <asp:DropDownList ID="ddlDType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlDType_SelectedIndexChanged">
+                                                            <asp:ListItem Value="%" Text="%"></asp:ListItem>
+                                                            <asp:ListItem Value="€" Text="€"></asp:ListItem>
+                                                        </asp:DropDownList>
                                                         <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred"
-                                                            MaxLength="2" Style="width: 100px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
-                                                            onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
+                                                            MaxLength="2" Style="width: 60px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
+                                                            onblur="extractNumber(this,-1,false);CalculatePay();" OnTextChanged="txtPDiscount_TextChanged"
+                                                            AutoPostBack="true"></asp:TextBox>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -231,8 +243,8 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Price">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Price")) %>'
-                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("Price")) %>'></asp:Label>
+                                                        <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("TPrice")) %>'
+                                                            ToolTip='<%# String.Format("{0:0.00}",Eval("TPrice")) %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -240,9 +252,9 @@
                                                 <asp:TemplateField HeaderText="Action">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
-                                                            CausesValidation="False" CommandArgument='<%# Eval("ProductID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
+                                                            Visible="false" CausesValidation="False" CommandArgument='<%# Eval("ProductID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                         <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
-                                                            CommandArgument='<%# Eval("ProductID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" /> </asp:LinkButton>
+                                                            CommandArgument='<%# Eval("ProductID") %>' CausesValidation="False"> <img src="../Images/ico_delete.png" alt="Delete" style="vertical-align:middle;"/> </asp:LinkButton>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" CssClass="al" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" CssClass="alH" />
@@ -353,7 +365,8 @@
             select: function (event, ui) {
                 $("#txtProductBarCode").val(ui.item.label);
                 $("#Productid").val(ui.item.value);
-                $("#Product-description").html(ui.item.desc);
+                var desc = "<img src='../images/pdot.png' style='vertical-align:bottom' />&nbsp;" + ui.item.desc
+                $("#Product-description").html(desc);
                 $("#txtQuantity").val("1");
                 return false;
             }

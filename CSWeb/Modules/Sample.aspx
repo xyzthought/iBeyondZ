@@ -42,7 +42,9 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
             <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
-
+                <asp:DropDownList ID="DropDownList1" runat="server" 
+                    onselectedindexchanged="DropDownList1_SelectedIndexChanged">
+                </asp:DropDownList>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                     ErrorMessage="RegularExpressionValidator" ControlToValidate="txtTest" ValidationExpression="\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"></asp:RegularExpressionValidator>
 
