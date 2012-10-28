@@ -84,6 +84,11 @@ public partial class Modules_Product : System.Web.UI.Page
     {
         try
         {
+            if (e.CommandName == "Edit")
+            {
+                Response.Redirect("AddEditProduct.aspx?ProductID="+e.CommandArgument.ToString());
+            }
+            /*
             Product objProd = new Product();
 
 
@@ -157,6 +162,7 @@ public partial class Modules_Product : System.Web.UI.Page
 
 
             }
+            */
         }
         catch (Exception ex)
         {
@@ -273,5 +279,9 @@ public partial class Modules_Product : System.Web.UI.Page
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
+    }
+    protected void lnkAddNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AddEditProduct.aspx");
     }
 }

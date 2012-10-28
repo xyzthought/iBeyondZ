@@ -42,23 +42,25 @@ namespace DAL.Component
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }
                     //if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
 
-                    //if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
+                    if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     //if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
-                    //     if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
-                    //if (dataReader["BrandID"] != DBNull.Value) { obj.BrandID = (int)dataReader["BrandID"]; }
+                    if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
+                    if (dataReader["Brand"] != DBNull.Value) { obj.Brand = (string)dataReader["Brand"]; }
                     //if (dataReader["CategoryID"] != DBNull.Value) { obj.CategoryID = (int)dataReader["CategoryID"]; }
                     //if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
-                    //if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
+                    if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
+                    if (dataReader["SellingPrice"] != DBNull.Value) { obj.SellingPrice = (decimal)dataReader["SellingPrice"]; }
                     //if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
                     if (dataReader["Margin"] != DBNull.Value) { obj.Margin = (decimal)dataReader["Margin"]; }
-                    //if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
+                    if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
+                    if (dataReader["Season"] != DBNull.Value) { obj.Season = (string)dataReader["Season"]; }
                     //if (dataReader["CreatedOn"] != DBNull.Value) { obj.CreatedOn = (DateTime)dataReader["CreatedOn"]; }
                     //if (dataReader["UpdatedOn"] != DBNull.Value) { obj.UpdatedOn = (DateTime)dataReader["UpdatedOn"]; }
                     //if (dataReader["CreatedBy"] != DBNull.Value) { obj.CreatedBy = (int)dataReader["CreatedBy"]; }
                     //if (dataReader["UpdatedBy"] != DBNull.Value) { obj.UpdatedBy = (int)dataReader["UpdatedBy"]; }
                     //if (dataReader["IsActive"] != DBNull.Value) { obj.IsActive = (bool)dataReader["IsActive"]; }
                     //if (dataReader["IsDeleted"] != DBNull.Value) { obj.IsDeleted = (bool)dataReader["IsDeleted"]; }
-
+                    if (dataReader["Quantity"] != DBNull.Value) { obj.Quantity = (decimal)dataReader["Quantity"]; }
                     list.Add(obj);
 
                 }
@@ -110,16 +112,17 @@ namespace DAL.Component
             //db.AddInParameter(dbCommand, "ProductID", DbType.Int32, vobjProduct.ProductID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, vobjProduct.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
-            //db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
-            //db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
-            //db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
-            //db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
-            //db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
-            //db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
+            db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
+            db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
+            db.AddInParameter(dbCommand, "SeasonID", DbType.Int32, vobjProduct.SeasonID);
+            db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
+            db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
+            db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
+            db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
             db.AddInParameter(dbCommand, "Margin", DbType.Decimal, vobjProduct.Margin);
-            //db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
-            //db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
-            ////db.AddInParameter(dbCommand, "CreatedOn", DbType.DateTime, vobjProduct.CreatedOn);
+            db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
+            db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
+            //db.AddInParameter(dbCommand, "CreatedOn", DbType.DateTime, vobjProduct.CreatedOn);
             //db.AddInParameter(dbCommand, "UpdatedOn", DbType.DateTime, vobjProduct.UpdatedOn);
             db.AddInParameter(dbCommand, "CreatedBy", DbType.Int32, vobjProduct.CreatedBy);
             db.AddInParameter(dbCommand, "UpdatedBy", DbType.Int32, vobjProduct.UpdatedBy);
@@ -140,15 +143,16 @@ namespace DAL.Component
             db.AddInParameter(dbCommand, "ProductID", DbType.Int32, vobjProduct.ProductID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, vobjProduct.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
-            //db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
-            //db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
-            //db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
-            //db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
-            //db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
-            //db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
+            db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
+            db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
+            db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
+            db.AddInParameter(dbCommand, "SeasonID", DbType.Int32, vobjProduct.SeasonID);
+            db.AddInParameter(dbCommand, "SizeID", DbType.String, vobjProduct.SizeID);
+            db.AddInParameter(dbCommand, "BuyingPrice", DbType.Decimal, vobjProduct.BuyingPrice);
+            db.AddInParameter(dbCommand, "Tax", DbType.Decimal, vobjProduct.Tax);
             db.AddInParameter(dbCommand, "Margin", DbType.Decimal, vobjProduct.Margin);
-            //db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
-            //db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
+            db.AddInParameter(dbCommand, "BarCode", DbType.String, vobjProduct.BarCode);
+            db.AddInParameter(dbCommand, "SellingPrice", DbType.Decimal, vobjProduct.SellingPrice);
             db.AddInParameter(dbCommand, "UpdatedBy", DbType.Int32, vobjProduct.UpdatedBy);
             db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
             db.ExecuteNonQuery(dbCommand);
@@ -175,19 +179,20 @@ namespace DAL.Component
                     if (dataReader["ProductID"] != DBNull.Value) { obj.ProductID = (int)dataReader["ProductID"]; }
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }
-                    //if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
-                    //if (dataReader["BrandID"] != DBNull.Value) { obj.BrandID = (int)dataReader["BrandID"]; }
+                    if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
+                    if (dataReader["BrandID"] != DBNull.Value) { obj.BrandID = (int)dataReader["BrandID"]; }
+                    if (dataReader["SeasonID"] != DBNull.Value) { obj.SeasonID = (int)dataReader["SeasonID"]; }
                     //if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     //if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
                     //// if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
 
-                    //if (dataReader["CategoryID"] != DBNull.Value) { obj.CategoryID = (int)dataReader["CategoryID"]; }
-                    //if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
-                    //if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
-                    //if (dataReader["SellingPrice"] != DBNull.Value) { obj.SellingPrice = (decimal)dataReader["SellingPrice"]; }
-                    //if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
+                    if (dataReader["CategoryID"] != DBNull.Value) { obj.CategoryID = (int)dataReader["CategoryID"]; }
+                    if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
+                    if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
+                    if (dataReader["SellingPrice"] != DBNull.Value) { obj.SellingPrice = (decimal)dataReader["SellingPrice"]; }
+                    if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
                     if (dataReader["Margin"] != DBNull.Value) { obj.Margin = (decimal)dataReader["Margin"]; }
-                    //if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
+                    if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
                     ////if (dataReader["CreatedOn"] != DBNull.Value) { obj.CreatedOn = (DateTime)dataReader["CreatedOn"]; }
                     ////if (dataReader["UpdatedOn"] != DBNull.Value) { obj.UpdatedOn = (DateTime)dataReader["UpdatedOn"]; }
                     ////if (dataReader["CreatedBy"] != DBNull.Value) { obj.CreatedBy = (int)dataReader["CreatedBy"]; }

@@ -17,7 +17,7 @@ namespace BLL.Component
             return new DAL.Component.CategoryDB().AddEditCategory(CategoryID, CategoryName);
         }
 
-        public bool DeleteCategory(int CategoryID)
+        public int DeleteCategory(int CategoryID)
         {
             return new DAL.Component.CategoryDB().DeleteCategory(CategoryID);
         }

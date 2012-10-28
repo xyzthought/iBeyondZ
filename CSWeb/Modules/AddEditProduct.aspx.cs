@@ -19,6 +19,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             PopulateSize();
             PopulateCategory();
             PopulateBrand();
+            PopulateSeason();
             if (Request.QueryString["ProductID"] != null)
             {
                 LoadData(int.Parse(Request.QueryString["ProductID"]));
@@ -27,8 +28,11 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             BindSizeMasterGrid();
             BindCategory();
             BindBrand();
+            BindSeason();
         }
     }
+
+   
 
 
 
@@ -166,6 +170,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             objProduct.Description = txtDescription.Text.Trim();
             objProduct.ManufacturerID = int.Parse(cmbManufacturer.SelectedValue);
             objProduct.BrandID = int.Parse(cmbBrand.SelectedValue);
+            objProduct.SeasonID = int.Parse(ddlSeason.SelectedValue);
             objProduct.CategoryID = int.Parse(cmbCategory.SelectedValue);
             objProduct.SizeID = GetSizeIDs();// chkSize.SelectedValue == "" ? 0 : int.Parse(chkSize.SelectedValue);
             objProduct.BuyingPrice = Convert.ToDecimal(txtBuyingPrice.Text);
@@ -230,6 +235,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 cmbManufacturer.SelectedValue = objProduct.ManufacturerID.ToString();
                 cmbCategory.SelectedValue = objProduct.CategoryID.ToString();
                 cmbBrand.SelectedValue = objProduct.BrandID.ToString();
+                ddlSeason.SelectedValue = objProduct.SeasonID.ToString();
                 string[] strVals = objProduct.SizeID.Split(',');
                 for (int i = 0; i < strVals.Length; i++)
                 {
@@ -243,10 +249,10 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                     }
                 }
 
-                txtBuyingPrice.Text = objProduct.BuyingPrice.ToString();
-                txtTax.Text = objProduct.Tax.ToString();
-                txtMargin.Text = objProduct.Margin.ToString();
-                txtSellingPrice.Text = objProduct.SellingPrice.ToString();
+                txtBuyingPrice.Text = String.Format("{0:0.00}",objProduct.BuyingPrice);
+                txtTax.Text = String.Format("{0:0.00}",objProduct.Tax);
+                txtMargin.Text = String.Format("{0:0.00}",objProduct.Margin);
+                txtSellingPrice.Text = String.Format("{0:0.00}",objProduct.SellingPrice);
                 txtBarcode.Text = objProduct.BarCode;
 
                 //  ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditProduct", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
@@ -258,7 +264,18 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
-
+    protected void gvSize_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            gvSize.PageIndex = e.NewPageIndex;
+            BindSizeMasterGrid();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
     protected void gvSize_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         gvSize.EditIndex = -1;
@@ -295,7 +312,32 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                     PopulateSize();
                 }
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
 
+                GridViewRow emptyRow = gvSize.Controls[0].Controls[0] as GridViewRow;
+
+                txtControl = (TextBox)emptyRow.FindControl("txtSizeName1");
+
+                if (txtControl.Text != null)
+                {
+                    SizeName = txtControl.Text.Trim();
+                }
+
+                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName);
+                if (mintReturn == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size with same name already exists');", true);
+                }
+                else
+                {
+                    //          ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size created successfully');", true);
+                    BindSizeMasterGrid();
+                    PopulateSize();
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -395,6 +437,18 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         BindCategory();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
+    protected void grvCategory_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvCategory.PageIndex = e.NewPageIndex;
+            BindCategory();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
     protected void grvCategory_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         grvCategory.EditIndex = -1;
@@ -431,6 +485,31 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 BindCategory();
                 PopulateCategory();
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
+
+                GridViewRow emptyRow = grvCategory.Controls[0].Controls[0] as GridViewRow;
+
+
+
+                txtControl = (TextBox)emptyRow.FindControl("txtCategoryName1");
+
+
+                if (txtControl.Text != null)
+                {
+                    CategoryName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.CategoryBLL().AddEditCategory(0, CategoryName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Category with same name already exists');", true);
+                }
+                BindCategory();
+                PopulateCategory();
+            }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
         }
         catch (Exception ex)
@@ -442,13 +521,17 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         int CategoryID = Convert.ToInt32(grvCategory.DataKeys[e.RowIndex].Values[0].ToString());
 
-        new BLL.Component.CategoryBLL().DeleteCategory(CategoryID);
+        int mintReturn  = new BLL.Component.CategoryBLL().DeleteCategory(CategoryID);
 
-
-        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Record deleted successfully');", true);
-
-        BindCategory();
-        PopulateCategory();
+        if (mintReturn == -1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cannot delete. Category is associated to a Product.');", true);
+        }
+        else
+        {
+            BindCategory();
+            PopulateCategory();
+        }
         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow3','dvInnerWindow2',0);", true);
     }
     protected void grvCategory_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -534,7 +617,29 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 BindBrand();
                 PopulateBrand();
             }
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
 
+                GridViewRow emptyRow = grvBrand.Controls[0].Controls[0] as GridViewRow;
+
+                txtControl = (TextBox)emptyRow.FindControl("txtBrand1");
+
+
+                if (txtControl.Text != null)
+                {
+                    BrandName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.BrandBLL().AddEditBrand(-1, BrandName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Brand with same name already exists');", true);
+                }
+                BindBrand();
+                PopulateBrand();
+            }
         }
         catch (Exception ex)
         {
@@ -546,13 +651,17 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         int BrandID = Convert.ToInt32(grvBrand.DataKeys[e.RowIndex].Values[0].ToString());
 
-        new BLL.Component.BrandBLL().DeleteBrand(BrandID);
+        int mintReturn = new BLL.Component.BrandBLL().DeleteBrand(BrandID);
 
-
-        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Record deleted successfully');", true);
-
-        BindBrand();
-        PopulateBrand();
+        if (mintReturn == -1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cannot delete. Brand is associated to a Product.');", true);
+        }
+        else
+        {
+            BindBrand();
+            PopulateBrand();
+        }
         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
     }
     protected void grvBrand_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -592,5 +701,175 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         PopulateBrand();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow4','dvInnerWindow3',0);", true);
+    }
+
+    private void BindSeason()
+    {
+        List<Season> lstSeason = new SeasonBLL().GetSeason();
+        grvSeason.DataSource = lstSeason;
+        grvSeason.DataBind();
+    }
+
+    private void PopulateSeason()
+    {
+        List<Season> lstSeason = new SeasonBLL().GetSeason();
+        ddlSeason.DataSource = lstSeason;
+        ddlSeason.DataValueField = "SeasonID";
+        ddlSeason.DataTextField = "SeasonName";
+        ddlSeason.DataBind();
+        ddlSeason.Items.Insert(0, new ListItem("--Select--"));
+        ddlSeason.SelectedIndex = 0;
+    }
+    protected void grvSeason_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvSeason.PageIndex = e.NewPageIndex;
+            BindSeason();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
+    }
+
+    protected void grvSeason_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        grvSeason.EditIndex = e.NewEditIndex;
+        BindSeason();
+        PopulateSeason();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+    }
+    protected void grvSeason_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        grvSeason.EditIndex = -1;
+        BindSeason();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+    }
+    protected void grvSeason_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+    }
+    protected void grvSeason_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        try
+        {
+            int SeasonID = 0;
+            string SeasonName = string.Empty;
+            if (e.CommandName.Equals("Add"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
+
+                txtControl = ((TextBox)grvSeason.FooterRow.FindControl("txtSeason"));
+                if (txtControl.Text != null)
+                {
+                    SeasonName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.SeasonBLL().AddEditSeason(-1, SeasonName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Season with same name already exists');", true);
+                }
+                BindSeason();
+
+            }
+
+            if (e.CommandName.Equals("AddEmpty"))
+            {
+                int retVal = 0;
+                TextBox txtControl;
+
+                GridViewRow emptyRow = grvSeason.Controls[0].Controls[0] as GridViewRow;
+
+
+                txtControl = (TextBox)emptyRow.FindControl("txtSeason1");
+                if (txtControl.Text != null)
+                {
+                    SeasonName = txtControl.Text.Trim();
+                }
+
+                retVal = new BLL.Component.SeasonBLL().AddEditSeason(-1, SeasonName);
+                if (retVal == -1)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Season with same name already exists');", true);
+                }
+                BindSeason();
+
+            }
+            PopulateSeason();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+    }
+    protected void grvSeason_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int SeasonID = Convert.ToInt32(grvSeason.DataKeys[e.RowIndex].Values[0].ToString());
+        int mintReturn = new BLL.Component.SeasonBLL().DeleteSeason(SeasonID);
+        if (mintReturn == -1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cannot delete.Season is associeted to Product');", true);
+        }
+        else
+        {
+            BindSeason();
+            PopulateSeason();
+        }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+    }
+    protected void grvSeason_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            int SeasonID = 0;
+            string SeasonName = string.Empty;
+            TextBox txtControl;
+
+            txtControl = ((TextBox)grvSeason.Rows[e.RowIndex].FindControl("txtSeasonIDE"));
+            if (txtControl.Text != null)
+            {
+                SeasonID = Convert.ToInt32(txtControl.Text.Trim());
+            }
+
+            txtControl = ((TextBox)grvSeason.Rows[e.RowIndex].FindControl("txtSeasonE"));
+            if (txtControl != null)
+            {
+                SeasonName = txtControl.Text.Trim();
+
+            }
+
+            int mintReturn = new BLL.Component.SeasonBLL().AddEditSeason(SeasonID, SeasonName);
+            if (mintReturn == -1)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Season with same name already exists.');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Updated successfully');", true);
+        grvSeason.EditIndex = -1;
+        BindSeason();
+        PopulateSeason();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "ShowModalDiv('ModalWindow5','dvInnerWindow4',0);", true);
+    }
+    protected void grvBrand_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            grvBrand.PageIndex = e.NewPageIndex;
+            BindBrand();
+        }
+        catch (Exception ex)
+        {
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+        }
     }
 }

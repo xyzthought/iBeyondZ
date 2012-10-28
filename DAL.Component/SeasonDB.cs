@@ -52,14 +52,17 @@ namespace DAL.Component
             return mintReturn;
         }
 
-        public bool DeleteSeason(int SeasonID)
+        public int DeleteSeason(int SeasonID)
         {
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_DeleteSeason ");
 
             db.AddInParameter(dbCommand, "SeasonID", DbType.Int32, SeasonID);
+            db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
+            db.ExecuteNonQuery(dbCommand);
 
-            return (db.ExecuteNonQuery(dbCommand) == 1);
+            int mintReturn = int.Parse(db.GetParameterValue(dbCommand, "@Return").ToString());
+            return mintReturn;
         }
     }
 }
