@@ -77,7 +77,7 @@
                                 Description
                             </div>
                             <div style="float: left;">
-                                <asp:TextBox ID="txtDescription" runat="server" Rows="5" TextMode="MultiLine" class="txtInv"></asp:TextBox>
+                                <asp:TextBox ID="txtDescription" runat="server" Rows="3" TextMode="MultiLine" class="txtInv"></asp:TextBox>
                             </div>
                             <div style="clear: both;">
                             </div>

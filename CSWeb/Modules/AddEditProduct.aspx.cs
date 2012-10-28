@@ -15,6 +15,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
+
             PopulateManufacturer();
             PopulateSize();
             PopulateCategory();
