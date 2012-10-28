@@ -93,7 +93,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                         PopulateProductDetail();
                         if (!string.IsNullOrEmpty(Session["Discount"].ToString()))
                         {
-                            txtDiscount.Text = Session["Discount"].ToString();
+                            txtDiscount.Text = string.Format("{0:0.00}", Convert.ToDecimal(Session["Discount"].ToString()));
                         }
                         else
                         {
@@ -132,7 +132,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         txtAmountPaid.Text = objSale.CCAmount.ToString();
         txtBCash.Text = objSale.BankAmount.ToString();
         txtCash.Text = objSale.Cash.ToString();
-        txtDiscount.Text = objSale.Discount.ToString();
+        txtDiscount.Text = txtDiscount.Text = string.Format("{0:0.00}", objSale.Discount); 
 
     }
 
@@ -185,7 +185,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             {
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString());
+                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
                 }
 
                 dblDiscounted = dblTotalPrice;

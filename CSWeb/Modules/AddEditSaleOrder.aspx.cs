@@ -234,7 +234,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 
                 dblTotalDiscount += decDiscount;
 
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString());
+                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["Price"].ToString());
             }
 
             dblDiscounted = dblTotalPrice;
@@ -244,7 +244,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
             }
 
             lblTotalAmount.Text = Math.Round(dblTotalPrice, 2).ToString();// String.Format("{0:C}", dblTotalPrice);
-            txtDiscount.Text = Math.Round(dblTotalDiscount, 2).ToString();
+            txtDiscount.Text = string.Format("{0:0.00}", dblTotalDiscount);
             lblTotalPay.Text = Math.Round((dblTotalPrice - dblTotalDiscount), 2).ToString();// String.Format("{0:C}", dblDiscounted);
             Session["Discount"] = Math.Round(dblTotalDiscount, 2).ToString();
         }
@@ -523,12 +523,14 @@ public partial class Modules_AddEditSaleOrder : PageBase
                     if (selectedVal == "%")
                     {
                         dtProductDetail.Rows[i]["TPrice"] = dblPrice - (dblPrice * Convert.ToDecimal(txtPDiscount.Text.Trim()) / 100);
+                        dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(txtPDiscount.Text.Trim());
                     }
                     else
                     {
                         dtProductDetail.Rows[i]["TPrice"] = dblPrice - Convert.ToDecimal(txtPDiscount.Text.Trim());
+                        dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(string.Format("{0:0.00}", Convert.ToDecimal(txtPDiscount.Text.Trim()))); 
                     }
-                    dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(txtPDiscount.Text.Trim());
+                   
                     dtProductDetail.Rows[i]["DiscountType"] = selectedVal;
                 }
                 else
