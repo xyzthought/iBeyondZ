@@ -257,14 +257,12 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 
                 dblTotalDiscount += decDiscount;
 
-                dblTotalPrice += (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) + Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString());
+                decimal UQ= (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
+                UQ = UQ + (UQ * +Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+                dblTotalPrice += UQ;
             }
 
-            dblDiscounted = dblTotalPrice;
-            if (!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
-            {
-                dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
-            }
+           
 
             lblTotalAmount.Text = Math.Round(dblTotalPrice, 2).ToString();// String.Format("{0:C}", dblTotalPrice);
             txtDiscount.Text = string.Format("{0:0.00}", dblTotalDiscount);

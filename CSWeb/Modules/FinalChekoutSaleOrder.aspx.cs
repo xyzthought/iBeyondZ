@@ -185,10 +185,10 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             {
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    dblTotalPrice += (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) + Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString());
+                    decimal UQ = (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
+                    UQ = UQ + (UQ * +Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+                    dblTotalPrice += UQ;
                 }
-
-                dblDiscounted = dblTotalPrice;
                 if (!string.IsNullOrEmpty(txtDiscount.Text.Trim()))
                 {
                     dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
