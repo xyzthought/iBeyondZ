@@ -18,7 +18,7 @@ namespace BLL.BusinessObject
         private decimal mdblTax;
         private decimal mdblStandardRebate;
         private decimal mdblDiscount;
-       
+
         private int mintCustomerID;
         private int mintPaymentModeID;
         private decimal mdblCCAmount;
@@ -29,8 +29,10 @@ namespace BLL.BusinessObject
 
         private int mintProductID;
         private int mintSizeID;
+        private string mstrSizeID;
         private string mstrBarCode;
         private string mstrProductName;
+        private string mstrProductSizes;
         private string mstrSizeName;
         private decimal mdblQuantity;
 
@@ -45,7 +47,12 @@ namespace BLL.BusinessObject
         private DateTime mdtCreatedOn;
         private int mintCreatedBy;
 
-       
+        public string Sizes
+        {
+            get { return mstrProductSizes; }
+            set { mstrProductSizes = value; }
+        }
+
         public string CFirstName
         {
             get { return mstrCFirstName; }
@@ -95,7 +102,8 @@ namespace BLL.BusinessObject
         {
             get { return mintCreatedBy; }
             set { mintCreatedBy = value; }
-        }
+        }
+
 
 
         public long SaleID
@@ -134,7 +142,7 @@ namespace BLL.BusinessObject
             get { return mdblTax; }
             set { mdblTax = value; }
         }
-       
+
         public int SaleMadeBy
         {
             get { return mintSaleMadeBy; }
@@ -151,8 +159,13 @@ namespace BLL.BusinessObject
         {
             get { return mintSizeID; }
             set { mintSizeID = value; }
-        }
-       
+        }
+        public string StringSizeID
+        {
+            get { return mstrSizeID; }
+            set { mstrSizeID = value; }
+        }
+
         public string SaleOrder
         {
             get { return mstrSaleOrder; }
@@ -199,11 +212,11 @@ namespace BLL.BusinessObject
             get { return mdblDiscount; }
             set { mdblDiscount = value; }
         }
-        
 
-      
 
-        
+
+
+
 
         public int ProductID
         {
@@ -232,5 +245,9 @@ namespace BLL.BusinessObject
             get { return mdblQuantity; }
             set { mdblQuantity = value; }
         }
+
+        public string SizeBarCode { get; set; }
+
+        public string DiscountType { get; set; }
     }
 }

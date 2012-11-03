@@ -61,10 +61,10 @@
                                                         </div>
                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;
                                                             padding-bottom: 6px;">
-                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection"
-                                                                value="Bar Code" checked="checked" onchange="ChangeMe(1)" />&nbsp;Bar Code<input
-                                                                    type="radio" id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
-                                                            Name
+                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoPName" name="rdoSelection"
+                                                                checked="checked" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
+                                                            Name<input type="radio" id="rdoBarCode" name="rdoSelection" value="Bar Code" onchange="ChangeMe(1)" />&nbsp;Bar
+                                                            Code
                                                         </div>
                                                         <div>
                                                             Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
@@ -176,9 +176,16 @@
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Bar Code">
+                                                <asp:TemplateField Visible="false">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("BarCode") %>' ToolTip='<%# Eval("BarCode") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Bar Code">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblPBarCodeWithSize" runat="server" Text='<%# Eval("PBarCodeWithSize") %>' ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -190,9 +197,26 @@
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                                 </asp:TemplateField>
+                                                <asp:TemplateField Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSizeBarcodeID" runat="server" Text='<%# Eval("SizeBarcodeID") %>'
+                                                            ToolTip='<%# Eval("SizeBarcodeID") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSizeID" runat="server" Text='<%# Eval("SizeID") %>' ToolTip='<%# Eval("SizeID") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Size">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblSize" runat="server" Text='<%# Eval("SizeName") %>' ToolTip='<%# Eval("SizeName") %>'></asp:Label>
+                                                        <asp:DropDownList ID="ddlPSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPSize_SelectedIndexChanged">
+                                                        </asp:DropDownList>
+                                                        <%-- <asp:Label ID="lblSize" runat="server" Text='<%# Eval("SizeName") %>' ToolTip='<%# Eval("SizeName") %>'></asp:Label>--%>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -327,7 +351,7 @@
 
 
     $(function () {
-        Populate(1);
+        Populate(2);
     });
 
     function Populate(callfrom) {

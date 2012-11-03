@@ -139,7 +139,7 @@ namespace DAL.Component
 
                 mParams[0] = Convert.ToInt32(vstrProductID);
 
-                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode_V2", mParams))
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode", mParams))
                 {
                     while (reader.Read())
                     {
@@ -169,6 +169,10 @@ namespace DAL.Component
                 {
                     objData.BarCode = Convert.ToString(drData["BarCode"]);
                 }
+                if (FieldExists(drData, "SizeBarCode") && drData["SizeBarCode"] != DBNull.Value)
+                {
+                    objData.SizeBarCode = Convert.ToString(drData["SizeBarCode"]);
+                }
                 if (FieldExists(drData, "ProductName") && drData["ProductName"] != DBNull.Value)
                 {
                     objData.ProductName = Convert.ToString(drData["ProductName"]);
@@ -181,6 +185,10 @@ namespace DAL.Component
                 {
                     objData.SizeName = Convert.ToString(drData["SizeName"]);
                 }
+                if (FieldExists(drData, "Sizes") && drData["Sizes"] != DBNull.Value)
+                {
+                    objData.Sizes = Convert.ToString(drData["Sizes"]);
+                }
                 if (FieldExists(drData, "Quantity") && drData["Quantity"] != DBNull.Value)
                 {
                     objData.Quantity = Convert.ToDecimal(drData["Quantity"]);
@@ -192,6 +200,10 @@ namespace DAL.Component
                 if (FieldExists(drData, "Discount") && drData["Discount"] != DBNull.Value)
                 {
                     objData.Discount = Convert.ToDecimal(drData["Discount"]);
+                }
+                if (FieldExists(drData, "DiscountType") && drData["DiscountType"] != DBNull.Value)
+                {
+                    objData.DiscountType = Convert.ToString(drData["DiscountType"]);
                 }
                 if (FieldExists(drData, "Tax") && drData["Tax"] != DBNull.Value)
                 {
@@ -241,7 +253,7 @@ namespace DAL.Component
                 using (DbConnection connection = dBase.CreateConnection())
                 {
                     connection.Open();
-                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoComplete_V2");
+                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoComplete");
                     DataSet dsData = dBase.ExecuteDataSet(objCmd);
                     dtData = dsData.Tables[0];
                     connection.Close();
@@ -296,12 +308,13 @@ namespace DAL.Component
             Message objMessage = new Message();
             try
             {
-                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleDetail_V2");
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdateSaleDetail");
                 dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
                 dBase.AddInParameter(objCmd, "@ProductID", DbType.Int32, objSale.ProductID);
                 dBase.AddInParameter(objCmd, "@SizeID", DbType.Int32, objSale.SizeID);
                 dBase.AddInParameter(objCmd, "@Quantity", DbType.Decimal, objSale.Quantity);
                 dBase.AddInParameter(objCmd, "@Discount", DbType.Decimal, objSale.Discount);
+                dBase.AddInParameter(objCmd, "@DiscountType", DbType.String, objSale.DiscountType);
                 dBase.AddInParameter(objCmd, "@Price", DbType.Decimal, objSale.Price);
 
                 dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
@@ -348,7 +361,7 @@ namespace DAL.Component
             try
             {
 
-                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSaleDetailBySaleID_V2");
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSaleDetailBySaleID");
                 dBase.AddInParameter(objCmd, "@SaleID", DbType.Int32, objSale.SaleID);
 
                 using (IDataReader reader = dBase.ExecuteReader(objCmd))

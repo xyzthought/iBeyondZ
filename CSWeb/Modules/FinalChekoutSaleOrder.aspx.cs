@@ -392,6 +392,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             objSale.BankAmount = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtBCash.Text.Trim()));
             objSale.Cash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtCash.Text.Trim()));
             objSale.Discount = (string.IsNullOrEmpty(txtDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtDiscount.Text.Trim()));
+            
             objSale.SaleMadeBy = ((User)Session["UserData"]).UserID;
 
 
@@ -407,6 +408,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                     objSale.SizeID = Convert.ToInt32(dtProductDetail.Rows[i]["SizeID"].ToString());
                     objSale.Quantity = Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
                     objSale.Discount = Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString());
+                    objSale.DiscountType = dtProductDetail.Rows[i]["DiscountType"].ToString();
                     objSale.Price = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString());
 
                     objMessage = objSBLL.InsertUpdateSaleDetail(objSale);

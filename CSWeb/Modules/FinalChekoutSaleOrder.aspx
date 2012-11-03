@@ -91,7 +91,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Bar Code">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("BarCode") %>' ToolTip='<%# Eval("BarCode") %>'></asp:Label>
+                                                        <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("PBarCodeWithSize") %>' ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
