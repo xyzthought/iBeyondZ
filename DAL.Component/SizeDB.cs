@@ -30,7 +30,7 @@ namespace DAL.Component
                     if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (int)dataReader["SizeID"]; }
 
                     if (dataReader["SizeName"] != DBNull.Value) { obj.SizeName = (string)dataReader["SizeName"]; }
-
+                    if (dataReader["SizeBarCode"] != DBNull.Value) { obj.SizeBarCode = (string)dataReader["SizeBarCode"]; }
                     list.Add(obj);
                 }
 
@@ -39,19 +39,20 @@ namespace DAL.Component
             }
         }
 
-        public int InsertSize(string SizeName)
+        public int InsertSize(string SizeName,string SizeBarCode)
         {
 
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
             DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_InsertMasterSize");
 
             db.AddInParameter(dbCommand, "SizeName", DbType.String, SizeName);
+            db.AddInParameter(dbCommand, "SizeBarCode", DbType.String, SizeBarCode);
             db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
             db.ExecuteNonQuery(dbCommand);
             return (int)db.GetParameterValue(dbCommand, "@Return");
         }
 
-        public int UpdateSize(int SizeID, string SizeName)
+        public int UpdateSize(int SizeID, string SizeName, string SizeBarCode)
         {
 
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
@@ -59,6 +60,7 @@ namespace DAL.Component
 
             db.AddInParameter(dbCommand, "SizeID", DbType.Int32, SizeID);
             db.AddInParameter(dbCommand, "SizeName", DbType.String, SizeName);
+            db.AddInParameter(dbCommand, "SizeBarCode", DbType.String, SizeBarCode);
             db.AddOutParameter(dbCommand, "Return", DbType.Int32, 4);
             db.ExecuteNonQuery(dbCommand);
             return (int)db.GetParameterValue(dbCommand, "@Return");

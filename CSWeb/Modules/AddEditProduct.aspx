@@ -6,6 +6,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Product</title>
+    <style type="text/css">
+    .scroll_checkboxes
+    {
+        height: 60px;
+        width: 265px;
+        padding: 5px;
+        overflow: auto;
+        border: 1px solid #ccc;
+    }
+    
+     .FormText
+    {
+       /* FONT-SIZE: 11px;
+        FONT-FAMILY: tahoma,sans-serif*/
+         border: 1px solid #DADADA;
+    height: 26px;
+    line-height: 24px;
+    padding: 2px;
+   /* width: 354px;*/
+    }
+</style>
     <script type="text/javascript">
         function ClearFormFields() {
 
@@ -29,10 +50,88 @@
             if ($('#txtMargin').val() == '') {
                 $('#txtMargin').val('0');
             }
-            var val = $('#txtBuyingPrice').val() * $('#txtMargin').val()
-            $('#txtSellingPrice').val(val);
+            var margin = ($('#txtMargin').val()) / 100;
+           
+            var bp = $('#txtBuyingPrice').val();
+            var bpm = bp * (($('#txtMargin').val()) / 100);
+            var tax = parseFloat($('#txtTax').val() / 100)+ (1);
+            var val = (parseFloat(bp) + parseFloat(bpm))*tax;
+            $('#txtSellingPrice').val(val.toFixed(2));
         }
-    </script>
+
+        function checkAlpaNumeric(obj) {
+            if (obj.value.match(/[^a-zA-Z0-9 ]/g)) {
+                obj.value = obj.value.replace(/[^a-zA-Z0-9 ]/g, '');
+            }
+        }
+    
+        var color = 'White';
+
+        function changeColor(obj) {
+            var rowObject = getParentRow(obj);
+            var parentTable = document.getElementById("<%=chkSize.ClientID%>");
+            if (color == '') {
+                color = getRowColor();
+            }
+            if (obj.checked) {
+                rowObject.style.backgroundColor = '#A3B1D8';
+            }
+            else {
+                rowObject.style.backgroundColor = color;
+                color = 'White';
+            }
+
+            // private method
+            function getRowColor() {
+                if (rowObject.style.backgroundColor == 'White') return parentTable.style.backgroundColor;
+                else return rowObject.style.backgroundColor;
+            }
+
+        }
+
+        // This method returns the parent row of the object
+
+        function getParentRow(obj) {
+            do {
+                obj = obj.parentElement;
+            }
+            while (obj.tagName != "TR")
+            return obj;
+        }
+
+
+        function TurnCheckBoixGridView(id) {
+            var frm = document.forms[0];
+
+            for (i = 0; i < frm.elements.length; i++) {
+                if (frm.elements[i].type == "checkbox" && frm.elements[i].id.indexOf("<%= chkSize.ClientID %>") == 0) {
+                    frm.elements[i].checked = document.getElementById(id).checked;
+                }
+            }
+        }
+
+        function SelectAll(id) {
+
+            var parentTable = document.getElementById("<%=chkSize.ClientID%>");
+            var color
+
+            if (document.getElementById(id).checked) {
+                color = '#A3B1D8'
+            }
+            else {
+                color = 'White'
+            }
+
+            for (i = 0; i < parentTable.rows.length; i++) {
+                parentTable.rows[i].style.backgroundColor = color;
+            }
+            TurnCheckBoixGridView(id);
+
+        }
+
+
+
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -137,9 +236,11 @@
                                 Size
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="3"
-                                    CellPadding="5" CellSpacing="5">
+                            <div class="scroll_checkboxes">
+                                <asp:CheckBoxList ID="chkSize" CssClass="FormText" runat="server" RepeatDirection="Vertical" RepeatColumns="1"
+                                    CellPadding="15" CellSpacing="5" BorderWidth="0">
                                 </asp:CheckBoxList>
+                                </div>
                             </div>
                             <div style="float: left; padding-left: 8px;">
                                 <span class="btn5">
@@ -165,7 +266,7 @@
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                    onblur="extractNumber(this,-1,false);" Style="width: 160px!important"></asp:TextBox>
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" Style="width: 160px!important"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
@@ -238,6 +339,10 @@
                                                                         <b>
                                                                             <asp:Label ID="lblSizeName" runat="server" Text="SizeName" /></b>
                                                                     </th>
+                                                                    <th>
+                                                                        <b>
+                                                                            <asp:Label ID="lblSizeBarCode" runat="server" Text="SizeBarCode" /></b>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -248,6 +353,11 @@
                                                                         <asp:TextBox ID="txtSizeName1" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName1" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:TextBox ID="txtSizeBarCode1" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" Visible="true" />
+                                                                        <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="RequiredFieldValidator1" runat="server"
+                                                                            ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
                                                                     <td>
                                                                         <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
@@ -279,9 +389,25 @@
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeNameE" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeName"  CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </FooterTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Size Bar Code" SortExpression="SizeBarCode">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCodeE" MaxLength="3" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSiE" ID="ReqtxtSizeBarE" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCodeE" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCode" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSizeBarcode" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
