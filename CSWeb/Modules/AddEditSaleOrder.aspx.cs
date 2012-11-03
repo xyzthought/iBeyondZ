@@ -257,7 +257,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 
                 dblTotalDiscount += decDiscount;
 
-                dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString());
+                dblTotalPrice += (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) + Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString());
             }
 
             dblDiscounted = dblTotalPrice;

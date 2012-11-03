@@ -185,7 +185,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             {
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    dblTotalPrice += Convert.ToDecimal(dtProductDetail.Rows[i]["TPrice"].ToString()) ;
+                    dblTotalPrice += (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString())) + Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString());
                 }
 
                 dblDiscounted = dblTotalPrice;
@@ -194,7 +194,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                     dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
                 }
 
-                lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice);// String.Format("{0:C}", dblTotalPrice);
+                lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice );// String.Format("{0:C}", dblTotalPrice);
                 lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
             }
         }
