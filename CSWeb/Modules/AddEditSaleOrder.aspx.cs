@@ -243,7 +243,10 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
             {
-                decimal decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());
+                decimal UQ = (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
+                UQ = UQ + (UQ * +Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+
+                decimal decDiscount = UQ;
 
                 selectedVal = dtProductDetail.Rows[i]["DiscountType"].ToString();
                 if (selectedVal == "%")
@@ -257,8 +260,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 
                 dblTotalDiscount += decDiscount;
 
-                decimal UQ= (Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString()));
-                UQ = UQ + (UQ * +Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
+               
                 dblTotalPrice += UQ;
             }
 
