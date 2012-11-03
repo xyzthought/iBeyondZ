@@ -6,6 +6,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Product</title>
+    <style type="text/css">
+    .scroll_checkboxes
+    {
+        height: 60px;
+        width: 265px;
+        padding: 5px;
+        overflow: auto;
+        border: 1px solid #ccc;
+    }
+    
+     .FormText
+    {
+       /* FONT-SIZE: 11px;
+        FONT-FAMILY: tahoma,sans-serif*/
+         border: 1px solid #DADADA;
+    height: 26px;
+    line-height: 24px;
+    padding: 2px;
+   /* width: 354px;*/
+    }
+</style>
     <script type="text/javascript">
         function ClearFormFields() {
 
@@ -43,7 +64,74 @@
                 obj.value = obj.value.replace(/[^a-zA-Z0-9 ]/g, '');
             }
         }
-    </script>
+    
+        var color = 'White';
+
+        function changeColor(obj) {
+            var rowObject = getParentRow(obj);
+            var parentTable = document.getElementById("<%=chkSize.ClientID%>");
+            if (color == '') {
+                color = getRowColor();
+            }
+            if (obj.checked) {
+                rowObject.style.backgroundColor = '#A3B1D8';
+            }
+            else {
+                rowObject.style.backgroundColor = color;
+                color = 'White';
+            }
+
+            // private method
+            function getRowColor() {
+                if (rowObject.style.backgroundColor == 'White') return parentTable.style.backgroundColor;
+                else return rowObject.style.backgroundColor;
+            }
+
+        }
+
+        // This method returns the parent row of the object
+
+        function getParentRow(obj) {
+            do {
+                obj = obj.parentElement;
+            }
+            while (obj.tagName != "TR")
+            return obj;
+        }
+
+
+        function TurnCheckBoixGridView(id) {
+            var frm = document.forms[0];
+
+            for (i = 0; i < frm.elements.length; i++) {
+                if (frm.elements[i].type == "checkbox" && frm.elements[i].id.indexOf("<%= chkSize.ClientID %>") == 0) {
+                    frm.elements[i].checked = document.getElementById(id).checked;
+                }
+            }
+        }
+
+        function SelectAll(id) {
+
+            var parentTable = document.getElementById("<%=chkSize.ClientID%>");
+            var color
+
+            if (document.getElementById(id).checked) {
+                color = '#A3B1D8'
+            }
+            else {
+                color = 'White'
+            }
+
+            for (i = 0; i < parentTable.rows.length; i++) {
+                parentTable.rows[i].style.backgroundColor = color;
+            }
+            TurnCheckBoixGridView(id);
+
+        }
+
+
+
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -148,9 +236,11 @@
                                 Size
                             </div>
                             <div style="float: left; width: 278px;">
-                                <asp:CheckBoxList ID="chkSize" runat="server" RepeatDirection="Horizontal" RepeatColumns="3"
-                                    CellPadding="5" CellSpacing="5">
+                            <div class="scroll_checkboxes">
+                                <asp:CheckBoxList ID="chkSize" CssClass="FormText" runat="server" RepeatDirection="Vertical" RepeatColumns="1"
+                                    CellPadding="15" CellSpacing="5" BorderWidth="0">
                                 </asp:CheckBoxList>
+                                </div>
                             </div>
                             <div style="float: left; padding-left: 8px;">
                                 <span class="btn5">
