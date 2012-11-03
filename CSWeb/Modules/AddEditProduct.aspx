@@ -259,7 +259,7 @@
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtSizeBarCode1" CssClass="txtMasterData" runat="server" Visible="true" />
+                                                                        <asp:TextBox ID="txtSizeBarCode1" MaxLength="3" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="RequiredFieldValidator1" runat="server"
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
@@ -303,14 +303,16 @@
                                                                     <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtSizeBarCodeE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                    <asp:TextBox ID="txtSizeBarCodeE" MaxLength="3" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSiE" ID="ReqtxtSizeBarE" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCodeE" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeBarCode" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeBarCode" MaxLength="3" CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSizeBarcode" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    <asp:RegularExpressionValidator ID="regSBAdd" ControlToValidate="txtSizeBarCode" runat="server" 
+                                                                    ErrorMessage="*" ValidationExpression="^[0-9a-zA-Z]"></asp:RegularExpressionValidator>
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
