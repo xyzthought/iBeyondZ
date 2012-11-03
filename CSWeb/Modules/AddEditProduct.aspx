@@ -37,6 +37,12 @@
             var val = (parseFloat(bp) + parseFloat(bpm))*tax;
             $('#txtSellingPrice').val(val.toFixed(2));
         }
+
+        function checkAlpaNumeric(obj) {
+            if (obj.value.match(/[^a-zA-Z0-9 ]/g)) {
+                obj.value = obj.value.replace(/[^a-zA-Z0-9 ]/g, '');
+            }
+        }
     </script>
 </head>
 <body>
@@ -259,7 +265,7 @@
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtSizeBarCode1" MaxLength="3" CssClass="txtMasterData" runat="server" Visible="true" />
+                                                                        <asp:TextBox ID="txtSizeBarCode1" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="RequiredFieldValidator1" runat="server"
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
@@ -293,7 +299,7 @@
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeNameE" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeName"  CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
@@ -303,16 +309,15 @@
                                                                     <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtSizeBarCodeE" MaxLength="3" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                    <asp:TextBox ID="txtSizeBarCodeE" MaxLength="3" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSiE" ID="ReqtxtSizeBarE" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCodeE" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeBarCode" MaxLength="3" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeBarCode" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSizeBarcode" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                    <asp:RegularExpressionValidator ID="regSBAdd" ControlToValidate="txtSizeBarCode" runat="server" 
-                                                                    ErrorMessage="*" ValidationExpression="^[0-9a-zA-Z]"></asp:RegularExpressionValidator>
+                                                                    
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
