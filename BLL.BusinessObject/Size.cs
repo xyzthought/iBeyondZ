@@ -20,5 +20,12 @@ namespace BLL.BusinessObject
             get { return mstrSizeName; }
             set { mstrSizeName = value; }
         }
+
+        private string mstrSizeBarCode;
+        public string SizeBarCode
+        {
+            get { return mstrSizeBarCode; }
+            set { mstrSizeBarCode = value; }
+        }
     }
 }

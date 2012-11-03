@@ -56,6 +56,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
         {
             int SizeID = 0;
             string SizeName = string.Empty;
+            string SizeBarCode = string.Empty;
             if (e.CommandName.Equals("Add"))
             {
                 int retVal = 0;
@@ -67,7 +68,13 @@ public partial class Modules_MasterData : System.Web.UI.Page
                     SizeName = txtControl.Text.Trim();
                 }
 
-                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName);
+                txtControl = ((TextBox)gvSize.FooterRow.FindControl("txtSizeBarCode"));
+                if (txtControl.Text != null)
+                {
+                    SizeBarCode = txtControl.Text.Trim();
+                }
+
+                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName,SizeBarCode);
                 if (mintReturn == -1)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size with same name already exists');", true);
@@ -93,7 +100,14 @@ public partial class Modules_MasterData : System.Web.UI.Page
                     SizeName = txtControl.Text.Trim();
                 }
 
-                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName);
+                txtControl = (TextBox)emptyRow.FindControl("txtSizeBarCode1");
+
+                if (txtControl.Text != null)
+                {
+                    SizeBarCode = txtControl.Text.Trim();
+                }
+
+                int mintReturn = new BLL.Component.SizeBLL().InsertSize(SizeName, SizeBarCode);
                 if (mintReturn == -1)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size with same name already exists');", true);
@@ -144,6 +158,7 @@ public partial class Modules_MasterData : System.Web.UI.Page
         {
             int SizeID = 0;
             string SizeName = string.Empty;
+            string SizeBarCode = string.Empty;
             TextBox txtControl;
 
             txtControl = ((TextBox)gvSize.Rows[e.RowIndex].FindControl("txtSizeIDE"));
@@ -158,8 +173,13 @@ public partial class Modules_MasterData : System.Web.UI.Page
                 SizeName = txtControl.Text.Trim();
 
             }
+            txtControl = ((TextBox)gvSize.Rows[e.RowIndex].FindControl("txtSizeBarCodeE"));
+            if (txtControl != null)
+            {
+                SizeBarCode = txtControl.Text.Trim();
 
-            int mintReturn = new BLL.Component.SizeBLL().UpdateSize(SizeID, SizeName);
+            }
+            int mintReturn = new BLL.Component.SizeBLL().UpdateSize(SizeID, SizeName, SizeBarCode);
             if (mintReturn == -1)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Size with same name already exists');", true);

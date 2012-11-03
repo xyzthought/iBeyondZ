@@ -29,8 +29,13 @@
             if ($('#txtMargin').val() == '') {
                 $('#txtMargin').val('0');
             }
-            var val = $('#txtBuyingPrice').val() * $('#txtMargin').val()
-            $('#txtSellingPrice').val(val);
+            var margin = ($('#txtMargin').val()) / 100;
+           
+            var bp = $('#txtBuyingPrice').val();
+            var bpm = bp * (($('#txtMargin').val()) / 100);
+            var tax = parseFloat($('#txtTax').val() / 100)+ (1);
+            var val = (parseFloat(bp) + parseFloat(bpm))*tax;
+            $('#txtSellingPrice').val(val.toFixed(2));
         }
     </script>
 </head>
@@ -165,7 +170,7 @@
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                    onblur="extractNumber(this,-1,false);" Style="width: 160px!important"></asp:TextBox>
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" Style="width: 160px!important"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
@@ -238,6 +243,10 @@
                                                                         <b>
                                                                             <asp:Label ID="lblSizeName" runat="server" Text="SizeName" /></b>
                                                                     </th>
+                                                                    <th>
+                                                                        <b>
+                                                                            <asp:Label ID="lblSizeBarCode" runat="server" Text="SizeBarCode" /></b>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -248,6 +257,11 @@
                                                                         <asp:TextBox ID="txtSizeName1" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName1" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:TextBox ID="txtSizeBarCode1" CssClass="txtMasterData" runat="server" Visible="true" />
+                                                                        <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="RequiredFieldValidator1" runat="server"
+                                                                            ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
                                                                     <td>
                                                                         <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
@@ -282,6 +296,21 @@
                                                                     <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </FooterTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Size Bar Code" SortExpression="SizeBarCode">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCodeE" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSiE" ID="ReqtxtSizeBarE" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCodeE" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCode" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSizeBarcode" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
