@@ -51,7 +51,7 @@
                                         <div class="acceptedCont">
                                             <div id="MidM2">
                                                 <fieldset class="fieldAddEdit">
-                                                    <div class="inner" style="height: 130px;">
+                                                    <div class="inner" style="height: 135px;">
                                                         <asp:HiddenField ID="hdnByBarCode" runat="server" ClientIDMode="Static" />
                                                         <asp:HiddenField ID="hdnByProductName" runat="server" ClientIDMode="Static" />
                                                         <div class="mandet">
@@ -126,9 +126,9 @@
                                                                     <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€</div>
                                                             </div>
                                                             <div>
-                                                                <div style="width: 70px; float: left; padding-left: 50px; font-weight: bold">
+                                                                <div style="width: 70px; float: right; padding-left: 50px; font-weight: bold">
                                                                     Discount</div>
-                                                                <div style="float: left; display: ">
+                                                                <div style="float: right">
                                                                     <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                                 </div>
                                                             </div>
@@ -140,7 +140,7 @@
                                                         <div style="width: 100px; float: left;">
                                                             <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                         </div>
-                                                        <div style="float: right; margin-bottom: 19px;">
+                                                        <div style="float: right; margin-bottom: 1px;">
                                                             <span class="btn5">
                                                                 <asp:LinkButton ID="lnkFinalChekout" runat="server" CausesValidation="False" OnClick="lnkFinalChekout_Click"><span class="AddCheckoutData"></span>Checkout</asp:LinkButton>
                                                             </span>
