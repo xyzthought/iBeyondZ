@@ -51,7 +51,7 @@
                                         <div class="acceptedCont">
                                             <div id="MidM2">
                                                 <fieldset class="fieldAddEdit">
-                                                    <div class="inner" style="height: 135px;">
+                                                    <div class="inner" style="height: 137px;">
                                                         <asp:HiddenField ID="hdnByBarCode" runat="server" ClientIDMode="Static" />
                                                         <asp:HiddenField ID="hdnByProductName" runat="server" ClientIDMode="Static" />
                                                         <div class="mandet">
@@ -127,7 +127,7 @@
                                                             </div>
                                                             <div>
                                                                 <div style="width: 70px; float: right; padding-left: 50px; font-weight: bold">
-                                                                    Discount</div>
+                                                                    Discount</div><br/><br/>
                                                                 <div style="float: right">
                                                                     <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                                 </div>
