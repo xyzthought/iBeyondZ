@@ -394,7 +394,7 @@
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size Bar Code" SortExpression="SizeBarCode">
+                                                            <asp:TemplateField HeaderText="Size Bar Code">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
                                                                 </ItemTemplate>
