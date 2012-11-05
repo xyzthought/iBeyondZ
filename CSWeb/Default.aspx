@@ -5,8 +5,13 @@
 <head runat="server">
     <title>Clothing Shop |</title>
     <link href="Styles/style.css" rel="stylesheet" type="text/css" />
+     <script type="text/javascript">
+         function onld() {
+             document.getElementById("txtUserName").focus();
+         }
+     </script>
 </head>
-<body>
+<body onload="onld();">
     <form id="form1" runat="server">
     <div>
         <div class="aspNetHidden">

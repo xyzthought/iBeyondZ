@@ -52,7 +52,7 @@
                             </div>
                             <br style="clear: both" />
                             <div class="grid_container">
-                                <div class="divCenter">
+                                <div class="divCenter" style="width:1142px !important">
                                     <div id="divSize" style="float: left; padding-right: 10px;">
                                         <div class="masterHeader" style="margin-bottom: 10px">
                                             Manage Size
@@ -80,6 +80,10 @@
                                                                         <b>
                                                                             <asp:Label ID="lblSizeName" runat="server" Text="SizeName" /></b>
                                                                     </th>
+                                                                    <th>
+                                                                        <b>
+                                                                            <asp:Label ID="lblSizeBarCode" runat="server" Text="SizeBarCode" /></b>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -90,6 +94,11 @@
                                                                         <asp:TextBox ID="txtSizeName1" CssClass="txtMasterData" runat="server" Visible="true" />
                                                                         <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                             ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName1" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:TextBox ID="txtSizeBarCode1" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" Visible="true" />
+                                                                        <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="RequiredFieldValidator1" runat="server"
+                                                                            ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode1" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     </td>
                                                                     <td>
                                                                         <asp:ImageButton ID="imgbtnSaveNew" ImageUrl="../Images/Plusorange.png" runat="server"
@@ -121,9 +130,25 @@
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeNameE" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtSizeName" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:TextBox ID="txtSizeName"  CssClass="txtMasterData" runat="server" />
                                                                     <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSize" runat="server"
                                                                         ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </FooterTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Size Code">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblSizeBarCode" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCodeE" MaxLength="3" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" CssClass="txtMasterData" runat="server" Text='<%# Eval("SizeBarCode") %>' />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSiE" ID="ReqtxtSizeBarE" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCodeE" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:TextBox ID="txtSizeBarCode" onblur="checkAlpaNumeric(this);" onkeyup="checkAlpaNumeric(this);" MaxLength="3" CssClass="txtMasterData" runat="server" />
+                                                                    <asp:RequiredFieldValidator ValidationGroup="NewDSi" ID="ReqtxtSizeBarcode" runat="server"
+                                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtSizeBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    
                                                                 </FooterTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Action">
