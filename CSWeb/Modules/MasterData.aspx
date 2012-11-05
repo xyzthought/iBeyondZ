@@ -52,7 +52,7 @@
                             </div>
                             <br style="clear: both" />
                             <div class="grid_container">
-                                <div class="divCenter">
+                                <div class="divCenter" style="width:1142px !important">
                                     <div id="divSize" style="float: left; padding-right: 10px;">
                                         <div class="reports" style="margin-bottom: 10px">
                                             Manage Size
