@@ -21,6 +21,15 @@ namespace BLL.Component
         {
             new ProductPurchaseDB().AddEditPurchase(ref vobjProductPurchase);
         }
+
+        public void AddEditProductPurchase(ref PurchaseRecord vobjPurchaseRecord)
+        {
+            new ProductPurchaseDB().AddEditProductPurchase(ref vobjPurchaseRecord);
+        }
+        public void GetPurchaseByID(ref PurchaseRecord vobjPurchaseRecord)
+        {
+            new ProductPurchaseDB().GetPurchaseByID(ref vobjPurchaseRecord);
+        }
         /*public void Add(ref ProductPurchase vobjProductPurchase)
         {
             new ProductPurchaseDB().Add(ref vobjProductPurchase);

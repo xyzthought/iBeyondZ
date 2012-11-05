@@ -198,7 +198,7 @@ public partial class BuyingInterface : PageBase
                 int intPurchaseID = Convert.ToInt32(e.CommandArgument.ToString());
                 param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + intPurchaseID;
                 param = Common.GenerateBASE64WithObfuscateApp(param);
-                vstrLink = "AddEditPurchase.aspx?q=" + param;
+                vstrLink = "AddEditProductPurchase.aspx?q=" + param;
                 Response.Redirect(vstrLink, false);
                 //ViewState["intPurchaseID"] = intPurchaseID;
                 //LoadData(intPurchaseID);
@@ -239,7 +239,7 @@ public partial class BuyingInterface : PageBase
     {
         param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0";
         param = Common.GenerateBASE64WithObfuscateApp(param);
-        vstrLink = "AddEditPurchase.aspx?q=" + param;
+        vstrLink = "AddEditProductPurchase.aspx?q=" + param;
         Response.Redirect(vstrLink, false);
     }
 

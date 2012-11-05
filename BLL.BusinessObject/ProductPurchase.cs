@@ -5,6 +5,36 @@ using System.Text;
 
 namespace BLL.BusinessObject
 {
+    public class ProductSize
+    {
+        public int ProductID { get; set; }
+        public int SizeID { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    public class PurchasedProduct
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string BarCode { get; set; }
+        public decimal BuyingPrice { get; set; }
+        public decimal Tax { get; set; }
+        public decimal Margin { get; set; }
+        public decimal SellingPrice { get; set; }
+        public List<ProductSize> PurchasedQty { get; set; }
+        public string SizeQty { get; set; }
+    }
+
+    public class PurchaseRecord : Message
+    {
+        public int PurchaseID { get; set; }
+        public int ManufacturerID { get; set; }
+        public string PurchaseDate { get; set; }
+        public List<PurchasedProduct> ProductsPurchased { get; set; }
+        public decimal TotalBuyingPrice { get; set; }
+        public int TotalQty { get; set; }
+    }
+
     public class ProductPurchase : Message
     {
         public int ProductPurchaseID {get;set;}
@@ -24,7 +54,8 @@ namespace BLL.BusinessObject
         public string ManufacturerName { get; set; }
         public string SizeIDs { get; set; }
         public string ProductName { get; set; }
-        public string Sizes { get; set; }            
+        public string Sizes { get; set; }
+         
         
         /*
         private int mintPurchaseID;

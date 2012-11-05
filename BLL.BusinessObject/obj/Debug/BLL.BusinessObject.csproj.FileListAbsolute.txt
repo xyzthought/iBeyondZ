@@ -3,3 +3,8 @@ C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.
 C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
 C:\Users\suvendu\Projects\CShop\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb
+D:\Projects\Others\Test\iBeyondZ_04Nov12\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.dll
+D:\Projects\Others\Test\iBeyondZ_04Nov12\BLL.BusinessObject\bin\Debug\BLL.BusinessObject.pdb
+D:\Projects\Others\Test\iBeyondZ_04Nov12\BLL.BusinessObject\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Others\Test\iBeyondZ_04Nov12\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.dll
+D:\Projects\Others\Test\iBeyondZ_04Nov12\BLL.BusinessObject\obj\Debug\BLL.BusinessObject.pdb
