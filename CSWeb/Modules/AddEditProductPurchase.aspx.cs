@@ -85,7 +85,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
         {
             PopulateAutoCompleteDataTable();
             PopulateManufacturer();
-
+            txtDateOfPurchase.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
             gobjProduct = new List<PurchasedProduct>();
             Session["PurchasedProduct"] = gobjProduct;
 
