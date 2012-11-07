@@ -323,7 +323,7 @@
                                                         <span class="btn">
                                                             <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>
                                                         <span class="btn">
-                                                            <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1');">Cancel</asp:LinkButton>
+                                                            <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1'); Populate(2);">Cancel</asp:LinkButton>
                                                         </span>
                                                     </div>
                                                 </div>
