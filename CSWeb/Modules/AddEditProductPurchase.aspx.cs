@@ -341,6 +341,27 @@ public partial class Modules_AddEditProductPurchase : PageBase
         }
         else
         {
+            System.Web.UI.HtmlControls.HtmlGenericControl containerDiv;
+            System.Web.UI.HtmlControls.HtmlGenericControl textBoxDiv;
+
+            for (int i = 0; i < lstSizeIDs.Count; i++)
+            {
+                for (int j = 0; j < lstProductSizes.Count; j++)
+                {
+                    if (lstSizeIDs[i].SizeID == lstProductSizes[j].SizeID)
+                    {
+                        containerDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
+                        containerDiv.Controls.Add(CreateLabel(lstProductSizes[j].SizeID, lstSizeIDs[i].SizeName));
+                        plhQty.Controls.Add(containerDiv);
+                        textBoxDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
+                        textBoxDiv.Controls.Add(CreateTextBox(lstProductSizes[j].SizeID, 0));
+                        plhQty.Controls.Add(textBoxDiv);
+                        break;
+                    }
+                }
+            }
+            
+
             Span3.InnerHtml = "Total Quantity cannot be zero";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditPurchase", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
         }
