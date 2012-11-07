@@ -163,7 +163,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
                 hdnByProductName.Value = hdnByProductName.Value.Substring(0, hdnByProductName.Value.Length - 2);
             }
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
         }
     }
 

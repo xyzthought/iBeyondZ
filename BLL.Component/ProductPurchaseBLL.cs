@@ -42,5 +42,11 @@ namespace BLL.Component
         {
             new ProductPurchaseDB().Delete(ref vobjProductPurchase);
         }
+
+        public void UpdateProductPrice(ref ProductPurchase vobjProductPurchase)
+        {
+            new ProductPurchaseDB().UpdateProductPrice(ref vobjProductPurchase);
+        }
+
     }
 }
