@@ -320,21 +320,30 @@ public partial class Modules_AddEditProductPurchase : PageBase
                 objPurchasedProduct.SizeQty += lstSizeIDs[i].SizeName + ": " + objProductSize.Quantity;
             }
         }
-        objPurchasedProduct.PurchasedQty = lstProductSizes;
 
-        if (Session["PurchasedProduct"] != null)
-            gobjProduct = (List<PurchasedProduct>)Session["PurchasedProduct"];
+        if (intTotalQty > 0)
+        {
+            objPurchasedProduct.PurchasedQty = lstProductSizes;
 
-        gobjProduct.Add(objPurchasedProduct);
-        Session["PurchasedProduct"] = gobjProduct;
+            if (Session["PurchasedProduct"] != null)
+                gobjProduct = (List<PurchasedProduct>)Session["PurchasedProduct"];
 
-        // lblMsg.Text = 
-        PopulateGrid();
+            gobjProduct.Add(objPurchasedProduct);
+            Session["PurchasedProduct"] = gobjProduct;
 
-        lblTotalQuantity.Text = Convert.ToString( intTotalQty + Convert.ToInt32(lblTotalQuantity.Text));
-        lblTotalAmount.Text = Math.Round((dblTotalAmount + (intTotalQty * objPurchasedProduct.BuyingPrice)),2).ToString();
+            // lblMsg.Text = 
+            PopulateGrid();
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+            lblTotalQuantity.Text = Convert.ToString(intTotalQty + Convert.ToInt32(lblTotalQuantity.Text));
+            lblTotalAmount.Text = Math.Round((dblTotalAmount + (intTotalQty * objPurchasedProduct.BuyingPrice)), 2).ToString();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+        }
+        else
+        {
+            Span3.InnerHtml = "Total Quantity cannot be zero";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditPurchase", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
+        }
 
     }
 
