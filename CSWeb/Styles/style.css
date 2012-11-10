@@ -11,9 +11,9 @@ h1,h2,h3,h4,h5,h6,span,p{  font-family:Arial, Helvetica, sans-serif; padding:0px
 .wrapper{ height:auto !important; min-height: 100%; margin:0px auto -59px;}
 
 select{ width:280px; height:30px; border:1px solid #D8D5D5; vertical-align:top;}
-.wrapperInnner{ margin:0 auto; text-align:center; height:80px; position:relative;}
+.wrapperInnner{ margin:0 auto; text-align:center; height:80px; position:relative;padding-top:50px;}
 
-.loginHeader{  background:url(../images/Navi.png) repeat-x top #fff; text-align:center; height:146px;}
+.loginHeader{  background:url(../images/Navi.png) repeat-x top #fff; text-align:center; height:25px;}
 
 .shiftingContainer{width:812px; margin:0 auto; padding-top:146px;}
 .shiftingContainer h1{ border-bottom:1px solid #cfcfcf; padding-bottom:11px; text-align:center; font-size:18px; text-transform:uppercase; margin-bottom:20px; }

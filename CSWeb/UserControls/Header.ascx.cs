@@ -14,6 +14,7 @@ public partial class UserControls_Header : System.Web.UI.UserControl
     {
         objPage.CheckSession();
         LoadUserSpecificData();
+        Page.Title = "S O F I S M";
     }
 
     private void LoadUserSpecificData()

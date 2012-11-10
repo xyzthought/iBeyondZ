@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Clothing Shop |</title>
+    <title>S O F I S M</title>
     <link href="Styles/style.css" rel="stylesheet" type="text/css" />
-     <script type="text/javascript">
-         function onld() {
-             document.getElementById("txtUserName").focus();
-         }
-     </script>
+    <script type="text/javascript">
+        function onld() {
+            document.getElementById("txtUserName").focus();
+        }
+    </script>
 </head>
 <body onload="onld();">
     <form id="form1" runat="server">
@@ -19,7 +19,8 @@
         <div class="wrapper" style="background: #fff !important;">
             <div class="loginHeader">
                 <div class="wrapperInnner">
-                    <%-- <img src="#">--%></div>
+                    <img src="Images/SOFISMLogo.jpg" />
+                </div>
             </div>
             <div class="shiftingContainer">
                 <h1>
@@ -47,7 +48,7 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
                                 Display="Dynamic" ControlToValidate="txtPassword" CssClass="errorMsg"></asp:RequiredFieldValidator></span>
                         <label id="errMsg" runat="server">
-                            </label>
+                        </label>
                         <p>
                             <asp:Button ID="btnLogin" class="btnLogin" runat="server" OnClick="btnLogin_Click" />
                         </p>
