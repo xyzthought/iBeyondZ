@@ -3,6 +3,7 @@
 using System;
 using System.Web;
 using BLL.BusinessObject;
+using BLL.Component;
 
 public class ProductHandler : IHttpHandler {
     
@@ -17,19 +18,33 @@ public class ProductHandler : IHttpHandler {
         
         try
         {
-            intProductID = Convert.ToInt32(context.Request["productID"]);
-            dcmBuyingPrice = Convert.ToDecimal(context.Request["buyingPrice"]);
-            dcmTax = Convert.ToDecimal(context.Request["tax"]);
-            dcmMargin = Convert.ToDecimal(context.Request["margin"]);
-            dcmSellingPrice = Convert.ToDecimal(context.Request["sellingPrice"]);
+            ProductPurchase objProductPurchase = new ProductPurchase();
+            
+            objProductPurchase.ProductID = Convert.ToInt32(context.Request["productID"]);
+            objProductPurchase.BuyingPrice = Convert.ToDecimal(context.Request["buyingPrice"]);
+            objProductPurchase.Tax = Convert.ToDecimal(context.Request["tax"]);
+            objProductPurchase.Margin = Convert.ToDecimal(context.Request["margin"]);
+            objProductPurchase.SellingPrice = Convert.ToDecimal(context.Request["sellingPrice"]);
 
-            objMessage.ReturnStatus = 1;
-            objMessage.ReturnMessage = "Price updated successfully";
+            new ProductPurchaseBLL().UpdateProductPrice(ref objProductPurchase);
+
+            if (objProductPurchase.ReturnValue > 0)
+            {
+                objMessage.ReturnStatus = 1;
+                objMessage.ReturnMessage = "Price updated successfully";
+            }
+            else
+            {
+                objMessage.ReturnStatus = -1;
+                objMessage.ReturnMessage = "Error in updating Price";
+            }
+            
+            
         }
         catch (Exception ex)
         {
             objMessage.ReturnStatus = -1;
-            objMessage.ReturnMessage = "Error in updating successfully";
+            objMessage.ReturnMessage = "Error in updating Price";
             
         }
         

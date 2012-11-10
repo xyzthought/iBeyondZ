@@ -323,7 +323,13 @@
                                                         <span class="btn">
                                                             <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>
                                                         <span class="btn">
+<<<<<<< HEAD
                                                             <asp:LinkButton ID="lnkCancel" runat="server" OnClientClick=" Populate(2); return CloseAddDiv('ModalWindow1');">Cancel</asp:LinkButton>
+=======
+                                                            <%--<asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1'); Populate(2);">Cancel</asp:LinkButton>--%>
+                                                            <a href="javascript:void(0)" onclick="CloseAddDiv('ModalWindow1')">Cancel</a>
+                                                            <%--<input type="button" value="Cancel" onclick="CloseAddDiv('ModalWindow1')" />--%>
+>>>>>>> 21a014f5078563bc9814fda779dabf38706f65d9
                                                         </span>
                                                     </div>
                                                 </div>
@@ -511,10 +517,16 @@ function UpdateProduct() {
     return false;
 }
 function OnComplete(result) {
-    alert([result.ReturnStatus, result.ReturnMessage]);
+    if (result.ReturnStatus > 0) {
+        $('#Span3').html('Price updated successfully');
+    }
+    else {
+        $('#Span3').html('Error in updating data');
+    }
+    //alert([result.ReturnStatus, result.ReturnMessage]);
 }
 function OnFail(result) {
-    alert(result);
+    //alert(result);
 }
 </script>
 

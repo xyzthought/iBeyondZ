@@ -258,7 +258,30 @@ namespace DAL.Component
 
         }
 
+        public void UpdateProductPrice(ref ProductPurchase vobjProductPurchase)
+        {
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_UpdateProductPrice");
+                dBase.AddInParameter(objCmd, "@ProductID", DbType.Int32, vobjProductPurchase.ProductID);
+                dBase.AddInParameter(objCmd, "@BuyingPrice", DbType.Decimal, vobjProductPurchase.BuyingPrice);
+                dBase.AddInParameter(objCmd, "@Tax", DbType.Decimal, vobjProductPurchase.Tax);
+                dBase.AddInParameter(objCmd, "@Margin", DbType.Decimal, vobjProductPurchase.Margin);
+                dBase.AddInParameter(objCmd, "@SellingPrice", DbType.Decimal, vobjProductPurchase.SellingPrice);
+                dBase.AddOutParameter(objCmd, "@MessageID", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@Message", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
 
+                vobjProductPurchase.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@MessageID");
+                vobjProductPurchase.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@Message");
+
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+        }
         public void AddEditPurchase(ref ProductPurchase vobjProductPurchase)
         {
             try
