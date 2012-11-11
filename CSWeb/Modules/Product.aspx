@@ -84,7 +84,7 @@
                                                     <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
+                                            <asp:TemplateField HeaderText="Manufacturer" Visible="false">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("Manufacturer") %>' />
@@ -111,23 +111,23 @@
                                             <asp:TemplateField HeaderText="Quantity">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Quantity")) %>' />
+                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="BuyingPrice">
+                                            <asp:TemplateField HeaderText="Buying Price">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblBuyingPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("BuyingPrice")) %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Margin">
+                                            <asp:TemplateField HeaderText="Margin(%)">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblMargin" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Margin")) %>' />
                                                 </ItemTemplate>
                                                
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="SellingPrice">
+                                            <asp:TemplateField HeaderText="Selling Price">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSellingPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("SellingPrice")) %>' />

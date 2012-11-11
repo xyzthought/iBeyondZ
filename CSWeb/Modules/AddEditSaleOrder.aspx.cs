@@ -135,7 +135,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
     }
 
     private void PopulateAutoCompleteDataTable()
-    { 
+    {
         SaleBLL objSaleBLL = new SaleBLL();
         dtAutoComplete = objSaleBLL.PopulateAutoCompleteProductInformation();
         PopulateAutoCompleteProductInformation();
@@ -186,7 +186,12 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtData.Columns.Add("Tax", typeof(decimal));
         dtData.Columns.Add("Price", typeof(decimal));
         dtData.Columns.Add("TPrice", typeof(decimal));
-        dtData.PrimaryKey = new DataColumn[] { dtData.Columns["ProductID"] };
+
+        DataColumn[] planfeaturesKeyColumns = new DataColumn[2];
+
+        planfeaturesKeyColumns[0] = dtData.Columns["ProductID"];
+        planfeaturesKeyColumns[1] = dtData.Columns["SizeID"];
+        dtData.PrimaryKey = planfeaturesKeyColumns;
         return dtData;
     }
 
@@ -238,7 +243,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         decimal dblTotalPrice = 0;
         decimal dblDiscounted = 0;
         decimal dblTotalDiscount = 0;
-        string selectedVal=string.Empty;
+        string selectedVal = string.Empty;
         if (null != dtProductDetail)
         {
             for (int i = 0; i < dtProductDetail.Rows.Count; i++)
@@ -257,14 +262,14 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 {
                     decDiscount = Convert.ToDecimal(dtProductDetail.Rows[i]["PDiscount"].ToString());
                 }
-                
+
                 dblTotalDiscount += decDiscount;
 
-               
+
                 dblTotalPrice += UQ;
             }
 
-           
+
 
             lblTotalAmount.Text = Math.Round(dblTotalPrice, 2).ToString();// String.Format("{0:C}", dblTotalPrice);
             txtDiscount.Text = string.Format("{0:0.00}", dblTotalDiscount);
@@ -312,7 +317,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         DataRow dtRow = dtProductDetail.NewRow();
         dtRow["ProductID"] = objSale.ProductID;
         dtRow["BarCode"] = objSale.BarCode;
-        dtRow["PBarCodeWithSize"] = objSale.BarCode+"-"+objSale.SizeBarCode;
+        dtRow["PBarCodeWithSize"] = objSale.BarCode + "-" + objSale.SizeBarCode;
         dtRow["ProductName"] = objSale.ProductName;
         dtRow["SizeID"] = objSale.SizeID;
         dtRow["SizeBarcodeID"] = objSale.SizeID + "||" + objSale.SizeBarCode;
@@ -339,7 +344,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     private void DeleteRowFromTempTable(Sale objSale)
     {
-        var rows = dtProductDetail.Select("ProductID ="+objSale.ProductID);
+        var rows = dtProductDetail.Select("ProductID =" + objSale.ProductID);
         foreach (var row in rows)
             row.Delete();
         dtProductDetail.AcceptChanges();
@@ -428,7 +433,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
     }
 
-    private void PopulateSizeDropDown(DropDownList ddlList,int vintProductID)
+    private void PopulateSizeDropDown(DropDownList ddlList, int vintProductID)
     {
         try
         {
@@ -452,7 +457,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
         catch (Exception ex)
         {
-           SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
     }
 
@@ -492,10 +497,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
             if (e.CommandName == "Delete")
             {
 
+                LinkButton gv = (LinkButton)e.CommandSource;
+                GridViewRow gvr = (GridViewRow)gv.Parent.Parent;
+                int rowIndex = gvr.RowIndex;
+                Label lblSizeID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblSizeID") as Label;
+
                 int intProductID = Convert.ToInt32(e.CommandArgument.ToString());
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    if (dtProductDetail.Rows[i]["ProductID"].ToString() == intProductID.ToString())
+                    if (dtProductDetail.Rows[i]["ProductID"].ToString() == intProductID.ToString() && dtProductDetail.Rows[i]["SizeID"].ToString() == lblSizeID.Text.Trim())
                     {
                         dtProductDetail.Rows[i].Delete();
                         break;
@@ -589,7 +599,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
         Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
 
-        int PQuantity =Convert.ToInt32(txtQuantity.Text.Trim());
+        int PQuantity = Convert.ToInt32(txtQuantity.Text.Trim());
         int PID = Convert.ToInt32(lblProductID.Text.Trim());
 
         for (int i = 0; i < dtProductDetail.Rows.Count; i++)
@@ -611,6 +621,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
     {
         TextBox txtPDiscount = (TextBox)sender;
         int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
+        Label lblSizeID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblSizeID") as Label;
         Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
         TextBox txtQuantity = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblQuantity") as TextBox;
         DropDownList ddlDType = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("ddlDType") as DropDownList;
@@ -620,7 +631,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
         for (int i = 0; i < dtProductDetail.Rows.Count; i++)
         {
-            if (dtProductDetail.Rows[i]["ProductID"].ToString() == PID.ToString())
+            if (dtProductDetail.Rows[i]["ProductID"].ToString() == PID.ToString() && dtProductDetail.Rows[i]["SizeID"].ToString() == lblSizeID.Text.ToString())
             {
                 decimal dblPrice = Convert.ToDecimal(dtProductDetail.Rows[i]["Unit"].ToString()) * Convert.ToDecimal(PQuantity);
                 dblPrice = dblPrice + dblPrice * (Convert.ToDecimal(dtProductDetail.Rows[i]["Tax"].ToString()) / 100);
@@ -635,9 +646,9 @@ public partial class Modules_AddEditSaleOrder : PageBase
                     else
                     {
                         dtProductDetail.Rows[i]["TPrice"] = dblPrice - Convert.ToDecimal(txtPDiscount.Text.Trim());
-                        dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(string.Format("{0:0.00}", Convert.ToDecimal(txtPDiscount.Text.Trim()))); 
+                        dtProductDetail.Rows[i]["PDiscount"] = Convert.ToDecimal(string.Format("{0:0.00}", Convert.ToDecimal(txtPDiscount.Text.Trim())));
                     }
-                   
+
                     dtProductDetail.Rows[i]["DiscountType"] = selectedVal;
                 }
                 else
@@ -673,47 +684,56 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
     protected void ddlPSize_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DropDownList ddlPSize = (DropDownList)sender;
-        int rowIndex = ((GridViewRow)((DropDownList)sender).NamingContainer).RowIndex;
-        Label lblSizeID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblSizeID") as Label;
-        Label lblBarCode = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblBarCode") as Label;
-        Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
-        Label lblPBarCodeWithSize = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblPBarCodeWithSize") as Label;
-
-
-        for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+        try
         {
-            if (dtProductDetail.Rows[i]["ProductID"].ToString() == lblProductID.Text.ToString())
-            {
-                if (ddlPSize.SelectedIndex > 0)
-                {
-                    string Barcode = dtProductDetail.Rows[i]["BarCode"].ToString();
-                    string[] SizeID = ddlPSize.SelectedValue.ToString().Split(new string[] { "||" }, StringSplitOptions.None);
-                    if (SizeID.Length > 0)
-                    {
-                        lblSizeID.Text = SizeID[0];
-                        lblPBarCodeWithSize.Text = lblBarCode.Text + "-" + SizeID[1];
-                    }
-                    dtProductDetail.Rows[i]["PBarCodeWithSize"] = lblBarCode.Text + "-" + SizeID[1];
-                    dtProductDetail.Rows[i]["SizeID"] = SizeID[0];
-                    dtProductDetail.Rows[i]["SizeName"] = ddlPSize.SelectedItem.Text.ToString();
-                    dtProductDetail.Rows[i]["SizeBarcode"] = SizeID[1];
-                    dtProductDetail.Rows[i]["SizeBarcodeID"] = ddlPSize.SelectedValue.ToString();
-                }
-                else
-                {
-                    dtProductDetail.Rows[i]["PBarCodeWithSize"] = "";
-                    dtProductDetail.Rows[i]["SizeID"] = 0;
-                    dtProductDetail.Rows[i]["SizeName"] = "";
-                    dtProductDetail.Rows[i]["SizeBarcode"] ="";
-                    dtProductDetail.Rows[i]["SizeBarcodeID"] = "";
-                }
-            }
-            dtProductDetail.AcceptChanges();
-            PopulateProductDetail();
-            CalculateTotalPrice();
-            PopulateAutoCompleteProductInformation();
+            DropDownList ddlPSize = (DropDownList)sender;
+            int rowIndex = ((GridViewRow)((DropDownList)sender).NamingContainer).RowIndex;
+            Label lblSizeID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblSizeID") as Label;
+            Label lblBarCode = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblBarCode") as Label;
+            Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
+            Label lblPBarCodeWithSize = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblPBarCodeWithSize") as Label;
 
+
+            for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+            {
+                if (dtProductDetail.Rows[i]["ProductID"].ToString() == lblProductID.Text.ToString() && dtProductDetail.Rows[i]["SizeID"].ToString() == lblSizeID.Text.ToString())
+                {
+                    if (ddlPSize.SelectedIndex > 0)
+                    {
+                        string Barcode = dtProductDetail.Rows[i]["BarCode"].ToString();
+                        string[] SizeID = ddlPSize.SelectedValue.ToString().Split(new string[] { "||" }, StringSplitOptions.None);
+                        if (SizeID.Length > 0)
+                        {
+                            lblSizeID.Text = SizeID[0];
+                            lblPBarCodeWithSize.Text = lblBarCode.Text + "-" + SizeID[1];
+                        }
+                        dtProductDetail.Rows[i]["PBarCodeWithSize"] = lblBarCode.Text + "-" + SizeID[1];
+                        dtProductDetail.Rows[i]["SizeID"] = SizeID[0];
+                        dtProductDetail.Rows[i]["SizeName"] = ddlPSize.SelectedItem.Text.ToString();
+                        dtProductDetail.Rows[i]["SizeBarcode"] = SizeID[1];
+                        dtProductDetail.Rows[i]["SizeBarcodeID"] = ddlPSize.SelectedValue.ToString();
+                    }
+                    else
+                    {
+                        dtProductDetail.Rows[i]["PBarCodeWithSize"] = "";
+                        dtProductDetail.Rows[i]["SizeID"] = 0;
+                        dtProductDetail.Rows[i]["SizeName"] = "";
+                        dtProductDetail.Rows[i]["SizeBarcode"] = "";
+                        dtProductDetail.Rows[i]["SizeBarcodeID"] = "";
+                    }
+                }
+                dtProductDetail.AcceptChanges();
+                PopulateProductDetail();
+                CalculateTotalPrice();
+                PopulateAutoCompleteProductInformation();
+
+
+            }
+        }
+        catch (ConstraintException ex)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+            lblError.InnerHtml = "Product all ready added with same size";
         }
     }
 }

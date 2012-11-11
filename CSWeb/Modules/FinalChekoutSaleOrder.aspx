@@ -91,7 +91,8 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Bar Code">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("PBarCodeWithSize") %>' ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
+                                                        <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("PBarCodeWithSize") %>'
+                                                            ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -127,7 +128,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Discount">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" ></asp:Label>
+                                                        <asp:Label ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server"></asp:Label>
                                                         <asp:Label ID="lblDiscType" runat="server" Text='<%# Eval("DiscountType") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
@@ -289,7 +290,6 @@
                                                         <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
                                                     <div style="clear: both">
                                                     </div>
-
                                                     <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
                                                         Discount</div>
                                                     <div style="width: 100px; float: left;">
@@ -328,8 +328,8 @@
                                                         </div>
                                                         <div class="alt" style="margin-bottom: 5px;">
                                                             <asp:TextBox ID="txtAmountPaid" runat="server" MaxLength="10" CssClass="txtCred"
-                                                                Style="width: 140px!important;text-align:right;" onkeyup="extractNumber(this,-1,false);CalculatePay();"
-                                                                onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
+                                                                Style="width: 140px!important; text-align: right;" onkeyup="extractNumber(this,-1,false);CalculatePay();"
+                                                                onblur="extractNumber(this,-1,false);CalculatePay();" onfocus="PopulateAmount(this);"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -347,8 +347,9 @@
                                                             Amount Paid :<span class="mandet2"></span>
                                                         </div>
                                                         <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtBCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important;text-align:right;"
-                                                                onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"></asp:TextBox>
+                                                            <asp:TextBox ID="txtBCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important;
+                                                                text-align: right;" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"
+                                                                onfocus="PopulateAmount(this);"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,7 +367,9 @@
                                                             Amount Paid :<span class="mandet2"></span>
                                                         </div>
                                                         <div class="alt" style="margin-bottom: 5px;">
-                                                            <asp:TextBox ID="txtCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important;text-align:right;"></asp:TextBox>
+                                                            <asp:TextBox ID="txtCash" runat="server" MaxLength="10" CssClass="txtCred" Style="width: 140px!important;
+                                                                text-align: right;" onkeyup="extractNumber(this,-1,false);CalculatePay();" onblur="extractNumber(this,-1,false);CalculatePay();"
+                                                                onfocus="PopulateAmount(this);"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -477,5 +480,14 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-    });
+});
+
+function PopulateAmount(evThis) {
+
+    $("#txtBCash").val("");
+    $("#txtCash").val("");
+    $("#txtAmountPaid").val("");
+
+    $("#" + evThis.id).val($("#lblTotalPay").html());
+}
 </script>

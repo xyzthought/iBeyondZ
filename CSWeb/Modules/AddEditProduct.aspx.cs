@@ -138,7 +138,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 int mintReturn = objProd.AddProduct(mobjProduct);
                 if (mintReturn == -1)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product for the Manufacturer already exists!');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product already exists!');", true);
                     return;
                 }
             }
@@ -148,7 +148,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
                 int mintReturn = objProd.EditProduct(mobjProduct);
                 if (mintReturn == -1)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product for the Manufacturer already exists!');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Product already exists!');", true);
                     return;
                 }
             }
@@ -169,7 +169,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             objProduct.ProductID = 0;
             objProduct.ProductName = txtProductName.Text.Trim();
             objProduct.Description = txtDescription.Text.Trim();
-            objProduct.ManufacturerID = int.Parse(cmbManufacturer.SelectedValue);
+            objProduct.ManufacturerID = -1; //int.Parse(cmbManufacturer.SelectedValue);
             objProduct.BrandID = int.Parse(cmbBrand.SelectedValue);
             objProduct.SeasonID = int.Parse(ddlSeason.SelectedValue);
             objProduct.CategoryID = int.Parse(cmbCategory.SelectedValue);
@@ -233,7 +233,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             {
                 txtProductName.Text = objProduct.ProductName;
                 txtDescription.Text = objProduct.Description;
-                cmbManufacturer.SelectedValue = objProduct.ManufacturerID.ToString();
+                //cmbManufacturer.SelectedValue = objProduct.ManufacturerID.ToString();
                 cmbCategory.SelectedValue = objProduct.CategoryID.ToString();
                 cmbBrand.SelectedValue = objProduct.BrandID.ToString();
                 ddlSeason.SelectedValue = objProduct.SeasonID.ToString();
