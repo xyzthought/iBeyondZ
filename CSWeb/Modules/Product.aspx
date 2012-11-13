@@ -84,12 +84,12 @@
                                                     <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
+                                           <%--<asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("Manufacturer") %>' />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
@@ -111,7 +111,7 @@
                                             <asp:TemplateField HeaderText="Quantity">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Quantity")) %>' />
+                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval(" Quantity") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="BuyingPrice">

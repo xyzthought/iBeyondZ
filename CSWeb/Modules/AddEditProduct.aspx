@@ -180,7 +180,7 @@
                             </div>
                             <div style="clear: both;">
                             </div>
-                            <div style="float: left; width: 135px;">
+                            <%--<div style="float: left; width: 135px;">
                                 Manufacturer<span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
@@ -189,7 +189,7 @@
                                 <asp:RequiredFieldValidator ID="ReqtxtMan" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                     ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbManufacturer"
                                     Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
+                            </div>--%>
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
