@@ -41,7 +41,7 @@ namespace DAL.Component
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }
                     //if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
-
+                   
                     //if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     //if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
                     if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
