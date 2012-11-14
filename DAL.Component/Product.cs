@@ -36,7 +36,7 @@ namespace DAL.Component
                 { 
 
                     BLL.BusinessObject.Product obj = new BLL.BusinessObject.Product();
-
+                    
                     if (dataReader["ProductID"] != DBNull.Value) { obj.ProductID = (int)dataReader["ProductID"]; }
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }

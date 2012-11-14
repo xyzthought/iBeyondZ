@@ -8,7 +8,7 @@
     <title>Product</title>
     <style type="text/css">
     .scroll_checkboxes
-    {
+    { 
         height: 60px;
         width: 265px;
         padding: 5px;
