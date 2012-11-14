@@ -18,7 +18,7 @@ using System.Data;
 
 public partial class Modules_AddEditSaleOrder : PageBase
 {
-
+    protected string serversideEvent = string.Empty;
     string vstrLink = string.Empty;
     string param = string.Empty;
 
@@ -90,6 +90,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (!Page.IsPostBack)
             {
+                serversideEvent = Page.ClientScript.GetPostBackEventReference(lnkAddMore, string.Empty);
                 PopulateAutoCompleteDataTable();
                 // Auto
                 if (null == Session["dtProductDetail"])

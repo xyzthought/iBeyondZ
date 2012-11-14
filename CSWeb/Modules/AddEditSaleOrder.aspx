@@ -127,7 +127,9 @@
                                                             </div>
                                                             <div>
                                                                 <div style="width: 70px; float: right; padding-left: 50px; font-weight: bold">
-                                                                    Discount</div><br/><br/>
+                                                                    Discount</div>
+                                                                <br />
+                                                                <br />
                                                                 <div style="float: right">
                                                                     <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€
                                                                 </div>
@@ -185,7 +187,8 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Bar Code">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPBarCodeWithSize" runat="server" Text='<%# Eval("PBarCodeWithSize") %>' ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
+                                                        <asp:Label ID="lblPBarCodeWithSize" runat="server" Text='<%# Eval("PBarCodeWithSize") %>'
+                                                            ToolTip='<%# Eval("PBarCodeWithSize") %>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -392,6 +395,7 @@
                 var desc = "<img src='../images/pdot.png' style='vertical-align:bottom' />&nbsp;" + ui.item.desc
                 $("#Product-description").html(desc);
                 $("#txtQuantity").val("1");
+                CallMeAndFireServerSideButton();
                 return false;
             }
         })
@@ -401,5 +405,9 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-    }
+}
+
+function CallMeAndFireServerSideButton() {
+            eval(<%=serversideEvent %>);
+        }
 </script>
