@@ -84,12 +84,16 @@
                                                     <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+<<<<<<< HEAD
                                             <asp:TemplateField HeaderText="Manufacturer" Visible="false">
+=======
+                                           <%--<asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
+>>>>>>> 6b0487ec9674b28a7c0c9dfd5e2a5b2108f99b2e
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("Manufacturer") %>' />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
@@ -111,7 +115,11 @@
                                             <asp:TemplateField HeaderText="Quantity">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
+<<<<<<< HEAD
                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' />
+=======
+                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval(" Quantity") %>' />
+>>>>>>> 6b0487ec9674b28a7c0c9dfd5e2a5b2108f99b2e
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Buying Price">

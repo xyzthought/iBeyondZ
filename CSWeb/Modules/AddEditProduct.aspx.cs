@@ -16,7 +16,7 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
 
-            PopulateManufacturer();
+           // PopulateManufacturer();
             PopulateSize();
             PopulateCategory();
             PopulateBrand();
@@ -96,13 +96,13 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
     {
         try
         {
-            List<Manufacturer> lstManufacturer = new ManufacturerBLL().GetAll(new PageInfo());
+          /*  List<Manufacturer> lstManufacturer = new ManufacturerBLL().GetAll(new PageInfo());
             cmbManufacturer.DataSource = lstManufacturer;
             cmbManufacturer.DataValueField = "ManufacturerID";
             cmbManufacturer.DataTextField = "CompanyName";
             cmbManufacturer.DataBind();
             cmbManufacturer.Items.Insert(0, new ListItem("--Select--"));
-            cmbManufacturer.SelectedIndex = 0;
+            cmbManufacturer.SelectedIndex = 0;*/
         }
         catch (Exception ex)
         {
@@ -169,7 +169,11 @@ public partial class Modules_AddEditProduct : System.Web.UI.Page
             objProduct.ProductID = 0;
             objProduct.ProductName = txtProductName.Text.Trim();
             objProduct.Description = txtDescription.Text.Trim();
+<<<<<<< HEAD
             objProduct.ManufacturerID = -1; //int.Parse(cmbManufacturer.SelectedValue);
+=======
+            //objProduct.ManufacturerID = int.Parse(cmbManufacturer.SelectedValue);
+>>>>>>> 6b0487ec9674b28a7c0c9dfd5e2a5b2108f99b2e
             objProduct.BrandID = int.Parse(cmbBrand.SelectedValue);
             objProduct.SeasonID = int.Parse(ddlSeason.SelectedValue);
             objProduct.CategoryID = int.Parse(cmbCategory.SelectedValue);

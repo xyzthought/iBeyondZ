@@ -41,8 +41,8 @@ namespace DAL.Component
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }
                     //if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
-
-                    if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
+                   
+                    //if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }
                     //if (dataReader["CategoryName"] != DBNull.Value) { obj.CategoryName = (string)dataReader["CategoryName"]; }
                     if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
                     if (dataReader["Brand"] != DBNull.Value) { obj.Brand = (string)dataReader["Brand"]; }
@@ -112,7 +112,7 @@ namespace DAL.Component
             //db.AddInParameter(dbCommand, "ProductID", DbType.Int32, vobjProduct.ProductID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, vobjProduct.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
-            db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
+           // db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
             db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
             db.AddInParameter(dbCommand, "SeasonID", DbType.Int32, vobjProduct.SeasonID);
             db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
@@ -143,7 +143,7 @@ namespace DAL.Component
             db.AddInParameter(dbCommand, "ProductID", DbType.Int32, vobjProduct.ProductID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, vobjProduct.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, vobjProduct.Description);
-            db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
+            //db.AddInParameter(dbCommand, "ManufacturerID", DbType.Int32, vobjProduct.ManufacturerID);
             db.AddInParameter(dbCommand, "BrandID", DbType.Int32, vobjProduct.BrandID);
             db.AddInParameter(dbCommand, "CategoryID", DbType.Int32, vobjProduct.CategoryID);
             db.AddInParameter(dbCommand, "SeasonID", DbType.Int32, vobjProduct.SeasonID);
@@ -179,7 +179,7 @@ namespace DAL.Component
                     if (dataReader["ProductID"] != DBNull.Value) { obj.ProductID = (int)dataReader["ProductID"]; }
                     if (dataReader["ProductName"] != DBNull.Value) { obj.ProductName = (string)dataReader["ProductName"]; }
                     if (dataReader["Description"] != DBNull.Value) { obj.Description = (string)dataReader["Description"]; }
-                    if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
+                    //if (dataReader["ManufacturerID"] != DBNull.Value) { obj.ManufacturerID = (int)dataReader["ManufacturerID"]; }
                     if (dataReader["BrandID"] != DBNull.Value) { obj.BrandID = (int)dataReader["BrandID"]; }
                     if (dataReader["SeasonID"] != DBNull.Value) { obj.SeasonID = (int)dataReader["SeasonID"]; }
                     //if (dataReader["Manufacturer"] != DBNull.Value) { obj.Manufacturer = (string)dataReader["Manufacturer"]; }

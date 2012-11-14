@@ -179,13 +179,24 @@
                             </div>
                             <div style="clear: both;">
                             </div>
+<<<<<<< HEAD
                             <div style="float: left; width: 135px; display: none">
+=======
+                            <%--<div style="float: left; width: 135px;">
+>>>>>>> 6b0487ec9674b28a7c0c9dfd5e2a5b2108f99b2e
                                 Manufacturer<span class="mandet2">* </span>
                             </div>
                             <div style="float: left; display: none">
                                 <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl">
                                 </asp:DropDownList>
+<<<<<<< HEAD
                             </div>
+=======
+                                <asp:RequiredFieldValidator ID="ReqtxtMan" runat="server" ErrorMessage="*" Font-Size="X-Small"
+                                    ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbManufacturer"
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>--%>
+>>>>>>> 6b0487ec9674b28a7c0c9dfd5e2a5b2108f99b2e
                             <div style="clear: both;">
                             </div>
                             <div style="float: left; width: 135px;">
