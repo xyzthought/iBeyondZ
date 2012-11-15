@@ -59,5 +59,6 @@ namespace BLL.BusinessObject
         public decimal Quantity { get; set; }
 
         public string Quantities { get; set; }
+        public string Stock { get; set; }
     }
 }

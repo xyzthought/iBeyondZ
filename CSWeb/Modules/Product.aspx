@@ -37,6 +37,14 @@
         <div class="main-table-wrapper">
             <div class="breadcrmbLeft">
                 <input type="hidden" name="ctl00$ContentPlaceHolder1$currentReportName" id="currentReportName" />
+                <div class="searchBox">
+                    <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
+                        onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
+                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" 
+                        ValidationGroup="abc" onclick="lnkBtnSearch_Click"></asp:LinkButton>
+                    <div class="clear">
+                    </div>
+                </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
                         <asp:LinkButton ID="lnkAddNew" runat="server" 
@@ -112,6 +120,12 @@
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Current Stock">
+                                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" Width="100px" />
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblStock" runat="server" Text='<%# Eval("Stock") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="BuyingPrice">

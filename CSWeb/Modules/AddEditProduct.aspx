@@ -291,10 +291,12 @@
                             <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Bar Code <span class="mandet2"></span>
+                                Bar Code <span class="mandet2">* </span>
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtBarcode" runat="server" CssClass="txtCred" MaxLength="13"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="reqBarcode" runat="server" ErrorMessage="*"
+                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBarcode" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <div class="btn-wrapper4">
                                 <span class="btn">

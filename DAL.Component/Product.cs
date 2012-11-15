@@ -61,6 +61,7 @@ namespace DAL.Component
                     //if (dataReader["IsActive"] != DBNull.Value) { obj.IsActive = (bool)dataReader["IsActive"]; }
                     //if (dataReader["IsDeleted"] != DBNull.Value) { obj.IsDeleted = (bool)dataReader["IsDeleted"]; }
                     if (dataReader["Quantity"] != DBNull.Value) { obj.Quantities = dataReader["Quantity"].ToString(); }
+                    if (dataReader["Stock"] != DBNull.Value) { obj.Stock = dataReader["Stock"].ToString(); }
                     list.Add(obj);
 
                 }
