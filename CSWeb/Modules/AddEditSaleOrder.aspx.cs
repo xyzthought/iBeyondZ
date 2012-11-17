@@ -600,7 +600,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
         Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
 
-        int PQuantity = Convert.ToInt32(txtQuantity.Text.Trim());
+        decimal PQuantity = Convert.ToDecimal(txtQuantity.Text.Trim());
         int PID = Convert.ToInt32(lblProductID.Text.Trim());
 
         for (int i = 0; i < dtProductDetail.Rows.Count; i++)
@@ -627,7 +627,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         TextBox txtQuantity = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblQuantity") as TextBox;
         DropDownList ddlDType = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("ddlDType") as DropDownList;
         string selectedVal = ddlDType.SelectedItem.Text;
-        int PQuantity = Convert.ToInt32(txtQuantity.Text.Trim());
+        decimal PQuantity = Convert.ToDecimal(txtQuantity.Text.Trim());
         int PID = Convert.ToInt32(lblProductID.Text.Trim());
 
         for (int i = 0; i < dtProductDetail.Rows.Count; i++)
