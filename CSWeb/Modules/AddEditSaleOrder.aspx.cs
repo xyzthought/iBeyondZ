@@ -300,7 +300,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         catch (ConstraintException ex)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
-            lblError.InnerHtml = "Product already added or select diffrent size";
+            lblError.InnerHtml = "Product already added or select different size";
         }
         catch (Exception ex)
         {
