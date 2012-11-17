@@ -38,7 +38,7 @@
                     <li id="mnuli11"><a href='../Modules/BuyingInterface.aspx'>Purchase</a></li>
                     <li id="mnuli9"><a href='../Modules/Sale.aspx'>Sale</a></li>
                     <li id="mnuli2"><a href='../Modules/MasterData.aspx'>Master</a></li>
-                   <%-- <li id="mnuli10"><a href='../Modules/Report.aspx'>Report</a></li>--%>
+                    <li id="mnuli10"><a href='../Modules/BarcodePrint.aspx'>Print-Barcode</a></li>
                     <li id="mnuli5">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>

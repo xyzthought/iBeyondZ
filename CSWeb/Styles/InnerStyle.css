@@ -1548,9 +1548,20 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
     vertical-align: middle;
     width: 14px;
 }
+
+.PrintBarcode {
+    background: url("../Images/printer.png") no-repeat scroll right top transparent;
+    display: inline-block;
+    height: 14px;
+    margin-right: 8px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    width: 14px;
+}
+
 .AddCheckoutData
 {
-    background: url("../Images/Checkout.png") no-repeat scroll right top transparent;
+    background: url("../Images/Checkout.png") no-repeat scroll right top transparent ;
     display: inline-block;
     height: 14px;
     margin-right: 8px;

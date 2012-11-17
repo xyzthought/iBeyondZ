@@ -65,5 +65,10 @@ namespace BLL.Component
         {
             return objDB.DeleteExistingSalesDetails(objSale);
         }
+
+        public List<Sale> GetAllProductBarCode(PageInfo objPI)
+        {
+            return objDB.GetAllProductBarCode(objPI);
+        }
     }
 }
