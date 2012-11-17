@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AddEditProductPurchase.aspx.cs" Inherits="Modules_AddEditProductPurchase" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AddEditProductPurchase.aspx.cs"
+    Inherits="Modules_AddEditProductPurchase" %>
 
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Product Purchase</title>
@@ -43,23 +43,25 @@
                                         Manufacturer<span class="mandet2">* </span>
                                     </div>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl" style="width:315px !important">
+                                        <asp:DropDownList ID="cmbManufacturer" runat="server" CssClass="txtUpl" Style="width: 315px !important">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="ReqtxtMan" runat="server" ErrorMessage="*" Font-Size="X-Small"
                                             ForeColor="Red" InitialValue="--Select--" ControlToValidate="cmbManufacturer"
                                             Display="Dynamic" ValidationGroup="mainFrm"></asp:RequiredFieldValidator>
                                     </div>
-                                    <div style="float: left; width: 135px; padding-left:10px">Purchase Date <span class="mandet2">* </span>
+                                    <div style="float: left; width: 135px; padding-left: 10px">
+                                        Purchase Date <span class="mandet2">* </span>
                                     </div>
-                                    <div style="float: left; padding-bottom:10px;">
+                                    <div style="float: left; padding-bottom: 10px;">
                                         <input type="text" id="txtDateOfPurchase" name="txtDateOfPurchase" runat="server"
-                                            class="txtCred" readonly="readonly" style="width: 160px!important"  />
-                                        <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" 
-                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtDateOfPurchase"
-                                            Display="Dynamic" ValidationGroup="mainFrm"></asp:RequiredFieldValidator>
+                                            class="txtCred" readonly="readonly" style="width: 160px!important" />
+                                        <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" ErrorMessage="*"
+                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtDateOfPurchase" Display="Dynamic"
+                                            ValidationGroup="mainFrm"></asp:RequiredFieldValidator>
                                         <asp:HiddenField ID="txtPurchaseID" runat="server" Visible="false" />
                                     </div>
-                                    <div style="clear: both" ></div>
+                                    <div style="clear: both">
+                                    </div>
                                     <!--Start Add/Edit product-->
                                     <div class="smallDivLeft">
                                         <div class="acceptedCont">
@@ -88,14 +90,16 @@
                                                             <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"
                                                                 Style="width: 275px!important;"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="required"
-                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic" ValidationGroup="barCode"></asp:RequiredFieldValidator>
+                                                                Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"
+                                                                ValidationGroup="barCode"></asp:RequiredFieldValidator>
                                                             <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
                                                             <p id="Product-description" style="margin-top: 5px;">
                                                             </p>
                                                         </div>
                                                         <div style="float: right; margin-top: 3px;">
                                                             <span class="btn5">
-                                                                <asp:LinkButton ID="lnkAddMore" runat="server" OnClick="lnkAddMore_Click" CausesValidation="true" ValidationGroup="barCode"><span class="AddNewData"></span>Add</asp:LinkButton>
+                                                                <asp:LinkButton ID="lnkAddMore" runat="server" OnClick="lnkAddMore_Click" CausesValidation="true"
+                                                                    ValidationGroup="barCode"><span class="AddNewData"></span>Add</asp:LinkButton>
                                                             </span>
                                                         </div>
                                                         <div style="clear: both">
@@ -126,12 +130,11 @@
                                                                 Total Buying Price</div>
                                                             <div style="width: 100px; float: left;">
                                                                 <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt" Text="0.00"></asp:Label>&nbsp;€</div>
-                                                                 <div style="float: right; margin-bottom: 19px;">
-                                                            <span class="btn5">
-                                                                <asp:LinkButton ID="lnkSave" runat="server" ValidationGroup="mainFrm" 
-                                                                         onclick="lnkSave_Click"><span class="AddCheckoutData"></span>Save</asp:LinkButton>
-                                                            </span>
-                                                        </div>
+                                                            <div style="float: right; margin-bottom: 19px;">
+                                                                <span class="btn5">
+                                                                    <asp:LinkButton ID="lnkSave" runat="server" ValidationGroup="mainFrm" OnClick="lnkSave_Click"><span class="AddCheckoutData"></span>Save</asp:LinkButton>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>
@@ -142,7 +145,6 @@
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>
-                                                       
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -244,13 +246,13 @@
                             </div>
                         </div>
                     </div>
-
                     <!--Add/Edit Product Purchase -->
                     <div id="ModalWindow1" style="display: none" clientidmode="Static">
                         <div class="mainModalAddEdit" id="mainModalAddDataSource">
                             <div class="topM">
                                 <h1>
-                                    <span id="spTitle">Add/Edit Purchase</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv" title="Close"> </a>
+                                    <span id="spTitle">Add/Edit Purchase</span><a onclick="return CloseAddDiv('ModalWindow1');"
+                                        id="lnkCloseAddDiv" title="Close"> </a>
                                 </h1>
                             </div>
                             <div id="Div2" class="MidM">
@@ -271,64 +273,82 @@
                                                         <asp:Label runat="server" ID="lblProduct" CssClass="txtCred"></asp:Label>
                                                         <asp:HiddenField runat="server" ID="htnProductID" ClientIDMode="Static" />
                                                     </div>
-                                                    <div>
-                                                        Bar Code:<span class="mandet2"></span>
-                                                    </div>
-                                                    <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:Label runat="server" ID="lblBarCode" CssClass="txtCred"></asp:Label>
+                                                    <div style="clear: both">
                                                     </div>
                                                     <div>
-                                                        Buying Price <span class="mandet2">*</span>
-                                                    </div>
-                                                    <div style="float: left;">
-                                                        <asp:TextBox ID="txtBuyingPrice" runat="server" onkeyup="extractNumber(this,-1,false);"
-                                                            onblur="extractNumber(this,-1,false);calculateSellingPrice();" CssClass="txtCred"
-                                                            Style="width: 160px!important"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ValidationGroup="frm"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                            <input type="button" value="Update Product with Buying Price" style="height:30px" onclick="UpdateProduct()" />
+                                                        <div style="float: left">
+                                                            <div>
+                                                                Bar Code:<span class="mandet2"></span>
+                                                            </div>
+                                                            <div class="alt" style="margin-bottom: 5px;">
+                                                                <asp:Label runat="server" ID="lblBarCode" CssClass="txtCred"></asp:Label>
+                                                            </div>
+                                                        </div>
+                                                        <div style="float: right">
+                                                            <div>
+                                                                Buying Price <span class="mandet2">*</span>
+                                                            </div>
+                                                            <div class="alt" style="margin-bottom: 5px;">
+                                                                <asp:TextBox ID="txtBuyingPrice" runat="server" onkeyup="extractNumber(this,-1,false);"
+                                                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" CssClass="txtCred"
+                                                                    Style="width: 100px!important; text-align: right"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                                    ValidationGroup="frm" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtBuyingPrice"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <input type="button" value="Update Price" style="height: 30px" onclick="UpdateProduct()" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div style="clear: both">
                                                     </div>
                                                     <div>
-                                                        Tax (%) <span class="mandet2">*</span>
+                                                        <div style="float: left">
+                                                            <div>
+                                                                Tax (%) <span class="mandet2">*</span>
+                                                            </div>
+                                                            <div>
+                                                                <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
+                                                                    Text="21" onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 100px!important;
+                                                                    text-align: right" MaxLength="2"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="reqtxtTax" runat="server" ErrorMessage="*" ValidationGroup="frm"
+                                                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtTax" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </div>
+                                                        </div>
+                                                        <div style="float: right">
+                                                            <div>
+                                                                Margin (%)<span class="mandet2">*</span>
+                                                            </div>
+                                                            <div>
+                                                                <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
+                                                                    ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 100px!important;
+                                                                    text-align: right"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="reqtxtMargin" runat="server" ErrorMessage="*" ValidationGroup="frm"
+                                                                    Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtMargin" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </div>
+                                                        </div>
+                                                        <div style="float: left;padding-left:30px;">
+                                                            <div>
+                                                                Selling Price<span class="mandet2">*</span>
+                                                            </div>
+                                                            <div>
+                                                                <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
+                                                                    ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 100px!important;text-align:right"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="reqtxtSellingPrice" runat="server" ErrorMessage="*"
+                                                                    ValidationGroup="frm" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtSellingPrice"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                                            Text="21" onblur="extractNumber(this,-1,false);calculateSellingPrice()" Style="width: 160px!important;"
-                                                            MaxLength="2"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqtxtTax" runat="server" ErrorMessage="*" ValidationGroup="frm"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtTax" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div>
-                                                        Margin (%)<span class="mandet2">*</span>
-                                                    </div>
-                                                    <div>
-                                                        <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
-                                                            ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqtxtMargin" runat="server" ErrorMessage="*" ValidationGroup="frm"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtMargin" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div>
-                                                        Selling Price<span class="mandet2">*</span>
-                                                    </div>
-                                                    <div>
-                                                        <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
-                                                            ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqtxtSellingPrice" runat="server" ErrorMessage="*" ValidationGroup="frm"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtSellingPrice" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                    <div style="clear: both">
                                                     </div>
                                                     <asp:PlaceHolder runat="server" ID="plhQty"></asp:PlaceHolder>
                                                     <div class="btn-wrapper4">
                                                         <span class="btn">
                                                             <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>
                                                         <span class="btn">
-
-                                                            
                                                             <%--<asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1'); Populate(2);">Cancel</asp:LinkButton>--%>
                                                             <a href="javascript:void(0)" onclick="CloseAddDiv('ModalWindow1')">Cancel</a>
                                                             <%--<input type="button" value="Cancel" onclick="CloseAddDiv('ModalWindow1')" />--%>
-
                                                         </span>
                                                     </div>
                                                 </div>
@@ -356,7 +376,6 @@
     </form>
 </body>
 </html>
-
 <style>
     #project-label
     {
@@ -404,16 +423,16 @@
         Populate(callfrom);
     }
 
-//    $(function () {
-//        $("#txtDateOfPurchase").datepicker({
-//            showOn: "button",
-//            buttonImage: "../images/calendar.gif",
-//            buttonImageOnly: true,
-//            changeMonth: true,
-//            changeYear: true,
-//            maxDate: "+0d"
-//        });
-//    });
+    //    $(function () {
+    //        $("#txtDateOfPurchase").datepicker({
+    //            showOn: "button",
+    //            buttonImage: "../images/calendar.gif",
+    //            buttonImageOnly: true,
+    //            changeMonth: true,
+    //            changeYear: true,
+    //            maxDate: "+0d"
+    //        });
+    //    });
 
     function PopulateDTPicker() {
         $("#txtDateOfPurchase").datepicker({
@@ -478,54 +497,53 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-}
-
-function calculateSellingPrice() {
-    if ($('#txtBuyingPrice').val() == '') {
-        $('#txtBuyingPrice').val('0');
     }
 
-    if ($('#txtMargin').val() == '') {
-        $('#txtMargin').val('0');
-    }
-    var margin = ($('#txtMargin').val()) / 100;
+    function calculateSellingPrice() {
+        if ($('#txtBuyingPrice').val() == '') {
+            $('#txtBuyingPrice').val('0');
+        }
 
-    var bp = $('#txtBuyingPrice').val();
-    var bpm = bp * (($('#txtMargin').val()) / 100);
-    var tax = parseFloat($('#txtTax').val() / 100) + (1);
-    var val = (parseFloat(bp) + parseFloat(bpm)) * tax;
-    $('#txtSellingPrice').val(val.toFixed(2));
-}
+        if ($('#txtMargin').val() == '') {
+            $('#txtMargin').val('0');
+        }
+        var margin = ($('#txtMargin').val()) / 100;
 
-function UpdateProduct() {
-    var productID = $('#htnProductID').val();
-    var buyingPrice = $('#txtBuyingPrice').val();
-    var tax = $('#txtTax').val();
-    var margin = $('#txtMargin').val();
-    var sellingPrice = $('#txtSellingPrice').val();
-    
-    $.ajax({
-        url: "../Handler/ProductHandler.ashx",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: { 'productID': productID, 'buyingPrice': buyingPrice, 'tax': tax, 'margin': margin, 'sellingPrice': sellingPrice },
-        responseType: "json",
-        success: OnComplete,
-        error: OnFail
-    });
-    return false;
-}
-function OnComplete(result) {
-    if (result.ReturnStatus > 0) {
-        $('#Span3').html('Price updated successfully');
+        var bp = $('#txtBuyingPrice').val();
+        var bpm = bp * (($('#txtMargin').val()) / 100);
+        var tax = parseFloat($('#txtTax').val() / 100) + (1);
+        var val = (parseFloat(bp) + parseFloat(bpm)) * tax;
+        $('#txtSellingPrice').val(val.toFixed(2));
     }
-    else {
-        $('#Span3').html('Error in updating data');
+
+    function UpdateProduct() {
+        var productID = $('#htnProductID').val();
+        var buyingPrice = $('#txtBuyingPrice').val();
+        var tax = $('#txtTax').val();
+        var margin = $('#txtMargin').val();
+        var sellingPrice = $('#txtSellingPrice').val();
+
+        $.ajax({
+            url: "../Handler/ProductHandler.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { 'productID': productID, 'buyingPrice': buyingPrice, 'tax': tax, 'margin': margin, 'sellingPrice': sellingPrice },
+            responseType: "json",
+            success: OnComplete,
+            error: OnFail
+        });
+        return false;
     }
-    //alert([result.ReturnStatus, result.ReturnMessage]);
-}
-function OnFail(result) {
-    //alert(result);
-}
+    function OnComplete(result) {
+        if (result.ReturnStatus > 0) {
+            $('#Span3').html('Price updated successfully');
+        }
+        else {
+            $('#Span3').html('Error in updating data');
+        }
+        //alert([result.ReturnStatus, result.ReturnMessage]);
+    }
+    function OnFail(result) {
+        //alert(result);
+    }
 </script>
-
