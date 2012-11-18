@@ -29,7 +29,7 @@
     <script type="text/javascript">
         function PrepareForPrint(printpage) {
             var divToPrint = document.getElementById(printpage);
-            var popupWin = window.open('', '_blank', 'width=1050,height=600');
+            var popupWin = window.open('', '_blank', 'width=900,height=600');
             popupWin.document.open();
             popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
             popupWin.document.close();
@@ -72,7 +72,7 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
             <div id="sss"></div>
-                <div id="dvgridcontainer" class="grid_container" style="width: 1000px;">
+                <div id="dvgridcontainer" class="grid_container" style="width: 800px;">
                     <!--Start GRID-->
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
                         <ContentTemplate>
@@ -128,7 +128,7 @@
 
         var values = barcodeValue;
         $("#ttt").val(values);
-        values = $("#ttt").val();
+        values = $.trim($("#ttt").val());
         var btype = "code128";
         
         var settings = {
@@ -147,6 +147,6 @@
 
 </script>
 <style>
- .barcodeTarget{overflow:hidden!important;width:290px!Important;}
+ .barcodeTarget{overflow:hidden!important;width:195px!Important;}
 </style>
 </html>
