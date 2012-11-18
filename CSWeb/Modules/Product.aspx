@@ -8,7 +8,7 @@
     <title>Manage Products</title>
     <script type="text/javascript">
         function ClearFormFields() {
-         
+          
             $('#txtProductName').val('');
             $('#txtDescription').val('');
             $('#txtBuyingPrice').val('');
@@ -120,12 +120,14 @@
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>' />
+                                                    <div id="dvQtyDetails" style="display:none" runat="server"><%# Eval("QuantityDetails") %></div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Current Stock">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" Width="100px" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblStock" runat="server" Text='<%# Eval("Stock") %>' />
+                                                    <div id="dvStockDetails" style="display:none" runat="server"><%# Eval("StockDetails") %></div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="BuyingPrice">

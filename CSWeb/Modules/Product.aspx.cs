@@ -8,12 +8,13 @@ using BLL.Component;
 using CSWeb.Utility;
 using BLL.BusinessObject;
 using System.Diagnostics;
+using System.Web.UI.HtmlControls;
 
 public partial class Modules_Product : System.Web.UI.Page
 {
     PageInfo objPI = new PageInfo();
     public const string DEFAULTCOLUMNNAME = "ProductName";
-
+ 
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -243,7 +244,22 @@ public partial class Modules_Product : System.Web.UI.Page
     }
     protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
 
+            Label lbl = (Label)e.Row.FindControl("lblQuantity");
+            HtmlGenericControl divQty = (HtmlGenericControl)e.Row.FindControl("dvQtyDetails");
+            //lbl.Attributes.Add("onmouseover", "show('" + divQty.ClientID + "')");
+            //lbl.Attributes.Add("onmouseout", "hide('" + divQty.ClientID + "')");
+
+            Label lblStock = (Label)e.Row.FindControl("lblStock");
+            HtmlGenericControl divStock = (HtmlGenericControl)e.Row.FindControl("dvStockDetails");
+            //lbl.Attributes.Add("onmouseover", "ShowModalDiv('" + divStock.ClientID + "')");
+            //lbl.Attributes.Add("onmouseout", "CloseAddDiv('" + divStock.ClientID + "')");
+
+            e.Row.Cells[5].ToolTip = divQty.InnerHtml.Trim();
+            e.Row.Cells[6].ToolTip = divStock.InnerHtml.Trim();
+        }
     }
 
 

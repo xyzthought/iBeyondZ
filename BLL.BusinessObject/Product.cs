@@ -60,5 +60,7 @@ namespace BLL.BusinessObject
 
         public string Quantities { get; set; }
         public string Stock { get; set; }
+        public string QuantityDetails { get; set; }
+        public string StockDetails { get; set; }
     }
 }
