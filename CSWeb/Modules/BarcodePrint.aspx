@@ -22,19 +22,20 @@
                 top: 40px;
                 left: 30px;
             }
+            
+            .barcodeTarget{overflow:hidden!important;width:208px!Important;}
         }
-        
-        
-       
     </style>
     <script type="text/javascript">
         function PrepareForPrint(printpage) {
             var divToPrint = document.getElementById(printpage);
-            var popupWin = window.open('', '_blank', 'width=900,height=600');
+            var popupWin = window.open('', '_blank', 'width=1050,height=600');
             popupWin.document.open();
             popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
             popupWin.document.close();
         }
+
+        
     
     </script>
 </head>
@@ -59,7 +60,7 @@
                     </div>
                 </div>
                 <div id="dvAddUser" class="fl">
-                    <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcode')"><span class="PrintBarcode">
+                    <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
                     </span>Print</a></span>
                 </div>
                 <div class="reports">
@@ -70,7 +71,8 @@
             </div>
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
-                <div id="dvgridcontainer" class="grid_container" style="width: 700px;">
+            <div id="sss"></div>
+                <div id="dvgridcontainer" class="grid_container" style="width: 1000px;">
                     <!--Start GRID-->
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
                         <ContentTemplate>
@@ -80,7 +82,8 @@
                                 </div>
                             </div>
                             <br style="clear: both" />
-                            <div class="grid_container" runat="server" id="dvBarcode">
+                            <input type="text" id="ttt" style="display:none" />
+                            <div class="grid_container" runat="server" id="dvBarcodes">
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -88,8 +91,8 @@
                 </div>
             </div>
         </div>
-        <div class="push">
-        </div>
+    </div>
+    <div class="push" style="min-height:50%">
     </div>
     <!--Body End-->
     <!--Footer Start-->
@@ -99,4 +102,51 @@
     <!--Footer Start-->
     </form>
 </body>
+<script src="../Scripts/jquery-barcode-2.0.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var i = 1;
+        $(".Section").each(function (index, obj) {
+
+            var str = $(obj).html();
+            if (str == '') {
+                $(obj).attr('style', 'background:red;');
+            }
+            else {
+                if (str.indexOf("dvbarcode") !== -1) {
+                    var divID = "dvbarcode" + i;
+                    var PrintdivID = "dvbarcodePrint" + i;
+                    generateBarcode($("#" + divID).html(), PrintdivID);
+                    i++;
+                }
+            }
+        });
+    });
+
+
+    function generateBarcode(barcodeValue, barcodePrint) {
+
+        var values = barcodeValue;
+        $("#ttt").val(values);
+        values = $("#ttt").val();
+        var btype = "code128";
+        
+        var settings = {
+            output: "css",
+            bgColor: "#FFFFFF",
+            color: "#000000",
+            barWidth: "1",
+            barHeight: "30"
+        };
+
+        $("#" + barcodePrint).html("").show().barcode(values, btype, settings);
+        $("#ttt").val("");
+    }
+
+    
+
+</script>
+<style>
+ .barcodeTarget{overflow:hidden!important;width:290px!Important;}
+</style>
 </html>

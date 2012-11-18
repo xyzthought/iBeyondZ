@@ -85,12 +85,15 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
                     thisBarcode = thisBarcode.Replace("[productname]", objData[i].ProductName);
                     thisBarcode = thisBarcode.Replace("[productsize]", objData[i].SizeName);
                     string BarCode = objData[i].BarCode;
+                    thisBarcode = thisBarcode.Replace("[dvbarcode]", "dvbarcode"+(i+1).ToString());
                     thisBarcode = thisBarcode.Replace("[barcode]", BarCode);
+                    thisBarcode = thisBarcode.Replace("[dvbarcodePrint]", "dvbarcodePrint" + (i + 1).ToString());
+                    thisBarcode = thisBarcode.Replace("[barcodePrint]", "[barcodePrint" + (i + 1).ToString() + "]");
                     sbBarcode.Append(thisBarcode);
                 }
             }
 
-            dvBarcode.InnerHtml = sbBarcode.ToString();
+            dvBarcodes.InnerHtml = sbBarcode.ToString();
         }
         catch (Exception ex)
         {
