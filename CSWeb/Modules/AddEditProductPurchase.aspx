@@ -342,6 +342,7 @@
                                                     <div style="clear: both">
                                                     </div>
                                                     <asp:PlaceHolder runat="server" ID="plhQty"></asp:PlaceHolder>
+                                                    <div style="clear: both">
                                                     <div class="btn-wrapper4">
                                                         <span class="btn">
                                                             <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>

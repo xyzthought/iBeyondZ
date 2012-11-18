@@ -415,6 +415,8 @@ public partial class Modules_AddEditProductPurchase : PageBase
 
                 System.Web.UI.HtmlControls.HtmlGenericControl containerDiv;
                 System.Web.UI.HtmlControls.HtmlGenericControl textBoxDiv;
+                System.Web.UI.HtmlControls.HtmlGenericControl mainDiv;
+                int pos = 1;
 
                 for (int i = 0; i < arrSizeIDs.Length; i++)
                 {
@@ -422,12 +424,29 @@ public partial class Modules_AddEditProductPurchase : PageBase
                     {
                         if (arrSizeIDs[i] == lstSize[j].SizeID.ToString())
                         {
+                            mainDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
+                            switch (pos)
+                            {
+                                case 1:
+                                    mainDiv.Attributes.Add("style", "float:left");
+                                    break;
+                                case 2:
+                                    mainDiv.Attributes.Add("style", "float:left; padding-left:30px");
+                                    break;
+                                case 3:
+                                    mainDiv.Attributes.Add("style", "float:right");
+                                    break;
+                            }
+                            pos++;
+                            pos = pos > 3 ? 1 : pos;
+
                             containerDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
                             containerDiv.Controls.Add(CreateLabel(lstSize[j].SizeID, lstSize[j].SizeName));
-                            plhQty.Controls.Add(containerDiv);
+                            mainDiv.Controls.Add(containerDiv);
                             textBoxDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
                             textBoxDiv.Controls.Add(CreateTextBox(lstSize[j].SizeID, 0));
-                            plhQty.Controls.Add(textBoxDiv);
+                            mainDiv.Controls.Add(textBoxDiv);
+                            plhQty.Controls.Add(mainDiv);
                             lstSizeIDs.Add(lstSize[j]);
                             break;
                         }
@@ -464,6 +483,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
         objTextBox.ID = "txtSize_" + intSizeID.ToString();
         objTextBox.Text = intQuantity.ToString();
         objTextBox.CssClass = "txtCred";
+        objTextBox.Attributes.Add("style", "width: 100px!important;text-align: right");
         objTextBox.Attributes.Add("onkeyup", "extractNumber(this,0,false);");
         objTextBox.Attributes.Add("onblur", "extractNumber(this,0,false);");
         return objTextBox;
