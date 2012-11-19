@@ -61,10 +61,10 @@
                                                         </div>
                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;
                                                             padding-bottom: 6px;">
-                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoPName" name="rdoSelection"
-                                                                checked="checked" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
-                                                            Name<input type="radio" id="rdoBarCode" name="rdoSelection" value="Bar Code" onchange="ChangeMe(1)" />&nbsp;Bar
-                                                            Code
+                                                            <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection"
+                                                                value="Bar Code" onchange="ChangeMe(1)" checked="checked" />&nbsp;Bar Code&nbsp;<input type="radio"
+                                                                    id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
+                                                            Name
                                                         </div>
                                                         <div>
                                                             Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
@@ -355,7 +355,7 @@
 
 
     $(function () {
-        Populate(2);
+        Populate(1);
     });
 
     function Populate(callfrom) {
@@ -397,9 +397,9 @@
                 $("#Product-description").html(desc);
                 
                 if (callfrom == "1")
-                $("#hdnProductBarCode").val(ui.item.label);
-                else
                 $("#hdnProductBarCode").val(ui.item.desc);
+                else
+                $("#hdnProductBarCode").val(ui.item.label);
 
                 $("#txtQuantity").val("1");
                 CallMeAndFireServerSideButton();

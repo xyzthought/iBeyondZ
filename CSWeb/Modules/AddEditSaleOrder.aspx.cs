@@ -166,7 +166,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 hdnByProductName.Value = hdnByProductName.Value.Substring(0, hdnByProductName.Value.Length - 2);
             }
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
         }
     }
 
@@ -221,7 +221,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         CalculateTotalPrice();
         txtProductBarCode.Text = "";
         txtQuantity.Text = "";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
 
     }
     #endregion
@@ -240,7 +240,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
         txtProductBarCode.Text = "";
         txtQuantity.Text = "";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
     }
 
     private void CalculateTotalPrice()
@@ -296,14 +296,14 @@ public partial class Modules_AddEditSaleOrder : PageBase
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
 
                 lblError.InnerHtml = "Product Bar Code not found";
             }
         }
         catch (ConstraintException ex)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
             lblError.InnerHtml = "Product already added or select different size";
         }
         catch (Exception ex)
@@ -793,7 +793,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         }
         catch (ConstraintException ex)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('1')", true);
             lblError.InnerHtml = "Product already added with same size";
         }
     }
