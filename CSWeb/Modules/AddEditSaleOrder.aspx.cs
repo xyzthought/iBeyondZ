@@ -150,8 +150,11 @@ public partial class Modules_AddEditSaleOrder : PageBase
             hdnByProductName.Value = "";
             for (int i = 0; i < dtAutoComplete.Rows.Count; i++)
             {
-                hdnByBarCode.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "@@";
-                hdnByProductName.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "@@";
+                //hdnByBarCode.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "@@";
+                //hdnByProductName.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductName"].ToString() + "##" + dtAutoComplete.Rows[i]["BarCode"].ToString() + "@@";
+
+                hdnByBarCode.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductSize"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductNameSize"].ToString() + "@@";
+                hdnByProductName.Value += dtAutoComplete.Rows[i]["ProductID"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductNameSize"].ToString() + "##" + dtAutoComplete.Rows[i]["ProductSize"].ToString() + "@@";
             }
             if (hdnByBarCode.Value.Length > 0)
             {
@@ -174,6 +177,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         dtData.Columns.Add("ProductID", typeof(int));
         dtData.Columns.Add("BarCode", typeof(string));
         dtData.Columns.Add("PBarCodeWithSize", typeof(string));
+        dtData.Columns.Add("PBarCodeWithSizeName", typeof(string));
         dtData.Columns.Add("ProductName", typeof(string));
         dtData.Columns.Add("SizeID", typeof(int));
         dtData.Columns.Add("SizeBarcodeID", typeof(string));
@@ -190,8 +194,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
 
         DataColumn[] planfeaturesKeyColumns = new DataColumn[2];
 
-        planfeaturesKeyColumns[0] = dtData.Columns["ProductID"];
-        planfeaturesKeyColumns[1] = dtData.Columns["SizeID"];
+        planfeaturesKeyColumns[0] = dtData.Columns["PBarCodeWithSizeName"];
+        //planfeaturesKeyColumns[1] = dtData.Columns["SizeID"];
         dtData.PrimaryKey = planfeaturesKeyColumns;
         return dtData;
     }
@@ -318,6 +322,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
         DataRow dtRow = dtProductDetail.NewRow();
         dtRow["ProductID"] = objSale.ProductID;
         dtRow["BarCode"] = objSale.BarCode;
+        if (!string.IsNullOrEmpty(hdnProductBarCode.Value))
+        {
+            dtRow["PBarCodeWithSizeName"] = hdnProductBarCode.Value.Trim();
+        }
+        else
+        {
+            dtRow["PBarCodeWithSizeName"] = objSale.BarCode + "-" + objSale.SizeName;
+        }
+
         dtRow["PBarCodeWithSize"] = objSale.BarCode + "-" + objSale.SizeBarCode;
         dtRow["ProductName"] = objSale.ProductName;
         dtRow["SizeID"] = objSale.SizeID;
@@ -408,17 +421,64 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
-                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID"));
-                param = Common.GenerateBASE64WithObfuscateApp(param);
-                vstrLink = "AddEditUser?q=" + param;
-                HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
-                aEdit.Attributes.Add("on", vstrLink);*/
                 int ProductID = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ProductID"));
                 DropDownList ddlPSize = (DropDownList)e.Row.FindControl("ddlPSize");
                 PopulateSizeDropDown(ddlPSize, ProductID);
-                ddlPSize.Items.FindByValue((e.Row.FindControl("lblSizeBarcodeID") as Label).Text).Selected = true;
+                bool isSelected = false;
+                Label lblSizeBarcodeID = e.Row.FindControl("lblSizeBarcodeID") as Label;
+                Label lblBarCode = e.Row.FindControl("lblBarCode") as Label;
+                if (!string.IsNullOrEmpty(lblSizeBarcodeID.Text))
+                {
+                    string[] SizeID = lblSizeBarcodeID.Text.Split(new string[] { "||" }, StringSplitOptions.None);
+                    if (SizeID.Length > 1 && !string.IsNullOrEmpty(SizeID[1]))
+                    {
+                        ddlPSize.Items.FindByValue((e.Row.FindControl("lblSizeBarcodeID") as Label).Text).Selected = true;
+                        isSelected = true;
+                    }
+                }
 
+                if (!isSelected)
+                {
+                    if (!string.IsNullOrEmpty(hdnProductBarCode.Value))
+                    {
+                        string[] SizeID = hdnProductBarCode.Value.Split(new string[] { "||" }, StringSplitOptions.None);
+                        if (SizeID.Length == 2 && !string.IsNullOrEmpty(SizeID[1]))
+                        {
+                            ddlPSize.Items.FindByText(SizeID[1]).Selected = true;
+
+                            for (int i = 0; i < dtProductDetail.Rows.Count; i++)
+                            {
+                                if (dtProductDetail.Rows[i]["ProductID"].ToString() == ProductID.ToString() && string.IsNullOrEmpty(dtProductDetail.Rows[i]["SizeName"].ToString()))
+                                {
+                                    if (ddlPSize.SelectedIndex > 0)
+                                    {
+                                        string Barcode = dtProductDetail.Rows[i]["BarCode"].ToString();
+                                        string[] ThisSizeID = ddlPSize.SelectedValue.ToString().Split(new string[] { "||" }, StringSplitOptions.None);
+
+                                        dtProductDetail.Rows[i]["PBarCodeWithSize"] = lblBarCode.Text + "-" + ThisSizeID[1];
+                                        dtProductDetail.Rows[i]["SizeID"] = ThisSizeID[0];
+                                        dtProductDetail.Rows[i]["SizeName"] = ddlPSize.SelectedItem.Text.ToString();
+                                        dtProductDetail.Rows[i]["SizeBarcode"] = ThisSizeID[1];
+                                        dtProductDetail.Rows[i]["SizeBarcodeID"] = ddlPSize.SelectedValue.ToString();
+                                    }
+                                    else
+                                    {
+                                        dtProductDetail.Rows[i]["PBarCodeWithSize"] = "";
+                                        dtProductDetail.Rows[i]["SizeID"] = 0;
+                                        dtProductDetail.Rows[i]["SizeName"] = "";
+                                        dtProductDetail.Rows[i]["SizeBarcode"] = "";
+                                        dtProductDetail.Rows[i]["SizeBarcodeID"] = "";
+                                    }
+
+                                    dtProductDetail.AcceptChanges();
+                                    PopulateProductDetail();
+                                    CalculateTotalPrice();
+                                    PopulateAutoCompleteProductInformation();
+                                }
+                            }
+                        }
+                    }
+                }
                 DropDownList ddlDType = (DropDownList)e.Row.FindControl("ddlDType");
                 ddlDType.Items.FindByValue((e.Row.FindControl("lblDiscType") as Label).Text).Selected = true;
 
@@ -737,4 +797,5 @@ public partial class Modules_AddEditSaleOrder : PageBase
             lblError.InnerHtml = "Product already added with same size";
         }
     }
+
 }

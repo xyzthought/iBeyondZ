@@ -75,6 +75,7 @@
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                                 Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
+                                                            <asp:HiddenField ID="hdnProductBarCode" runat="server" ClientIDMode="Static" />
                                                             <p id="Product-description" style="margin-top: 5px;">
                                                             </p>
                                                         </div>
@@ -394,6 +395,12 @@
                 $("#Productid").val(ui.item.value);
                 var desc = "<img src='../images/pdot.png' style='vertical-align:bottom' />&nbsp;" + ui.item.desc
                 $("#Product-description").html(desc);
+                
+                if (callfrom == "1")
+                $("#hdnProductBarCode").val(ui.item.label);
+                else
+                $("#hdnProductBarCode").val(ui.item.desc);
+
                 $("#txtQuantity").val("1");
                 CallMeAndFireServerSideButton();
                 return false;
