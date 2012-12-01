@@ -132,8 +132,13 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         txtAmountPaid.Text = objSale.CCAmount.ToString();
         txtBCash.Text = objSale.BankAmount.ToString();
         txtCash.Text = objSale.Cash.ToString();
-        txtDiscount.Text = txtDiscount.Text = string.Format("{0:0.00}", objSale.Discount); 
+        txtDiscount.Text = txtDiscount.Text = string.Format("{0:0.00}", objSale.Discount);
+        txtSaleNote.Text = objSale.SaleNote;
 
+        ddlFdiscount.SelectedValue = objSale.FinalDiscountType.ToString();
+        txtFDiscount.Text = objSale.FinalDiscount.ToString();
+        
+        txtFinalAmount.Text = objSale.FinalPayableAmount.ToString();
     }
 
     private void PopulateCustomer()
@@ -196,6 +201,23 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
 
                 lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice );// String.Format("{0:C}", dblTotalPrice);
                 lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
+                lblFinalAmount.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
+                
+
+                decimal dblAmountAfterDiscount = Convert.ToDecimal(lblTotalPay.Text);
+                if (Convert.ToDecimal(txtFDiscount.Text) > 0)
+                {
+                    if (ddlFdiscount.SelectedValue == "%")
+                    {
+                        dblAmountAfterDiscount = dblAmountAfterDiscount - (dblAmountAfterDiscount * Convert.ToDecimal(txtFDiscount.Text) / 100);
+                    }
+                    else
+                    {
+                        dblAmountAfterDiscount = dblAmountAfterDiscount - Convert.ToDecimal(txtFDiscount.Text);
+                    }
+                }
+                lblFinalAmount.Text = string.Format("{0:0.00}", dblAmountAfterDiscount);
+                txtFinalAmount.Text = lblFinalAmount.Text;
             }
         }
         catch (Exception ex)
@@ -331,7 +353,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
     {
         try
         {
-            double dbAmounttoBePaid = Math.Round(Convert.ToDouble(lblTotalPay.Text.Trim()), 2);
+            double dbAmounttoBePaid = Math.Round(Convert.ToDouble(txtFinalAmount.Text.Trim()), 2);
             double dblCalculatedAmount = 0;
             double dblCredit = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtAmountPaid.Text.Trim()), 2));
             double dblBank = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Math.Round(Convert.ToDouble(txtBCash.Text.Trim()), 2));
@@ -387,12 +409,15 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             objSale.ZIP = txtZIP.Text.Trim();
             objSale.Country = txtCountry.Text.Trim();
             objSale.Email = txtEmailID.Text.Trim();
+            objSale.SaleNote = txtSaleNote.Text.Trim();
             objSale.TeleNumber = txtPhone.Text.Trim();
             objSale.CCAmount = (string.IsNullOrEmpty(txtAmountPaid.Text.Trim()) ? 0 : Convert.ToDecimal(txtAmountPaid.Text.Trim()));
             objSale.BankAmount = (string.IsNullOrEmpty(txtBCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtBCash.Text.Trim()));
             objSale.Cash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtCash.Text.Trim()));
             objSale.Discount = (string.IsNullOrEmpty(txtDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtDiscount.Text.Trim()));
-            
+            objSale.FinalDiscountType = ddlFdiscount.SelectedValue.ToString();
+            objSale.FinalDiscount =Convert.ToDecimal(txtFDiscount.Text.Trim());
+            objSale.FinalPayableAmount=Convert.ToDecimal(txtFinalAmount.Text.Trim());
             objSale.SaleMadeBy = ((User)Session["UserData"]).UserID;
 
 

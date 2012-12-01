@@ -35,6 +35,34 @@
                 alert(e);
             }
         }
+
+        function CalculateFinalPay() {
+            var typeOfDiscount = $("#ddlFdiscount").val();
+            var Discount = $("#txtFDiscount").val();
+            var GrossPay = $("#lblTotalPay").html();
+            var Calc = 0;
+            if (typeOfDiscount == "%") {
+                Calc = GrossPay - (GrossPay * Discount / 100);
+            }
+            else {
+                Calc = GrossPay - Discount;
+            }
+            $("#lblFinalAmount").html(Calc.toFixed(2));
+            $("#txtFinalAmount").val(Calc.toFixed(2));
+        }
+
+        function ResetCalculation() {
+            var typeOfDiscount = $("#ddlFdiscount").val();
+            $("#txtFDiscount").val("0.00");
+            $("#lblFinalAmount").html($("#lblTotalPay").html());
+            $("#txtFinalAmount").val($("#lblTotalPay").html());
+            if (typeOfDiscount == "%") {
+                $("#txtFDiscount").attr('maxlength', '2');
+            }
+            else {
+                $("#txtFDiscount").attr('maxlength', '10');
+            }
+        }
     </script>
 </head>
 <body>
@@ -173,7 +201,7 @@
                                         <div class="acceptedCont">
                                             <div id="MidM2">
                                                 <fieldset class="fieldAddEdit">
-                                                    <div class="inner" style="margin: 0 5px 24px!important;">
+                                                    <div class="inner" style="margin: 0 5px 0px!important;">
                                                         <div class="mandet">
                                                             <span id="lblMessage">* Fields are mandatory</span></div>
                                                         <div class="errorMsg">
@@ -260,6 +288,13 @@
                                                         </div>
                                                         <div style="clear: both">
                                                         </div>
+                                                        <div>
+                                                            Special Note :
+                                                        </div>
+                                                        <div>
+                                                            <asp:TextBox ID="txtSaleNote" runat="server" CssClass="txtSaleNote" TextMode="MultiLine"
+                                                                MaxLength="1024"></asp:TextBox>
+                                                        </div>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -272,33 +307,61 @@
                                     <div class="pendingCont">
                                         <div id="Div1">
                                             <fieldset class="fieldAddEdit">
-                                                <div class="innerSummary">
+                                                <div class="innerSummary" style="margin: 0px!important">
                                                     <div>
-                                                        <div class="accpendNew" style="width: 49%; float: left">
+                                                        <div class="accpendNew" style="width: 98%; float: left">
                                                             Payment Details</div>
-                                                        <div class="accpendNew" style="width: 46%; float: right">
-                                                            <span class="btn5" style="float: right; padding-top: 2px; padding-right: 5px;">
-                                                                <asp:LinkButton ID="lnkBack" runat="server" CausesValidation="False" OnClick="lnkBack_Click">Back</asp:LinkButton>
-                                                            </span>
+                                                    </div>
+                                                    <div style="clear: both">
+                                                    </div>
+                                                    <div style="float: left; padding-left: 5px;">
+                                                        <div style="width: 100px; padding-left: 5px; font-weight: bold">
+                                                            Total Amount</div>
+                                                        <div style="width: 100px;">
+                                                            <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
+                                                    </div>
+                                                    <div style="float: right; padding-left: 5px;">
+                                                        <div style="width: 100px; padding-right: 5px; font-weight: bold; text-align: right">
+                                                            Product Discount</div>
+                                                        <div style="padding-right: 7px; margin: 0!important; float: right">
+                                                            <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Style="text-align: right"></asp:Label>&nbsp;€
                                                         </div>
                                                     </div>
                                                     <div style="clear: both">
                                                     </div>
-                                                    <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                        Total Amount</div>
-                                                    <div style="width: 100px; float: left;">
-                                                        <asp:Label ID="lblTotalAmount" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
+                                                    <div style="float: left; padding-left: 5px;">
+                                                        <div style="width: 100px; padding-left: 5px; font-weight: bold">
+                                                            Gross Pay</div>
+                                                        <div>
+                                                            <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
+                                                    </div>
+                                                    <div style="float: right; padding-left: 5px;">
+                                                        <div style="padding-right: 5px; font-weight: bold; text-align: right">
+                                                            Final Discount</div>
+                                                        <div style="padding-right: 7px; margin: 0!important; float: right">
+                                                            <asp:DropDownList ID="ddlFdiscount" runat="server" onChange="ResetCalculation()">
+                                                                <asp:ListItem Value="%" Text="%"></asp:ListItem>
+                                                                <asp:ListItem Value="€" Text="€"></asp:ListItem>
+                                                            </asp:DropDownList>
+                                                            <asp:TextBox ID="txtFDiscount" runat="server" CssClass="txtCred" MaxLength="2" Style="width: 100px!important;
+                                                                text-align: right" Text="0.00"  onkeyup="extractNumber(this,-1,false);CalculateFinalPay()"  onblur="extractNumber(this,-1,false);CalculateFinalPay()"></asp:TextBox>
+                                                        </div>
+                                                    </div>
                                                     <div style="clear: both">
                                                     </div>
-                                                    <div style="width: 100px; float: left; padding-left: 5px; font-weight: bold">
-                                                        Discount</div>
-                                                    <div style="width: 100px; float: left;">
-                                                        <asp:Label ID="txtDiscount" runat="server" CssClass="lblAmt" Style="width: 100px!important"></asp:Label>&nbsp;€
+                                                    <div style="float: left; padding-left: 5px;">
+                                                        <div style="width: 100px; padding-left: 5px; font-weight: bold">
+                                                            Final Amount</div>
+                                                        <div>
+                                                            <asp:Label ID="lblFinalAmount" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
                                                     </div>
-                                                    <div style="width: 100px; float: right; padding-left: 5px; margin-top: -18px; font-weight: bold">
-                                                        Total Pay</div>
-                                                    <div style="float: right; margin-bottom: 22px">
-                                                        <asp:Label ID="lblTotalPay" runat="server" CssClass="lblAmt"></asp:Label>&nbsp;€</div>
+                                                    <div style="float: right; padding-left: 5px;">
+                                                        <div style="padding-right: 5px; font-weight: bold">
+                                                            Final Payable Amount</div>
+                                                        <div style="padding-right: 7px; margin: 0!important; float: right">
+                                                            <asp:TextBox ID="txtFinalAmount" runat="server" CssClass="txtCred" Style="width: 100px!important;
+                                                                text-align: right" onkeyup="extractNumber(this,-1,false);"  onblur="extractNumber(this,-1,false);"></asp:TextBox></div>
+                                                    </div>
                                                     <div style="clear: both">
                                                     </div>
                                                 </div>
@@ -309,11 +372,11 @@
                             </div>
                             <!--End Payment Deatils-->
                             <!--Card Panel-->
-                            <div class="smallDivRight" style="margin-top: 18px!important; width: 486px!important">
+                            <div class="smallDivRight" style="margin-top: 6px!important; width: 486px!important">
                                 <div class="pendingCont">
                                     <div id="Div2">
                                         <fieldset class="fieldAddEdit">
-                                            <div class="innerSummary">
+                                            <div class="innerSummary" style="margin: -4px 5px 5px 10px!important">
                                                 <!--Credit Card-->
                                                 <div style="float: left; margin-right: 10px">
                                                     <div>
@@ -383,6 +446,11 @@
                                                     <span class="btn5" style="margin-right: -5px!important; margin-top: 5px!important;">
                                                         <asp:LinkButton ID="lnkFinalCheckout" runat="server" OnClick="lnkFinalCheckout_Click"><span class="AddCheckoutData"></span>Final Checkout</asp:LinkButton></span>
                                                 </div>
+                                                <div class="fl" style="float: right">
+                                                    <span class="btn5" style="margin-right: -5px!important; margin-top: 5px!important;">
+                                                        <asp:LinkButton ID="lnkBack" runat="server" CausesValidation="False" OnClick="lnkBack_Click">Back</asp:LinkButton>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -395,6 +463,7 @@
             </asp:UpdatePanel>
         </div>
     </div>
+    <div style="clear: both">
     </div>
     <div class="push">
     </div>
@@ -403,7 +472,7 @@
     <div>
         <uc2:Footer ID="Footer1" runat="server" />
     </div>
-    <!--Footer Start-->
+    <!--Footer End-->
     </form>
 </body>
 </html>
@@ -443,6 +512,11 @@
 </style>
 <script type="text/javascript">
 
+    $("input[type=text]").focus(function () {
+        // Select field contents
+        this.select();
+    });
+
     $(function () {
         var projects = [];
         var MyKeys = ["value", "label", "desc"];
@@ -480,14 +554,16 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-});
+    });
 
-function PopulateAmount(evThis) {
+    function PopulateAmount(evThis) {
 
-    $("#txtBCash").val("");
-    $("#txtCash").val("");
-    $("#txtAmountPaid").val("");
+        $("#txtBCash").val("");
+        $("#txtCash").val("");
+        $("#txtAmountPaid").val("");
 
-    $("#" + evThis.id).val($("#lblTotalPay").html());
-}
+        //$("#" + evThis.id).val($("#lblTotalPay").html());
+
+        $("#" + evThis.id).val($("#txtFinalAmount").val());
+    }
 </script>

@@ -249,5 +249,13 @@ namespace BLL.BusinessObject
         public string SizeBarCode { get; set; }
 
         public string DiscountType { get; set; }
+
+        public string SaleNote { get; set; }
+
+        public string FinalDiscountType { get; set; }
+
+        public decimal FinalDiscount { get; set; }
+
+        public decimal FinalPayableAmount { get; set; }
     }
 }

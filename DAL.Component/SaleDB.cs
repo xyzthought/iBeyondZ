@@ -282,11 +282,14 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@Country", DbType.String, objSale.Country);
                 dBase.AddInParameter(objCmd, "@Email", DbType.String, objSale.Email);
                 dBase.AddInParameter(objCmd, "@TeleNumber", DbType.String, objSale.TeleNumber);
-
+                dBase.AddInParameter(objCmd, "@SaleNote", DbType.String, objSale.SaleNote);
                 dBase.AddInParameter(objCmd, "@CCAmount", DbType.Decimal, objSale.CCAmount);
                 dBase.AddInParameter(objCmd, "@BankAmount", DbType.Decimal, objSale.BankAmount);
                 dBase.AddInParameter(objCmd, "@Cash", DbType.Decimal, objSale.Cash);
                 dBase.AddInParameter(objCmd, "@Discount", DbType.Decimal, objSale.Discount);
+                dBase.AddInParameter(objCmd, "@FinalDiscountType", DbType.String, objSale.FinalDiscountType);
+                dBase.AddInParameter(objCmd, "@FinalDiscount", DbType.Decimal, objSale.FinalDiscount);
+                dBase.AddInParameter(objCmd, "@FinalPayableAmount", DbType.Decimal, objSale.FinalPayableAmount);
                 dBase.AddInParameter(objCmd, "@SaleMadeBy", DbType.Int32, objSale.SaleMadeBy);
                 dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
                 dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
@@ -441,10 +444,27 @@ namespace DAL.Component
                 {
                     objData.Email = Convert.ToString(drData["Email"]);
                 }
+                if (FieldExists(drData, "SaleNote") && drData["SaleNote"] != DBNull.Value)
+                {
+                    objData.SaleNote = Convert.ToString(drData["SaleNote"]);
+                }
                 if (FieldExists(drData, "Discount") && drData["Discount"] != DBNull.Value)
                 {
                     objData.Discount = Convert.ToDecimal(drData["Discount"]);
                 }
+                if (FieldExists(drData, "FinalDiscountType") && drData["FinalDiscountType"] != DBNull.Value)
+                {
+                    objData.FinalDiscountType = Convert.ToString(drData["FinalDiscountType"]);
+                }
+                if (FieldExists(drData, "FinalDiscount") && drData["FinalDiscount"] != DBNull.Value)
+                {
+                    objData.FinalDiscount = Convert.ToDecimal(drData["FinalDiscount"]);
+                }
+                if (FieldExists(drData, "FinalPayableAmount") && drData["FinalPayableAmount"] != DBNull.Value)
+                {
+                    objData.FinalPayableAmount = Convert.ToDecimal(drData["FinalPayableAmount"]);
+                }
+
                 if (FieldExists(drData, "CCAmount") && drData["CCAmount"] != DBNull.Value)
                 {
                     objData.CCAmount = Convert.ToDecimal(drData["CCAmount"]);

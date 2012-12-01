@@ -90,6 +90,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (!Page.IsPostBack)
             {
+                txtProductBarCode.Focus();
                 serversideEvent = Page.ClientScript.GetPostBackEventReference(lnkAddMore, string.Empty);
                 PopulateAutoCompleteDataTable();
                 // Auto

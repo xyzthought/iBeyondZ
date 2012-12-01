@@ -1730,6 +1730,17 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
     padding: 2px;
     width: 345px;
 }
+
+.txtSaleNote {
+    border: 1px solid #DADADA;
+    font-family: Arial,helvetica,Sans-Serif;
+    font-size: 13px;
+    height: 68px;
+    max-height:68px;
+    max-width: 345px;
+    padding: 2px;
+    width: 345px;
+}
 .includeCoverP input {
     margin-right: 5px;
     vertical-align: middle;
