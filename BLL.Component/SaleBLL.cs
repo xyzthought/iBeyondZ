@@ -66,9 +66,9 @@ namespace BLL.Component
             return objDB.DeleteExistingSalesDetails(objSale);
         }
 
-        public List<Sale> GetAllProductBarCode(PageInfo objPI)
+        public List<Sale> GetAllProductBarCode(PageInfo objPI, int PurchaseID)
         {
-            return objDB.GetAllProductBarCode(objPI);
+            return objDB.GetAllProductBarCode(objPI, PurchaseID);
         }
     }
 }

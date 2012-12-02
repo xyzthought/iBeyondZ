@@ -193,6 +193,12 @@ public partial class BuyingInterface : PageBase
     {
         try
         {
+            if (e.CommandName == "Print")
+            {
+                int intPurchaseID = Convert.ToInt32(e.CommandArgument.ToString());
+                vstrLink = "BarcodePrint.aspx?q=" + intPurchaseID.ToString();
+                Response.Redirect(vstrLink, false);
+            }
             if (e.CommandName == "Edit")
             {
                 int intPurchaseID = Convert.ToInt32(e.CommandArgument.ToString());

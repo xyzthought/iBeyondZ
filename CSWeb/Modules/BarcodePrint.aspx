@@ -94,6 +94,7 @@
     </div>
     <div class="push" style="min-height:50%">
     </div>
+    <div style="clear:both"></div>
     <!--Body End-->
     <!--Footer Start-->
     <div>
@@ -147,6 +148,6 @@
 
 </script>
 <style>
- .barcodeTarget{overflow:hidden!important;width:195px!Important;}
+ .barcodeTarget{overflow:hidden!important;width:174px!Important;}
 </style>
 </html>

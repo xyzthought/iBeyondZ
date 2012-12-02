@@ -257,5 +257,7 @@ namespace BLL.BusinessObject
         public decimal FinalDiscount { get; set; }
 
         public decimal FinalPayableAmount { get; set; }
+
+        public string Brand { get; set; }
     }
 }

@@ -32,12 +32,33 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
         }
     }
 
+    protected int PurchaseID
+    {
+        get
+        {
+            if (ViewState["PurchaseID"] != null)
+                return Convert.ToInt32(ViewState["PurchaseID"]);
+            else
+                return 0;
+        }
+        set
+        {
+            ViewState["PurchaseID"] = value;
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             Readfile();
-            PopulateBarCode();
+            string strQuery = Request.QueryString["q"];
+            
+            if (!string.IsNullOrEmpty(strQuery))
+            {
+                PurchaseID = Convert.ToInt32(Request.QueryString["q"].ToString());
+            }
+            PopulateBarCode(PurchaseID);
         }
     }
 
@@ -56,7 +77,7 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
         
     }
 
-    private void PopulateBarCode()
+    private void PopulateBarCode(int PurchaseID)
     {
         try
         {
@@ -75,21 +96,31 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
             SaleBLL objSaleBLL = new SaleBLL();
 
             List<Sale> objData = new List<Sale>();
-            objData = objSaleBLL.GetAllProductBarCode(objPI);
+            objData = objSaleBLL.GetAllProductBarCode(objPI, PurchaseID);
 
             if (objData != null)
             {
+                int Kounter = 0;
                 for (int i = 0; i < objData.Count; i++)
                 {
-                    thisBarcode = BarcodeHTML;
-                    thisBarcode = thisBarcode.Replace("[productname]", objData[i].ProductName);
-                    thisBarcode = thisBarcode.Replace("[productsize]", objData[i].SizeName);
-                    string BarCode = objData[i].BarCode;
-                    thisBarcode = thisBarcode.Replace("[dvbarcode]", "dvbarcode"+(i+1).ToString());
-                    thisBarcode = thisBarcode.Replace("[barcode]", BarCode);
-                    thisBarcode = thisBarcode.Replace("[dvbarcodePrint]", "dvbarcodePrint" + (i + 1).ToString());
-                    thisBarcode = thisBarcode.Replace("[barcodePrint]", "[barcodePrint" + (i + 1).ToString() + "]");
-                    sbBarcode.Append(thisBarcode);
+                    int PurchaseQuantity =(int)objData[i].Quantity;
+                    
+                    for (int ii = 0; ii < PurchaseQuantity; ii++)
+                    {
+                        thisBarcode = BarcodeHTML;
+                        thisBarcode = thisBarcode.Replace("[brandname]", objData[i].Brand);
+                        thisBarcode = thisBarcode.Replace("[productname]", objData[i].ProductName);
+                        thisBarcode = thisBarcode.Replace("[productsize]", objData[i].SizeName);
+                        thisBarcode = thisBarcode.Replace("[sellingprice]", string.Format("{0:0.00}", objData[i].Price));
+                        string BarCode = objData[i].BarCode;
+                        thisBarcode = thisBarcode.Replace("[dvbarcode]", "dvbarcode" + (Kounter + 1).ToString());
+                        thisBarcode = thisBarcode.Replace("[barcode]", BarCode);
+                        thisBarcode = thisBarcode.Replace("[dvbarcodePrint]", "dvbarcodePrint" + (Kounter + 1).ToString());
+                        thisBarcode = thisBarcode.Replace("[barcodePrint]", "[barcodePrint" + (Kounter + 1).ToString() + "]");
+                        sbBarcode.Append(thisBarcode);
+                        Kounter++;
+                    }
+                    
                 }
             }
 
@@ -103,6 +134,6 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
 
     protected void lnkBtnSearch_Click(object sender, EventArgs e)
     {
-        PopulateBarCode();
+        PopulateBarCode(PurchaseID);
     }
 }

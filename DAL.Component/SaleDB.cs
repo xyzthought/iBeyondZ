@@ -510,12 +510,13 @@ namespace DAL.Component
             return objMessage;
         }
 
-        public List<Sale> GetAllProductBarCode(PageInfo objPI)
+        public List<Sale> GetAllProductBarCode(PageInfo objPI,int PurchaseID)
         {
             List<Sale> objSale = new List<Sale>();
             try
             {
                 DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_PrintProductBarcode");
+                dBase.AddInParameter(objCmd, "@PurchaseID", DbType.Int32, PurchaseID);
                 dBase.AddInParameter(objCmd, "@SearchText", DbType.String, objPI.SearchText);
 
                 using (IDataReader reader = dBase.ExecuteReader(objCmd))
@@ -559,6 +560,18 @@ namespace DAL.Component
                 if (FieldExists(drData, "SizeBarCode") && drData["SizeBarCode"] != DBNull.Value)
                 {
                     objData.SizeBarCode = Convert.ToString(drData["SizeBarCode"]);
+                }
+                if (FieldExists(drData, "Price") && drData["Price"] != DBNull.Value)
+                {
+                    objData.Price = Convert.ToDecimal(drData["Price"]);
+                }
+                if (FieldExists(drData, "Brand") && drData["Brand"] != DBNull.Value)
+                {
+                    objData.Brand = Convert.ToString(drData["Brand"]);
+                }
+                if (FieldExists(drData, "Quantity") && drData["Quantity"] != DBNull.Value)
+                {
+                    objData.Quantity = Convert.ToInt32(drData["Quantity"]);
                 }
             }
             catch (Exception ex)
