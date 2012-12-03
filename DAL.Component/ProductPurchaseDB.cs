@@ -48,6 +48,8 @@ namespace DAL.Component
 
                         if (reader["PurchaseID"] != DBNull.Value)
                             objProductPurchase.ProductPurchaseID = Convert.ToInt32(reader["PurchaseID"]);
+                        if (reader["ProductPurchaseID"] != DBNull.Value)
+                            objProductPurchase.ProductPurchaseDetailID = Convert.ToInt32(reader["ProductPurchaseID"]);
                         if (reader["PurchaseDate"] != DBNull.Value)
                             objProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToShortDateString();
                         if (reader["CompanyName"] != DBNull.Value)

@@ -121,5 +121,7 @@ namespace BLL.BusinessObject
         }
          */
 
+
+        public int ProductPurchaseDetailID { get; set; }
     }
 }

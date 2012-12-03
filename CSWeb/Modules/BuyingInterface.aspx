@@ -141,7 +141,7 @@
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
                                              <asp:LinkButton ID="lnkPrint" runat="server" CommandName="Print" ToolTip="Click to print"
-                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseID") %>'> <img src="../Images/PrintBarcode.png" alt="Edit" /> </asp:LinkButton>
+                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseDetailID") %>'> <img src="../Images/PrintBarcode.png" alt="Print" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
                                                     CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
