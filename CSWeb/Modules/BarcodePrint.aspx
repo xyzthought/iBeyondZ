@@ -33,7 +33,7 @@
             var MediaPrint = "@page{margin:0} @media print { body { width: 200 height: 600}  }";
             var vStyle = "<head><style type='text/css'>html,body {   margin:-7px;   padding:0;height:auto;} "+MediaPrint+"</style></head>";
             popupWin.document.open();
-            popupWin.document.write('<html>' + vStyle + '<body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+            popupWin.document.write('<html>' + vStyle + '<body onload="window.print()">' +   + '</html>');
             popupWin.document.close();
         }
 
@@ -64,6 +64,10 @@
                 <div id="dvAddUser" class="fl">
                     <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
                     </span>Print</a></span>
+                    <%--<span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintBarcode">
+                    </span>Print1</a></span>--%>
+                    <span class="btn5"><asp:LinkButton ID="lnkPrint" class="btn5" runat="server" OnClick="lnkPrint_Click"
+                        CausesValidation="False" Text="Print1"></asp:LinkButton></span>
                 </div>
                 <div class="reports">
                     Print | Product Barcode
