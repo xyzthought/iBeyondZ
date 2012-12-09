@@ -9,9 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <script type="text/javascript">
-            document.write(window.opener.document.getElementById("divToPrint").innerHTML);
-        </script>
+        
     </div>
     </form>
 </body>

@@ -52,20 +52,12 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-            /*Readfile();
             string strQuery = Request.QueryString["q"];
 
             if (!string.IsNullOrEmpty(strQuery))
             {
                 PurchaseID = Convert.ToInt32(Request.QueryString["q"].ToString());
-            }
-            string strBarCode = PopulateBarCode(PurchaseID);
-            ConvertHTMLToPDF(strBarCode);
-            */
-
-            if (null != Session["BarCodeHTML"])
-            {
-                // ConvertHTMLToPDF(Session["BarCodeHTML"].ToString());
+                PopulateBarCode(PurchaseID);
             }
         }
     }
@@ -91,25 +83,25 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
         Response.Clear();
         Response.ContentType = "application/pdf";
         Response.AppendHeader("Content-Disposition", "attachment; filename=Barcode.pdf");
- 
+
         //Render PlaceHolder to temporary stream 
         System.IO.StringWriter stringWrite = new StringWriter();
         System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
- 
+
         StringReader reader = new StringReader(HTMLCode);
- 
+
         //Create PDF document 
         Document doc = new Document(PageSize.A4);
         HTMLWorker parser = new HTMLWorker(doc);
         PdfWriter.GetInstance(doc, new FileStream(Server.MapPath("~") + "/Handler/BarCode.pdf", FileMode.Create));
         doc.Open();
- 
+
         /********************************************************************************/
         //var interfaceProps = new Dictionary<string, object="">();
         //var ih = new ImageHander() { BaseUri = Request.Url.ToString() };
- 
+
         //interfaceProps.Add(HTMLWorker.IMG_PROVIDER, ih);
- 
+
         foreach (IElement element in HTMLWorker.ParseToList(
             new StringReader(HTMLCode), null))
         {
@@ -125,39 +117,31 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
         {
             File.Delete(Server.MapPath("~/Handler/BarCode.pdf"));
         }
- 
+
         /********************************************************************************/
-         
+
     }
 
-    /*public void WritePDF(string content)
-    {
-        Response.Clear();
-        Response.ContentType = "application/pdf";
-        Response.AppendHeader("Content-Disposition", "attachment; filename=table.pdf");
-        var doc = new Document();
-        PdfWriter.GetInstance(doc, Response.OutputStream);
-        doc.Open();
-        var html = new StringBuilder();
-        var stringWriter = new StringWriter(html);
-        var htmlWriter = new HtmlTextWriter(stringWriter);
-        toPDF.RenderControl(htmlWriter);
-        var interfaceProps = new Dictionary<string, Object>();
-    }*/
 
-    private string PopulateBarCode(int PurchaseID)
+    private void PopulateBarCode(int PurchaseID)
     {
         try
         {
             StringBuilder sbBarcode = new StringBuilder();
             string thisBarcode = string.Empty;
-            
+
             objPI.SearchText = "";
 
             SaleBLL objSaleBLL = new SaleBLL();
 
             List<Sale> objData = new List<Sale>();
             objData = objSaleBLL.GetAllProductBarCode(objPI, PurchaseID);
+
+            Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+            PdfWriter pdfWriter = PdfWriter.GetInstance(document, new FileStream(Server.MapPath("~") + "/Handler/BarCode.pdf", FileMode.Create));
+            document.Open();
+            PdfContentByte pdfContentByte = pdfWriter.DirectContent;
+            iTextSharp.text.Image img;
 
             if (objData != null)
             {
@@ -168,29 +152,93 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
 
                     for (int ii = 0; ii < PurchaseQuantity; ii++)
                     {
-                        thisBarcode = BarcodeHTML;
-                        thisBarcode = thisBarcode.Replace("[brandname]", objData[i].Brand);
-                        thisBarcode = thisBarcode.Replace("[productname]", objData[i].ProductName);
-                        thisBarcode = thisBarcode.Replace("[productsize]", objData[i].SizeName);
-                        thisBarcode = thisBarcode.Replace("[sellingprice]", string.Format("{0:0.00}", objData[i].Price));
-                        string BarCode = objData[i].BarCode;
-                        thisBarcode = thisBarcode.Replace("[dvbarcode]", "dvbarcode" + (Kounter + 1).ToString());
-                        thisBarcode = thisBarcode.Replace("[barcode]", BarCode);
-                        thisBarcode = thisBarcode.Replace("[dvbarcodePrint]", "dvbarcodePrint" + (Kounter + 1).ToString());
-                        thisBarcode = thisBarcode.Replace("[barcodePrint]", "[barcodePrint" + (Kounter + 1).ToString() + "]");
-                        sbBarcode.Append(thisBarcode);
+                        if (ii > 0)
+                            document.NewPage();
+
+                        PdfPTable table = new PdfPTable(2);
+                        //table.TotalWidth = 176f;
+                        //fix the absolute width of the table
+                        //table.LockedWidth = true;
+
+                        //relative col widths in proportions
+                        //float[] widths = new float[] { 1f, 1f };
+                        //table.SetWidths(widths);
+                        table.HorizontalAlignment = 1;
+                        //leave a gap before and after the table
+                        table.SpacingBefore = 20f;
+                        table.SpacingAfter = 30f;
+
+                        PdfPCell cell = new PdfPCell(new Phrase(objData[i].Brand, new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD)));
+                        cell.Colspan = 2;
+                        cell.Border = 0;
+                        cell.Padding = 2f;
+                        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase(objData[i].ProductName, new Font(Font.FontFamily.HELVETICA, 22, Font.NORMAL)));
+                        cell.Colspan = 2;
+                        cell.Border = 0;
+                        cell.Padding = 2f;
+                        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 22, Font.NORMAL)));
+                        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                        cell.Border = 0;
+                        cell.Padding = 2f;
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("€" + string.Format("{0:0.00}", objData[i].Price), new Font(Font.FontFamily.HELVETICA, 28, Font.NORMAL)));
+                        cell.HorizontalAlignment = 2; //0=Left, 1=Centre, 2=Right
+                        cell.Border = 0;
+                        cell.Padding = 2f;
+                        table.AddCell(cell);
+
+                        pdfContentByte = pdfWriter.DirectContent;
+                        img = GetBarcode128(pdfContentByte, objData[i].BarCode, false, Barcode.CODE128);
+
+                        cell = new PdfPCell(); //new Phrase(new Chunk(img, 0, 0)));
+                        cell.AddElement(img);
+                        cell.Colspan = 2;
+                        cell.Border = 0;
+                        cell.Padding = 2f;
+                        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                        table.AddCell(cell);
+
+                        document.Add(table);
+
                         Kounter++;
                     }
 
                 }
+                document.Close();
+
             }
 
-            return sbBarcode.ToString();
+            HttpContext context = HttpContext.Current;
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=Barcode.pdf");
+            Response.WriteFile(Server.MapPath("~/Handler/BarCode.pdf"));
+            Response.Flush();
+            Response.Close();
+            if (File.Exists(Server.MapPath("~/Handler/BarCode.pdf")))
+            {
+                File.Delete(Server.MapPath("~/Handler/BarCode.pdf"));
+            }
+
         }
         catch (Exception ex)
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-            return "";
+
         }
+    }
+
+    public iTextSharp.text.Image GetBarcode128(PdfContentByte pdfContentByte, string code, bool extended, int codeType)
+    {
+        Barcode128 code128 = new Barcode128 { Code = code, Extended = extended, CodeType = codeType };
+        code128.ChecksumText = true;
+        return code128.CreateImageWithBarcode(pdfContentByte, null, null);
     }
 }

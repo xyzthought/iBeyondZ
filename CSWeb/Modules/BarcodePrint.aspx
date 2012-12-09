@@ -64,9 +64,9 @@
                 <div id="dvAddUser" class="fl">
                     <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
                     </span>Print</a></span>
-                    <%--<span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintBarcode">
+                    <span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintBarcode">
                     </span>Print1</a></span>
-                    <span class="btn5"><asp:LinkButton ID="lnkPrint" class="btn5" runat="server" OnClick="lnkPrint_Click"
+                    <%--<span class="btn5"><asp:LinkButton ID="lnkPrint" class="btn5" runat="server" OnClick="lnkPrint_Click"
                         CausesValidation="False" Text="Print1"></asp:LinkButton></span>--%>
                 </div>
                 <div class="reports">
