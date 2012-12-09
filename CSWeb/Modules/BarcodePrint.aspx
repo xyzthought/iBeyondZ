@@ -23,14 +23,14 @@
                 left: 30px;
             }
             
-            .barcodeTarget{overflow:hidden!important;width:208px!Important;}
+            .barcodeTarget{overflow:hidden!important;width:840px!Important;}
         }
     </style>
     <script type="text/javascript">
         function PrepareForPrint(printpage) {
             var divToPrint = document.getElementById(printpage);
-            var popupWin = window.open('', '_blank', 'width=200,height=600');
-            var MediaPrint = "@page{margin:0} @media print { body { width: 200 height: 600}  }";
+            var popupWin = window.open('', '_blank', 'width=1100,height=900');
+            var MediaPrint = "@page{margin:0} @media print { body { width: 1100 height: 900}  }";
             var vStyle = "<head><style type='text/css'>html,body {   margin:-7px;   padding:0;height:auto;} "+MediaPrint+"</style></head>";
             popupWin.document.open();
             popupWin.document.write('<html>' + vStyle + '<body onload="window.print()">' + divToPrint.innerHTML + '</html>');
@@ -65,9 +65,9 @@
                     <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
                     </span>Print</a></span>
                     <%--<span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintBarcode">
-                    </span>Print1</a></span>--%>
+                    </span>Print1</a></span>
                     <span class="btn5"><asp:LinkButton ID="lnkPrint" class="btn5" runat="server" OnClick="lnkPrint_Click"
-                        CausesValidation="False" Text="Print1"></asp:LinkButton></span>
+                        CausesValidation="False" Text="Print1"></asp:LinkButton></span>--%>
                 </div>
                 <div class="reports">
                     Print | Product Barcode
@@ -78,7 +78,7 @@
             <span id="ContentPlaceHolder1_lblMsg"></span>
             <div id="updMain">
             <div id="sss"></div>
-                <div id="dvgridcontainer" class="grid_container" style="width: 1200px;">
+                <div id="dvgridcontainer" class="grid_container" style="width: 1100px;">
                     <!--Start GRID-->
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
                         <ContentTemplate>
@@ -142,8 +142,8 @@
             output: "css",
             bgColor: "#FFFFFF",
             color: "#000000",
-            barWidth: "1",
-            barHeight: "30"
+            barWidth: "6",
+            barHeight: "550"
         };
 
         $("#" + barcodePrint).html("").show().barcode(values, btype, settings);
@@ -154,6 +154,6 @@
 
 </script>
 <style>
- .barcodeTarget{overflow:hidden!important;width:174px!Important;}
+ .barcodeTarget{overflow:hidden!important;width:1100px!Important;}
 </style>
 </html>
