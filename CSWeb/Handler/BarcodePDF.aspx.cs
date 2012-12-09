@@ -125,6 +125,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
 
     private void PopulateBarCode(int PurchaseID)
     {
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         try
         {
             StringBuilder sbBarcode = new StringBuilder();
@@ -137,7 +138,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
             List<Sale> objData = new List<Sale>();
             objData = objSaleBLL.GetAllProductBarCode(objPI, PurchaseID);
 
-            Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+            
             PdfWriter pdfWriter = PdfWriter.GetInstance(document, new FileStream(Server.MapPath("~") + "/Handler/BarCode.pdf", FileMode.Create));
             document.Open();
             PdfContentByte pdfContentByte = pdfWriter.DirectContent;
@@ -230,6 +231,8 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            if (document.IsOpen())
+                document.Close();
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
 
         }
