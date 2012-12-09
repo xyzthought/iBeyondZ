@@ -1550,7 +1550,7 @@ div.fileupload-rebrush input.fileupload-rebrush-field {
 }
 
 .PrintBarcode {
-    background: url("../Images/printer.png") no-repeat scroll right top transparent;
+    background: url("../Images/PrintBarcode.png") no-repeat scroll right top transparent;
     display: inline-block;
     height: 20px;
     margin-right: 8px;
