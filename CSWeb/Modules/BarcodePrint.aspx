@@ -64,7 +64,7 @@
                 <div id="dvAddUser" class="fl">
                     <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
                     </span>Print</a></span>
-                    <span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintBarcode">
+                    <span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintPDF">
                     </span>Print to PDF</a></span>
 
                 </div>

@@ -125,7 +125,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
 
     private void PopulateBarCode(int PurchaseID)
     {
-        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        Document document = new Document(PageSize.A4, 10, 10, 10, 10);
         try
         {
             StringBuilder sbBarcode = new StringBuilder();
@@ -234,7 +234,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
             if (document.IsOpen())
                 document.Close();
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
-
+            Response.Write(ex.ToString());
         }
     }
 
