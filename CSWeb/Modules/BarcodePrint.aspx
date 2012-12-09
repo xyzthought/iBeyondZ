@@ -33,7 +33,7 @@
             var MediaPrint = "@page{margin:0} @media print { body { width: 200 height: 600}  }";
             var vStyle = "<head><style type='text/css'>html,body {   margin:-7px;   padding:0;height:auto;} "+MediaPrint+"</style></head>";
             popupWin.document.open();
-            popupWin.document.write('<html>' + vStyle + '<body onload="window.print()">' +   + '</html>');
+            popupWin.document.write('<html>' + vStyle + '<body onload="window.print()">' + divToPrint.innerHTML + '</html>');
             popupWin.document.close();
         }
 
