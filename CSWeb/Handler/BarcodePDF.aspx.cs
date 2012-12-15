@@ -125,9 +125,10 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
 
     private void PopulateBarCode(int PurchaseID)
     {
-        Rectangle pageSize = new Rectangle(842, 595);
+        //Rectangle pageSize = new Rectangle(842, 595);
+        Rectangle pageSize = new Rectangle(62,29);
         //Document document = new Document(PageSize.A4_LANDSCAPE, 10, 10, 10, 10);
-        Document document = new Document(pageSize, 10, 10, 110, 10);
+        Document document = new Document(pageSize, 0, 0, 2, 0);
         try
         {
             StringBuilder sbBarcode = new StringBuilder();
@@ -168,33 +169,34 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
                         //table.SetWidths(widths);
                         table.HorizontalAlignment = 1;
                         //leave a gap before and after the table
-                        table.SpacingBefore = 20f;
-                        table.SpacingAfter = 30f;
+                        //table.SpacingBefore = 1f;
+                        //table.SpacingAfter = 1f;
+                        table.WidthPercentage = 95;
 
-                        PdfPCell cell = new PdfPCell(new Phrase(objData[i].Brand, new Font(Font.FontFamily.HELVETICA, 44f, Font.BOLD)));
+                        PdfPCell cell = new PdfPCell(new Phrase(objData[i].Brand, new Font(Font.FontFamily.HELVETICA, 3f, Font.BOLD)));
                         cell.Colspan = 2;
                         cell.Border = 0;
-                        cell.Padding = 5f;
+                        cell.Padding = 0f;
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase(objData[i].ProductName, new Font(Font.FontFamily.HELVETICA, 34f, Font.NORMAL)));
+                        cell = new PdfPCell(new Phrase(objData[i].ProductName, new Font(Font.FontFamily.HELVETICA, 2f, Font.NORMAL)));
                         cell.Colspan = 2;
                         cell.Border = 0;
-                        cell.Padding = 5f;
+                        cell.Padding = 0f;
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 34f, Font.NORMAL)));
+                        cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 3f, Font.NORMAL)));
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         cell.Border = 0;
-                        cell.Padding = 5f;
+                        cell.Padding = 0f;
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("€" + string.Format("{0:0.00}", objData[i].Price), new Font(Font.FontFamily.HELVETICA, 44f, Font.BOLD)));
+                        cell = new PdfPCell(new Phrase("€ " + string.Format("{0:0.00}", objData[i].Price), new Font(Font.FontFamily.HELVETICA, 4f, Font.BOLD)));
                         cell.HorizontalAlignment = 2; //0=Left, 1=Centre, 2=Right
                         cell.Border = 0;
-                        cell.Padding = 5f;
+                        cell.Padding = .5f;
                         table.AddCell(cell);
 
                         pdfContentByte = pdfWriter.DirectContent;
@@ -204,7 +206,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
                         cell.AddElement(img);
                         cell.Colspan = 2;
                         cell.Border = 0;
-                        cell.Padding = 5f;
+                        cell.Padding = 0f;
                         //cell.FixedHeight = img.Height + 200;
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         table.AddCell(cell);

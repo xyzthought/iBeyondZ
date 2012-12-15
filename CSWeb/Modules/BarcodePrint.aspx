@@ -62,8 +62,8 @@
                     </div>
                 </div>
                 <div id="dvAddUser" class="fl">
-                    <span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
-                    </span>Print</a></span>
+                    <%--<span class="btn5"><a href="#nogo" onclick="PrepareForPrint('dvBarcodes')"><span class="PrintBarcode">
+                    </span>Print</a></span>--%>
                     <span class="btn5"><a href="../handler/BarcodePDF.aspx?q=<%=PurchaseID %>" target="_new"><span class="PrintPDF">
                     </span>Print to PDF</a></span>
 
@@ -141,8 +141,8 @@
             output: "css",
             bgColor: "#FFFFFF",
             color: "#000000",
-            barWidth: "6",
-            barHeight: "550"
+            barWidth: "1",//6
+            barHeight: "30"//500
         };
 
         $("#" + barcodePrint).html("").show().barcode(values, btype, settings);

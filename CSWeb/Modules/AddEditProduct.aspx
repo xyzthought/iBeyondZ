@@ -57,6 +57,8 @@
             var tax = parseFloat($('#txtTax').val() / 100)+ (1);
             var val = (parseFloat(bp) + parseFloat(bpm))*tax;
             $('#txtSellingPrice').val(val.toFixed(2));
+            $('#hdnSellingPrice').val(val.toFixed(2));
+            
         }
 
         function checkAlpaNumeric(obj) {
@@ -129,6 +131,22 @@
 
         }
 
+
+        function calculateMarginPrice() {
+
+            var OSP = $('#hdnSellingPrice').val();
+            var CSP = $('#txtSellingPrice').val();
+            var OMargin = $('#txtMargin').val();
+
+            //alert(OSP + '-' + CSP + '-' + OMargin);
+            $('#hdnSellingPrice').val($('#txtSellingPrice').val());
+            
+            var CMargin = (OMargin / OSP) * CSP;
+
+            
+            $('#txtMargin').val(CMargin.toFixed(2));
+            //alert(CMargin);
+        }
 
 
 </script>
@@ -285,7 +303,8 @@
                                 Selling Price <span class="mandet2"></span>
                             </div>
                             <div style="float: left;">
-                                <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);"
+                            <asp:HiddenField ID="hdnSellingPrice" ClientIDMode="Static" runat="server" />
+                                <asp:TextBox ID="txtSellingPrice" onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateMarginPrice()"
                                     runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
                             </div>
                             <div style="clear: both">
@@ -814,4 +833,12 @@
     </form>
 </body>
 </html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#hdnSellingPrice').val($('#txtSellingPrice').val());
+    });
+</script>
                                                                                                                                                                                                                                                                                                                                                                              
