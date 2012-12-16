@@ -95,6 +95,10 @@ namespace DAL.Component
                 {
                     objCustomer.Email = Convert.ToString(drData["Email"]);
                 }
+                if (FieldExists(drData, "UpdatedOn") && drData["UpdatedOn"] != DBNull.Value)
+                {
+                    objCustomer.UpdatedOn = Convert.ToDateTime(drData["UpdatedOn"]);
+                }
 
                
             }
@@ -120,5 +124,90 @@ namespace DAL.Component
             return (reader.GetSchemaTable().DefaultView.Count > 0);
         }
 
+
+        public List<Customer> GetAllCustomer(List<Customer> objData, PageInfo vobjPageInfo)
+        {
+            List<Customer> lstobjCustomer = new List<Customer>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@SortDirection", SqlDbType.NVarChar),
+                                        new SqlParameter("@SearchText", SqlDbType.NVarChar)
+                                };
+
+                mParams[0] = vobjPageInfo.SortColumnName;
+                mParams[1] = vobjPageInfo.SortDirection;
+                mParams[2] = vobjPageInfo.SearchText;
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllCustomerDetail", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjCustomer.Add(PopulateCustomer(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjCustomer;
+        }
+
+        public Message DeletePlatformCustomer(Customer objCustomer)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_DeletePlatformCustomer");
+                dBase.AddInParameter(objCmd, "@CustomerID", DbType.Int32, objCustomer.CustomerID);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
+
+        public Message InsertUpdatePlatformCustomer(Customer objCustomer)
+        {
+            Message objMessage = new Message();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdatePlatformCustomer");
+                dBase.AddInParameter(objCmd, "@CustomerID", DbType.Int32, objCustomer.CustomerID);
+                dBase.AddInParameter(objCmd, "@FirstName", DbType.String, objCustomer.FirstName);
+                dBase.AddInParameter(objCmd, "@LastName", DbType.String, objCustomer.LastName);
+                dBase.AddInParameter(objCmd, "@Address", DbType.String, objCustomer.Address);
+                dBase.AddInParameter(objCmd, "@ZIP", DbType.String, objCustomer.ZIP);
+                dBase.AddInParameter(objCmd, "@City", DbType.String, objCustomer.City);
+                dBase.AddInParameter(objCmd, "@Country", DbType.String, objCustomer.Country);
+                dBase.AddInParameter(objCmd, "@TeleNumber", DbType.String, objCustomer.TeleNumber);
+                dBase.AddInParameter(objCmd, "@Email", DbType.String, objCustomer.Email);
+                dBase.AddInParameter(objCmd, "@CreatedBy", DbType.String, objCustomer.CreatedBy);
+                dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
+                dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
+                dBase.ExecuteNonQuery(objCmd);
+
+                objMessage.ReturnValue = (int)dBase.GetParameterValue(objCmd, "@ReturnValue");
+                objMessage.ReturnMessage = (string)dBase.GetParameterValue(objCmd, "@ReturnMessage");
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objMessage;
+        }
     }
 }

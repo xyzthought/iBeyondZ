@@ -13,9 +13,8 @@ using System.Net.Mail;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 
-public partial class Modules_PlatformUser : PageBase
+public partial class Modules_ManageCustomer : System.Web.UI.Page
 {
-
     PageInfo objPI = new PageInfo();
     string vstrLink = string.Empty;
     string param = string.Empty;
@@ -30,21 +29,13 @@ public partial class Modules_PlatformUser : PageBase
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.DESC;
-            PopulateUserType();
+           
             PopulateGrid();
         }
     }
 
-   
 
-    #region Populate User Type
-    private void PopulateUserType()
-    {
-        UserTypeBLL objUTBLL = new UserTypeBLL();
-        List<UserTypeBO> objUTBO = objUTBLL.GetAllUserType();
-        Common.BindControl(ddlUserType, objUTBO, "UserType", "UserTypeID", Constants.ControlType.DropDownList, true);
-    } 
-    #endregion
+
 
     #region Populate Grid
     private void PopulateGrid()
@@ -65,17 +56,17 @@ public partial class Modules_PlatformUser : PageBase
                 objPI.SortDirection = Convert.ToString(ViewState[Constants.SORTDERECTION]);
                 objPI.SortColumnName = Convert.ToString(ViewState[Constants.SORTCOLUMNNAME]);
             }
-            UserBLL objUserBLL = new UserBLL();
+            CustomerBLL objCustomerBLL = new CustomerBLL();
 
-            List<User> objData = new List<User>();
-            objData = objUserBLL.GetAllUser(objData, objPI);
+            List<Customer> objData = new List<Customer>();
+            objData = objCustomerBLL.GetAllCustomer(objData, objPI);
 
             gvGrid.DataSource = objData;
             gvGrid.ExportTemplate = "export_template_4Column.xlsx";
             gvGrid.ExportCaption = "";
             gvGrid.ExcelColumn = "";
             gvGrid.DataBind();
-            
+
             if (objData != null)
             {
                 if (!iFlag && lblMsg.Text == "")
@@ -112,13 +103,13 @@ public partial class Modules_PlatformUser : PageBase
                 }
 
             }
-            
+
         }
         catch (Exception ex)
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
-    } 
+    }
     #endregion
 
     #region GRID VIEW EVENTS
@@ -173,20 +164,20 @@ public partial class Modules_PlatformUser : PageBase
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID"));
+                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "CustomerID"));
                 param = Common.GenerateBASE64WithObfuscateApp(param);
-                vstrLink = "AddEditUser?q=" + param;
+                vstrLink = "AddEditCustomer?q=" + param;
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
                 aEdit.Attributes.Add("on", vstrLink);*/
 
 
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
-                lnkDelete.OnClientClick = "return confirm('User :" + BLL.BusinessObject.Constants.DeleteConf + "');";
+                lnkDelete.OnClientClick = "return confirm('Customer :" + BLL.BusinessObject.Constants.DeleteConf + "');";
 
-                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "UserID")) == ((User)Session["UserData"]).UserID)
+                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "CustomerID")) == ((Customer)Session["CustomerData"]).CustomerID)
                     lnkDelete.Visible = false;
-                
+
 
             }
         }
@@ -202,20 +193,20 @@ public partial class Modules_PlatformUser : PageBase
         {
             if (e.CommandName == "Edit")
             {
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                ViewState["intUserID"] = intUserID;
-                LoadData(intUserID);
+                int intCustomerID = Convert.ToInt32(e.CommandArgument.ToString());
+                ViewState["intCustomerID"] = intCustomerID;
+                LoadData(intCustomerID);
             }
 
             if (e.CommandName == "Delete")
             {
-                
+
                 Message vobjMsg = new Message();
-                int intUserID = Convert.ToInt32(e.CommandArgument.ToString());
-                User objUser = new User();
-                UserBLL objUBLL = new UserBLL();
-                objUser.UserID = intUserID;
-                vobjMsg = objUBLL.DeletePlatformUser(objUser);
+                int intCustomerID = Convert.ToInt32(e.CommandArgument.ToString());
+                Customer objCustomer = new Customer();
+                CustomerBLL objUBLL = new CustomerBLL();
+                objCustomer.CustomerID = intCustomerID;
+                vobjMsg = objUBLL.DeletePlatformCustomer(objCustomer);
 
                 if (vobjMsg.ReturnValue > 0)
                 {
@@ -232,9 +223,9 @@ public partial class Modules_PlatformUser : PageBase
                     lblMsg.Text = vobjMsg.ReturnMessage;
                 }
             }
-            
 
-           
+
+
         }
         catch (Exception ex)
         {
@@ -243,34 +234,36 @@ public partial class Modules_PlatformUser : PageBase
     }
 
 
-    
 
-    private void LoadData(int vintUserID)
+
+    private void LoadData(int vintCustomerID)
     {
         try
         {
-            User objUser = new User();
-            UserBLL objUBLL = new UserBLL();
-            objUser.UserID = vintUserID;
-            List<User> objList = objUBLL.GetPlatformUserByUserID(ref objUser);
+            Customer objCustomer = new Customer();
+            CustomerBLL objUBLL = new CustomerBLL();
+            objCustomer.CustomerID = vintCustomerID;
+            List<Customer> objList = objUBLL.GetCustomerDetailByCustID(ref objCustomer);
 
             if (null != objList)
             {
-                ddlUserType.SelectedValue = objList[0].UserTypeID.ToString();
                 txtFirstName.Text = objList[0].FirstName;
                 txtLastName.Text = objList[0].LastName;
-                txtLoginID.Text = objList[0].LoginID;
-                txtPassword.Text = objList[0].LoginPassword;
-                txtEmailID.Text = objList[0].CommunicationEmailID;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditUser", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
-               
+                txtAddress.Text = objList[0].Address;
+                txtZIP.Text = objList[0].ZIP;
+                txtCity.Text = objList[0].City;
+                txtCountry.Text = objList[0].Country;
+                txtPhone.Text = objList[0].TeleNumber;
+                txtEmailID.Text = objList[0].Email;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditCustomer", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
+
             }
         }
         catch (Exception ex)
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
-       
+
     }
 
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -283,10 +276,10 @@ public partial class Modules_PlatformUser : PageBase
     {
         //gvGrid.EditIndex = e.NewEditIndex;
     }
-    
+
     #endregion
 
-   
+
 
     protected void lnkBtnSearch_Click(object sender, EventArgs e)
     {
@@ -295,53 +288,47 @@ public partial class Modules_PlatformUser : PageBase
 
     protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
     {
-        if (ddlUserType.SelectedIndex > 0)
+        if (null != ViewState["intCustomerID"] && Convert.ToInt32(ViewState["intCustomerID"].ToString()) > 0)
         {
-            if (null != ViewState["intUserID"] && Convert.ToInt32(ViewState["intUserID"].ToString())>0)
-            {
-                SaveData(Constants.MODE_EDIT, Convert.ToInt32(ViewState["intUserID"].ToString()));
-            }
-            else
-            {
-                SaveData(Constants.MODE_ADD, 0);
-            }
+            SaveData(Constants.MODE_EDIT, Convert.ToInt32(ViewState["intCustomerID"].ToString()));
         }
         else
         {
-            lblMsg.Text = Resources.Resource.MandatoryFieldMissing;
+            SaveData(Constants.MODE_ADD, 0);
         }
     }
 
 
     #region Save Data
-    private void SaveData(string vstrMode,int vintUserID )
+    private void SaveData(string vstrMode, int vintCustomerID)
     {
-        User objUser = new User();
-        UserBLL objUBLL=new UserBLL();
-        objUser.UserID=vintUserID;
-        objUser.UserTypeID =Convert.ToInt32(ddlUserType.SelectedItem.Value.ToString());
-        objUser.FirstName = txtFirstName.Text.Trim();
-        objUser.LastName = txtLastName.Text.Trim();
-        objUser.LoginID = txtLoginID.Text.Trim();
-        objUser.LoginPassword = txtPassword.Text.Trim();
-        objUser.CommunicationEmailID = txtEmailID.Text.Trim();
-       
-
-        Message objMsg = objUBLL.InsertUpdatePlatformUser(objUser);
+        Customer objCustomer = new Customer();
+        CustomerBLL objUBLL = new CustomerBLL();
+        objCustomer.CustomerID = vintCustomerID;
+        
+        objCustomer.FirstName = txtFirstName.Text.Trim();
+        objCustomer.LastName = txtLastName.Text.Trim();
+        objCustomer.Address = txtAddress.Text.Trim();
+        objCustomer.ZIP = txtZIP.Text.Trim();
+        objCustomer.City = txtCity.Text.Trim();
+        objCustomer.Country = txtCountry.Text.Trim();
+        objCustomer.TeleNumber = txtPhone.Text.Trim();
+        objCustomer.Email = txtEmailID.Text.Trim();
+        objCustomer.CreatedBy = ((User)Session["UserData"]).UserID;
+        Message objMsg = objUBLL.InsertUpdatePlatformCustomer(objCustomer);
 
         lblError.InnerHtml = objMsg.ReturnMessage;
         if (objMsg.ReturnValue > 0)
         {
             divMess.Visible = true;
             lblMsg.Text = objMsg.ReturnMessage;
-            ViewState["intUserID"] = null;
+            ViewState["intCustomerID"] = null;
             PopulateGrid();
         }
         else
         {
-            Page.ClientScript.RegisterStartupScript(GetType(), "AddEditUser", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
+            Page.ClientScript.RegisterStartupScript(GetType(), "AddEditCustomer", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
         }
-    } 
+    }
     #endregion
-    
 }

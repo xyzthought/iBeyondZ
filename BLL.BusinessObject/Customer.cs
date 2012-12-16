@@ -73,7 +73,10 @@ namespace BLL.BusinessObject
         {
             get { return mintCreatedBy; }
             set { mintCreatedBy = value; }
-        }
+        }
 
+
+
+        public DateTime UpdatedOn { get; set; }
     }
 }

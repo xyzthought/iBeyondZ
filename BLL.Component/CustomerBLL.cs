@@ -15,9 +15,25 @@ namespace BLL.Component
         {
             objDB = new CustomerDB();
         }
-        public List<Customer> GetCustomerDetailByCustID(ref Customer objCust)
+        public List<Customer> GetCustomerDetailByCustID(ref Customer objData)
         {
-            return objDB.GetCustomerDetailByCustID(ref objCust);
+            return objDB.GetCustomerDetailByCustID(ref objData);
+        }
+
+        public List<Customer> GetAllCustomer(List<Customer> objData, PageInfo objPI)
+        {
+            return objDB.GetAllCustomer(objData, objPI);
+        }
+
+        
+        public Message DeletePlatformCustomer(Customer objData)
+        {
+            return objDB.DeletePlatformCustomer(objData);
+        }
+
+        public Message InsertUpdatePlatformCustomer(Customer objCustomer)
+        {
+            return objDB.InsertUpdatePlatformCustomer(objCustomer);
         }
     }
 }
