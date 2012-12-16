@@ -49,24 +49,24 @@
                 <div id="Div1" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
-                            <input type="text" id="toDate" runat="server" class="txtCred" style="width: 100px!important" /></p>
+                            <input type="text" id="toDate" runat="server" class="txtCred" style="width: 80px!important" /></p>
                     </div>
                 </div>
                 <div id="dv2" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
-                            <input type="text" id="fromDate" runat="server" class="txtCred" style="width: 100px!important" /></p>
+                            <input type="text" id="fromDate" runat="server" class="txtCred" style="width: 80px!important" /></p>
                     </div>
                 </div>
                 <div id="Div2" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
-                            <input type="text" id="txtSearchManufacturer" runat="server" class="txtCred" value="Manufacturer Name" style="width: 200px!important" /></p>
+                            <input type="text" id="txtSearchManufacturer" runat="server" class="txtCred" value="Manufacturer Name" style="width: 160px!important" /></p>
                     </div>
                 </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add Purchase Record</span></asp:LinkButton>
+                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add New</span></asp:LinkButton>
                 </div>
                 <div class="reports">
                     Manage Product Purchase

@@ -95,6 +95,10 @@ namespace DAL.Component
                 {
                     objCustomer.Email = Convert.ToString(drData["Email"]);
                 }
+                if (FieldExists(drData, "CreatedOn") && drData["CreatedOn"] != DBNull.Value)
+                {
+                    objCustomer.CreatedOn = Convert.ToDateTime(drData["CreatedOn"]);
+                }
                 if (FieldExists(drData, "UpdatedOn") && drData["UpdatedOn"] != DBNull.Value)
                 {
                     objCustomer.UpdatedOn = Convert.ToDateTime(drData["UpdatedOn"]);

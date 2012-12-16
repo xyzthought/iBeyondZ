@@ -255,8 +255,8 @@
                             </div>
                             <div style="float: left; width: 278px;">
                             <div class="scroll_checkboxes">
-                                <asp:CheckBoxList ID="chkSize" CssClass="FormText" runat="server" RepeatDirection="Vertical" RepeatColumns="1"
-                                    CellPadding="15" CellSpacing="5" BorderWidth="0">
+                                <asp:CheckBoxList ID="chkSize" CssClass="FormText" runat="server" RepeatDirection="Horizontal" RepeatColumns="7"
+                                    CellPadding="25" CellSpacing="10" BorderWidth="0">
                                 </asp:CheckBoxList>
                                 </div>
                             </div>
@@ -291,11 +291,13 @@
                             <div style="clear: both">
                             </div>
                             <div style="float: left; width: 135px;">
-                                Margin <span class="mandet2"></span>
+                                Margin (in %) <span class="mandet2"></span>
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
                                     ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
+                                <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtMargin" MinimumValue="0" MaximumValue="99.99" ErrorMessage="0 to 99.99" Type="Double"  Font-Size="X-Small" ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
+                                
                             </div>
                             <div style="clear: both">
                             </div>
@@ -457,6 +459,7 @@
                                                         <HeaderStyle CssClass="trHeader" />
                                                     </ctrl:CustomGridView>
                                             </div>
+                                            
                                         </fieldset>
                                     </div>
                                 </div>

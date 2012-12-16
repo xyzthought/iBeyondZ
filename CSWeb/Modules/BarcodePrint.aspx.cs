@@ -126,6 +126,9 @@ public partial class Modules_BarcodePrint : System.Web.UI.Page
                         thisBarcode = thisBarcode.Replace("[barcode]", BarCode);
                         thisBarcode = thisBarcode.Replace("[dvbarcodePrint]", "dvbarcodePrint" + (Kounter + 1).ToString());
                         thisBarcode = thisBarcode.Replace("[barcodePrint]", "[barcodePrint" + (Kounter + 1).ToString() + "]");
+                        thisBarcode = thisBarcode.Replace("[QuantityID]", "txtQuantity" + (Kounter + 1).ToString());
+                        thisBarcode = thisBarcode.Replace("[imageID]", "PrinterID" + (Kounter + 1).ToString());
+                        thisBarcode = thisBarcode.Replace("[thisID]", (Kounter + 1).ToString());
                         sbBarcode.Append(thisBarcode);
                         Kounter++;
                     }

@@ -75,5 +75,10 @@ namespace BLL.Component
         {
             return objDB.GetAllProductBarCode(objPI, PurchaseID);
         }
+
+        public List<Sale> GetProductBarCode(string thisBarcode, int Quantity)
+        {
+            return objDB.GetProductBarCode(thisBarcode, Quantity);
+        }
     }
 }

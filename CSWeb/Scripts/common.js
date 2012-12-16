@@ -164,7 +164,7 @@ function isDate(dtStr) {
     day = parseInt(strDay)
     year = parseInt(strYr)
     if (pos1 == -1 || pos2 == -1) {
-        alert("The date format should be : mm/dd/yyyy")
+        alert("The date format should be : MM/dd/yyyy")
         return false
     }
     if (strMonth.length < 1 || month < 1 || month > 12) {

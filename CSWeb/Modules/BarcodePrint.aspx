@@ -149,6 +149,17 @@
         $("#ttt").val("");
     }
 
+
+    function PrintBarCodeMultiple(ID) {
+        var Quantity = $("#txtQuantity" + ID).val();
+        var BarCode = $("#dvbarcode" + ID).html();
+        BarCode = $.trim(BarCode);
+        if (null != Quantity) {
+            //alert(BarCode);
+            location.href = "../handler/BarcodePDF.aspx?bc=" + BarCode + "&Qty=" + Quantity;
+        }
+    }
+
     
 
 </script>
