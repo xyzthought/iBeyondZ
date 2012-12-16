@@ -142,7 +142,7 @@
             bgColor: "#FFFFFF",
             color: "#000000",
             barWidth: "1",//6
-            barHeight: "30"//500
+            barHeight: "30"//500 
         };
 
         $("#" + barcodePrint).html("").show().barcode(values, btype, settings);
