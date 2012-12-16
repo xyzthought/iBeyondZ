@@ -18,6 +18,7 @@ using System.Activities.Statements;
 
 public partial class Modules_FinalChekoutSaleOrder : PageBase
 {
+    protected string serversideEvent = string.Empty;
     string vstrLink = string.Empty;
     string param = string.Empty;
 
@@ -74,6 +75,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         {
             if (!Page.IsPostBack)
             {
+                serversideEvent = Page.ClientScript.GetPostBackEventReference(btnRegresh, string.Empty);
                 if (null != Session["dtProductDetail"])
                 {
                     PopulateCustomer();
@@ -338,6 +340,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                 PopulateFormFields(objLCust);
             }
         }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateCustomer", "Populate()", true);
     }
 
     private void PopulateFormFields(List<BLL.BusinessObject.Customer> objLCust)

@@ -518,11 +518,18 @@
     });
 
     $(function () {
+        Populate();
+    });
+
+
+    function Populate() {
+
+    
         var projects = [];
         var MyKeys = ["value", "label", "desc"];
         dimArrayValue = $("#hdnCustData").val()
         var DataArr = dimArrayValue.split("@@");
-
+        
         for (i = 0; i < DataArr.length; i++) {
             var DataArr2 = DataArr[i].split("##");
             var obj = {};
@@ -544,7 +551,7 @@
                 $("#Customer").val(ui.item.label);
                 $("#Customerid").val(ui.item.value);
                 $("#Customer-description").html(ui.item.desc);
-
+                CallMeAndFireServerSideButton();
                 return false;
             }
         })
@@ -554,7 +561,11 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-    });
+    
+    
+    }
+
+
 
     function PopulateAmount(evThis) {
 
@@ -566,4 +577,9 @@
 
         $("#" + evThis.id).val($("#txtFinalAmount").val());
     }
+
+
+    function CallMeAndFireServerSideButton() {
+            eval(<%=serversideEvent %>);
+            }
 </script>

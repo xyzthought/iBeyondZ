@@ -155,6 +155,37 @@ namespace DAL.Component
             return lstobjData;
         }
 
+
+        public List<Sale> GetProductInfoByBarCode(string vstrProductBarCode)
+        {
+            List<Sale> lstobjData = new List<Sale>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("vstrProductBarCode", SqlDbType.VarChar,50),                                              
+                                };
+
+                mParams[0] = vstrProductBarCode;
+
+                using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetProductDetailByBarCode_v2", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjData.Add(PopulateProductData(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjData;
+        }
+
+
+
         private Sale PopulateProductData(IDataReader drData)
         {
             Sale objData = new Sale();

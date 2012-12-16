@@ -289,7 +289,8 @@ public partial class Modules_AddEditSaleOrder : PageBase
         try
         {
             SaleBLL objSBLL = new SaleBLL();
-            List<Sale> objSale = objSBLL.GetProductDetailByBarCode(Productid.Value.Trim());
+            //List<Sale> objSale = objSBLL.GetProductDetailByBarCode(Productid.Value.Trim());
+            List<Sale> objSale = objSBLL.GetProductInfoByBarCode(txtProductBarCode.Text.Trim());
             RepopulateDataTableWithDiscountPrice();
             if (null != objSale && objSale.Count > 0)
             {

@@ -60,7 +60,7 @@
                                                             <span id="lblError" runat="server"></span>
                                                         </div>
                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;
-                                                            padding-bottom: 6px;">
+                                                            padding-bottom: 6px;display:none">
                                                             <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection"
                                                                 value="Bar Code" onchange="ChangeMe(1)" checked="checked" />&nbsp;Bar Code&nbsp;<input type="radio"
                                                                     id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
