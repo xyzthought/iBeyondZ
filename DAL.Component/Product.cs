@@ -22,7 +22,7 @@ namespace DAL.Component
         {
 
             Database db = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");//DatabaseFactory.CreateDatabase(Config);
-            DbCommand dbCommand = db.GetStoredProcCommand("sprocCS_GetProducts");
+            DbCommand dbCommand = db.GetStoredProcCommand("[sprocCS_GetProducts_V2]");
             db.AddInParameter(dbCommand, "SortColumnName", DbType.String, vobjPageInfo.SortColumnName);
             db.AddInParameter(dbCommand, "SortDirection", DbType.String, vobjPageInfo.SortDirection);
             db.AddInParameter(dbCommand, "SearchText", DbType.String, vobjPageInfo.SearchText);

@@ -116,7 +116,7 @@
                                                     <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("BarCode") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Quantity">
+                                            <asp:TemplateField HeaderText="Quantity" Visible="false">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>' />

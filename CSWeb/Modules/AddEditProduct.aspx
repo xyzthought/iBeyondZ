@@ -284,7 +284,7 @@
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox ID="txtTax" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,-1,false);"
-                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" Style="width: 160px!important"></asp:TextBox>
+                                    onblur="extractNumber(this,-1,false);calculateSellingPrice();" Style="width: 160px!important" Text="21"></asp:TextBox>
                                 <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                                             Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCountry" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             </div>
