@@ -164,20 +164,9 @@ public partial class Modules_ManageCustomer : System.Web.UI.Page
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                /*param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "CustomerID"));
-                param = Common.GenerateBASE64WithObfuscateApp(param);
-                vstrLink = "AddEditCustomer?q=" + param;
-                HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
-                aEdit.Attributes.Add("on", vstrLink);*/
-
-
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
                 lnkDelete.OnClientClick = "return confirm('Customer :" + BLL.BusinessObject.Constants.DeleteConf + "');";
-
-                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "CustomerID")) == ((Customer)Session["CustomerData"]).CustomerID)
-                    lnkDelete.Visible = false;
-
 
             }
         }
@@ -255,6 +244,7 @@ public partial class Modules_ManageCustomer : System.Web.UI.Page
                 txtCountry.Text = objList[0].Country;
                 txtPhone.Text = objList[0].TeleNumber;
                 txtEmailID.Text = objList[0].Email;
+                txtNote.Text = objList[0].Notes;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AddEditCustomer", "ShowModalDiv('ModalWindow1','dvInnerWindow',0);", true);
 
             }
@@ -314,6 +304,7 @@ public partial class Modules_ManageCustomer : System.Web.UI.Page
         objCustomer.Country = txtCountry.Text.Trim();
         objCustomer.TeleNumber = txtPhone.Text.Trim();
         objCustomer.Email = txtEmailID.Text.Trim();
+        objCustomer.Notes = txtNote.Text.Trim();
         objCustomer.CreatedBy = ((User)Session["UserData"]).UserID;
         Message objMsg = objUBLL.InsertUpdatePlatformCustomer(objCustomer);
 

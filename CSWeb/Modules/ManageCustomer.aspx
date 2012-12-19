@@ -18,6 +18,7 @@
             $('#txtPhone').val('');
             $('#lblError').empty();
             $('#txtFirstName').focus();
+            $('#txtNote').val('');
         }
 
         function SetFocusOnName() {
@@ -234,6 +235,15 @@
                                                             Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ControlToValidate="txtEmailID"
                                                             ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></asp:RegularExpressionValidator>
                                                     </div>
+                                                    <div style="clear: both">
+                                                        </div>
+                                                        <div>
+                                                            Special Note :
+                                                        </div>
+                                                        <div>
+                                                            <asp:TextBox ID="txtNote" runat="server" CssClass="txtSaleNote" TextMode="MultiLine"
+                                                                MaxLength="1024"></asp:TextBox>
+                                                        </div>
                                                     <div style="clear: both">
                                                     </div>
                                                     <div class="btn-wrapper4">

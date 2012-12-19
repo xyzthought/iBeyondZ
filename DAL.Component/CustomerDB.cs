@@ -95,6 +95,11 @@ namespace DAL.Component
                 {
                     objCustomer.Email = Convert.ToString(drData["Email"]);
                 }
+
+                if (FieldExists(drData, "Notes") && drData["Notes"] != DBNull.Value)
+                {
+                    objCustomer.Notes = Convert.ToString(drData["Notes"]);
+                }
                 if (FieldExists(drData, "CreatedOn") && drData["CreatedOn"] != DBNull.Value)
                 {
                     objCustomer.CreatedOn = Convert.ToDateTime(drData["CreatedOn"]);
@@ -198,6 +203,7 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@Country", DbType.String, objCustomer.Country);
                 dBase.AddInParameter(objCmd, "@TeleNumber", DbType.String, objCustomer.TeleNumber);
                 dBase.AddInParameter(objCmd, "@Email", DbType.String, objCustomer.Email);
+                dBase.AddInParameter(objCmd, "@Notes", DbType.String, objCustomer.Notes);
                 dBase.AddInParameter(objCmd, "@CreatedBy", DbType.String, objCustomer.CreatedBy);
                 dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
                 dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);

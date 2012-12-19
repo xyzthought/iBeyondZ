@@ -78,5 +78,7 @@ namespace BLL.BusinessObject
 
 
         public DateTime UpdatedOn { get; set; }
+
+        public string Notes { get; set; }
     }
 }

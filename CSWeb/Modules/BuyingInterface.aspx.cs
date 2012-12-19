@@ -171,8 +171,8 @@ public partial class BuyingInterface : PageBase
                 vstrLink = "AddEditUser?q=" + param;
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
                 aEdit.Attributes.Add("on", vstrLink);*/
-
-
+                LinkButton lnkEdit = new LinkButton();
+                lnkEdit = (LinkButton)e.Row.FindControl("lnkEdit");
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
                 lnkDelete.OnClientClick = "return confirm('Purchase record :" + BLL.BusinessObject.Constants.DeleteConf + "');";
@@ -180,7 +180,11 @@ public partial class BuyingInterface : PageBase
                 /* if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ManufacturerID")) == ((User)Session["UserData"]).UserID)
                      lnkDelete.Visible = false;*/
 
-
+                if (((User)Session["UserData"]).UserTypeID == (int)Constants.UserType.StockManager)
+                {
+                    lnkEdit.Visible = false;
+                    lnkDelete.Visible = false;
+                }
             }
         }
         catch (Exception ex)

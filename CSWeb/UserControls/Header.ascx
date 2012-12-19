@@ -29,18 +29,16 @@
                 <div class="clear">
                 </div>
                 <ul>
-                    <li id="mnuli1"><a href='../Modules/Landingpage.aspx'>Home</a></li>
-                    <li id="mnuli6"><a href="../Modules/PlatformUser.aspx">Platform User</a>
-                        
-                    </li>
-                    <li id="mnuli7"><a href='../Modules/Manufacturer.aspx'>Manufacturer</a></li>
-                    <li id="mnuli8"><a href='../Modules/Product.aspx'>Product</a></li>
-                    <li id="mnuli11"><a href='../Modules/BuyingInterface.aspx'>Purchase</a></li>
-                    <li id="mnuli9"><a href='../Modules/Sale.aspx'>Sale</a></li>
-                    <li id="mnuli2"><a href='../Modules/MasterData.aspx'>Master</a></li>
-                    <li id="mnuli10"><a href='../Modules/BarcodePrint.aspx'>Barcode</a></li>
-                    <li id="mnuli3"><a href='../Modules/ManageCustomer.aspx'>Customer</a></li>
-                    <li id="mnuli5">
+                    <li id="mnuli1" runat="server"><a href='../Modules/Landingpage.aspx'>Home</a></li>
+                    <li id="mnuli2" runat="server" style="display:none"><a href="../Modules/PlatformUser.aspx">Platform User</a> </li>
+                    <li id="mnuli3" runat="server" style="display:none"><a href='../Modules/Manufacturer.aspx'>Manufacturer</a></li>
+                    <li id="mnuli4" runat="server" style="display:none"><a href='../Modules/Product.aspx'>Product</a></li>
+                    <li id="mnuli5" runat="server" style="display:none"><a href='../Modules/BuyingInterface.aspx'>Purchase</a></li>
+                    <li id="mnuli6" runat="server" style="display:none"><a href='../Modules/Sale.aspx'>Sale</a></li>
+                    <li id="mnuli7" runat="server" style="display:none"><a href='../Modules/MasterData.aspx'>Master</a></li>
+                    <li id="mnuli8" runat="server" style="display:none"><a href='../Modules/BarcodePrint.aspx'>Barcode</a></li>
+                    <li id="mnuli9" runat="server" style="display:none"><a href='../Modules/ManageCustomer.aspx'>Customer</a></li>
+                    <li id="mnuli10" runat="server">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>
                 </ul>
@@ -91,7 +89,8 @@
                                     <asp:TextBox ID="txtOldPassword" runat="server" CssClass="txtCred" MaxLength="50"
                                         TextMode="Password" ValidationGroup="CP"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtOldPassword" Display="Dynamic" ValidationGroup="CP"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtOldPassword" Display="Dynamic"
+                                        ValidationGroup="CP"></asp:RequiredFieldValidator>
                                 </div>
                                 <div>
                                     New Password :<span class="mandet2">* </span>
@@ -100,7 +99,8 @@
                                     <asp:TextBox ID="txtNewPassword" runat="server" CssClass="txtCred" MaxLength="50"
                                         TextMode="Password" ValidationGroup="CP"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqtxtFirstName" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtNewPassword" Display="Dynamic" ValidationGroup="CP"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtNewPassword" Display="Dynamic"
+                                        ValidationGroup="CP"></asp:RequiredFieldValidator>
                                 </div>
                                 <div>
                                     Confirm Password :<span class="mandet2">* </span>
@@ -109,7 +109,8 @@
                                     <asp:TextBox ID="txtCPassword" runat="server" CssClass="txtCred" MaxLength="50" TextMode="Password"
                                         ValidationGroup="CP"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqtxtSecondName" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCPassword" Display="Dynamic" ValidationGroup="CP"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtCPassword" Display="Dynamic"
+                                        ValidationGroup="CP"></asp:RequiredFieldValidator>
                                     <asp:CompareValidator ControlToValidate="txtCPassword" ControlToCompare="txtNewPassword"
                                         ID="reqCom" runat="server" ErrorMessage="Mismatching..." Font-Size="X-Small"
                                         ForeColor="Red" Display="Dynamic" ValidationGroup="CP"></asp:CompareValidator>
@@ -156,7 +157,8 @@
                                 <div class="alt">
                                     <asp:TextBox ID="txtFirstName" runat="server" CssClass="txtCred" MaxLength="50" ValidationGroup="MA"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtFirstName" Display="Dynamic" ValidationGroup="MA"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtFirstName" Display="Dynamic"
+                                        ValidationGroup="MA"></asp:RequiredFieldValidator>
                                 </div>
                                 <div>
                                     Last Name :<span class="mandet2">* </span>
@@ -164,7 +166,8 @@
                                 <div class="alt" style="margin-bottom: 5px;">
                                     <asp:TextBox ID="txtLastName" runat="server" CssClass="txtCred" MaxLength="50" ValidationGroup="MA"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLastName" Display="Dynamic" ValidationGroup="MA"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtLastName" Display="Dynamic"
+                                        ValidationGroup="MA"></asp:RequiredFieldValidator>
                                 </div>
                                 <div>
                                     Email ID :<span class="mandet2">* </span>
@@ -172,11 +175,13 @@
                                 <div class="alt" style="margin-bottom: 5px;">
                                     <asp:TextBox ID="txtEmailID" runat="server" CssClass="txtCred" MaxLength="50" ValidationGroup="MA"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
-                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtEmailID" Display="Dynamic" ValidationGroup="MA"></asp:RequiredFieldValidator>
+                                        Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtEmailID" Display="Dynamic"
+                                        ValidationGroup="MA"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:RegularExpressionValidator ID="RegEmail" runat="server" ErrorMessage="Invalid Email"
                                         Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ControlToValidate="txtEmailID"
-                                        ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" ValidationGroup="MA"></asp:RegularExpressionValidator>
+                                        ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"
+                                        ValidationGroup="MA"></asp:RegularExpressionValidator>
                                 </div>
                                 <div class="btn-wrapper4">
                                     <span class="btn">

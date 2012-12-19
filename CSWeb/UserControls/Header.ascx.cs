@@ -6,15 +6,71 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL.BusinessObject;
 using BLL.Component;
+using System.Web.UI.HtmlControls;
 
 public partial class UserControls_Header : System.Web.UI.UserControl
 {
     PageBase objPage = new PageBase();
     protected void Page_Load(object sender, EventArgs e)
     {
-        objPage.CheckSession();
-        LoadUserSpecificData();
-        Page.Title = "S O F I S M";
+        if (!Page.IsPostBack)
+        {
+            objPage.CheckSession();
+            LoadUserSpecificData();
+            SetPagePrivilege();
+            Page.Title = "S O F I S M";
+        }
+    }
+
+    private void SetPagePrivilege()
+    {
+        string[] menuArray = new string[] { "mnuli1", "mnuli2", "mnuli3", "mnuli4", "mnuli5", "mnuli6", "mnuli7", "mnuli8", "mnuli9", "mnuli10"};
+        string[] SellingDesk = new string[] { "mnuli6", "mnuli9" };  //SALE & CUSTOMER & MY ACCOUNT
+        string[] StockManager = new string[] { "mnuli6", "mnuli4", "mnuli8", "mnuli5" }; //: MANUFACTURER, PRODUCT, BARCODE, PURCHASE
+        User objUser = new BLL.BusinessObject.User();
+        objUser = (User)Session["UserData"];
+        if (objUser.UserTypeID == (int)Constants.UserType.SellingDesk)
+        {
+            for (int i = 0; i < menuArray.Length; i++)
+            {
+                for (int ii = 0; ii < SellingDesk.Length; ii++)
+                {
+                    if (SellingDesk[ii] == menuArray[i])
+                    {
+                        HtmlGenericControl ThisLI = (HtmlGenericControl)FindControl(SellingDesk[ii]);
+                        ThisLI.ID = SellingDesk[ii];
+                        ThisLI.Style.Add("display", "");
+                    }
+                }
+            }
+        }
+
+        else if (objUser.UserTypeID == (int)Constants.UserType.StockManager)
+        {
+            for (int i = 0; i < menuArray.Length; i++)
+            {
+                for (int ii = 0; ii < StockManager.Length; ii++)
+                {
+                    if (StockManager[ii] == menuArray[i])
+                    {
+                        HtmlGenericControl ThisLI = (HtmlGenericControl)FindControl(StockManager[ii]);
+                        ThisLI.ID = StockManager[ii];
+                        ThisLI.Style.Add("display", "");
+                    }
+                }
+            }
+        }
+
+        else if (objUser.UserTypeID == (int)Constants.UserType.Admin)
+        {
+            for (int i = 0; i < menuArray.Length; i++)
+            {
+                HtmlGenericControl ThisLI = (HtmlGenericControl)FindControl(menuArray[i]);
+                ThisLI.ID = menuArray[i];
+                ThisLI.Style.Add("display", "");
+            }
+        }
+
     }
 
     private void LoadUserSpecificData()

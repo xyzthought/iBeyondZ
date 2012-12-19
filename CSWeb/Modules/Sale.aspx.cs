@@ -27,6 +27,8 @@ public partial class Modules_Sale : PageBase
     {
         if (!Page.IsPostBack)
         {
+           
+
             objPI.SortColumnName = DEFAULTCOLUMNNAME;
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
@@ -85,6 +87,11 @@ public partial class Modules_Sale : PageBase
                 gvGrid.ExportCaption = "";
                 gvGrid.ExcelColumn = "";
                 gvGrid.DataBind();
+
+                if (((User)Session["UserData"]).UserTypeID == (int)Constants.UserType.SellingDesk)
+                {
+                    gvGrid.Columns[6].Visible = false;
+                }
             }
         }
         catch (Exception ex)
@@ -156,6 +163,12 @@ public partial class Modules_Sale : PageBase
                 LinkButton lnkDelete = new LinkButton();
                 lnkDelete = (LinkButton)e.Row.FindControl("lnkDelete");
                 lnkDelete.OnClientClick = "return confirm('Sale :" + BLL.BusinessObject.Constants.DeleteConf + "');";
+
+                if (((User)Session["UserData"]).UserTypeID == (int)Constants.UserType.SellingDesk)
+                {
+                    aEdit.Style.Add("display","none");
+                    lnkDelete.Visible = false;
+                }
 
             }
         }
