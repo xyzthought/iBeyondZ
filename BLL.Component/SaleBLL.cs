@@ -85,5 +85,10 @@ namespace BLL.Component
         {
             return objDB.SearchProductAutoCompleteForPurchase();
         }
+
+        public List<Sale> GetSelectedProductBarCode(string ThisBarcode)
+        {
+            return objDB.GetSelectedProductBarCode(ThisBarcode);
+        }
     }
 }

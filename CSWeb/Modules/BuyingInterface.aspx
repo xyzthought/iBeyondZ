@@ -1,7 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BuyingInterface.aspx.cs" Inherits="BuyingInterface" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BuyingInterface.aspx.cs"
+    Inherits="BuyingInterface" %>
+
 <%@ Register Src="../UserControls/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/Footer.ascx" TagName="Footer" TagPrefix="uc2" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -19,7 +20,6 @@
             $('#lblError').empty();
         }
     </script>
-    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -61,12 +61,16 @@
                 <div id="Div2" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
-                            <input type="text" id="txtSearchManufacturer" runat="server" class="txtCred" value="Manufacturer Name" style="width: 160px!important" /></p>
+                            <input type="text" id="txtSearchManufacturer" runat="server" class="txtCred" value="Manufacturer Name"
+                                style="width: 160px!important" /></p>
                     </div>
                 </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add New</span></asp:LinkButton>
+                        <asp:LinkButton ID="lnkPrint" runat="server" OnClick="lnkPrint_Click"><span class="PrintPDF"></span>Print</asp:LinkButton></span>
+                    <span class="btn5">
+                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add
+                        New</asp:LinkButton></span>
                 </div>
                 <div class="reports">
                     Manage Product Purchase
@@ -93,19 +97,21 @@
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
                                     CurrentDateRow="6" CurrentDateCol="3" StartDateRow="4" StartDateCol="3" EndDateRow="5"
                                     EndDateCol="3" OnRowDataBound="gvGrid_RowDataBound" OnRowCommand="gvGrid_RowCommand"
-                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing" OnRowDeleting="gvGrid_RowDeleting"
-                                    OnSorting="gvGrid_Sorting">
+                                    OnPageIndexChanging="gvGrid_PageIndexChanging" OnRowEditing="gvGrid_RowEditing"
+                                    OnRowDeleting="gvGrid_RowDeleting" OnSorting="gvGrid_Sorting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Purchase Date" SortExpression="PurchaseDate">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblPurchaseDate" runat="server" Text='<%# Eval("PurchaseDate") %>' ToolTip='<%# Eval("PurchaseDate") %>'></asp:Label>
+                                                <asp:Label ID="lblPurchaseDate" runat="server" Text='<%# Eval("PurchaseDate") %>'
+                                                    ToolTip='<%# Eval("PurchaseDate") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("ManufacturerName") %>' ToolTip='<%# Eval("ManufacturerName") %>'></asp:Label>
+                                                <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("ManufacturerName") %>'
+                                                    ToolTip='<%# Eval("ManufacturerName") %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
@@ -133,15 +139,24 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Buying Price" SortExpression="BuyingPrice">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>' ToolTip='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'></asp:Label>
+                                                <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'
+                                                    ToolTip='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'></asp:Label>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Print">
+                                            <ItemTemplate>
+                                            <asp:Label id="lblPPDID" runat="server" Visible="false" Text='<%# Eval("ProductPurchaseID") %>'></asp:Label>
+                                                <asp:CheckBox ID="chkPrint" runat="server" CausesValidation="False" />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" CssClass="al" />
+                                            <HeaderStyle HorizontalAlign="Center" Font-Underline="false" CssClass="alH" />
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
-                                             <asp:LinkButton ID="lnkPrint" runat="server" CommandName="Print" ToolTip="Click to print"
-                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseDetailID") %>'> <img src="../Images/PrintBarcode.png" alt="Print" /> </asp:LinkButton>
+                                                <%--<asp:LinkButton ID="lnkPrint" runat="server" CommandName="Print" ToolTip="Click to print"
+                                                    CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseDetailID") %>'> <img src="../Images/PrintBarcode.png" alt="Print" /> </asp:LinkButton>--%>
                                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" ToolTip="Click to edit"
                                                     CausesValidation="False" CommandArgument='<%# Eval("ProductPurchaseID") %>'> <img src="../Images/ico_edit.png" alt="Edit" /> </asp:LinkButton>
                                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" ToolTip="Click to delete"
@@ -162,7 +177,8 @@
                         <div class="mainModalAddEdit" id="mainModalAddDataSource">
                             <div class="topM">
                                 <h1>
-                                    <span id="spTitle">Add/Edit Purchase</span><a onclick="return CloseAddDiv('ModalWindow1');" id="lnkCloseAddDiv" title="Close"> </a>
+                                    <span id="spTitle">Add/Edit Purchase</span><a onclick="return CloseAddDiv('ModalWindow1');"
+                                        id="lnkCloseAddDiv" title="Close"> </a>
                                 </h1>
                             </div>
                             <div id="MidM2" class="MidM">
@@ -182,48 +198,59 @@
                                                     <div class="alt" style="margin-bottom: 5px;">
                                                         <asp:DropDownList ID="ddlManufacturer" runat="server" CssClass="txtUpl">
                                                         </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="reqManufacturer" runat="server" ValidationGroup="frm" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlManufacturer" Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
+                                                        <asp:RequiredFieldValidator ID="reqManufacturer" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlManufacturer"
+                                                            Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div>
                                                         Product :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
                                                         <asp:DropDownList ID="ddlProduct" runat="server" CssClass="txtUpl">
-                                                        </asp:DropDownList><asp:RequiredFieldValidator ID="reqProduct" runat="server" ValidationGroup="frm" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlProduct" Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
+                                                        </asp:DropDownList>
+                                                        <asp:RequiredFieldValidator ID="reqProduct" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlProduct"
+                                                            Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div>
                                                         Size:<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
                                                         <asp:DropDownList ID="ddlSize" runat="server" CssClass="txtUpl">
-                                                        </asp:DropDownList><asp:RequiredFieldValidator ID="reqddlSize" runat="server" ValidationGroup="frm" ErrorMessage="*"
-                                                            Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlSize" Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
+                                                        </asp:DropDownList>
+                                                        <asp:RequiredFieldValidator ID="reqddlSize" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="ddlSize"
+                                                            Display="Dynamic" InitialValue="-1"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div>
                                                         Quantity :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtQuantity" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,0,false);" onblur="extractNumber(this,0,false);"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqtxtQuantity" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtQuantity" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        <asp:TextBox ID="txtQuantity" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,0,false);"
+                                                            onblur="extractNumber(this,0,false);"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="reqtxtQuantity" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtQuantity"
+                                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div>
                                                         Price :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <asp:TextBox ID="txtPrice" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,2,false);" onblur="extractNumber(this,2,false);"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="reqTxtPrice" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtPrice" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        <asp:TextBox ID="txtPrice" runat="server" CssClass="txtCred" onkeyup="extractNumber(this,2,false);"
+                                                            onblur="extractNumber(this,2,false);"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="reqTxtPrice" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtPrice"
+                                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div>
                                                         Date of Purchase :<span class="mandet2">* </span>
                                                     </div>
                                                     <div class="alt" style="margin-bottom: 5px;">
-                                                        <input type="text" ID="txtDateOfPurchase" name="txtDateOfPurchase" runat="server" class="txtCred" />
-                                                        <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" ValidationGroup="frm" ErrorMessage="*" Font-Size="X-Small"
-                                                            ForeColor="Red" ControlToValidate="txtDateOfPurchase" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                        <input type="text" id="txtDateOfPurchase" name="txtDateOfPurchase" runat="server"
+                                                            class="txtCred" />
+                                                        <asp:RequiredFieldValidator ID="reqtxtDateOfPurchase" runat="server" ValidationGroup="frm"
+                                                            ErrorMessage="*" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtDateOfPurchase"
+                                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="btn-wrapper4">
                                                         <span class="btn">
@@ -353,7 +380,7 @@
 
     $(function () {
         /*if ($('#txtSearchManufacturer').val() == "") {
-            $('#txtSearchManufacturer').val('Manufacturer Name')
+        $('#txtSearchManufacturer').val('Manufacturer Name')
         }*/
         var tbval = $('#txtSearchManufacturer').val();
         $('#txtSearchManufacturer').focus(function () { if ($(this).val() == tbval) $(this).val(''); });

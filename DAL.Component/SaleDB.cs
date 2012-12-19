@@ -661,5 +661,30 @@ namespace DAL.Component
             }
             return objSale;
         }
+
+        public List<Sale> GetSelectedProductBarCode(string ThisBarcode)
+        {
+            List<Sale> objSale = new List<Sale>();
+            try
+            {
+                DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_GetSelectedProductBarCode");
+                dBase.AddInParameter(objCmd, "@ProductPurchaseID", DbType.String, ThisBarcode);
+                
+
+                using (IDataReader reader = dBase.ExecuteReader(objCmd))
+                {
+                    while (reader.Read())
+                    {
+                        objSale.Add(PopulateProductBarCode(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return objSale;
+        }
     }
 }

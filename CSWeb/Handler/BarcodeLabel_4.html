@@ -1,0 +1,27 @@
+﻿<div class="Section" style="border: 1px solid #EEEEEE; float: left; padding: 2px;
+    width: 215px; height: 82; margin: 20px 0 0 20px;">
+    <div style="padding-bottom: 2px; font-size: 12px; font-weight: bold;">
+        [brandname]
+    </div>
+    <div style="padding-bottom: 2px; font-size: 10px">
+        [productname]
+    </div>
+    <div style="padding-bottom: 2px; font-size: 10px; float: left;">
+        Size : <span style="font-size: 12px; font-weight: bold;">[productsize]</span></div>
+    <div style="font-size: 16px; float: right; font-weight: bold">
+        €[sellingprice]</div>
+    <br />
+    <div class="clBarcode" style="display: none" id="[dvbarcode]">
+        [barcode]</div>
+    <div id="[dvbarcodePrint]" class="barcodeTarget">
+        [barcodePrint]
+    </div>
+    <div style="float: right; padding-top: 2px;">
+        <span style="font-size: 10px;
+                font-weight: bold;">Tick to Print&nbsp;
+            <input type="checkbox" id="[chkPrint]" name="[chkPrint]" class="chkPrint" />&nbsp;</span> <span style="font-size: 10px;
+                font-weight: bold;">No. Of Copy</span>&nbsp;<input id="[QuantityID]" value="1" onkeyup="extractNumber(this,-1,false);"
+                    onblur="extractNumber(this,-1,false);" type="text" maxlength="3" style="border: 1px solid #DADADA;
+                    height: 15px; line-height: 16px; padding: 1px; width: 30px;" />
+    </div>
+</div>

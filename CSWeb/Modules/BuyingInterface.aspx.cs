@@ -30,7 +30,7 @@ public partial class BuyingInterface : PageBase
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.DESC;
-            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today.AddDays(-30));
+            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today.AddDays(-7));
             toDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
             PopulateGrid();
             PopulateManufacturer();
@@ -384,4 +384,27 @@ public partial class BuyingInterface : PageBase
     {
         PopulateGrid();
     }
+    protected void lnkPrint_Click(object sender, EventArgs e)
+    {
+        string ProductPurchaseDetialID = String.Empty;
+        if (null != gvGrid && gvGrid.Rows.Count > 0)
+        {
+            foreach (GridViewRow di in gvGrid.Rows)
+            {
+                CheckBox chkBx = (CheckBox)di.FindControl("chkPrint");
+                Label lblPPDID = (Label)di.FindControl("lblPPDID");
+                if (chkBx != null && chkBx.Checked)
+                {
+                    ProductPurchaseDetialID += lblPPDID.Text.Trim() + ",";
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(ProductPurchaseDetialID))
+        {
+            ProductPurchaseDetialID = ProductPurchaseDetialID.Substring(0, ProductPurchaseDetialID.Length - 1);
+            Response.Redirect("../handler/BarcodePDF.aspx?mq="+ProductPurchaseDetialID, false);
+        }
+    }
+
 }
