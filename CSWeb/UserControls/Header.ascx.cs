@@ -24,6 +24,7 @@ public partial class UserControls_Header : System.Web.UI.UserControl
 
     private void SetPagePrivilege()
     {
+        objPage.CheckSession();
         string[] menuArray = new string[] { "mnuli1", "mnuli2", "mnuli3", "mnuli4", "mnuli5", "mnuli6", "mnuli7", "mnuli8", "mnuli9", "mnuli10"};
         string[] SellingDesk = new string[] { "mnuli6", "mnuli9" };  //SALE & CUSTOMER & MY ACCOUNT
         string[] StockManager = new string[] { "mnuli6", "mnuli4", "mnuli8", "mnuli5" }; //: MANUFACTURER, PRODUCT, BARCODE, PURCHASE
@@ -77,6 +78,7 @@ public partial class UserControls_Header : System.Web.UI.UserControl
     {
         try
         {
+            objPage.CheckSession();
             User objUser = new BLL.BusinessObject.User();
             objUser = (User)Session["UserData"];
             lblUserName.InnerHtml = objUser.FirstName;

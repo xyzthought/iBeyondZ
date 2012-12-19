@@ -326,13 +326,14 @@
                                                                     Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtMargin" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </div>
                                                         </div>
-                                                        <div style="float: left;padding-left:30px;">
+                                                        <div style="float: left; padding-left: 30px;">
                                                             <div>
                                                                 Selling Price<span class="mandet2">*</span>
                                                             </div>
                                                             <div>
                                                                 <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
-                                                                    ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 100px!important;text-align:right"></asp:TextBox>
+                                                                    ID="txtSellingPrice" runat="server" CssClass="txtCred" Style="width: 100px!important;
+                                                                    text-align: right"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="reqtxtSellingPrice" runat="server" ErrorMessage="*"
                                                                     ValidationGroup="frm" Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtSellingPrice"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -343,16 +344,16 @@
                                                     </div>
                                                     <asp:PlaceHolder runat="server" ID="plhQty"></asp:PlaceHolder>
                                                     <div style="clear: both">
-                                                    <div class="btn-wrapper4">
-                                                        <span class="btn">
-                                                            <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>
-                                                        <span class="btn">
-                                                            <%--<asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1'); Populate(2);">Cancel</asp:LinkButton>--%>
-                                                            <a href="javascript:void(0)" onclick="CloseAddDiv('ModalWindow1')">Cancel</a>
-                                                            <%--<input type="button" value="Cancel" onclick="CloseAddDiv('ModalWindow1')" />--%>
-                                                        </span>
+                                                        <div class="btn-wrapper4">
+                                                            <span class="btn">
+                                                                <asp:LinkButton ID="lnkBtnSaveDS" runat="server" OnClick="lnkBtnSaveDS_Click" ValidationGroup="frm">Save</asp:LinkButton></span>
+                                                            <span class="btn">
+                                                                <%--<asp:LinkButton ID="lnkCancel" runat="server" OnClientClick="return CloseAddDiv('ModalWindow1'); Populate(2);">Cancel</asp:LinkButton>--%>
+                                                                <a href="javascript:void(0)" onclick="CloseAddDiv('ModalWindow1')">Cancel</a>
+                                                                <%--<input type="button" value="Cancel" onclick="CloseAddDiv('ModalWindow1')" />--%>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -489,6 +490,7 @@
                 var desc = "<img src='../images/pdot.png' style='vertical-align:bottom' />&nbsp;" + ui.item.desc
                 $("#Product-description").html(desc);
                 $("#txtQuantity").val("1");
+                CallMeAndFireServerSideButton();
                 return false;
             }
         })
@@ -498,7 +500,11 @@
 				.append("<a>" + item.label + "<br>" + item.desc + "</a>")
 				.appendTo(ul);
 		};
-    }
+}
+
+function CallMeAndFireServerSideButton() {
+            eval(<%=serversideEvent %>);
+        }
 
     function calculateSellingPrice() {
         if ($('#txtBuyingPrice').val() == '') {

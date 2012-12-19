@@ -351,6 +351,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         txtCountry.Text = objLCust[0].Country;
         txtEmailID.Text = objLCust[0].Email;
         txtPhone.Text = objLCust[0].TeleNumber;
+        txtSaleNote.Text = objLCust[0].Notes;
     }
     protected void lnkFinalCheckout_Click(object sender, EventArgs e)
     {

@@ -276,6 +276,28 @@ namespace DAL.Component
             return dtData;
         }
 
+        public DataTable SearchProductAutoCompleteForPurchase()
+        {
+            DataTable dtData = new DataTable();
+            try
+            {
+                using (DbConnection connection = dBase.CreateConnection())
+                {
+                    connection.Open();
+                    DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_SearchProductAutoCompleteForPurchase");
+                    DataSet dsData = dBase.ExecuteDataSet(objCmd);
+                    dtData = dsData.Tables[0];
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+
+            return dtData;
+        }
+
         public DataTable PopulateAutoCompleteProductInformation()
         {
             DataTable dtData = new DataTable();

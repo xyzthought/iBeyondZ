@@ -16,7 +16,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
     string vstrLink = string.Empty;
     string param = string.Empty;
     List<PurchasedProduct> gobjProduct;
-
+    protected string serversideEvent = string.Empty;
 
     #region Protected Properties
     protected string SelectedMode
@@ -81,8 +81,10 @@ public partial class Modules_AddEditProductPurchase : PageBase
     #endregion
     protected void Page_Load(object sender, EventArgs e)
     {
+         
         if (!Page.IsPostBack)
         {
+            serversideEvent = Page.ClientScript.GetPostBackEventReference(lnkAddMore, string.Empty);
             PopulateAutoCompleteDataTable();
             PopulateManufacturer();
             txtDateOfPurchase.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
@@ -138,7 +140,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
     private void PopulateAutoCompleteDataTable()
     {
         SaleBLL objSaleBLL = new SaleBLL();
-        dtAutoComplete = objSaleBLL.PopulateAutoCompleteProductInformation();
+        dtAutoComplete = objSaleBLL.SearchProductAutoCompleteForPurchase();
         PopulateAutoCompleteProductInformation();
     }
     private void PopulateAutoCompleteProductInformation()
@@ -269,6 +271,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
 
     protected void lnkAddMore_Click(object sender, EventArgs e)
     {
+        
         PopulateData();
 
         txtProductBarCode.Text = "";

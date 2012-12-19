@@ -80,5 +80,10 @@ namespace BLL.Component
         {
             return objDB.GetProductBarCode(thisBarcode, Quantity);
         }
+
+        public DataTable SearchProductAutoCompleteForPurchase()
+        {
+            return objDB.SearchProductAutoCompleteForPurchase();
+        }
     }
 }
