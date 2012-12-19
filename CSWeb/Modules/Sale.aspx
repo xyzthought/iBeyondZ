@@ -31,12 +31,26 @@
                         <asp:LinkButton ID="lnkRefresh" runat="server" OnClick="lnkRefresh_Click">Refresh</asp:LinkButton>
                     </span>
                 </div>
-                <div id="dv2" class="fl">
+               <%-- <div id="dv2" class="fl">
                     <div class="demo" style="font-size: 9px!important;">
                         <p>
                             <input type="text" id="datepicker" runat="server" class="txtCred" style="width: 100px!important" /></p>
                     </div>
+                </div>--%>
+
+                <div id="Div1" class="fl">
+                    <div class="demo" style="font-size: 9px!important;">
+                        <p>
+                            <input type="text" id="toDate" runat="server" class="txtCred" style="width: 80px!important" /></p>
+                    </div>
                 </div>
+                <div id="dv2" class="fl">
+                    <div class="demo" style="font-size: 9px!important;">
+                        <p>
+                            <input type="text" id="fromDate" runat="server" class="txtCred" style="width: 80px!important" /></p>
+                    </div>
+                </div>
+
                 <div id="dv1" class="fl">
                     <span class="btn5">
                         <asp:LinkButton ID="lnkAddNew2" runat="server" OnClick="lnkAddNew2_Click"><span class="AddNewData"></span>Add New Sale</asp:LinkButton>
@@ -168,7 +182,7 @@
 <script type="text/javascript">
 
     $(function () {
-        $("#datepicker").datepicker({
+        $("#fromDate").datepicker({
             showOn: "button",
             buttonImage: "../images/calendar.gif",
             buttonImageOnly: true,
@@ -177,5 +191,17 @@
             maxDate: "+0d"
         });
     });
+    $(function () {
+        $("#toDate").datepicker({
+            showOn: "button",
+            buttonImage: "../images/calendar.gif",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: "+0d"
+        });
+    });
+
+
 </script>
 <!--Date Picker-->

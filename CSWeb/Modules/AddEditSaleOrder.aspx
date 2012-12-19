@@ -347,6 +347,10 @@
     }
 </style>
 <script type="text/javascript">
+
+
+
+
 $('#txtProductBarCode').focus();
     function ChangeMe(callfrom) {
 

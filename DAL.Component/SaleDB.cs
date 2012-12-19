@@ -22,7 +22,7 @@ namespace DAL.Component
     {
         Database dBase = EnterpriseLibraryContainer.Current.GetInstance<Database>("CSWebDSN");
 
-        public List<Sale> GetAllSaleDataByDate(List<Sale> objData, PageInfo vobjPageInfo, string strDate)
+        public List<Sale> GetAllSaleDataByDate(List<Sale> objData, PageInfo vobjPageInfo, string strFromDate, string strToDate)
         {
             List<Sale> lstobjData = new List<Sale>();
             try
@@ -32,13 +32,15 @@ namespace DAL.Component
                                         new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
                                         new SqlParameter("@SortDirection", SqlDbType.NVarChar),
                                         new SqlParameter("@SearchText", SqlDbType.NVarChar),
-                                        new SqlParameter("@SaleDate", SqlDbType.NVarChar),
+                                        new SqlParameter("@SaleFromDate", SqlDbType.NVarChar),
+                                        new SqlParameter("@SaleToDate", SqlDbType.NVarChar),
                                 };
 
                 mParams[0] = vobjPageInfo.SortColumnName;
                 mParams[1] = vobjPageInfo.SortDirection;
                 mParams[2] = vobjPageInfo.SearchText;
-                mParams[3] = strDate;
+                mParams[3] = strFromDate;
+                mParams[4] = strToDate;
 
                 using (IDataReader reader = dBase.ExecuteReader("sprocCS_GetAllSaleDataByDate", mParams))
                 {

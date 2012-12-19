@@ -34,7 +34,10 @@ public partial class Modules_Sale : PageBase
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.DESC;
 
-            datepicker.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+            //datepicker.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+            toDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+
             PopulateGrid();
         }
     }
@@ -59,7 +62,7 @@ public partial class Modules_Sale : PageBase
     {
         try
         {
-            if (!string.IsNullOrEmpty(datepicker.Value))
+            if (!(string.IsNullOrEmpty(fromDate.Value) && string.IsNullOrEmpty(toDate.Value)))
             {
                 if (txtSearch.Text.Trim() != "Search")
                 {
@@ -80,7 +83,7 @@ public partial class Modules_Sale : PageBase
                 SaleBLL objSaleBLL = new SaleBLL();
 
                 List<Sale> objData = new List<Sale>();
-                objData = objSaleBLL.GetAllSaleDataByDate(objData, objPI, datepicker.Value);
+                objData = objSaleBLL.GetAllSaleDataByDate(objData, objPI, fromDate.Value,toDate.Value);
 
                 gvGrid.DataSource = objData;
                 gvGrid.ExportTemplate = "export_template_4Column.xlsx";

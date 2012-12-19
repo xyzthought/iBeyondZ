@@ -16,9 +16,9 @@ namespace BLL.Component
             objDB = new SaleDB();
         }
 
-        public List<Sale> GetAllSaleDataByDate(List<Sale> objData, PageInfo objPI, string strDate)
+        public List<Sale> GetAllSaleDataByDate(List<Sale> objData, PageInfo objPI, string strFromDate, string strToDate)
         {
-            return objDB.GetAllSaleDataByDate(objData, objPI, strDate);
+            return objDB.GetAllSaleDataByDate(objData, objPI, strFromDate, strToDate);
         }
 
         public List<Sale> GetProductDetailByBarCode(string vstrProductBarcode)
