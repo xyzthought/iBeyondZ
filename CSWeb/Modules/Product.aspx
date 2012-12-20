@@ -8,7 +8,7 @@
     <title>Manage Products</title>
     <script type="text/javascript">
         function ClearFormFields() {
-          
+
             $('#txtProductName').val('');
             $('#txtDescription').val('');
             $('#txtBuyingPrice').val('');
@@ -22,7 +22,11 @@
         }
     </script>
     <style type="text/css">
-    .gvStyle tr td, .gvStyle tr th{padding:5px;vertical-align:top;}
+        .gvStyle tr td, .gvStyle tr th
+        {
+            padding: 5px;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
@@ -40,15 +44,14 @@
                 <div class="searchBox">
                     <asp:TextBox ID="txtSearch" value="Search" runat="server" class="searchBoxTxt" onkeypress="return SetDefaultButton(event,1);"
                         onfocus="if (this.value==&#39;Search&#39;) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=&#39;Search&#39;" />
-                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" 
-                        ValidationGroup="abc" onclick="lnkBtnSearch_Click"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkBtnSearch" class="searchBoxBtn" runat="server" ValidationGroup="abc"
+                        OnClick="lnkBtnSearch_Click"></asp:LinkButton>
                     <div class="clear">
                     </div>
                 </div>
                 <div id="dvAddUser" class="fl">
                     <span class="btn5">
-                        <asp:LinkButton ID="lnkAddNew" runat="server" 
-                        onclick="lnkAddNew_Click"><span class="AddNewData"></span>Add Product</asp:LinkButton></span>
+                        <asp:LinkButton ID="lnkAddNew" runat="server" OnClick="lnkAddNew_Click"><span class="AddNewData"></span>Add Product</asp:LinkButton></span>
                 </div>
                 <div class="reports">
                     Manage Products
@@ -57,7 +60,6 @@
                 </div>
             </div>
             <span id="ContentPlaceHolder1_lblMsg"></span>
-            
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ClientIDMode="Static">
                 <ContentTemplate>
                     <div id="updMain">
@@ -76,23 +78,22 @@
                                         SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ShowFooter="false" EmptyDataText="No Record Found"
                                         OnRowCancelingEdit="gvGrid_RowCancelingEdit" OnRowCommand="gvGrid_RowCommand"
                                         OnRowDataBound="gvGrid_RowDataBound" OnRowDeleting="gvGrid_RowDeleting" OnRowEditing="gvGrid_RowEditing"
-                                        OnRowUpdating="gvGrid_RowUpdating" 
-                                        onpageindexchanging="gvGrid_PageIndexChanging" onsorting="gvGrid_Sorting">
-                                        
+                                        OnRowUpdating="gvGrid_RowUpdating" OnPageIndexChanging="gvGrid_PageIndexChanging"
+                                        OnSorting="gvGrid_Sorting">
                                         <Columns>
                                             <asp:TemplateField HeaderText="ProductID" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProductID" runat="server" Text='<%# Eval("ProductID") %>' Visible="false" />
                                                 </ItemTemplate>
-                                                
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Product" SortExpression="ProductName">
                                                 <ItemStyle VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Left" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProductName" runat="server" Text='<%# Eval("ProductName") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                           <%--<asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
+                                            <%--<asp:TemplateField HeaderText="Manufacturer" SortExpression="Manufacturer">
                                                 <ItemStyle VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblManufacturer" runat="server" Text='<%# Eval("Manufacturer") %>' />
@@ -100,18 +101,21 @@
                                             </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                                                 <ItemStyle VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Left" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblBrand" runat="server" Text='<%# Eval("Brand") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Season" SortExpression="Season">
                                                 <ItemStyle VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Left" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSeason" runat="server" Text='<%# Eval("Season") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="BarCode">
-                                                <ItemStyle VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Left" />
+                                                <ItemStyle VerticalAlign="Top" HorizontalAlign="Left" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblBarCode" runat="server" Text='<%# Eval("BarCode") %>' />
                                                 </ItemTemplate>
@@ -120,31 +124,43 @@
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>' />
-                                                    <div id="dvQtyDetails" style="display:none" runat="server"><%# Eval("QuantityDetails") %></div>
+                                                    <div id="dvQtyDetails" style="display: none" runat="server">
+                                                        <%# Eval("QuantityDetails") %></div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Current Stock">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" Width="100px" />
+                                                <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblStock" runat="server" Text='<%# Eval("Stock") %>' />
-                                                    <div id="dvStockDetails" style="display:none" runat="server"><%# Eval("StockDetails") %></div>
+                                                    <div id="dvStockDetails" style="display: none" runat="server">
+                                                        <%# Eval("StockDetails") %></div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="BuyingPrice">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblBuyingPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("BuyingPrice")) %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Margin">
+                                            <asp:TemplateField HeaderText="VAT(%)">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Right" />
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblTax" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Tax")) %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Margin(%)">
+                                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
+                                                 <HeaderStyle HorizontalAlign="Right"/>
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblMargin" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Margin")) %>' />
                                                 </ItemTemplate>
-                                               
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="SellingPrice">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
+                                                <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSellingPrice" runat="server" Text='<%# String.Format("{0:0.00}",Eval("SellingPrice")) %>' />
                                                 </ItemTemplate>
@@ -154,11 +170,11 @@
                                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Top" />
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgbtnEdit" ImageUrl="../Images/ico_Edit.png" runat="server"
-                                                        CommandName="Edit" CommandArgument='<%# Eval("ProductID") %>' ToolTip="Edit" ValidationGroup="Edit" />
+                                                        CommandName="Edit" CommandArgument='<%# Eval("ProductID") %>' ToolTip="Edit"
+                                                        ValidationGroup="Edit" />
                                                     <asp:ImageButton ID="imgbtnDelete" ImageUrl="../Images/ico_delete.png" runat="server"
                                                         CommandName="Delete" ToolTip="Delete" OnClientClick="return confirm('Are you sure you want to delete? ');" />
                                                 </ItemTemplate>
-                                              
                                             </asp:TemplateField>
                                         </Columns>
                                         <RowStyle CssClass="tdData" />

@@ -50,7 +50,7 @@ namespace DAL.Component
                     //if (dataReader["SizeID"] != DBNull.Value) { obj.SizeID = (string)dataReader["SizeID"]; }
                     if (dataReader["BuyingPrice"] != DBNull.Value) { obj.BuyingPrice = (decimal)dataReader["BuyingPrice"]; }
                     if (dataReader["SellingPrice"] != DBNull.Value) { obj.SellingPrice = (decimal)dataReader["SellingPrice"]; }
-                    //if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
+                    if (dataReader["Tax"] != DBNull.Value) { obj.Tax = (decimal)dataReader["Tax"]; }
                     if (dataReader["Margin"] != DBNull.Value) { obj.Margin = (decimal)dataReader["Margin"]; }
                     if (dataReader["BarCode"] != DBNull.Value) { obj.BarCode = (string)dataReader["BarCode"]; }
                     if (dataReader["Season"] != DBNull.Value) { obj.Season = (string)dataReader["Season"]; }
