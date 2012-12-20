@@ -134,18 +134,20 @@
 
         function calculateMarginPrice() {
 
-            var OSP = $('#hdnSellingPrice').val();
+            
+
+            var bp = $('#txtBuyingPrice').val();
+            var tax = $('#txtTax').val()
+            var BPrice = parseFloat(bp) + parseFloat(bp * tax / 100)
+           
             var CSP = $('#txtSellingPrice').val();
-            var OMargin = $('#txtMargin').val();
 
-            //alert(OSP + '-' + CSP + '-' + OMargin);
-            $('#hdnSellingPrice').val($('#txtSellingPrice').val());
-            
-            var CMargin = (OMargin / OSP) * CSP;
+            var CMargin = parseFloat(CSP) - parseFloat(BPrice);
 
-            
-            $('#txtMargin').val(CMargin.toFixed(2));
-            //alert(CMargin);
+
+            var CMarginInPercentage = parseFloat(CMargin/BPrice * 100);
+            $('#txtMargin').val(CMarginInPercentage.toFixed(2));
+
         }
 
 
@@ -295,8 +297,8 @@
                             </div>
                             <div style="float: left;">
                                 <asp:TextBox onkeyup="extractNumber(this,-1,false);" onblur="extractNumber(this,-1,false);calculateSellingPrice();"
-                                    ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important"></asp:TextBox>
-                                <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtMargin" MinimumValue="0" MaximumValue="99.99" ErrorMessage="0 to 99.99" Type="Double"  Font-Size="X-Small" ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
+                                    ID="txtMargin" runat="server" CssClass="txtCred" Style="width: 160px!important" MaxLength="5"></asp:TextBox>
+                                <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtMargin" MinimumValue="0" MaximumValue="999.99" ErrorMessage="0 to 999.99" Type="Double"  Font-Size="X-Small" ForeColor="Red" Display="Dynamic"></asp:RangeValidator>
                                 
                             </div>
                             <div style="clear: both">
