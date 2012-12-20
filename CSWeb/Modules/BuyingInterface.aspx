@@ -147,7 +147,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Print">
                                             <ItemTemplate>
-                                            <asp:Label id="lblPPDID" runat="server" Visible="false" Text='<%# Eval("ProductPurchaseID") %>'></asp:Label>
+                                            <asp:Label id="lblPPDID" runat="server" Visible="false" Text='<%# Eval("ProductPurchaseDetailID") %>'></asp:Label>
                                                 <asp:CheckBox ID="chkPrint" runat="server" CausesValidation="False" />
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" CssClass="al" />
