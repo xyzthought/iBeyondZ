@@ -24,7 +24,7 @@ public partial class Modules_Product : System.Web.UI.Page
             {
                
                 objPI.SortColumnName = DEFAULTCOLUMNNAME;
-                objPI.SortDirection = Constants.DESC;
+                objPI.SortDirection = Constants.ASC;
                 ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
                 ViewState[Constants.SORTDERECTION] = Constants.DESC;
 
