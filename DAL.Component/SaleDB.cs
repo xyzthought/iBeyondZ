@@ -101,6 +101,17 @@ namespace DAL.Component
                     objData.Discount = Convert.ToDecimal(drData["Discount"]);
 
                 }
+                if (FieldExists(drData, "FinalDiscount") && drData["FinalDiscount"] != DBNull.Value)
+                {
+                    objData.FinalDiscount = Convert.ToDecimal(drData["FinalDiscount"]);
+
+                }
+                if (FieldExists(drData, "FinalPayableAmount") && drData["FinalPayableAmount"] != DBNull.Value)
+                {
+                    objData.FinalPayableAmount = Convert.ToDecimal(drData["FinalPayableAmount"]);
+
+                }
+                
                 if (FieldExists(drData, "SaleMadeByName") && drData["SaleMadeByName"] != DBNull.Value)
                 {
                     objData.SaleMadeByName = Convert.ToString(drData["SaleMadeByName"]);

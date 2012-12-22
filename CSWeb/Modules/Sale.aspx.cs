@@ -32,7 +32,7 @@ public partial class Modules_Sale : PageBase
             objPI.SortColumnName = DEFAULTCOLUMNNAME;
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
-            ViewState[Constants.SORTDERECTION] = Constants.DESC;
+            ViewState[Constants.SORTDERECTION] = Constants.ASC;
 
             //datepicker.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
             fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);

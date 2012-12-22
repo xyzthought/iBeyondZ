@@ -289,6 +289,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
     }
     protected void lnkBtnSaveDS_Click(object sender, EventArgs e)
     {
+      
         PurchasedProduct objPurchasedProduct = new PurchasedProduct();
         objPurchasedProduct.ProductID = Convert.ToInt32(htnProductID.Value);
         objPurchasedProduct.ProductName = lblProduct.Text;
@@ -493,28 +494,36 @@ public partial class Modules_AddEditProductPurchase : PageBase
     }
     protected void lnkSave_Click(object sender, EventArgs e)
     {
+
         if (Session["PurchasedProduct"] != null)
         {
-            gobjProduct = (List<PurchasedProduct>)Session["PurchasedProduct"];
-            PurchaseRecord objPurchaseRecord = new PurchaseRecord();
-            objPurchaseRecord.ManufacturerID = Convert.ToInt32(cmbManufacturer.SelectedValue);
-            objPurchaseRecord.PurchaseDate = txtDateOfPurchase.Value;
-            objPurchaseRecord.PurchaseID = Convert.ToInt32(txtPurchaseID.Value);
-            objPurchaseRecord.ProductsPurchased = gobjProduct;
-
-            new ProductPurchaseBLL().AddEditProductPurchase(ref objPurchaseRecord);
-
-            if (objPurchaseRecord.ReturnValue > 0)
+            if (cmbManufacturer.SelectedIndex > 0)
             {
-                Response.Redirect("BuyingInterface.aspx", true);
+                gobjProduct = (List<PurchasedProduct>)Session["PurchasedProduct"];
+                PurchaseRecord objPurchaseRecord = new PurchaseRecord();
+                objPurchaseRecord.ManufacturerID = Convert.ToInt32(cmbManufacturer.SelectedValue);
+                objPurchaseRecord.PurchaseDate = txtDateOfPurchase.Value;
+                objPurchaseRecord.PurchaseID = Convert.ToInt32(txtPurchaseID.Value);
+                objPurchaseRecord.ProductsPurchased = gobjProduct;
+
+                new ProductPurchaseBLL().AddEditProductPurchase(ref objPurchaseRecord);
+
+                if (objPurchaseRecord.ReturnValue > 0)
+                {
+                    Response.Redirect("BuyingInterface.aspx", true);
+                }
+                else
+                {
+                    txtProductBarCode.Text = "";
+                    Productid.Value = "0";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMsg", "alert('Error in saving record!')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
+
+                }
             }
             else
             {
-                txtProductBarCode.Text = "";
-                Productid.Value = "0";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMsg", "alert('Error in saving record!')", true);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "PopulateType", "Populate('2')", true);
-
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMsg", "alert('Please select manufacturer!')", true);
             }
 
         }
