@@ -30,7 +30,7 @@ public partial class BuyingInterface : PageBase
             objPI.SortDirection = Constants.DESC;
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.DESC;
-            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today.AddDays(-7));
+            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today.AddDays(-30));
             toDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
             PopulateGrid();
             PopulateManufacturer();

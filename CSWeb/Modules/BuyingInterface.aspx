@@ -91,7 +91,7 @@
                             <div class="grid_container">
                                 <ctrl:CustomGridView ID="gvGrid" EmptyDataText="<span class='noDataSelected'>No Data Available</span>"
                                     runat="server" AutoGenerateColumns="false" AllowPaging="True" AllowSorting="True"
-                                    Width="100%" PageSize="20" GridLines="None" CssClass="gvStyle" SortColumn="CompanyName"
+                                    Width="100%" PageSize="50" GridLines="None" CssClass="gvStyle" SortColumn="CompanyName"
                                     DataKeyNames="ManufacturerID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                     SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                     ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"
@@ -134,16 +134,42 @@
                                             <ItemTemplate>
                                                 <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' ToolTip='<%# Eval("Quantity") %>'></asp:Label>
                                             </ItemTemplate>
-                                            <ItemStyle HorizontalAlign="Left" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                            <ItemStyle HorizontalAlign="Right" />
+                                            <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Buying Price" SortExpression="BuyingPrice">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'
                                                     ToolTip='<%# String.Format("{0:C}", Eval("BuyingPrice")) %>'></asp:Label>
                                             </ItemTemplate>
-                                            <ItemStyle HorizontalAlign="Left" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
+                                            <ItemStyle HorizontalAlign="Right" />
+                                            <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
+                                        </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="Margin(%)">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblMargin" runat="server" Text='<%# String.Format("{0:C}", Eval("Margin")) %>'
+                                                    ToolTip='<%# String.Format("{0:C}", Eval("Margin")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Right" />
+                                            <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
+                                        </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="VAT(%)">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblTax" runat="server" Text='<%# String.Format("{0:C}", Eval("Tax")) %>'
+                                                    ToolTip='<%# String.Format("{0:C}", Eval("Tax")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Right" />
+                                            <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Selling Price">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblSPrice" runat="server" Text='<%# String.Format("{0:C}", Eval("SellingPrice")) %>'
+                                                    ToolTip='<%# String.Format("{0:C}", Eval("SellingPrice")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Right" />
+                                            <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Print">
                                             <ItemTemplate>

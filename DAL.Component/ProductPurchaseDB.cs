@@ -62,7 +62,12 @@ namespace DAL.Component
                             objProductPurchase.Quantity = Convert.ToInt32(reader["Quantity"]);
                         if (reader["BuyingPrice"] != DBNull.Value)
                             objProductPurchase.BuyingPrice = Convert.ToDecimal(reader["BuyingPrice"]);
-
+                        if (reader["Margin"] != DBNull.Value)
+                            objProductPurchase.Margin = Convert.ToDecimal(reader["Margin"]);
+                        if (reader["Tax"] != DBNull.Value)
+                            objProductPurchase.Tax = Convert.ToDecimal(reader["Tax"]);
+                        if (reader["Price"] != DBNull.Value)
+                            objProductPurchase.SellingPrice = Convert.ToDecimal(reader["Price"]);
                         lstProductPurshase.Add(objProductPurchase);
                     }
                 }

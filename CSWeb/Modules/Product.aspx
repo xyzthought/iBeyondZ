@@ -123,7 +123,7 @@
                                             <asp:TemplateField HeaderText="Quantity" Visible="false">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>' />
+                                                    <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantities") %>'  />
                                                     <div id="dvQtyDetails" style="display: none" runat="server">
                                                         <%# Eval("QuantityDetails") %></div>
                                                 </ItemTemplate>
@@ -132,7 +132,7 @@
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" Width="100px" />
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblStock" runat="server" Text='<%# Eval("Stock") %>' />
+                                                    <asp:Label ID="lblStock" runat="server" Text='<%# Eval("Stock") %>' style="width:100px !important;background-color:#eee !important;cursor:pointer;margin: 3px 13px 10px " />
                                                     <div id="dvStockDetails" style="display: none" runat="server">
                                                         <%# Eval("StockDetails") %></div>
                                                 </ItemTemplate>
