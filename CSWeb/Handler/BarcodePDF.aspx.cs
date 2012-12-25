@@ -163,7 +163,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 3f, Font.NORMAL)));
+                        cell = new PdfPCell(AddSize(objData[i].SizeName));//(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 3f, Font.BOLD)));
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         cell.Border = 0;
                         cell.Padding = 0f;
@@ -217,6 +217,29 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             Response.Write(ex.ToString());
         }
+    }
+
+    private PdfPTable AddSize(string Size)
+    {
+        PdfPTable table = new PdfPTable(2);
+        table.HorizontalAlignment = 0;
+        table.TotalWidth = 20f;
+        table.LockedWidth = true;
+        //table.WidthPercentage = 10;
+
+        PdfPCell cell = new PdfPCell(new Phrase("Size :", new Font(Font.FontFamily.HELVETICA, 3f, Font.NORMAL)));
+        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+        cell.Border = 0;
+        cell.Padding = 0f;
+        table.AddCell(cell);
+        
+        cell = new PdfPCell(new Phrase(Size, new Font(Font.FontFamily.HELVETICA, 3f, Font.BOLD)));
+        cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+        cell.Border = 0;
+        cell.Padding = 0f;       
+        table.AddCell(cell);
+
+        return table;
     }
 
     private void DeleteOldFiles()
@@ -287,7 +310,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
                     cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 3f, Font.NORMAL)));
+                    cell = new PdfPCell(AddSize(objData[i].SizeName));
                     cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                     cell.Border = 0;
                     cell.Padding = 0f;
@@ -469,7 +492,7 @@ public partial class Handler_BarcodePDF : System.Web.UI.Page
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Size: " + objData[i].SizeName, new Font(Font.FontFamily.HELVETICA, 3f, Font.NORMAL)));
+                        cell = new PdfPCell(AddSize(objData[i].SizeName));
                         cell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
                         cell.Border = 0;
                         cell.Padding = 0f;
