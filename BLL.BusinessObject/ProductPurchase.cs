@@ -123,5 +123,7 @@ namespace BLL.BusinessObject
 
 
         public int ProductPurchaseDetailID { get; set; }
+
+        public DateTime ProductPurchaseDate { get; set; }
     }
 }

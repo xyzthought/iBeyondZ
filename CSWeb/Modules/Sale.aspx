@@ -97,7 +97,7 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="SaleDate">
+                                <asp:TemplateField HeaderText="Sale Date">
                                     <ItemTemplate>
                                         <asp:Label ID="lblSaleDate" runat="server" Text='<%# Eval("SaleDate","{0:dd-MMM-yyyy HH:mm}") %>' ToolTip='<%# Eval("SaleDate","{0:dd-MMM-yyyy}") %>'></asp:Label>
                                     </ItemTemplate>
@@ -156,7 +156,7 @@
                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
 
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="SaleMadeBy" SortExpression="SaleMadeBy">
+                                <asp:TemplateField HeaderText="Sale Made By" SortExpression="SaleMadeBy">
                                     <ItemTemplate>
                                         <asp:Label ID="lblSaleMadeBy" runat="server" Text='<%# Eval("SaleMadeByName") %>'
                                             ToolTip='<%# Eval("SaleMadeByName") %>'></asp:Label>

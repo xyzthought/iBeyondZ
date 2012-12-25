@@ -34,9 +34,9 @@ public partial class Modules_Sale : PageBase
             ViewState[Constants.SORTCOLUMNNAME] = DEFAULTCOLUMNNAME;
             ViewState[Constants.SORTDERECTION] = Constants.ASC;
 
-            //datepicker.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
-            fromDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
-            toDate.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+            //datepicker.Value = string.Format("{0:dd/MM/yyyy}", DateTime.Today);
+            fromDate.Value = string.Format("{0:dd/MM/yyyy}", DateTime.Today);
+            toDate.Value = string.Format("{0:dd/MM/yyyy}", DateTime.Today);
 
             PopulateGrid();
         }

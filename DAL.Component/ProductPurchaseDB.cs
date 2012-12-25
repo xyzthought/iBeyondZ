@@ -52,6 +52,8 @@ namespace DAL.Component
                             objProductPurchase.ProductPurchaseDetailID = Convert.ToInt32(reader["ProductPurchaseID"]);
                         if (reader["PurchaseDate"] != DBNull.Value)
                             objProductPurchase.PurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]).ToShortDateString();
+                        if (reader["PurchaseDate"] != DBNull.Value)
+                            objProductPurchase.ProductPurchaseDate = Convert.ToDateTime(reader["PurchaseDate"]);
                         if (reader["CompanyName"] != DBNull.Value)
                             objProductPurchase.ManufacturerName = Convert.ToString(reader["CompanyName"]);
                         if (reader["ProductName"] != DBNull.Value)
@@ -245,7 +247,7 @@ namespace DAL.Component
                 DbCommand objCmd = dBase.GetStoredProcCommand("sprocCS_InsertUpdatePurchase");
                 dBase.AddInParameter(objCmd, "@PurchaseID", DbType.Int32, vobjProductPurchase.PurchaseID);
                 dBase.AddInParameter(objCmd, "@ManufacturerID", DbType.Int32, vobjProductPurchase.ManufacturerID);
-                dBase.AddInParameter(objCmd, "@PurchaseDate", DbType.DateTime, vobjProductPurchase.PurchaseDate);
+                dBase.AddInParameter(objCmd, "@PurchaseDate", DbType.String, vobjProductPurchase.PurchaseDate.Trim());
                 dBase.AddInParameter(objCmd, "@ProductsPurchased", DbType.Xml, strProducts.ToString());
                 dBase.AddInParameter(objCmd, "@PurchasedQty", DbType.Xml, strSizes.ToString());
                 dBase.AddInParameter(objCmd, "@UpdatedBy", DbType.Int32, 1);

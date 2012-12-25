@@ -137,7 +137,7 @@
                                                         <%# Eval("StockDetails") %></div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="BuyingPrice">
+                                            <asp:TemplateField HeaderText="Buying Price">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>
@@ -158,7 +158,7 @@
                                                     <asp:Label ID="lblMargin" runat="server" Text='<%# String.Format("{0:0.00}",Eval("Margin")) %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="SellingPrice">
+                                            <asp:TemplateField HeaderText="Selling Price">
                                                 <ItemStyle HorizontalAlign="Right" VerticalAlign="Top" />
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemTemplate>

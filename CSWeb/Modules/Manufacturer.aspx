@@ -87,7 +87,7 @@
                                             <ItemStyle HorizontalAlign="Left" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Underline="false" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ContactLastName" SortExpression="ContactLastName">
+                                        <asp:TemplateField HeaderText="Contact Last Name" SortExpression="ContactLastName">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblContactLastName" runat="server" Text='<%# Eval("ContactLastName") %>'
                                                     ToolTip='<%# Eval("ContactLastName") %>'></asp:Label>

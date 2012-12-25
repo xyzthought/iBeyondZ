@@ -87,7 +87,7 @@ public partial class Modules_AddEditProductPurchase : PageBase
             serversideEvent = Page.ClientScript.GetPostBackEventReference(lnkAddMore, string.Empty);
             PopulateAutoCompleteDataTable();
             PopulateManufacturer();
-            txtDateOfPurchase.Value = string.Format("{0:MM/dd/yyyy}", DateTime.Today);
+            txtDateOfPurchase.Value = string.Format("{0:dd/MM/yyyy}", DateTime.Today);
             gobjProduct = new List<PurchasedProduct>();
             Session["PurchasedProduct"] = gobjProduct;
 
