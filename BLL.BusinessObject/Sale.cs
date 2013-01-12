@@ -259,5 +259,7 @@ namespace BLL.BusinessObject
         public decimal FinalPayableAmount { get; set; }
 
         public string Brand { get; set; }
+
+        public string ThisSaleDate { get; set; }
     }
 }

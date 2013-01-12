@@ -90,6 +90,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         {
             if (!Page.IsPostBack)
             {
+                SaleDate.Value = string.Format("{0:dd/MM/yyyy}", DateTime.Today);
                 txtProductBarCode.Focus();
                 serversideEvent = Page.ClientScript.GetPostBackEventReference(lnkAddMore, string.Empty);
                 PopulateAutoCompleteDataTable();
@@ -112,6 +113,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
                     SelectedMode = objQuery["MODE"].ToString();
                     SaleID = Convert.ToInt32(objQuery["ID"].ToString());
 
+                    if (objQuery.ContainsKey("sd"))
+                    {
+                        DateTime QSaleDate = Convert.ToDateTime(objQuery["sd"].ToString());
+                        SaleDate.Value = string.Format("{0:dd/MM/yyyy}", QSaleDate);
+                    }
+                    if (objQuery.ContainsKey("tsd"))
+                    {
+                        SaleDate.Value = objQuery["tsd"].ToString();
+                    }
                     if (SelectedMode == Constants.MODE_EDIT)
                     {
                         Session["dtProductDetail"] = null;
@@ -642,7 +652,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 RepopulateDataTableWithDiscountPrice();
                 CalculateTotalPrice();
                 Session["dtProductDetail"] = dtProductDetail;
-                param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "=" + SaleID;
+                param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "=" + SaleID + "&sd=" + SaleDate.Value.Trim();
                 param = Common.GenerateBASE64WithObfuscateApp(param);
                 vstrLink = "FinalChekoutSaleOrder.aspx?q=" + param;
                 Response.Redirect(vstrLink, false);
@@ -661,7 +671,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
         TextBox txtQuantity = (TextBox)sender;
         int rowIndex = ((GridViewRow)((TextBox)sender).NamingContainer).RowIndex;
         Label lblProductID = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("lblProductID") as Label;
-
+        TextBox txtPDiscount = gvGrid.Rows[rowIndex].Cells[0].Controls[0].FindControl("txtPDiscount") as TextBox;
         decimal PQuantity = Convert.ToDecimal(txtQuantity.Text.Trim());
         int PID = Convert.ToInt32(lblProductID.Text.Trim());
 
@@ -671,13 +681,15 @@ public partial class Modules_AddEditSaleOrder : PageBase
             {
                 dtProductDetail.Rows[i]["Quantity"] = PQuantity;
                 dtProductDetail.Rows[i]["TPrice"] = Convert.ToDecimal(dtProductDetail.Rows[i]["Price"]) * PQuantity;
-                break;
+                //break;
             }
         }
         dtProductDetail.AcceptChanges();
         PopulateProductDetail();
         CalculateTotalPrice();
         PopulateAutoCompleteProductInformation();
+        txtPDiscount.Focus();
+        //txtPDiscount.Attributes.Add("onfocus", "this.select();");
     }
 
     protected void txtPDiscount_TextChanged(object sender, EventArgs e)
@@ -718,7 +730,7 @@ public partial class Modules_AddEditSaleOrder : PageBase
                 {
                     dtProductDetail.Rows[i]["TPrice"] = dblPrice;
                 }
-                break;
+               // break;
             }
         }
         dtProductDetail.AcceptChanges();

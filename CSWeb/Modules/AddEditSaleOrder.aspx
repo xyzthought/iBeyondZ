@@ -60,11 +60,15 @@
                                                             <span id="lblError" runat="server"></span>
                                                         </div>
                                                         <div style="background: url('../Images/dot.png') repeat-x scroll center bottom #FFFFFF;
-                                                            padding-bottom: 6px;display:none">
+                                                            padding-bottom: 6px; display: none">
                                                             <strong>Search By</strong>&nbsp;<input type="radio" id="rdoBarCode" name="rdoSelection"
-                                                                value="Bar Code" onchange="ChangeMe(1)" checked="checked" />&nbsp;Bar Code&nbsp;<input type="radio"
-                                                                    id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
+                                                                value="Bar Code" onchange="ChangeMe(1)" checked="checked" />&nbsp;Bar Code&nbsp;<input
+                                                                    type="radio" id="rdoPName" name="rdoSelection" value="Product Name" onchange="ChangeMe(2)" />&nbsp;Product
                                                             Name
+                                                        </div>
+                                                        <div id="Div2">
+                                                            Sale Date:&nbsp;
+                                                            <input type="text" id="SaleDate" runat="server" class="txtCred" style="width: 80px!important" />
                                                         </div>
                                                         <div>
                                                             Product <span id="spType">Bar Code</span> :<span class="mandet2">* </span>
@@ -248,23 +252,23 @@
                                                         <asp:Label ID="lblDiscType" runat="server" Text='<%# Eval("DiscountType") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Discount">
+                                                <asp:TemplateField HeaderText="VAT(21%)">
                                                     <ItemTemplate>
-                                                        <asp:DropDownList ID="ddlDType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlDType_SelectedIndexChanged">
-                                                            <asp:ListItem Value="%" Text="%"></asp:ListItem>
-                                                            <asp:ListItem Value="€" Text="€"></asp:ListItem>
-                                                        </asp:DropDownList>
-                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred"
-                                                            MaxLength="2" Style="width: 60px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
-                                                            onblur="extractNumber(this,-1,false);CalculatePay();" OnTextChanged="txtPDiscount_TextChanged"
-                                                            AutoPostBack="true"></asp:TextBox>
+                                                        <asp:Label ID="lblVAT" runat="server" Text='<%# ShowValue(Eval("Unit").ToString(),Eval("Quantity").ToString(),Eval("Tax").ToString())%>'></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="VAT(21%)">
+                                                <asp:TemplateField HeaderText="Discount">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblVAT" runat="server" Text='<%# ShowValue(Eval("Unit").ToString(),Eval("Quantity").ToString(),Eval("Tax").ToString())%>'></asp:Label>
+                                                        <asp:TextBox ID="txtPDiscount" Text='<%# Eval("PDiscount") %>' runat="server" CssClass="txtCred"
+                                                            MaxLength="2" Style="width: 60px!important; text-align: right" onkeyup="extractNumber(this,-1,false);CalculatePay();"
+                                                            onblur="extractNumber(this,-1,false);CalculatePay();" OnTextChanged="txtPDiscount_TextChanged"
+                                                            AutoPostBack="true"></asp:TextBox>
+                                                        <asp:DropDownList ID="ddlDType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlDType_SelectedIndexChanged">
+                                                            <asp:ListItem Value="%" Text="%"></asp:ListItem>
+                                                            <asp:ListItem Value="€" Text="€"></asp:ListItem>
+                                                        </asp:DropDownList>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Right" />
                                                     <HeaderStyle HorizontalAlign="Right" Font-Underline="false" />
@@ -348,7 +352,10 @@
 </style>
 <script type="text/javascript">
 
-
+$("input[type=text]").focus(function () {
+        // Select field contents
+        this.select();
+    });
 
 
 $('#txtProductBarCode').focus();
@@ -421,4 +428,23 @@ $('#txtProductBarCode').focus();
 function CallMeAndFireServerSideButton() {
             eval(<%=serversideEvent %>);
         }
+</script>
+<script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.datepicker.js" type="text/javascript"></script>
+<script src="../Scripts/jquery.ui.widget.js" type="text/javascript"></script>
+<link href="../Styles/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" />
+<link href="../Styles/jquery.ui.theme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+    $(function () {
+        $("#SaleDate").datepicker({
+            showOn: "button",
+            buttonImage: "../images/calendar.gif",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: "+0d"
+        });
+    });
+
 </script>

@@ -357,6 +357,7 @@ namespace DAL.Component
                 dBase.AddInParameter(objCmd, "@FinalDiscount", DbType.Decimal, objSale.FinalDiscount);
                 dBase.AddInParameter(objCmd, "@FinalPayableAmount", DbType.Decimal, objSale.FinalPayableAmount);
                 dBase.AddInParameter(objCmd, "@SaleMadeBy", DbType.Int32, objSale.SaleMadeBy);
+                dBase.AddInParameter(objCmd, "@ThisSaleDate", DbType.String, objSale.ThisSaleDate);
                 dBase.AddOutParameter(objCmd, "@ReturnValue", DbType.Int32, 4);
                 dBase.AddOutParameter(objCmd, "@ReturnMessage", DbType.String, 255);
                 dBase.ExecuteNonQuery(objCmd);

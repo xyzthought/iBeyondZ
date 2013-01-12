@@ -52,6 +52,21 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
         }
     }
 
+    protected string SaleDate
+    {
+        get
+        {
+            if (ViewState["SaleDate"] != null)
+                return Convert.ToString(ViewState["SaleDate"]);
+            else
+                return string.Empty;
+        }
+        set
+        {
+            ViewState["SaleDate"] = value;
+        }
+    }
+
     protected DataTable dtProductDetail
     {
         get
@@ -86,7 +101,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                         Dictionary<String, String> objQuery = Common.PopulateDictionaryFromQueryString(strQuery);
                         SelectedMode = objQuery["MODE"].ToString();
                         SaleID = Convert.ToInt32(objQuery["ID"].ToString());
-
+                        SaleDate = objQuery["sd"].ToString();
                         if (SelectedMode == Constants.MODE_EDIT)
                         {
                             PopulateFinalSaleDetail(SaleID);
@@ -139,7 +154,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
 
         ddlFdiscount.SelectedValue = objSale.FinalDiscountType.ToString();
         txtFDiscount.Text = objSale.FinalDiscount.ToString();
-        
+
         txtFinalAmount.Text = objSale.FinalPayableAmount.ToString();
     }
 
@@ -201,10 +216,10 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                     dblDiscounted = dblTotalPrice - Convert.ToDecimal(txtDiscount.Text.Trim());
                 }
 
-                lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice );// String.Format("{0:C}", dblTotalPrice);
+                lblTotalAmount.Text = string.Format("{0:0.00}", dblTotalPrice);// String.Format("{0:C}", dblTotalPrice);
                 lblTotalPay.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
                 lblFinalAmount.Text = string.Format("{0:0.00}", dblDiscounted);// String.Format("{0:C}", dblDiscounted);
-                
+
 
                 decimal dblAmountAfterDiscount = Convert.ToDecimal(lblTotalPay.Text);
                 if (Convert.ToDecimal(txtFDiscount.Text) > 0)
@@ -322,6 +337,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
     {
         Session["dtProductDetail"] = dtProductDetail;
         param = Constants.MODE + "=" + SelectedMode + "&" + Constants.ID + "=" + SaleID;
+        param += "&tsd=" + SaleDate;
         param = Common.GenerateBASE64WithObfuscateApp(param);
         vstrLink = "AddEditSaleOrder.aspx?q=" + param;
         Response.Redirect(vstrLink, false);
@@ -378,7 +394,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                 SaveData();
                 Session["dtProductDetail"] = null;
                 Session["Discount"] = null;
-                Response.Redirect("AddEditSaleOrder.aspx",false);
+                Response.Redirect("AddEditSaleOrder.aspx", false);
 
             }
         }
@@ -406,7 +422,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             Sale objSale = new Sale();
             SaleBLL objSBLL = new SaleBLL();
             objSale.SaleID = SaleID;
-            objSale.CustomerID = (string.IsNullOrEmpty(Customerid.Value.Trim()) ? 0 : Convert.ToInt32(Customerid.Value.Trim())); 
+            objSale.CustomerID = (string.IsNullOrEmpty(Customerid.Value.Trim()) ? 0 : Convert.ToInt32(Customerid.Value.Trim()));
             objSale.CFirstName = Customer.Text.Trim();
             objSale.Address = txtAddress.Text.Trim();
             objSale.City = txtCity.Text.Trim();
@@ -420,10 +436,10 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
             objSale.Cash = (string.IsNullOrEmpty(txtCash.Text.Trim()) ? 0 : Convert.ToDecimal(txtCash.Text.Trim()));
             objSale.Discount = (string.IsNullOrEmpty(txtDiscount.Text.Trim()) ? 0 : Convert.ToDecimal(txtDiscount.Text.Trim()));
             objSale.FinalDiscountType = ddlFdiscount.SelectedValue.ToString();
-            objSale.FinalDiscount =Convert.ToDecimal(txtFDiscount.Text.Trim());
-            objSale.FinalPayableAmount=Convert.ToDecimal(txtFinalAmount.Text.Trim());
+            objSale.FinalDiscount = Convert.ToDecimal(txtFDiscount.Text.Trim());
+            objSale.FinalPayableAmount = Convert.ToDecimal(txtFinalAmount.Text.Trim());
             objSale.SaleMadeBy = ((User)Session["UserData"]).UserID;
-
+            objSale.ThisSaleDate = SaleDate;
 
             Message objMessage = objSBLL.InsertUpdateSaleMaster(objSale);
             if (objMessage.ReturnValue > 0)
@@ -432,7 +448,7 @@ public partial class Modules_FinalChekoutSaleOrder : PageBase
                 objMessage = objSBLL.DeleteExistingSalesDetails(objSale);
                 for (int i = 0; i < dtProductDetail.Rows.Count; i++)
                 {
-                    
+
                     objSale.ProductID = Convert.ToInt32(dtProductDetail.Rows[i]["ProductID"].ToString());
                     objSale.SizeID = Convert.ToInt32(dtProductDetail.Rows[i]["SizeID"].ToString());
                     objSale.Quantity = Convert.ToDecimal(dtProductDetail.Rows[i]["Quantity"].ToString());

@@ -27,7 +27,7 @@ public partial class Modules_Sale : PageBase
     {
         if (!Page.IsPostBack)
         {
-           
+
 
             objPI.SortColumnName = DEFAULTCOLUMNNAME;
             objPI.SortDirection = Constants.DESC;
@@ -50,11 +50,11 @@ public partial class Modules_Sale : PageBase
 
     protected void lnkAddNew2_Click(object sender, EventArgs e)
     {
-       param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0" ;
-       param = Common.GenerateBASE64WithObfuscateApp(param);
-       vstrLink = "AddEditSaleOrder.aspx?q=" + param;
-       Session["dtProductDetail"] = null;
-       Response.Redirect(vstrLink, false);
+        param = Constants.MODE + "=" + Constants.MODE_ADD + "&" + Constants.ID + "=0";
+        param = Common.GenerateBASE64WithObfuscateApp(param);
+        vstrLink = "AddEditSaleOrder.aspx?q=" + param;
+        Session["dtProductDetail"] = null;
+        Response.Redirect(vstrLink, false);
     }
 
     #region Populate Grid
@@ -83,7 +83,7 @@ public partial class Modules_Sale : PageBase
                 SaleBLL objSaleBLL = new SaleBLL();
 
                 List<Sale> objData = new List<Sale>();
-                objData = objSaleBLL.GetAllSaleDataByDate(objData, objPI, fromDate.Value,toDate.Value);
+                objData = objSaleBLL.GetAllSaleDataByDate(objData, objPI, fromDate.Value, toDate.Value);
 
                 gvGrid.DataSource = objData;
                 gvGrid.ExportTemplate = "export_template_4Column.xlsx";
@@ -101,7 +101,7 @@ public partial class Modules_Sale : PageBase
         {
             SendMail.MailMessage("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
         }
-    } 
+    }
     #endregion
 
     #region GRID VIEW EVENTS
@@ -157,6 +157,7 @@ public partial class Modules_Sale : PageBase
             {
 
                 param = Constants.MODE + "=" + Constants.MODE_EDIT + "&" + Constants.ID + "=" + Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "SaleID"));
+                param += "&sd=" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SaleDate"));
                 param = Common.GenerateBASE64WithObfuscateApp(param);
                 vstrLink = "AddEditSaleOrder.aspx?q=" + param;
                 HtmlControl aEdit = (HtmlControl)e.Row.FindControl("aEdit");
@@ -233,7 +234,7 @@ public partial class Modules_Sale : PageBase
     }
 
     #endregion
-   
+
     protected void lnkRefresh_Click(object sender, EventArgs e)
     {
         PopulateGrid();
