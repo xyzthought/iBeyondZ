@@ -75,11 +75,12 @@
                                                         </div>
                                                         <div class="alt" style="float: left!important; width: 280px;">
                                                             <asp:TextBox ID="txtProductBarCode" runat="server" CssClass="txtCred" ClientIDMode="Static"
-                                                                Style="width: 275px!important;"></asp:TextBox>
+                                                                 onkeypress="return EnterEvent(event)" Style="width: 275px!important;"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                                                                 Font-Size="X-Small" ForeColor="Red" ControlToValidate="txtProductBarCode" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             <asp:HiddenField ID="Productid" runat="server" ClientIDMode="Static" />
                                                             <asp:HiddenField ID="hdnProductBarCode" runat="server" ClientIDMode="Static" />
+                                                            <asp:HiddenField ID="hdnSizeBarCode" runat="server" ClientIDMode="Static" />
                                                             <p id="Product-description" style="margin-top: 5px;">
                                                             </p>
                                                         </div>
@@ -407,13 +408,18 @@ $('#txtProductBarCode').focus();
                 var desc = "<img src='../images/pdot.png' style='vertical-align:bottom' />&nbsp;" + ui.item.desc
                 $("#Product-description").html(desc);
                 
-                if (callfrom == "1")
+               /* if (callfrom == "1")
                 $("#hdnProductBarCode").val(ui.item.desc);
                 else
                 $("#hdnProductBarCode").val(ui.item.label);
 
-                $("#txtQuantity").val("1");
-                CallMeAndFireServerSideButton();
+                var SBarCode=PBarCode.substring($("#hdnProductBarCode").val().indexOf('-')+1);
+                $("#hdnSizeBarCode").val(SBarCode);
+
+                $("#txtQuantity").val("1");*/
+                //CallMeAndFireServerSideButton();
+
+                CallServerSideEvent();
                 return false;
             }
         })
@@ -425,9 +431,47 @@ $('#txtProductBarCode').focus();
 		};
 }
 
+function CallServerSideEvent()
+{
+    //$("ul.ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all").css("display","none");
+    if($("#txtProductBarCode").val().length>0)
+    {
+        var PBarCode=$("#txtProductBarCode").val();
+        if(PBarCode.indexOf("-") !== -1)
+        {
+            //PrdBarCode=PBarCode.substring(0,PBarCode.indexOf('-'));
+            var SBarCode=PBarCode.substring(PBarCode.indexOf('-')+1);
+            $("#hdnSizeBarCode").val(SBarCode);
+            $("#txtQuantity").val("1");
+            $("#hdnProductBarCode").val(PBarCode);
+            removeElement();
+            CallMeAndFireServerSideButton();
+            
+        }
+    }
+}
+
+function removeElement()
+{
+    var ps=document.getElementsByTagName('ul');
+    for (var i = 0; i < ps.length; i++) {
+    if(ps[i].className=='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all')
+    {
+        ps[i].style.display='none';
+    }
+}
+}
+
 function CallMeAndFireServerSideButton() {
             eval(<%=serversideEvent %>);
         }
+
+        function EnterEvent(e) {
+        if (e.keyCode == 13) {
+           CallServerSideEvent();
+           
+        }
+    }
 </script>
 <script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
 <script src="../Scripts/jquery.ui.datepicker.js" type="text/javascript"></script>
