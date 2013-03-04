@@ -169,7 +169,7 @@
                                         Product List</div>
                                     <div style="margin: 5px;">
                                         <ctrl:CustomGridView ID="gvGrid" runat="server" AutoGenerateColumns="false" AllowPaging="True"
-                                            AllowSorting="True" Width="100%" PageSize="20" GridLines="None" CssClass="gvStyle"
+                                            AllowSorting="True" Width="100%" PageSize="100" GridLines="None" CssClass="gvStyle"
                                             SortColumn="UserType" DataKeyNames="ProductID" SortOrder="Ascending" SortAscImageUrl="~/Images/GridViewCtrl/asc.png"
                                             SortDescImageUrl="~/Images/GridViewCtrl/dsc.png" ExportTemplatePath="~/Reports/Templates/"
                                             ExcelHeaderRow="8" StartRow="10" StartColumn="2" DBColumn="" MaxLevel="1" SheetNumber="1"

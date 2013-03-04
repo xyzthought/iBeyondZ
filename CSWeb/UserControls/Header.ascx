@@ -30,17 +30,37 @@
                 </div>
                 <ul>
                     <li id="mnuli1" runat="server"><a href='../Modules/Landingpage.aspx'>Home</a></li>
-                    <li id="mnuli2" runat="server" style="display:none"><a href="../Modules/PlatformUser.aspx">Platform User</a> </li>
-                    <li id="mnuli3" runat="server" style="display:none"><a href='../Modules/Manufacturer.aspx'>Manufacturer</a></li>
-                    <li id="mnuli4" runat="server" style="display:none"><a href='../Modules/Product.aspx'>Product</a></li>
-                    <li id="mnuli5" runat="server" style="display:none"><a href='../Modules/BuyingInterface.aspx'>Purchase</a></li>
-                    <li id="mnuli6" runat="server" style="display:none"><a href='../Modules/Sale.aspx'>Sale</a></li>
-                    <li id="mnuli7" runat="server" style="display:none"><a href='../Modules/MasterData.aspx'>Master</a></li>
-                    <li id="mnuli8" runat="server" style="display:none"><a href='../Modules/BarcodePrint.aspx'>Barcode</a></li>
-                    <li id="mnuli9" runat="server" style="display:none"><a href='../Modules/ManageCustomer.aspx'>Customer</a></li>
+                    <li id="mnuli2" runat="server" style="display: none"><a href="../Modules/PlatformUser.aspx">
+                        Platform User</a> </li>
+                    <li id="mnuli3" runat="server" style="display: none"><a href='../Modules/Manufacturer.aspx'>
+                        Manufacturer</a></li>
+                    <li id="mnuli4" runat="server" style="display: none"><a href='../Modules/Product.aspx'>
+                        Product</a></li>
+                    <li id="mnuli5" runat="server" style="display: none"><a href='../Modules/BuyingInterface.aspx'>
+                        Purchase</a></li>
+                    <li id="mnuli6" runat="server" style="display: none"><a href='../Modules/Sale.aspx'>
+                        Sale</a></li>
+                    <li id="mnuli7" runat="server" style="display: none"><a href='../Modules/MasterData.aspx'>
+                        Master</a></li>
+                    <li id="mnuli8" runat="server" style="display: none"><a href='../Modules/BarcodePrint.aspx'>
+                        Barcode</a></li>
+                    <li id="mnuli9" runat="server" style="display: none"><a href='../Modules/ManageCustomer.aspx'>
+                        Customer</a></li>
                     <li id="mnuli10" runat="server">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>
+                    <li id="mnuli11" runat="server" style="z-index: 100; text-align: center;" clientidmode="Static">
+                        <a href=''>Reports</a>
+                        <ul class="ulDashboard" id="ulSMenu" style="top: 35px; visibility: visible; left: 0px;
+                            display: none;">
+                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
+                                href='google.com'>Stock</a></li>
+                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
+                                href=''>Item Sold</a></li>
+                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
+                                href=''>Home</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="clear">
                 </div>
@@ -200,3 +220,25 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#mnuli11').hover(
+         function () {
+             $('#mnuli11').css('background-color', 'Black');
+             $('#mnuli11').css('text-align', 'left');
+             $('div').removeClass('wrapper');
+             $('#ulSMenu').show();
+         }
+     );
+         //smoothmenu1
+         $('li').not('#mnuli11').hover(
+            function () {
+                $('#mnuli11').css('background-color', '');
+                //$('div').addClass('wrapper');
+             $('#ulSMenu').hide();
+         }
+     );
+
+    });
+</script>
