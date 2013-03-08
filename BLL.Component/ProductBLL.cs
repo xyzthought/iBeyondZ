@@ -47,5 +47,10 @@ namespace BLL.Component
         {
             return null;
         }
+
+        public List<Product> GetStockByDate(PageInfo objPI, string strDate)
+        {
+            return new DAL.Component.Product().GetStockByDate(objPI, strDate);
+        }
     }
 }

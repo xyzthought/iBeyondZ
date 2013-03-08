@@ -1,17 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Header.ascx.cs" Inherits="UserControls_Header" %>
 <!--All Script tag should come here-->
-<script src="../Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-<script src="../Scripts/common.js" type="text/javascript"></script>
-<script src="../Scripts/jquery-formatcurrency.js" type="text/javascript"></script>
-<script src="../Scripts/jquery.ui.core.js" type="text/javascript"></script>
-<script src="../Scripts/jquery.ui.widget.js" type="text/javascript"></script>
-<script src="../Scripts/jquery.ui.position.js" type="text/javascript"></script>
-<script src="../Scripts/jquery.ui.autocomplete.js" type="text/javascript"></script>
-<link href="../Styles/jquery.ui.all.css" rel="stylesheet" type="text/css" />
-<link href="../Styles/jquery.ui.autocomplete.css" rel="stylesheet" type="text/css" />
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery-1.8.0.min.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/common.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery-formatcurrency.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery.ui.core.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery.ui.widget.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery.ui.position.js")%>' type="text/javascript"></script>
+<script src='<%=Page.ResolveUrl("~/Scripts/jquery.ui.autocomplete.js")%>' type="text/javascript"></script>
+<link href='<%=Page.ResolveUrl("~/Styles/jquery.ui.all.css")%>' rel="stylesheet" type="text/css" />
+<link href='<%=Page.ResolveUrl("~/Styles/jquery.ui.autocomplete.css")%>' rel="stylesheet" type="text/css" />
 <!--All CSS should come here-->
-<link href="../Styles/InnerStyle.css" rel="stylesheet" type="text/css" />
-<link href="../Styles/Header.css" rel="stylesheet" type="text/css" />
+<link href='<%=Page.ResolveUrl("~/Styles/InnerStyle.css")%>' rel="stylesheet" type="text/css" />
+<link href='<%=Page.ResolveUrl("~/Styles/Header.css")%>' rel="stylesheet" type="text/css" />
 <asp:ScriptManager ID="ScriptManager1" runat="server">
 </asp:ScriptManager>
 <div class="header">
@@ -20,7 +20,7 @@
         </div>
         <div class="modelwindowHeader" id="dvHeaderLoading" style="height: 100px; width: 100px;
             margin: -50px 0 0 -50px; display: none;">
-            <img alt="Progress" src="../Images/SaveProgress.gif" title="Progress...please wait" />
+            <img alt="Progress" src='<%=Page.ResolveUrl("~/Images/SaveProgress.gif")%>' title="Progress...please wait" />
         </div>
         <div style="float: left;">
             <div class="menu ddsmoothmenu" id="smoothmenu1">
@@ -29,34 +29,34 @@
                 <div class="clear">
                 </div>
                 <ul>
-                    <li id="mnuli1" runat="server"><a href='../Modules/Landingpage.aspx'>Home</a></li>
-                    <li id="mnuli2" runat="server" style="display: none"><a href="../Modules/PlatformUser.aspx">
+                    <li id="mnuli1" runat="server"><a href='<%=Page.ResolveUrl("~/Modules/Landingpage.aspx")%>'>Home</a></li>
+                    <li id="mnuli2" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/PlatformUser.aspx")%>'>
                         Platform User</a> </li>
-                    <li id="mnuli3" runat="server" style="display: none"><a href='../Modules/Manufacturer.aspx'>
+                    <li id="mnuli3" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/Manufacturer.aspx")%>'>
                         Manufacturer</a></li>
-                    <li id="mnuli4" runat="server" style="display: none"><a href='../Modules/Product.aspx'>
+                    <li id="mnuli4" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/Product.aspx")%>'>
                         Product</a></li>
-                    <li id="mnuli5" runat="server" style="display: none"><a href='../Modules/BuyingInterface.aspx'>
+                    <li id="mnuli5" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/BuyingInterface.aspx")%>'>
                         Purchase</a></li>
-                    <li id="mnuli6" runat="server" style="display: none"><a href='../Modules/Sale.aspx'>
+                    <li id="mnuli6" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/Sale.aspx")%>'>
                         Sale</a></li>
-                    <li id="mnuli7" runat="server" style="display: none"><a href='../Modules/MasterData.aspx'>
+                    <li id="mnuli7" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/MasterData.aspx")%>'>
                         Master</a></li>
-                    <li id="mnuli8" runat="server" style="display: none"><a href='../Modules/BarcodePrint.aspx'>
+                    <li id="mnuli8" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/BarcodePrint.aspx")%>'>
                         Barcode</a></li>
-                    <li id="mnuli9" runat="server" style="display: none"><a href='../Modules/ManageCustomer.aspx'>
+                    <li id="mnuli9" runat="server" style="display: none"><a href='<%=Page.ResolveUrl("~/Modules/ManageCustomer.aspx")%>'>
                         Customer</a></li>
                     <li id="mnuli10" runat="server">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>
-                    <li id="mnuli11" runat="server" style="z-index: 100; text-align: center;" clientidmode="Static">
-                        <a href=''>Reports</a>
+                    <li id="mnuli11" runat="server" style="text-align: center;" clientidmode="Static">
+                        <a href='<%=Page.ResolveUrl("~/Modules/Reports/StockReport.aspx")%>'>Reports</a>
                         <ul class="ulDashboard" id="ulSMenu" style="top: 35px; visibility: visible; left: 0px;
                             display: none;">
                             <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
-                                href='google.com'>Stock</a></li>
+                                href='<%=Page.ResolveUrl("~/Modules/Reports/StockReport.aspx")%>'>Stock</a></li>
                             <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
-                                href=''>Item Sold</a></li>
+                                href='<%=Page.ResolveUrl("~/Modules/Reports/SaleReport.aspx")%>'>Item Sold</a></li>
                             <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
                                 href=''>Home</a></li>
                         </ul>
