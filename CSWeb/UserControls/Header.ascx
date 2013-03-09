@@ -49,16 +49,16 @@
                     <li id="mnuli10" runat="server">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>
-                    <li id="mnuli11" runat="server" style="text-align: center;" clientidmode="Static">
+                    <li id="mnuli11" runat="server" style="text-align: left;width:120px;" clientidmode="Static">
                         <a href='<%=Page.ResolveUrl("~/Modules/Reports/StockReport.aspx")%>'>Reports</a>
                         <ul class="ulDashboard" id="ulSMenu" style="top: 35px; visibility: visible; left: 0px;
                             display: none;">
-                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
+                            <li class="ulDashboard" style="z-index:100;position:relative; background-color: Black; text-align: left;width:120px;"><a style="width: 100px;cursor:pointer"
                                 href='<%=Page.ResolveUrl("~/Modules/Reports/StockReport.aspx")%>'>Stock</a></li>
-                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
+                            <li class="ulDashboard" style="z-index:100;position:relative;background-color: Black; text-align: left;width:120px;"><a style="width: 100px;cursor:pointer"
                                 href='<%=Page.ResolveUrl("~/Modules/Reports/SaleReport.aspx")%>'>Item Sold</a></li>
-                            <li class="ulDashboard" style="background-color: Black; text-align: left"><a style="width: 100px;cursor:pointer"
-                                href=''>Home</a></li>
+                            <li class="ulDashboard" style="z-index:100;position:relative;background-color: Black; text-align: left;width:120px;"><a style="width: 100px;cursor:pointer"
+                                href='<%=Page.ResolveUrl("~/Modules/Reports/SaleReportDetail.aspx")%>'>Sale Detail</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -227,7 +227,7 @@
          function () {
              $('#mnuli11').css('background-color', 'Black');
              $('#mnuli11').css('text-align', 'left');
-             $('div').removeClass('wrapper');
+             //$('div').removeClass('wrapper');
              $('#ulSMenu').show();
          }
      );

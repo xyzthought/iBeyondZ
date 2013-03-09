@@ -261,5 +261,7 @@ namespace BLL.BusinessObject
         public string Brand { get; set; }
 
         public string ThisSaleDate { get; set; }
+
+        public string ProductDetails { get; set; }
     }
 }

@@ -90,5 +90,10 @@ namespace BLL.Component
         {
             return objDB.GetSelectedProductBarCode(ThisBarcode);
         }
+
+        public List<Sale> GetAllSaleDetailsDataByDate(List<Sale> objData, PageInfo objPI, string strFromDate, string strToDate)
+        {
+            return objDB.GetAllSaleDetailsDataByDate(objData, objPI, strFromDate, strToDate);
+        }
     }
 }

@@ -111,6 +111,27 @@ namespace DAL.Component
                     objData.FinalPayableAmount = Convert.ToDecimal(drData["FinalPayableAmount"]);
 
                 }
+                if (FieldExists(drData, "BankAmount") && drData["BankAmount"] != DBNull.Value)
+                {
+                    objData.BankAmount = Convert.ToDecimal(drData["BankAmount"]);
+
+                }
+                if (FieldExists(drData, "CCAmount") && drData["CCAmount"] != DBNull.Value)
+                {
+                    objData.CCAmount = Convert.ToDecimal(drData["CCAmount"]);
+
+                }
+                if (FieldExists(drData, "Cash") && drData["Cash"] != DBNull.Value)
+                {
+                    objData.Cash = Convert.ToDecimal(drData["Cash"]);
+
+                }
+
+                if (FieldExists(drData, "ProductDetails") && drData["ProductDetails"] != DBNull.Value)
+                {
+                    objData.ProductDetails = Convert.ToString(drData["ProductDetails"]);
+
+                }
                 
                 if (FieldExists(drData, "SaleMadeByName") && drData["SaleMadeByName"] != DBNull.Value)
                 {
@@ -697,6 +718,42 @@ namespace DAL.Component
                 Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
             }
             return objSale;
+        }
+
+        public List<Sale> GetAllSaleDetailsDataByDate(List<Sale> objData, PageInfo vobjPageInfo, string strFromDate, string strToDate)
+        {
+            List<Sale> lstobjData = new List<Sale>();
+            try
+            {
+
+                object[] mParams = {
+                                        new SqlParameter("@SortColumnName", SqlDbType.NVarChar),                                              
+                                        new SqlParameter("@SortDirection", SqlDbType.NVarChar),
+                                        new SqlParameter("@SearchText", SqlDbType.NVarChar),
+                                        new SqlParameter("@SaleFromDate", SqlDbType.NVarChar),
+                                        new SqlParameter("@SaleToDate", SqlDbType.NVarChar),
+                                };
+
+                mParams[0] = vobjPageInfo.SortColumnName;
+                mParams[1] = vobjPageInfo.SortDirection;
+                mParams[2] = vobjPageInfo.SearchText;
+                mParams[3] = strFromDate;
+                mParams[4] = strToDate;
+
+                using (IDataReader reader = dBase.ExecuteReader("[sprocCS_GetSaleDetailsDataByDate]", mParams))
+                {
+                    while (reader.Read())
+                    {
+                        lstobjData.Add(PopulateData(reader));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Common.LogError("CSWeb > Error > " + (new StackTrace()).GetFrame(0).GetMethod().Name, ex.ToString());
+            }
+            return lstobjData;
         }
     }
 }
