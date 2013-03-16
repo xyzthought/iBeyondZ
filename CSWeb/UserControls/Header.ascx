@@ -49,7 +49,7 @@
                     <li id="mnuli10" runat="server">
                         <asp:LinkButton ID="lnkMyAccount" runat="server" Style="color: #CCCCCC; text-decoration: none"
                             CausesValidation="False" OnClick="lnkMyAccount_Click">My Account</asp:LinkButton></li>
-                    <li id="mnuli11" runat="server" style="text-align: left;width:120px;" clientidmode="Static">
+                    <li id="mnuli11" runat="server" style="text-align: left;width:120px;display: none" clientidmode="Static">
                         <a href='<%=Page.ResolveUrl("~/Modules/Reports/StockReport.aspx")%>'>Reports</a>
                         <ul class="ulDashboard" id="ulSMenu" style="top: 35px; visibility: visible; left: 0px;
                             display: none;">

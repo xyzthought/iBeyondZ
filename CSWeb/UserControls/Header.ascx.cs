@@ -27,7 +27,7 @@ public partial class UserControls_Header : System.Web.UI.UserControl
         try
         {
             objPage.CheckSession();
-            string[] menuArray = new string[] { "mnuli1", "mnuli2", "mnuli3", "mnuli4", "mnuli5", "mnuli6", "mnuli7", "mnuli8", "mnuli9", "mnuli10" };
+            string[] menuArray = new string[] { "mnuli1", "mnuli2", "mnuli3", "mnuli4", "mnuli5", "mnuli6", "mnuli7", "mnuli8", "mnuli9", "mnuli10", "mnuli11" };
             string[] SellingDesk = new string[] { "mnuli6", "mnuli9" };  //SALE & CUSTOMER & MY ACCOUNT
             string[] StockManager = new string[] { "mnuli6", "mnuli4", "mnuli8", "mnuli5" }; //: MANUFACTURER, PRODUCT, BARCODE, PURCHASE
             User objUser = new BLL.BusinessObject.User();
